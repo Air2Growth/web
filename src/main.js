@@ -2,13 +2,15 @@ import "./graphics.css";
 import { initGraphics } from "./graphics.js";
 import "./visual-pages.css";
 import "./scroll.css";
+import "./mobile.css";
 import { initScrollStories } from "./scroll.js";
 const menuToggle = document.querySelector(".menu-toggle");
 const navigation = document.querySelector("#navigation");
-function closeMenu() {
+function closeMenu(returnFocus = false) {
   navigation.classList.remove("is-open");
   menuToggle.setAttribute("aria-expanded", "false");
   menuToggle.setAttribute("aria-label", "Menü öffnen");
+  if (returnFocus) menuToggle.focus();
 }
 menuToggle.addEventListener("click", () => {
   const open = menuToggle.getAttribute("aria-expanded") !== "true";
@@ -18,12 +20,19 @@ menuToggle.addEventListener("click", () => {
     "aria-label",
     open ? "Menü schließen" : "Menü öffnen",
   );
+  if (open) navigation.querySelector("a")?.focus({ preventScroll: true });
 });
 navigation
   .querySelectorAll("a")
-  .forEach((link) => link.addEventListener("click", closeMenu));
+  .forEach((link) => link.addEventListener("click", () => closeMenu()));
 document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape") closeMenu();
+  if (event.key === "Escape" && navigation.classList.contains("is-open")) closeMenu(true);
+});
+document.addEventListener("pointerdown", (event) => {
+  if (!navigation.contains(event.target) && !menuToggle.contains(event.target)) closeMenu();
+});
+document.addEventListener("focusin", (event) => {
+  if (!navigation.contains(event.target) && !menuToggle.contains(event.target)) closeMenu();
 });
 window.matchMedia("(min-width: 961px)").addEventListener("change", (event) => {
   if (event.matches) closeMenu();

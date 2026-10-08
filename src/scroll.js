@@ -14,7 +14,7 @@ export function initScrollStories(selectStep) {
   const toggle = document.createElement("button");
   toggle.type = "button";
   toggle.className = "motion-toggle";
-  document.body.append(toggle);
+  (document.querySelector(".footer") || document.body).append(toggle);
   const scenes = [...document.querySelectorAll("[data-scene]")];
   const tech = document.querySelector("#technologie");
   tech?.classList.add("story-tech");

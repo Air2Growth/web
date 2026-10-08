@@ -96,3 +96,10 @@ alignment, ≥44px control heights, and zero horizontal overflow.
 
 The graphics critique removed rotated shapes that escaped narrow viewports and repositioned the hero label inside its arch. Motion follows the existing animation preference and reduced-motion setting. Decorative SVGs are hidden from assistive technology; controls and captions remain readable. The horizontally scrollable architecture is keyboard-focusable on narrow screens. Native CAD frames and source-qualified figures remain unchanged.
 
+## Mobile audit and optimization
+
+The phone audit covered all seven pages at 320–430px portrait widths and short landscape viewports. Diagram text previously scaled down to 5–9px; mobile now uses native-size labels for the carbon cycle, a compact four-module architecture, and a four-person work cycle. Desktop diagrams retain their original layout. Cultivation illustrations become compact image-and-caption rows, while narrow-screen algae controls use the full available width. Source-qualified model notes remain readable.
+
+Navigation scrolls within a short viewport, moves focus to the first link when opened, restores focus on Escape, and closes on outside taps or focus. The animation switch lives in the footer on phones and short screens so it cannot cover content. Contact fields use 16px type, controls retain generous touch targets, and partner logos occupy separate grid cells. Normal document scrolling, reduced motion, all story chapters, and the native CAD slider remain available.
+
+Verification covered 42 phone layouts (all seven pages at 320×740, 360×800, 390×844, 430×932, 667×375 and 844×390), all six technology stages at three phone widths, native CAD/lens touch controls, navigation focus and dismissal, and reduced motion. Shared route, form, image, link and desktop scroll checks also passed.

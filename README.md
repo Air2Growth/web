@@ -39,6 +39,7 @@ Deploy the contents of `dist/` to a static host. The site expects deployment at 
 - `src/visual-pages.css`: cost figures, timelines, and concise summaries on the secondary pages.
 - `src/graphics.css` and `src/graphics.js`: field contours, the interactive algae lens, and module architecture.
 - `src/expressive-pages.css`: cultivation, team, roadmap and contact illustrations.
+- `src/mobile.css`: readable phone diagrams, compact graphics, form sizing and short-viewport navigation.
 - `public/`: locally served images, favicon, and licensed fonts.
 - `scripts/serve.mjs`: Tailscale address discovery and server launcher.
 - `DESIGN.md`: source analysis and design decisions.
