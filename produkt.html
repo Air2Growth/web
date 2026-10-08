@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Ein modulares System für die lokale Düngerproduktion. Lernen Sie den V3-Prototyp, den aktuellen Entwicklungsstand und die vorgesehenen Einsatzbereiche kennen."
+    />
+    <meta name="theme-color" content="#183c2c" />
+    <title>Produkt &amp; Prototyp | Air2Growth</title>
+    <link rel="icon" type="image/svg+xml" href="/images/favicon.svg" />
+    <link
+      rel="preload"
+      href="/fonts/open-sans-regular.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="stylesheet" href="/src/style.css" />
+    <script type="module" src="/src/main.js"></script>
+  </head>
+  <body data-page="produkt">
+    <a class="skip-link" href="#main">Zum Inhalt springen</a>
+    <header class="header">
+      <a class="brand" href="/" aria-label="Air2Growth Startseite"
+        ><svg viewBox="0 0 40 42" fill="none" aria-hidden="true">
+          <path
+            d="M20 36V20M20 26C7 26 5 16 6 7c10 0 17 4 14 19ZM20 20C20 8 27 3 36 3c0 11-4 17-16 17Z"
+            stroke="currentColor"
+            stroke-width="2.3"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          /></svg
+        ><span
+          >air<span class="brand-two">2</span>growth<span class="brand-dot"
+            >.</span
+          ></span
+        ></a
+      >
+      <nav id="navigation" aria-label="Hauptnavigation">
+        <a class="home-nav" href="/">Start</a
+        ><a href="/produkt.html" aria-current="page">Produkt</a
+        ><a href="/technologie.html">Technologie</a
+        ><a href="/vorteile.html">Vorteile</a><a href="/team.html">Team</a
+        ><a href="/investoren.html">Investoren</a
+        ><a href="/kontakt.html">Kontakt</a>
+      </nav>
+      <a
+        class="button small header-cta"
+        href="/kontakt.html?thema=Pilotprojekt#anfrage"
+        >Pilotprojekt anfragen <span aria-hidden="true">↗</span></a
+      >
+      <button
+        class="menu-toggle"
+        aria-label="Menü öffnen"
+        aria-expanded="false"
+        aria-controls="navigation"
+      >
+        <span></span><span></span>
+      </button>
+    </header>
+    <main id="main">
+      <nav class="breadcrumbs wrap" aria-label="Brotkrumennavigation">
+        <a href="/">Start</a><span aria-hidden="true">/</span
+        ><span aria-current="page">Produkt & Prototyp</span>
+      </nav>
+      <section class="page-intro wrap">
+        <div>
+          <p class="page-label">Produkt & Prototyp</p>
+          <h1>Von der Luft<br />auf Ihren Hof.</h1>
+        </div>
+        <p class="page-lead">
+          CO₂ filtern. Algen kultivieren. Dünger vor Ort gewinnen.
+        </p>
+      </section>
+      <section
+        class="scroll-scene model-scene"
+        data-scene="model"
+        aria-label="Eine Anlage. Ein eigener Kreislauf."
+      >
+        <div class="scene-sticky wrap">
+          <div class="scene-heading">
+            <h2>Eine Anlage. Ein eigener Kreislauf.</h2>
+            <span class="scroll-cue"
+              >Scrollen und entdecken <span aria-hidden="true">↓</span></span
+            >
+          </div>
+          <div class="scene-layout">
+            <figure class="scene-figure">
+              <div class="model-stage">
+                <span class="model-label">Aktueller CAD-Entwurf</span
+                ><img
+                  class="scroll-model"
+                  src="/images/machine-frames/000.png"
+                  width="800"
+                  height="800"
+                  alt="Rotierende CAD-Ansicht der aktuellen Air2Growth-Gesamtanlage"
+                />
+                <span class="model-angle" aria-hidden="true">0°</span>
+              </div>
+              <figcaption>Gesamtanlage · CAD-Konzept</figcaption>
+              <label class="model-range-label"
+                >Modell drehen<input
+                  class="model-range"
+                  type="range"
+                  min="0"
+                  max="35"
+                  value="0"
+                  aria-label="Ansicht des CAD-Modells drehen"
+              /></label>
+            </figure>
+            <div class="scene-copy">
+              <div class="scene-chapters">
+                <article class="scene-chapter" data-chapter="0">
+                  <span class="chapter-index">01</span>
+                  <h3>CO₂ einfangen.</h3>
+                  <p>
+                    Der Filter bindet Kohlendioxid direkt aus der Umgebungsluft.
+                  </p>
+                </article>
+                <article class="scene-chapter" data-chapter="1">
+                  <span class="chapter-index">02</span>
+                  <h3>Mikroalgen versorgen.</h3>
+                  <p>Die Nährlösung transportiert CO₂ in den Algenreaktor.</p>
+                </article>
+                <article class="scene-chapter" data-chapter="2">
+                  <span class="chapter-index">03</span>
+                  <h3>Bio-Dünger ernten.</h3>
+                  <p>Die Biomasse wird am eigenen Standort entnommen.</p>
+                </article>
+              </div>
+              <div class="chapter-controls" aria-label="Kapitel auswählen">
+                <button
+                  type="button"
+                  data-chapter-go="0"
+                  aria-label="Kapitel 1: CO₂ einfangen."
+                >
+                  01</button
+                ><button
+                  type="button"
+                  data-chapter-go="1"
+                  aria-label="Kapitel 2: Mikroalgen versorgen."
+                >
+                  02</button
+                ><button
+                  type="button"
+                  data-chapter-go="2"
+                  aria-label="Kapitel 3: Bio-Dünger ernten."
+                >
+                  03</button
+                ><a href="#modul-alltag" class="scene-skip">Weiter</a>
+              </div>
+              <div class="scene-progress" aria-hidden="true"><span></span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section
+        class="machine-anatomy section wrap"
+        aria-labelledby="anatomy-title"
+      >
+        <div class="graphic-heading">
+          <h2 id="anatomy-title">Vier Module. Ein Zusammenspiel.</h2>
+          <span>Schematische Architektur</span>
+        </div>
+        <figure
+          class="assembly-map"
+          tabindex="0"
+          role="img"
+          aria-label="Modul A gewinnt CO₂, Modul B kultiviert Mikroalgen, Modul C erntet und reinigt. Modul D übernimmt Steuerung und Versorgung."
+        >
+          <svg viewBox="0 0 1080 480" aria-hidden="true">
+            <defs>
+              <pattern
+                id="assembly-grid"
+                width="30"
+                height="30"
+                patternUnits="userSpaceOnUse"
+              >
+                <circle cx="2" cy="2" r="1" fill="#c5d3b6" />
+              </pattern>
+            </defs>
+            <rect
+              x="0"
+              y="0"
+              width="1080"
+              height="480"
+              fill="url(#assembly-grid)"
+            />
+            <path
+              class="assembly-flow"
+              d="M240 215H430M640 215H830"
+              stroke="#759954"
+              stroke-width="5"
+              stroke-dasharray="7 10"
+            />
+            <g class="assembly-module module-a">
+              <path
+                d="M110 290V115L210 90V265Z"
+                fill="#e2ebd6"
+                stroke="#183c2c"
+                stroke-width="2"
+              />
+              <path
+                d="M110 115L70 95L170 70L210 90M70 95V270L110 290"
+                fill="#f5f7ef"
+                stroke="#183c2c"
+                stroke-width="2"
+              />
+              <path
+                d="M132 142L191 127M132 169L191 154M132 196L191 181M132 223L191 208"
+                stroke="#739653"
+                stroke-width="5"
+              />
+              <text x="138" y="258" font-size="25">A</text>
+              <text x="140" y="330" text-anchor="middle" font-size="17">
+                CO₂-Gewinnung
+              </text>
+            </g>
+            <g class="assembly-module module-b">
+              <path
+                d="M468 116Q540 81 612 116V268Q540 302 468 268Z"
+                fill="#cce0b5"
+                stroke="#183c2c"
+                stroke-width="2"
+              />
+              <ellipse
+                cx="540"
+                cy="116"
+                rx="72"
+                ry="21"
+                fill="#e5efda"
+                stroke="#183c2c"
+                stroke-width="2"
+              />
+              <path
+                d="M481 236Q540 212 598 236"
+                stroke="#87aa62"
+                stroke-width="35"
+                fill="none"
+              />
+              <circle cx="509" cy="189" r="12" fill="#76984f" />
+              <circle cx="553" cy="156" r="8" fill="#76984f" />
+              <circle cx="574" cy="211" r="10" fill="#76984f" />
+              <text x="532" y="275" font-size="25">B</text>
+              <text x="540" y="330" text-anchor="middle" font-size="17">
+                Kultivierung
+              </text>
+            </g>
+            <g class="assembly-module module-c">
+              <path
+                d="M886 250H981V132L946 95L911 132V250Z"
+                fill="#c1d8a6"
+                stroke="#183c2c"
+                stroke-width="2"
+              />
+              <path
+                d="M875 250H995V282H875Z"
+                fill="#e2ebd6"
+                stroke="#183c2c"
+                stroke-width="2"
+              />
+              <path
+                d="M932 193Q909 172 925 151Q940 164 932 193M936 177Q960 170 960 147Q939 148 936 177"
+                fill="#739653"
+              />
+              <text x="924" y="275" font-size="25">C</text>
+              <text x="936" y="330" text-anchor="middle" font-size="17">
+                Ernte & Reinigung
+              </text>
+            </g>
+            <path
+              d="M140 353V401H938V353M540 353V401"
+              stroke="#8caaa5"
+              fill="none"
+              stroke-width="2"
+              stroke-dasharray="5 7"
+            />
+            <g>
+              <rect
+                x="395"
+                y="383"
+                width="290"
+                height="63"
+                rx="8"
+                fill="#183c2c"
+              />
+              <circle cx="421" cy="415" r="5" fill="#d6eda7" />
+              <text x="450" y="422" fill="#f8f9f3" font-size="17">
+                D · Steuerung & Versorgung
+              </text>
+            </g>
+          </svg>
+        </figure>
+      </section>
+      <section id="modul-alltag" class="detail-section section wrap">
+        <div class="detail-heading">
+          <h2>Vom Labor aufs Feld.</h2>
+          <p>V3 läuft im Feldtest beim ersten Partnerbetrieb.</p>
+        </div>
+        <div class="module-facts" data-reveal>
+          <div><strong>TRL 4</strong><span>Laborprototyp validiert</span></div>
+          <div>
+            <strong>7 kg</strong><span>Bio-Dünger / Woche / Modul*</span>
+            <div class="harvest-dots" aria-hidden="true">● ● ● ● ● ● ●</div>
+          </div>
+          <div>
+            <strong>Modular</strong
+            ><span>Für die Produktion auf Ihrem Hof</span>
+          </div>
+        </div>
+        <p class="detail-note">
+          * Aktueller Modellwert; tatsächliche Mengen sind standort- und
+          betriebsabhängig.
+        </p>
+        <details class="visual-details">
+          <summary>Was braucht Ihr Standort?</summary>
+          <p>
+            Stellfläche, Wasser, Strom, Licht und die Einbindung in Ihre
+            Düngetechnik klären wir im Pilotgespräch. Ernte, Betreuung und
+            Nährsalzversorgung werden für Ihren Betrieb geplant.
+          </p>
+        </details>
+        <a class="button" href="/kontakt.html?thema=Pilotprojekt#anfrage"
+          >Pilotprojekt anfragen ↗</a
+        >
+      </section>
+      <section class="page-next wrap">
+        <a href="/technologie.html"
+          ><span>Weiter entdecken</span
+          ><strong>So funktioniert der Kreislauf</strong
+          ><span aria-hidden="true">↗</span></a
+        >
+      </section>
+    </main>
+    <footer class="footer wrap">
+      <div class="footer-top">
+        <a class="brand" href="/"
+          >air<span class="brand-two">2</span>growth<span class="brand-dot"
+            >.</span
+          ></a
+        ><span>From Carbon to Crop.</span
+        ><a href="mailto:info@air2growth.com">info@air2growth.com ↗</a>
+      </div>
+      <nav class="footer-pages" aria-label="Weitere Seiten">
+        <a href="/produkt.html">Produkt</a
+        ><a href="/technologie.html">Technologie</a
+        ><a href="/vorteile.html">Vorteile</a><a href="/team.html">Team</a
+        ><a href="/investoren.html">Investoren</a
+        ><a href="/kontakt.html">Kontakt</a>
+      </nav>
+      <div class="footer-bottom">
+        <span
+          >© <span id="year">2026</span> Air2Growth · Mit Überzeugung in München
+          entwickelt.</span
+        >
+        <div>
+          <a
+            href="https://air2growth.de/#impressum"
+            target="_blank"
+            rel="noopener"
+            >Impressum ↗</a
+          ><a
+            href="https://air2growth.de/#datenschutz"
+            target="_blank"
+            rel="noopener"
+            >Datenschutz ↗</a
+          ><a href="#">Nach oben ↑</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

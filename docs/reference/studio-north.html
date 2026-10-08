@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Studio North — sample creative-studio demo site." />
+    <title>Studio North — Creative Studio Sample</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23111827'/%3E%3Cpath d='M9 22V10h5.5a5.5 5.5 0 0 1 0 11H12v1h-3zm3-4h2.3a2.5 2.5 0 0 0 0-5H12v5z' fill='white'/%3E%3Ccircle cx='22' cy='21' r='3' fill='%2338bdf8'/%3E%3C/svg%3E" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header" id="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="#top" aria-label="Studio North home">
+          <span class="brand-mark" aria-hidden="true">N</span>
+          <span class="brand-text">Studio&nbsp;North</span>
+        </a>
+
+        <button
+          class="nav-toggle"
+          id="nav-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="site-nav"
+          aria-label="Open navigation menu"
+        >
+          <span class="nav-toggle-bar" aria-hidden="true"></span>
+          <span class="nav-toggle-bar" aria-hidden="true"></span>
+          <span class="nav-toggle-bar" aria-hidden="true"></span>
+        </button>
+
+        <nav class="site-nav" id="site-nav" aria-label="Primary">
+          <ul>
+            <li><a href="#work" data-navlink>Work</a></li>
+            <li><a href="#services" data-navlink>Services</a></li>
+            <li><a href="#studio" data-navlink>Studio</a></li>
+            <li><a href="#contact" data-navlink>Contact</a></li>
+          </ul>
+          <a class="button button-small nav-cta" href="#contact">Start a project</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <!-- Hero -->
+      <section class="hero" id="top" aria-labelledby="hero-title">
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow">Brand · Web · Motion — Sample site</p>
+            <h1 id="hero-title">A small studio making clear, confident websites.</h1>
+            <p class="lede">
+              Studio North is a fictional demo studio making fast, accessible
+              websites. Sample content for evaluation only.
+            </p>
+            <div class="hero-actions">
+              <a class="button button-primary" href="#work">See selected work</a>
+              <a class="button button-ghost" href="#contact">Get a quote</a>
+            </div>
+            <dl class="hero-stats">
+              <div>
+                <dt>Projects shipped</dt>
+                <dd>48</dd>
+              </div>
+              <div>
+                <dt>Avg. Lighthouse</dt>
+                <dd>98</dd>
+              </div>
+              <div>
+                <dt>Team size</dt>
+                <dd>6</dd>
+              </div>
+            </dl>
+          </div>
+          <div class="hero-card" aria-label="Sample project highlight">
+            <div class="browser-dots" aria-hidden="true">
+              <span></span><span></span><span></span>
+            </div>
+            <p class="hero-card-kicker">Featured — Fjord Coffee</p>
+            <p class="hero-card-title">A warm rebrand and storefront that loads in a blink.</p>
+            <div class="hero-card-tags">
+              <span>Branding</span><span>Web</span><span>E-commerce</span>
+            </div>
+            <div class="hero-card-bars" aria-hidden="true">
+              <span style="--w: 92%"></span>
+              <span style="--w: 76%"></span>
+              <span style="--w: 64%"></span>
+            </div>
+            <p class="hero-card-note">Fictional highlight to preview our style.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Work -->
+      <section class="section" id="work" aria-labelledby="work-title" tabindex="-1">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Selected work</p>
+              <h2 id="work-title">Recent projects, filterable in place</h2>
+              <p class="section-sub">
+                Use the filter buttons to explore the sample portfolio.
+              </p>
+            </div>
+          </div>
+
+          <div class="filters" role="group" aria-label="Filter projects by discipline">
+            <button type="button" class="chip is-active" data-filter="all" aria-pressed="true">All</button>
+            <button type="button" class="chip" data-filter="branding" aria-pressed="false">Branding</button>
+            <button type="button" class="chip" data-filter="web" aria-pressed="false">Web</button>
+            <button type="button" class="chip" data-filter="motion" aria-pressed="false">Motion</button>
+          </div>
+          <p class="filter-status" id="filter-status" role="status" aria-live="polite">Showing 6 of 6 projects.</p>
+
+          <ul class="work-grid" id="work-grid">
+            <li class="work-card" data-category="branding web">
+              <span class="work-thumb work-thumb-a" aria-hidden="true">Fj</span>
+              <div class="work-body">
+                <h3>Fjord Coffee</h3>
+                <p>Identity, packaging, and a 0.9s storefront.</p>
+                <p class="work-meta"><span>Branding</span><span>Web</span></p>
+              </div>
+            </li>
+            <li class="work-card" data-category="web">
+              <span class="work-thumb work-thumb-b" aria-hidden="true">Ha</span>
+              <div class="work-body">
+                <h3>Harborline Ferries</h3>
+                <p>Timetable UX and booking flow, mobile-first.</p>
+                <p class="work-meta"><span>Web</span></p>
+              </div>
+            </li>
+            <li class="work-card" data-category="motion branding">
+              <span class="work-thumb work-thumb-c" aria-hidden="true">Lu</span>
+              <div class="work-body">
+                <h3>Lumen Festival</h3>
+                <p>Title sequence and wayfinding system.</p>
+                <p class="work-meta"><span>Motion</span><span>Branding</span></p>
+              </div>
+            </li>
+            <li class="work-card" data-category="web motion">
+              <span class="work-thumb work-thumb-d" aria-hidden="true">Ar</span>
+              <div class="work-body">
+                <h3>Arctic Reads</h3>
+                <p>Editorial site with scroll-driven chapters.</p>
+                <p class="work-meta"><span>Web</span><span>Motion</span></p>
+              </div>
+            </li>
+            <li class="work-card" data-category="branding">
+              <span class="work-thumb work-thumb-e" aria-hidden="true">Sk</span>
+              <div class="work-body">
+                <h3>Skog Botanics</h3>
+                <p>Naming, label system, and launch site.</p>
+                <p class="work-meta"><span>Branding</span></p>
+              </div>
+            </li>
+            <li class="work-card" data-category="motion web">
+              <span class="work-thumb work-thumb-f" aria-hidden="true">No</span>
+              <div class="work-body">
+                <h3>Nordwind Air</h3>
+                <p>Animated flight map and marketing pages.</p>
+                <p class="work-meta"><span>Motion</span><span>Web</span></p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Services -->
+      <section class="section section-alt" id="services" aria-labelledby="services-title" tabindex="-1">
+        <div class="container">
+          <p class="eyebrow">What we do</p>
+          <h2 id="services-title">Three services, done well</h2>
+          <p class="section-sub">Fixed-scope sample packages with clear deliverables.</p>
+          <div class="cards">
+            <article class="card">
+              <h3>Brand identity</h3>
+              <p>Logo, type, color, and a one-page usage guide your team will actually read.</p>
+              <ul>
+                <li>Discovery workshop</li>
+                <li>Logo + lockups</li>
+                <li>Mini brand book</li>
+              </ul>
+            </article>
+            <article class="card">
+              <h3>Web design &amp; build</h3>
+              <p>Fast, accessible marketing sites your team can easily update.</p>
+              <ul>
+                <li>UX + copy polish</li>
+                <li>Accessible components</li>
+                <li>Testing and launch</li>
+              </ul>
+            </article>
+            <article class="card">
+              <h3>Motion &amp; illustration</h3>
+              <p>Subtle animation and illustration that keep pages fast.</p>
+              <ul>
+                <li>Hero animation</li>
+                <li>Icon set</li>
+                <li>Reduced-motion safe</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Studio -->
+      <section class="section" id="studio" aria-labelledby="studio-title" tabindex="-1">
+        <div class="container studio-grid">
+          <div>
+            <p class="eyebrow">The studio</p>
+            <h2 id="studio-title">Six people, one shared checklist</h2>
+            <p>
+              We are a fictional team used for this sample. We keep sites small,
+              clear, and easy to use on any device.
+            </p>
+            <ul class="checklist">
+              <li>Clear structure that is easy to skim</li>
+              <li>Comfortable to use with keyboard alone</li>
+              <li>Reads well on phones and small screens</li>
+              <li>Honors reduced-motion preferences</li>
+            </ul>
+          </div>
+          <aside class="studio-panel" aria-label="Studio facts">
+            <h3>How we work</h3>
+            <ol>
+              <li><strong>Week 1 —</strong> clarify the message.</li>
+              <li><strong>Week 2 —</strong> design in the browser.</li>
+              <li><strong>Week 3 —</strong> polish, test, and ship.</li>
+            </ol>
+            <p class="studio-note">Current availability: <strong>2 slots in November</strong>.</p>
+          </aside>
+        </div>
+      </section>
+
+      <!-- Contact -->
+      <section class="section section-dark" id="contact" aria-labelledby="contact-title" tabindex="-1">
+        <div class="container contact-grid">
+          <div>
+            <p class="eyebrow eyebrow-light">Contact</p>
+            <h2 id="contact-title">Tell us about your project</h2>
+            <p class="section-sub">
+              Demo form only — no backend, nothing is sent or stored. Try it
+              empty to preview validation.
+            </p>
+            <ul class="contact-list">
+              <li><strong>Email:</strong> hello@studionorth.example</li>
+              <li><strong>Studio:</strong> Bergen, Norway (fictional)</li>
+              <li><strong>Replies:</strong> within 2 business days</li>
+            </ul>
+          </div>
+
+          <form class="contact-form" id="contact-form" novalidate>
+            <div class="form-row">
+              <div class="field">
+                <label for="field-name">Name</label>
+                <input id="field-name" name="name" type="text" autocomplete="name" required aria-describedby="error-name" />
+                <p class="field-error" id="error-name" hidden></p>
+              </div>
+              <div class="field">
+                <label for="field-email">Email</label>
+                <input id="field-email" name="email" type="email" autocomplete="email" required aria-describedby="error-email" />
+                <p class="field-error" id="error-email" hidden></p>
+              </div>
+            </div>
+            <div class="field">
+              <label for="field-budget">Budget range</label>
+              <select id="field-budget" name="budget">
+                <option value="under-5k">Under €5k</option>
+                <option value="5-15k" selected>€5k – €15k</option>
+                <option value="15k-plus">€15k+</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="field-message">Project details</label>
+              <textarea id="field-message" name="message" rows="4" required minlength="20" aria-describedby="error-message hint-message"></textarea>
+              <p class="field-hint" id="hint-message">At least 20 characters — goals, timeline, links.</p>
+              <p class="field-error" id="error-message" hidden></p>
+            </div>
+            <p class="form-error-summary" id="form-error-summary" role="alert" tabindex="-1" hidden></p>
+            <button class="button button-primary button-full" type="submit" id="form-submit">Send message</button>
+            <div class="form-success" id="form-success" role="status" tabindex="-1" hidden>
+              <h3>Thanks — message ready (not sent).</h3>
+              <p id="form-success-text">This is a front-end demo, so nothing was transmitted.</p>
+              <button class="button button-ghost button-full" type="button" id="form-reset">Write another message</button>
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>© <span id="year">2026</span> Studio North — sample demo site. No cookies, no tracking.</p>
+        <a class="to-top" href="#top" id="to-top">Back to top ↑</a>
+      </div>
+    </footer>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

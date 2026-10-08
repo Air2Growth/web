@@ -1,0 +1,20 @@
+{
+  "name": "web",
+  "module": "src/index.ts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "node scripts/serve.mjs dev",
+    "build": "vite build",
+    "preview": "node scripts/serve.mjs preview",
+    "dev:local": "vite --host 127.0.0.1 --port 5173 --strictPort",
+    "preview:local": "vite preview --host 127.0.0.1 --port 4173 --strictPort"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "vite": "^8.3.4"
+  },
+  "peerDependencies": {
+    "typescript": "^7"
+  }
+}

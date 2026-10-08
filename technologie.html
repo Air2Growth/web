@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Luftansaugung, CO₂-Bindung und Mikroalgen arbeiten zusammen. Sechs Schritte verbinden Umgebungsluft mit der Produktion von organischem Dünger."
+    />
+    <meta name="theme-color" content="#183c2c" />
+    <title>Technologie | Air2Growth</title>
+    <link rel="icon" type="image/svg+xml" href="/images/favicon.svg" />
+    <link
+      rel="preload"
+      href="/fonts/open-sans-regular.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="stylesheet" href="/src/style.css" />
+    <script type="module" src="/src/main.js"></script>
+  </head>
+  <body data-page="technologie">
+    <a class="skip-link" href="#main">Zum Inhalt springen</a>
+    <header class="header">
+      <a class="brand" href="/" aria-label="Air2Growth Startseite"
+        ><svg viewBox="0 0 40 42" fill="none" aria-hidden="true">
+          <path
+            d="M20 36V20M20 26C7 26 5 16 6 7c10 0 17 4 14 19ZM20 20C20 8 27 3 36 3c0 11-4 17-16 17Z"
+            stroke="currentColor"
+            stroke-width="2.3"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          /></svg
+        ><span
+          >air<span class="brand-two">2</span>growth<span class="brand-dot"
+            >.</span
+          ></span
+        ></a
+      >
+      <nav id="navigation" aria-label="Hauptnavigation">
+        <a class="home-nav" href="/">Start</a><a href="/produkt.html">Produkt</a
+        ><a href="/technologie.html" aria-current="page">Technologie</a
+        ><a href="/vorteile.html">Vorteile</a><a href="/team.html">Team</a
+        ><a href="/investoren.html">Investoren</a
+        ><a href="/kontakt.html">Kontakt</a>
+      </nav>
+      <a
+        class="button small header-cta"
+        href="/kontakt.html?thema=Pilotprojekt#anfrage"
+        >Pilotprojekt anfragen <span aria-hidden="true">↗</span></a
+      >
+      <button
+        class="menu-toggle"
+        aria-label="Menü öffnen"
+        aria-expanded="false"
+        aria-controls="navigation"
+      >
+        <span></span><span></span>
+      </button>
+    </header>
+    <main id="main">
+      <nav class="breadcrumbs wrap" aria-label="Brotkrumennavigation">
+        <a href="/">Start</a><span aria-hidden="true">/</span
+        ><span aria-current="page">Technologie</span>
+      </nav>
+      <section class="page-intro wrap">
+        <div>
+          <p class="page-label">Technologie</p>
+          <h1>CO₂ nutzen.<br />Biomasse gewinnen.</h1>
+        </div>
+        <p class="page-lead">
+          Luftansaugung, CO₂-Bindung und Mikroalgen arbeiten zusammen. Sechs
+          Schritte verbinden Umgebungsluft mit der Produktion von organischem
+          Dünger.
+        </p>
+      </section>
+      <section id="technologie" class="technology section">
+        <div class="wrap">
+          <div class="section-heading">
+            <div>
+              <h2>Sechs Schritte.<br /><em>Ein Kreislauf.</em></h2>
+            </div>
+            <p>
+              Scrollen Sie durch den Kreislauf – oder wählen Sie einen Schritt.
+            </p>
+          </div>
+          <div class="process-layout">
+            <div
+              class="process-tabs"
+              role="tablist"
+              aria-label="Schritte der Düngerproduktion"
+              aria-orientation="vertical"
+            >
+              <button
+                id="tab-0"
+                role="tab"
+                aria-selected="true"
+                aria-controls="process-panel"
+                tabindex="0"
+                data-step="0"
+              >
+                <span>01</span>
+                <div>Luftansaugung<small>Umgebungsluft einsaugen.</small></div>
+                <b aria-hidden="true">↗</b></button
+              ><button
+                id="tab-1"
+                role="tab"
+                aria-selected="false"
+                aria-controls="process-panel"
+                tabindex="-1"
+                data-step="1"
+              >
+                <span>02</span>
+                <div>CO₂-Bindung<small>Ein Sorbens bindet das CO₂.</small></div>
+                <b aria-hidden="true">↗</b></button
+              ><button
+                id="tab-2"
+                role="tab"
+                aria-selected="false"
+                aria-controls="process-panel"
+                tabindex="-1"
+                data-step="2"
+              >
+                <span>03</span>
+                <div>
+                  Regeneration<small>Gebundenes CO₂ wieder lösen.</small>
+                </div>
+                <b aria-hidden="true">↗</b></button
+              ><button
+                id="tab-3"
+                role="tab"
+                aria-selected="false"
+                aria-controls="process-panel"
+                tabindex="-1"
+                data-step="3"
+              >
+                <span>04</span>
+                <div>
+                  Algenversorgung<small
+                    >Die Nährlösung erreicht die Algen.</small
+                  >
+                </div>
+                <b aria-hidden="true">↗</b></button
+              ><button
+                id="tab-4"
+                role="tab"
+                aria-selected="false"
+                aria-controls="process-panel"
+                tabindex="-1"
+                data-step="4"
+              >
+                <span>05</span>
+                <div>Wachstum<small>Photosynthese im Reaktor.</small></div>
+                <b aria-hidden="true">↗</b></button
+              ><button
+                id="tab-5"
+                role="tab"
+                aria-selected="false"
+                aria-controls="process-panel"
+                tabindex="-1"
+                data-step="5"
+              >
+                <span>06</span>
+                <div>Ernte<small>Organischen Dünger entnehmen.</small></div>
+                <b aria-hidden="true">↗</b>
+              </button>
+            </div>
+            <div
+              id="process-panel"
+              class="process-panel"
+              role="tabpanel"
+              aria-labelledby="tab-0"
+              tabindex="0"
+            >
+              <div class="process-diagram" aria-hidden="true">
+                <svg
+                  class="process-waves"
+                  viewBox="0 0 650 250"
+                  preserveAspectRatio="none"
+                >
+                  <path
+                    d="M-40 115Q60 50 150 115T330 115T510 115T690 115M-40 145Q60 80 150 145T330 145T510 145T690 145M-40 175Q60 110 150 175T330 175T510 175T690 175"
+                    fill="none"
+                    stroke="#b6cba0"
+                  />
+                  <g fill="#a2bd85">
+                    <circle cx="72" cy="102" r="5" />
+                    <circle cx="170" cy="154" r="7" />
+                    <circle cx="481" cy="102" r="5" />
+                    <circle cx="580" cy="154" r="7" />
+                  </g>
+                </svg>
+                <span class="flow-label">Luft</span
+                ><span class="flow-arrow">→</span>
+                <div class="reactor">
+                  <div class="reactor-top"></div>
+                  <div class="reactor-liquid">
+                    <span></span><span></span><span></span><span></span>
+                  </div>
+                  <div class="reactor-label">a2g<span>Luftansaugung</span></div>
+                </div>
+                <span class="flow-arrow">→</span
+                ><span class="flow-label output-label">Filter</span>
+              </div>
+              <div class="panel-bottom">
+                <span class="eyebrow" id="process-kicker"
+                  >Schritt 01 / Luftansaugung</span
+                >
+                <h3 id="process-title">Umgebungsluft ist der Ausgangspunkt.</h3>
+                <p id="process-description">
+                  Ventilatoren saugen Umgebungsluft in das System. So gelangt
+                  das darin enthaltene CO₂ zum Filter – direkt an Ihrem
+                  Standort.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="detail-section section wrap">
+        <div class="detail-heading">
+          <h2>Was hinein geht. Was daraus wird.</h2>
+        </div>
+        <figure class="resource-equation" data-reveal>
+          <div>
+            <span aria-hidden="true">◌</span><strong>CO₂</strong
+            ><small>aus Umgebungsluft</small>
+          </div>
+          <b aria-hidden="true">+</b>
+          <div><span aria-hidden="true">☀</span><strong>Licht</strong></div>
+          <b aria-hidden="true">+</b>
+          <div>
+            <span aria-hidden="true">◒</span><strong>Wasser & Nährsalze</strong>
+          </div>
+          <b aria-hidden="true">→</b>
+          <div class="equation-result">
+            <span aria-hidden="true">♧</span><strong>Algenbiomasse</strong
+            ><small>Organischer Dünger</small>
+          </div>
+        </figure>
+        <p class="detail-note">
+          Schematische Darstellung. Der Laborprototyp ist auf TRL 4 validiert;
+          V3 wird im Feldtest erprobt.
+        </p>
+        <details class="visual-details">
+          <summary>Filter, Regeneration und Photosynthese</summary>
+          <p>
+            Ein Sorbens bindet CO₂. Die Nährlösung löst es wieder aus dem Filter
+            und versorgt damit die Mikroalgen. Mit Licht, Wasser und Nährsalzen
+            entsteht durch Photosynthese die Biomasse für die Ernte.
+          </p>
+        </details>
+      </section>
+      <section class="page-next wrap">
+        <a href="/vorteile.html"
+          ><span>Weiter entdecken</span
+          ><strong>Kosten und Potenzial verstehen</strong
+          ><span aria-hidden="true">↗</span></a
+        >
+      </section>
+    </main>
+    <footer class="footer wrap">
+      <div class="footer-top">
+        <a class="brand" href="/"
+          >air<span class="brand-two">2</span>growth<span class="brand-dot"
+            >.</span
+          ></a
+        ><span>From Carbon to Crop.</span
+        ><a href="mailto:info@air2growth.com">info@air2growth.com ↗</a>
+      </div>
+      <nav class="footer-pages" aria-label="Weitere Seiten">
+        <a href="/produkt.html">Produkt</a
+        ><a href="/technologie.html">Technologie</a
+        ><a href="/vorteile.html">Vorteile</a><a href="/team.html">Team</a
+        ><a href="/investoren.html">Investoren</a
+        ><a href="/kontakt.html">Kontakt</a>
+      </nav>
+      <div class="footer-bottom">
+        <span
+          >© <span id="year">2026</span> Air2Growth · Mit Überzeugung in München
+          entwickelt.</span
+        >
+        <div>
+          <a
+            href="https://air2growth.de/#impressum"
+            target="_blank"
+            rel="noopener"
+            >Impressum ↗</a
+          ><a
+            href="https://air2growth.de/#datenschutz"
+            target="_blank"
+            rel="noopener"
+            >Datenschutz ↗</a
+          ><a href="#">Nach oben ↑</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

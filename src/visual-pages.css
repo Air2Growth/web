@@ -1,0 +1,521 @@
+/* Air2Growth visual-pages.css — figures for vorteile/team/investoren/kontakt.
+   Palette: paper #f8f9f3, forest #183c2c, leaf #6d8f4e, lime #d6eda7,
+   muted #67746a, line #dfe4d8. Open Sans inherited. No JS required. */
+
+.vp-figure {
+  margin: 32px 0;
+}
+.vp-figure > figcaption {
+  margin-top: 12px;
+  font-size: 13px;
+  line-height: 1.8;
+  color: #4f5b52;
+  max-width: 70ch;
+}
+.vp-kicker {
+  display: inline-block;
+  font-size: 12.5px;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+.vp-lede {
+  font-size: 14px;
+  line-height: 1.8;
+  max-width: 70ch;
+  margin: 0 0 6px;
+}
+.vp-qual {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--green);
+  background: var(--lime);
+  border-radius: 999px;
+  padding: 6px 14px;
+}
+
+/* Cost blocks: proportional bars, honest scale (3000 / 300 / 50). */
+.vp-cost {
+  list-style: none;
+  margin: 18px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 14px;
+}
+.vp-cost li {
+  display: grid;
+  grid-template-columns: 190px minmax(0, 1fr) 120px;
+  align-items: center;
+  gap: 14px;
+}
+.vp-cost .vp-cost-label {
+  font-size: 13px;
+}
+.vp-cost .vp-cost-label small {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+}
+.vp-cost .vp-track {
+  height: 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #fff;
+  overflow: hidden;
+}
+.vp-cost .vp-bar {
+  display: block;
+  height: 100%;
+  width: var(--w, 10%);
+  border-radius: 999px;
+  background: linear-gradient(90deg, #6d8f4e, #183c2c);
+}
+.vp-cost li:nth-child(3) .vp-bar {
+  background: linear-gradient(90deg, #9dbb7a, #6d8f4e);
+}
+.vp-cost strong {
+  text-align: right;
+  font-size: 15px;
+  white-space: nowrap;
+}
+.vp-cost strong small {
+  font-weight: 400;
+  color: var(--muted);
+}
+
+/* Potential strip: two facts side by side, one quiet disclaimer. */
+.vp-potential {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  margin-top: 26px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.vp-potential div {
+  padding: 18px 22px 18px 0;
+}
+.vp-potential div + div {
+  padding-left: 22px;
+  border-left: 1px solid var(--line);
+}
+.vp-potential strong {
+  display: block;
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: -0.8px;
+  line-height: 1.1;
+}
+.vp-potential strong small {
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: var(--muted);
+}
+.vp-potential span {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* Audience chips: one line, no cards. */
+.vp-chips {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 16px 0 0;
+  padding: 0;
+}
+.vp-chips li {
+  font-size: 13px;
+  border: 1px solid var(--line);
+  background: #fff;
+  border-radius: 999px;
+  padding: 7px 16px;
+}
+
+/* Flow strip: short sequence with drawn connectors. */
+.vp-flow {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin: 18px 0 0;
+  padding: 0;
+}
+.vp-flow li {
+  position: relative;
+  padding: 0 26px 0 0;
+  font-size: 13px;
+  line-height: 1.7;
+}
+.vp-flow li + li {
+  padding-left: 30px;
+}
+.vp-flow li + li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 26px;
+  width: 20px;
+  border-top: 2px dashed #8ca86d;
+}
+.vp-flow b {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--green);
+  color: #fff;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+.vp-flow li:last-child b {
+  background: #6d8f4e;
+}
+.vp-flow small {
+  display: block;
+  color: var(--muted);
+}
+
+/* Vertical achievement timeline (team). */
+.vp-timeline {
+  list-style: none;
+  margin: 20px 0 0;
+  padding: 0 0 0 26px;
+  position: relative;
+}
+.vp-timeline::before {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: var(--line);
+}
+.vp-timeline > li {
+  position: relative;
+  padding: 0 0 22px;
+  font-size: 13px;
+  line-height: 1.7;
+}
+.vp-timeline > li:last-child {
+  padding-bottom: 0;
+}
+.vp-timeline > li::before {
+  content: "";
+  position: absolute;
+  left: -26px;
+  top: 5px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--lime);
+  border: 3px solid var(--green);
+}
+.vp-timeline > li.is-plan::before {
+  background: #fff;
+  border-style: dashed;
+}
+.vp-timeline strong {
+  display: block;
+  font-size: 14px;
+}
+.vp-timeline .vp-when {
+  font-size: 12px;
+  color: var(--muted);
+}
+.vp-timeline p {
+  margin: 4px 0 0;
+  color: var(--muted);
+  max-width: 70ch;
+}
+
+/* Four people remain balanced in the roster and role summary. */
+.team-names {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+/* Role ribbon (team): one line, four voices. */
+.vp-roles {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin: 20px 0 0;
+  padding: 16px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.vp-roles div {
+  padding: 0 18px;
+}
+.vp-roles div:first-child {
+  padding-left: 0;
+}
+.vp-roles div + div {
+  border-left: 1px solid var(--line);
+}
+.vp-roles strong {
+  display: block;
+  font-size: 14px;
+}
+.vp-roles span {
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+/* Horizontal milestone lane (investoren). */
+.vp-lane {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr;
+  margin: 20px 0 0;
+  padding: 0;
+  position: relative;
+}
+.vp-lane::before {
+  content: "";
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  top: 9px;
+  border-top: 2px solid var(--line);
+}
+.vp-lane li {
+  position: relative;
+  padding: 26px 18px 0 0;
+  font-size: 13px;
+  line-height: 1.7;
+}
+.vp-lane li::before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--green);
+  border: 3px solid var(--lime);
+}
+.vp-lane li.is-plan::before {
+  background: #fff;
+  border-color: var(--green);
+  border-style: dashed;
+}
+.vp-lane strong {
+  display: block;
+  font-size: 14px;
+}
+.vp-lane .vp-when {
+  font-size: 12px;
+  color: var(--muted);
+}
+.vp-lane p {
+  margin: 4px 0 0;
+  color: var(--muted);
+}
+.vp-tag {
+  display: inline-block;
+  font-size: 11px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 2px 10px;
+  margin-top: 8px;
+  color: var(--muted);
+}
+.vp-tag.is-done {
+  background: var(--lime);
+  border-color: transparent;
+  color: var(--green);
+}
+
+/* Contact path: numbered because it is a real sequence. */
+.vp-path {
+  list-style: none;
+  counter-reset: vp-step;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 20px 0 0;
+  padding: 0;
+}
+.vp-path li {
+  counter-increment: vp-step;
+  position: relative;
+  padding: 0 22px 0 0;
+  font-size: 13px;
+  line-height: 1.7;
+}
+.vp-path li + li {
+  padding-left: 24px;
+  border-left: 1px dashed #8ca86d;
+}
+.vp-path li::before {
+  content: "0" counter(vp-step);
+  display: block;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.8px;
+  color: #8ca86d;
+  margin-bottom: 6px;
+}
+.vp-path strong {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+.vp-path p {
+  margin: 0;
+  color: var(--muted);
+}
+
+/* Checklist figure: two quiet columns, check marks drawn in CSS. */
+.vp-checks {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 32px;
+  list-style: none;
+  margin: 18px 0 0;
+  padding: 18px 0 0;
+  border-top: 1px solid var(--line);
+}
+.vp-checks li {
+  position: relative;
+  padding-left: 28px;
+  font-size: 13px;
+  line-height: 1.7;
+}
+.vp-checks li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 4px;
+  width: 14px;
+  height: 8px;
+  border-left: 2px solid #6d8f4e;
+  border-bottom: 2px solid #6d8f4e;
+  transform: rotate(-45deg);
+}
+.vp-checks small {
+  display: block;
+  color: var(--muted);
+}
+
+/* Deeper facts stay collapsible. */
+details.vp-more {
+  margin-top: 22px;
+  border-top: 1px solid var(--line);
+  padding-top: 14px;
+}
+details.vp-more summary {
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--green);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+details.vp-more p {
+  font-size: 13px;
+  line-height: 1.9;
+  color: var(--muted);
+  max-width: 75ch;
+}
+
+/* Figures animate after entering the viewport. */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal-visible .vp-bar {
+    transform-origin: left center;
+    animation: vp-grow 1s ease both;
+  }
+  .vp-timeline.reveal-visible::before {
+    animation: vp-drop 1.2s ease both;
+    transform-origin: top center;
+  }
+}
+@keyframes vp-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes vp-grow {
+  from {
+    transform: scaleX(0.15);
+    opacity: 0.4;
+  }
+  to {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
+@keyframes vp-drop {
+  from {
+    transform: scaleY(0.2);
+    opacity: 0.3;
+  }
+  to {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal],
+  .vp-bar,
+  .vp-timeline.reveal-visible::before {
+    animation: none;
+  }
+}
+
+@media (max-width: 860px) {
+  .vp-cost li {
+    grid-template-columns: 1fr auto;
+  }
+  .vp-cost .vp-track {
+    grid-column: 1 / -1;
+    order: 3;
+  }
+  .vp-potential,
+  .vp-roles,
+  .vp-flow,
+  .vp-path,
+  .vp-lane,
+  .vp-checks {
+    grid-template-columns: 1fr;
+  }
+  .vp-potential div + div {
+    padding-left: 0;
+    border-left: 0;
+    border-top: 1px solid var(--line);
+    padding-top: 14px;
+  }
+  .vp-roles div + div {
+    border-left: 0;
+    border-top: 1px solid var(--line);
+    padding: 12px 0 0;
+    margin-top: 12px;
+  }
+  .vp-roles div {
+    padding-left: 0;
+  }
+  .vp-flow li + li {
+    padding: 14px 0 0;
+  }
+  .vp-flow li + li::before {
+    display: none;
+  }
+  .vp-path li + li {
+    border-left: 0;
+    border-top: 1px dashed #8ca86d;
+    padding: 14px 0 0;
+    margin-top: 14px;
+  }
+  .vp-lane::before {
+    display: none;
+  }
+}

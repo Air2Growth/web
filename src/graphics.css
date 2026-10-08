@@ -1,0 +1,460 @@
+/* Field-paper, forest, leaf, algae green, water teal and sunlight gold. */
+body {
+  background-image: url("/images/field-contours.svg");
+  background-size: 1600px auto;
+  background-repeat: no-repeat;
+  background-position: center top;
+}
+.hero-copy {
+  position: relative;
+  isolation: isolate;
+  min-width: 0;
+}
+.hero-molecule {
+  position: absolute;
+  right: 0;
+  top: -18px;
+  width: clamp(110px, 14vw, 160px);
+  color: #769653;
+  rotate: -16deg;
+  opacity: 0.5;
+  pointer-events: none;
+  z-index: -1;
+}
+.hero-molecule svg {
+  width: 100%;
+  overflow: visible;
+}
+.hero-visual {
+  border-radius: 46% 46% 12px 12px;
+}
+.hero-visual .orbit {
+  border: 1px solid #e6f5d385;
+  border-radius: 50%;
+  background: #f8f9f30a;
+  backdrop-filter: blur(2px);
+}
+.page-intro {
+  position: relative;
+  isolation: isolate;
+}
+.page-intro::after {
+  content: "";
+  position: absolute;
+  width: min(240px, 32%);
+  aspect-ratio: 1;
+  right: 0;
+  bottom: -20px;
+  background: url("/images/algae-constellation.svg") center/contain no-repeat;
+  opacity: 0.14;
+  z-index: -1;
+  pointer-events: none;
+}
+.scene-sticky {
+  isolation: isolate;
+}
+.scene-sticky::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: url("/images/field-contours.svg") center/1400px auto no-repeat;
+  opacity: 0.35;
+  pointer-events: none;
+}
+.graphic-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 30px;
+  margin-bottom: 34px;
+}
+.graphic-heading h2 {
+  font-size: clamp(30px, 3.7vw, 50px);
+  font-weight: 400;
+  letter-spacing: -1.6px;
+  line-height: 1.15;
+  margin: 0;
+}
+.graphic-heading > span {
+  font-size: 12.5px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.micro-lab {
+  position: relative;
+  isolation: isolate;
+  border-block: 1px solid var(--line);
+  padding-block: 70px;
+  margin-block: 60px;
+}
+.micro-lab::before {
+  content: "";
+  position: absolute;
+  inset: 100px 10% 80px 22%;
+  background: #eaf0e0;
+  border-radius: 58% 42% 57% 43%;
+  z-index: -1;
+  rotate: -8deg;
+  opacity: 0.75;
+  pointer-events: none;
+}
+.lab-layout {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 70px;
+  align-items: center;
+}
+.lab-lens {
+  position: relative;
+  isolation: isolate;
+  margin: 0;
+  max-width: 590px;
+  aspect-ratio: 1;
+  cursor: crosshair;
+}
+.micrograph {
+  display: block;
+  width: 100%;
+  overflow: visible;
+  filter: drop-shadow(0 15px 30px #183c2c0b);
+}
+.lens-light {
+  position: absolute;
+  inset: 7%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at var(--lens-x, 50%) var(--lens-y, 50%),
+    #f3ffd968,
+    transparent 52%
+  );
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+.lab-caption {
+  position: absolute;
+  left: 50%;
+  translate: -50% 0;
+  bottom: 12px;
+  font-size: 13px;
+  letter-spacing: 0.25px;
+  background: #f8f9f3d9;
+  padding: 4px 14px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+.micro-cell {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition:
+    scale 1.1s,
+    translate 1.1s,
+    opacity 1.1s,
+    rotate 1.1s;
+}
+.micro-cells {
+  transform-origin: 300px 300px;
+  transition: transform 1.2s ease;
+}
+.micro-carbon {
+  transition:
+    opacity 0.8s,
+    transform 0.8s;
+  transform-origin: 300px 300px;
+}
+.micro-sun {
+  transition:
+    opacity 0.8s,
+    transform 0.8s;
+  transform-origin: 430px 75px;
+}
+.lab-lens[data-lab="air"] .micro-cell {
+  scale: 0.58;
+  opacity: 0.6;
+  rotate: var(--cell-turn);
+}
+.lab-lens[data-lab="air"] .micro-cells {
+  transform: scale(0.7);
+}
+.lab-lens[data-lab="air"] .micro-sun {
+  opacity: 0.2;
+  transform: scale(0.6);
+}
+.lab-lens[data-lab="grow"] .micro-carbon {
+  opacity: 0.35;
+}
+.lab-lens[data-lab="harvest"] .micro-cells {
+  transform: translate(70px, 40px) scale(0.78);
+}
+.lab-lens[data-lab="harvest"] .micro-cell {
+  rotate: var(--cell-turn);
+}
+.lab-lens[data-lab="harvest"] .micro-carbon {
+  opacity: 0.1;
+}
+.lab-growth {
+  position: relative;
+  text-align: center;
+}
+.growth-plant {
+  width: 100%;
+  max-width: 340px;
+  display: block;
+  margin: 0 auto 10px;
+  overflow: visible;
+}
+.plant-leaf {
+  transform-origin: 170px 240px;
+  transition: transform 1.2s;
+}
+.plant-leaf-right {
+  transform-origin: 170px 190px;
+}
+.plant-stem {
+  transition: opacity 1s;
+}
+.lab-growth[data-lab="air"] .plant-leaf-left {
+  transform: scale(0.45) rotate(15deg);
+}
+.lab-growth[data-lab="air"] .plant-leaf-right {
+  transform: scale(0.45) rotate(-15deg);
+}
+.lab-growth[data-lab="harvest"] .plant-leaf-left {
+  transform: scale(1.09) rotate(-8deg);
+}
+.lab-growth[data-lab="harvest"] .plant-leaf-right {
+  transform: scale(1.09) rotate(8deg);
+}
+.plant-orbit {
+  transform-origin: 170px 200px;
+  transition: rotate 1.2s;
+}
+.lab-growth[data-lab="harvest"] .plant-orbit {
+  rotate: 50deg;
+}
+.lab-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.lab-controls button {
+  font-size: 12px;
+  padding: 12px 20px;
+  min-height: 44px;
+  border: 1px solid #aebe99;
+  border-radius: 30px;
+  background: var(--paper);
+  color: var(--green);
+}
+.lab-controls button[aria-pressed="true"] {
+  background: var(--green);
+  color: var(--paper);
+  border-color: var(--green);
+}
+.lab-status {
+  min-height: 44px;
+  max-width: 300px;
+  margin: 18px auto 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.7;
+}
+.machine-anatomy {
+  padding-block: 50px;
+}
+.assembly-map {
+  margin: 0;
+  padding: 20px 0;
+  border-block: 1px solid var(--line);
+  background: #f8f9f3a8;
+  overflow: hidden;
+}
+.assembly-map svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 540px;
+  overflow: visible;
+}
+.assembly-map text {
+  font-family: "Open Sans", sans-serif;
+  font-size: 15px;
+  fill: var(--green);
+}
+.assembly-map g:last-child text {
+  fill: var(--paper);
+}
+.assembly-flow {
+  animation: assembly-flow 16s linear infinite;
+}
+@keyframes assembly-flow {
+  to {
+    stroke-dashoffset: -170;
+  }
+}
+.process-waves {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.6;
+}
+.process-diagram > .reactor,
+.process-diagram > .flow-label,
+.process-diagram > .flow-arrow {
+  position: relative;
+}
+.process-panel[data-active="4"] .process-waves {
+  opacity: 1;
+}
+.process-panel[data-active="4"] .process-waves circle {
+  fill: #769b50;
+}
+.footer {
+  position: relative;
+  isolation: isolate;
+}
+.footer::before {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 25px;
+  width: 180px;
+  height: 180px;
+  background: url("/images/algae-constellation.svg") center/contain no-repeat;
+  opacity: 0.1;
+  z-index: -1;
+  pointer-events: none;
+}
+@media (max-width: 960px) {
+  .hero-molecule {
+    width: 130px;
+    top: -5px;
+    right: 0;
+  }
+  .lab-layout {
+    gap: 30px;
+  }
+  .graphic-heading h2 {
+    font-size: 36px;
+  }
+}
+@media (max-width: 760px) {
+  .hero-molecule {
+    width: 96px;
+    right: 0;
+    top: -6px;
+    opacity: 0.3;
+  }
+  .hero-visual {
+    border-radius: 38% 38% 10px 10px;
+  }
+  .page-intro::after {
+    width: 160px;
+    bottom: 0;
+    opacity: 0.14;
+  }
+  .graphic-heading {
+    display: block;
+    margin-bottom: 28px;
+  }
+  .graphic-heading h2 {
+    font-size: 32px;
+    letter-spacing: -1px;
+  }
+  .graphic-heading > span {
+    display: block;
+    margin-top: 12px;
+  }
+  .micro-lab {
+    padding-block: 40px;
+    margin-block: 40px;
+  }
+  .lab-layout {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .lab-lens {
+    max-width: 420px;
+    margin: auto;
+    width: 100%;
+  }
+  .lab-growth {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    align-items: center;
+    text-align: left;
+    column-gap: 12px;
+  }
+  .growth-plant {
+    grid-row: 1 / 3;
+    margin: 0;
+    max-width: 130px;
+  }
+  .lab-controls {
+    justify-content: flex-start;
+    gap: 5px;
+  }
+  .lab-controls button {
+    padding: 12px 16px;
+    font-size: 12px;
+    min-height: 44px;
+  }
+  .lab-status {
+    margin: 10px 0 0;
+    font-size: 11px;
+    min-height: 34px;
+  }
+  .micro-lab::before {
+    inset: 100px 0 60px 0;
+    rotate: 0deg;
+  }
+  .machine-anatomy {
+    padding-block: 35px;
+  }
+  .assembly-map {
+    padding-block: 12px;
+  }
+  .assembly-map svg {
+    min-width: 520px;
+    max-width: none;
+    width: 100%;
+  }
+  .assembly-map {
+    overflow-x: auto;
+    scrollbar-width: thin;
+  }
+  .footer::before {
+    width: 130px;
+    height: 130px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .assembly-flow {
+    animation: none;
+  }
+  .micro-cell,
+  .micro-cells,
+  .micro-carbon,
+  .micro-sun,
+  .plant-leaf,
+  .plant-orbit {
+    transition: none;
+  }
+}
+.motion-off .assembly-flow {
+  animation: none;
+}
+
+.hero-visual .image-tag {
+  left: 50%;
+  translate: -50% 0;
+  top: 30px;
+  max-width: calc(100% - 32px);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

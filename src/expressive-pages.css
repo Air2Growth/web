@@ -1,0 +1,384 @@
+/* Air2Growth expressive-pages.css — SCOPE ONLY vorteile/team/investoren/kontakt.
+   Palette: forest #183c2c, lime #d6eda7, paper #f8f9f3. Open Sans inherited.
+   No global body/html/* rules: every selector is scoped to [data-page=...]
+   or an .xp-* class used only on those four pages. Parent adds global
+   background ribbons; this file only decorates local foreground figures.
+   Native CSS animation only; disabled under .motion-off + reduced motion. */
+
+[data-page="vorteile"] .xp-band,
+[data-page="team"] .xp-cycle,
+[data-page="investoren"] .xp-growth,
+[data-page="kontakt"] .xp-constellation {
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.xp-caption {
+  font-size: 12.5px;
+  line-height: 1.7;
+  color: #4f5b52;
+  margin: 10px 0 0;
+  max-width: 60ch;
+}
+
+.xp-decor {
+  pointer-events: none;
+}
+
+/* ============ VORTEILE: illustrated use-case band under intro ============ */
+[data-page="vorteile"] .xp-band {
+  position: relative;
+  margin-block: 6px 8px;
+  border-radius: 38px 90px 34px 80px / 60px 34px 70px 30px;
+  background:
+    radial-gradient(circle at 12% 88%, rgba(24, 60, 44, 0.10) 0 2px, transparent 3px),
+    radial-gradient(circle at 24% 92%, rgba(24, 60, 44, 0.08) 0 2px, transparent 3px),
+    radial-gradient(circle at 68% 90%, rgba(24, 60, 44, 0.08) 0 2px, transparent 3px),
+    radial-gradient(circle at 84% 86%, rgba(24, 60, 44, 0.10) 0 2px, transparent 3px),
+    linear-gradient(180deg, #eef5da 0%, #f8f9f3 78%);
+  border: 1px solid #dfe4d8;
+  padding: clamp(18px, 3.4vw, 34px) clamp(16px, 3vw, 30px) clamp(14px, 2.4vw, 22px);
+}
+
+[data-page="vorteile"] .xp-band::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 10px;
+  background: radial-gradient(circle at 10px -4px, transparent 11px, #d6eda7 12px, #d6eda7 13px, transparent 14px) repeat-x;
+  background-size: 28px 12px;
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+[data-page="vorteile"] .xp-uses {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(14px, 2.4vw, 26px);
+  position: relative;
+}
+
+[data-page="vorteile"] .xp-use {
+  position: relative;
+  background: #fff;
+  border: 1px solid #dfe4d8;
+  padding: 14px 14px 12px;
+  min-width: 0;
+}
+
+[data-page="vorteile"] .xp-use:nth-child(1) {
+  border-radius: 120px 120px 26px 26px / 90px 90px 26px 26px;
+}
+
+[data-page="vorteile"] .xp-use:nth-child(2) {
+  border-radius: 26px 70px 30px 60px / 30px 40px 30px 40px;
+}
+
+[data-page="vorteile"] .xp-use:nth-child(3) {
+  border-radius: 60px 26px 70px 30px / 40px 30px 44px 30px;
+}
+
+[data-page="vorteile"] .xp-use svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+[data-page="vorteile"] .xp-use figcaption {
+  font-size: 12.5px;
+  line-height: 1.7;
+  color: #4f5b52;
+  margin-top: 8px;
+}
+
+[data-page="vorteile"] .xp-use figcaption strong {
+  display: block;
+  font-size: 13.5px;
+  color: #183c2c;
+}
+
+/* small inline detail chips attached to existing figures */
+[data-page="vorteile"] .xp-sproutline {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+  font-size: 11px;
+  color: #67746a;
+}
+
+[data-page="vorteile"] .xp-sproutline svg {
+  flex: none;
+  width: 44px;
+  height: 26px;
+}
+
+/* ============ TEAM: four roles as work cycle ============ */
+[data-page="team"] .xp-cycle {
+  margin-block: 22px 6px;
+  position: relative;
+  background:
+    radial-gradient(ellipse 60% 45% at 50% 42%, rgba(214, 237, 167, 0.55), transparent 70%),
+    linear-gradient(180deg, #f2f6e6 0%, #f8f9f3 100%);
+  border: 1px solid #dfe4d8;
+  border-radius: 70px 30px 80px 28px / 34px 70px 30px 60px;
+  padding: clamp(18px, 3vw, 30px) clamp(14px, 2.6vw, 28px) clamp(12px, 2vw, 20px);
+  overflow: hidden;
+}
+
+[data-page="team"] .xp-cycle::after {
+  content: "";
+  position: absolute;
+  inset: auto -20% -46% -20%;
+  height: 60%;
+  background: repeating-linear-gradient(-8deg, transparent 0 14px, rgba(24, 60, 44, 0.05) 14px 15px);
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  pointer-events: none;
+}
+
+[data-page="team"] .xp-cycle figure {
+  margin: 0;
+  position: relative;
+  max-width: 720px;
+  margin-inline: auto;
+}
+
+[data-page="team"] .xp-cycle svg.xp-ring {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 340px;
+}
+
+[data-page="team"] .xp-cycle .xp-legend {
+  list-style: none;
+  margin: 10px auto 0;
+  padding: 12px 2px 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  border-top: 1px dashed #8ca86d;
+  position: relative;
+  max-width: 720px;
+}
+
+[data-page="team"] .xp-cycle .xp-legend li {
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: #67746a;
+  min-width: 0;
+}
+
+[data-page="team"] .xp-cycle .xp-legend strong {
+  display: block;
+  font-size: 13.5px;
+  color: #183c2c;
+}
+
+/* ============ INVESTOREN: seedling → field growth strip ============ */
+[data-page="investoren"] .xp-growth {
+  margin-block: 18px 4px;
+  border: 1px solid #dfe4d8;
+  background:
+    radial-gradient(circle at 8% 12%, rgba(214, 237, 167, 0.8) 0 34px, transparent 35px),
+    radial-gradient(circle at 94% 88%, rgba(109, 143, 78, 0.14) 0 44px, transparent 45px),
+    linear-gradient(180deg, #f4f8e8 0%, #f8f9f3 90%);
+  border-radius: 28px 80px 30px 70px / 50px 30px 60px 28px;
+  padding: clamp(16px, 3vw, 28px) clamp(14px, 2.6vw, 26px) clamp(12px, 2vw, 18px);
+  position: relative;
+  overflow: hidden;
+}
+
+[data-page="investoren"] .xp-growth svg.xp-stages {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+[data-page="investoren"] .xp-growth ol {
+  list-style: none;
+  margin: 10px 0 0;
+  padding: 10px 0 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+  border-top: 1px dashed #8ca86d;
+}
+
+[data-page="investoren"] .xp-growth ol li {
+  font-size: 12.5px;
+  line-height: 1.7;
+  color: #4f5b52;
+  min-width: 0;
+}
+
+[data-page="investoren"] .xp-growth ol strong {
+  display: block;
+  font-size: 13px;
+  color: #183c2c;
+}
+
+/* ============ KONTAKT: seed/field constellation ============ */
+[data-page="kontakt"] .xp-constellation {
+  position: relative;
+  margin-block: 4px 10px;
+  border: 1px solid #dfe4d8;
+  border-radius: 40px 28px 60px 24px / 28px 50px 26px 40px;
+  background:
+    radial-gradient(circle, rgba(24, 60, 44, 0.16) 0 1.6px, transparent 2px) 0 0 / 26px 26px,
+    linear-gradient(180deg, #eff5dc 0%, #f8f9f3 82%);
+  padding: clamp(14px, 2.6vw, 24px) clamp(14px, 2.6vw, 24px) clamp(10px, 1.8vw, 16px);
+  overflow: hidden;
+}
+
+[data-page="kontakt"] .xp-constellation svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+[data-page="kontakt"] .contact-page {
+  position: relative;
+}
+
+[data-page="kontakt"] .xp-constellation {
+  pointer-events: none;
+}
+
+[data-page="kontakt"] .xp-constellation a,
+[data-page="kontakt"] .xp-constellation button {
+  pointer-events: auto;
+}
+
+/* ============ motion: native CSS only, gated ============ */
+@media (prefers-reduced-motion: no-preference) {
+  html:not(.motion-off) [data-page="vorteile"] .xp-sway {
+    transform-origin: 50% 92%;
+    animation: xp-sway 5.2s ease-in-out infinite alternate;
+  }
+
+  html:not(.motion-off) [data-page="vorteile"] .xp-band .xp-use:nth-child(2) .xp-sway {
+    animation-duration: 6.4s;
+    animation-delay: -2s;
+  }
+
+  html:not(.motion-off) [data-page="vorteile"] .xp-band .xp-use:nth-child(3) .xp-sway {
+    animation-duration: 7.1s;
+    animation-delay: -3.4s;
+  }
+
+  html:not(.motion-off) [data-page="team"] .xp-orbit {
+    animation: xp-dash 22s linear infinite;
+  }
+
+  html:not(.motion-off) [data-page="team"] .xp-pulse {
+    transform-origin: center;
+    transform-box: fill-box;
+    animation: xp-pulse 3.6s ease-in-out infinite;
+  }
+
+  html:not(.motion-off) [data-page="investoren"] .xp-sway {
+    transform-origin: 50% 100%;
+    animation: xp-sway 5.8s ease-in-out infinite alternate;
+  }
+
+  html:not(.motion-off) [data-page="investoren"] .xp-drift {
+    animation: xp-drift 9s ease-in-out infinite alternate;
+  }
+
+  html:not(.motion-off) [data-page="kontakt"] .xp-float {
+    animation: xp-float 7s ease-in-out infinite alternate;
+  }
+
+  html:not(.motion-off) [data-page="kontakt"] .xp-twinkle {
+    animation: xp-twinkle 3.2s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes xp-sway {
+  from { transform: rotate(-2.2deg); }
+  to { transform: rotate(2.2deg); }
+}
+
+@keyframes xp-dash {
+  to { stroke-dashoffset: -320; }
+}
+
+@keyframes xp-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.12); opacity: 0.85; }
+}
+
+@keyframes xp-drift {
+  from { transform: translateX(-6px); }
+  to { transform: translateX(6px); }
+}
+
+@keyframes xp-float {
+  from { transform: translateY(-4px); }
+  to { transform: translateY(5px); }
+}
+
+@keyframes xp-twinkle {
+  from { opacity: 0.35; }
+  to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-page="vorteile"] .xp-sway,
+  [data-page="vorteile"] .xp-use,
+  [data-page="team"] .xp-orbit,
+  [data-page="team"] .xp-pulse,
+  [data-page="investoren"] .xp-sway,
+  [data-page="investoren"] .xp-drift,
+  [data-page="kontakt"] .xp-float,
+  [data-page="kontakt"] .xp-twinkle {
+    animation: none;
+  }
+}
+
+.motion-off [data-page="vorteile"] .xp-sway,
+.motion-off [data-page="vorteile"] .xp-use,
+.motion-off [data-page="team"] .xp-orbit,
+.motion-off [data-page="team"] .xp-pulse,
+.motion-off [data-page="investoren"] .xp-sway,
+.motion-off [data-page="investoren"] .xp-drift,
+.motion-off [data-page="kontakt"] .xp-float,
+.motion-off [data-page="kontakt"] .xp-twinkle {
+  animation: none;
+}
+
+/* ============ responsive: 320px+, no document overflow ============ */
+@media (max-width: 860px) {
+  [data-page="vorteile"] .xp-uses {
+    grid-template-columns: 1fr;
+  }
+
+  [data-page="vorteile"] .xp-use:nth-child(1) {
+    border-radius: 90px 90px 22px 22px / 64px 64px 22px 22px;
+  }
+
+  [data-page="team"] .xp-cycle .xp-legend {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  [data-page="investoren"] .xp-growth ol {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 420px) {
+  [data-page="vorteile"] .xp-band,
+  [data-page="team"] .xp-cycle,
+  [data-page="investoren"] .xp-growth,
+  [data-page="kontakt"] .xp-constellation {
+    border-radius: 22px;
+  }
+
+  [data-page="team"] .xp-cycle .xp-legend {
+    grid-template-columns: 1fr;
+  }
+}
