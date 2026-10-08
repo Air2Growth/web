@@ -50,7 +50,7 @@ Scenes use sticky positioning only on sufficiently wide/tall viewports. Mobile, 
 
 The user requested the newer assembly from `../air2growth/cad`. The product turntable therefore reads the canonical `cad/machine/Air2Growth-machine.FCStd` with its installed module links and preserves its component colors. Rendered views are website assets only; no CAD source or qualification state is changed. The visual label is “Aktueller CAD-Entwurf” and the caption identifies the overall machine concept. V3 field-test information stays in the separate development-status section, so the newer concept drawing is not represented as a photograph or exact model of that trial.
 
-The later team update adds Thinh Nguyen as Head of Product Development for Hardware & Software. Navika is listed as Head of Sales. The existing photograph remains labeled with the three original founders shown in it.
+The later team update adds Thinh Nguyen as Head of Engineering for Hardware & Software. Navika is listed as Head of Sales. The existing photograph remains labeled with the three original founders shown in it.
 
 ## Expanded graphics
 
