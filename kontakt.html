@@ -19,6 +19,7 @@
     />
     <link rel="stylesheet" href="/src/style.css" />
     <link rel="stylesheet" href="/src/expressive-pages.css" />
+    <link rel="stylesheet" href="/src/page-designs/kontakt.css" />
     <script type="module" src="/src/main.js"></script>
   </head>
   <body data-page="kontakt">
@@ -45,12 +46,45 @@
         ><a href="/vorteile.html">Vorteile</a><a href="/team.html">Team</a
         ><a href="/investoren.html">Investoren</a
         ><a href="/kontakt.html" aria-current="page">Kontakt</a>
+        <div class="language-switch" role="group" aria-label="Sprache wählen">
+          <a
+            href="?lang=de"
+            data-language="de"
+            lang="de"
+            hreflang="de"
+            aria-label="Deutsch"
+            >DE</a
+          >
+          <a
+            href="?lang=en"
+            data-language="en"
+            lang="en"
+            hreflang="en"
+            aria-label="English"
+            >EN</a
+          >
+        </div>
       </nav>
       <a
         class="button small header-cta"
         href="/kontakt.html?thema=Pilotprojekt#anfrage"
-        >Pilotprojekt anfragen <span aria-hidden="true">↗</span></a
-      >
+        >Pilotprojekt anfragen
+        <span aria-hidden="true"
+          ><svg
+            class="direction-arrow"
+            viewBox="0 0 24 24"
+            fill="none"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path
+              d="M5 19 19 5M5 5h14v14"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            /></svg></span
+      ></a>
       <button
         class="menu-toggle"
         aria-label="Menü öffnen"
@@ -61,81 +95,23 @@
       </button>
     </header>
     <main id="main">
-      <nav class="breadcrumbs wrap" aria-label="Brotkrumennavigation">
-        <a href="/">Start</a><span aria-hidden="true">/</span
-        ><span aria-current="page">Kontakt & Fragen</span>
-      </nav>
-      <section class="page-intro wrap">
-        <div>
-          <p class="page-label">Kontakt & Fragen</p>
-          <h1>Ein Gespräch.<br />Viele Möglichkeiten.</h1>
-        </div>
-        <p class="page-lead">
-          Sie möchten eine Pilotanlage erproben, die Technologie verstehen oder
-          Air2Growth als Partner begleiten? Hier beginnt der Austausch.
-        </p>
-      </section>
-      <section class="xp-constellation wrap">
-        <svg id="xp-k-seeds" viewBox="0 0 600 150" focusable="false" aria-hidden="true">
-          <g fill="none" stroke="#8ca86d" stroke-width="2" stroke-dasharray="4 8">
-            <ellipse cx="300" cy="75" rx="220" ry="52" />
-            <ellipse cx="300" cy="75" rx="140" ry="32" />
-          </g>
-          <g class="xp-float">
-            <path d="M300 112 V82" stroke="#183c2c" stroke-width="4" stroke-linecap="round" />
-            <path d="M300 92 C282 92 276 82 275 72 c14 0 23 6 25 20 Z" fill="#6d8f4e" />
-            <path d="M300 86 C318 86 324 76 325 66 c-14 0 -23 6 -25 20 Z" fill="#d6eda7" stroke="#183c2c" stroke-width="2" />
-            <ellipse cx="300" cy="114" rx="40" ry="9" fill="#183c2c" />
-            <path d="M268 112 H332" stroke="#d6eda7" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="1 8" />
-          </g>
-          <g fill="#183c2c">
-            <ellipse class="xp-twinkle" cx="96" cy="52" rx="7" ry="9" transform="rotate(-24 96 52)" />
-            <ellipse class="xp-twinkle" cx="150" cy="100" rx="6" ry="8" transform="rotate(18 150 100)" style="animation-delay: -1s" />
-            <ellipse class="xp-twinkle" cx="452" cy="48" rx="7" ry="9" transform="rotate(22 452 48)" style="animation-delay: -2s" />
-            <ellipse class="xp-twinkle" cx="508" cy="102" rx="6" ry="8" transform="rotate(-18 508 102)" style="animation-delay: -0.5s" />
-          </g>
-          <g stroke="#6d8f4e" stroke-width="2" fill="none" stroke-linecap="round">
-            <path d="M96 34 v-8 M150 84 v-8 M452 30 v-8 M508 86 v-8" />
-          </g>
-          <g fill="none" stroke="#183c2c" stroke-width="2.2">
-            <rect x="196" y="52" width="34" height="24" rx="6" transform="rotate(-10 213 64)" />
-            <path d="M230 60 l14 -6 v18 l-14 -6" transform="rotate(-10 213 64)" fill="#d6eda7" />
-            <rect x="370" y="52" width="34" height="24" rx="12" transform="rotate(10 387 64)" />
-            <circle cx="379" cy="64" r="2.4" fill="#183c2c" stroke="none" />
-            <circle cx="388" cy="64" r="2.4" fill="#183c2c" stroke="none" />
-          </g>
-          <g fill="#d6eda7" stroke="#183c2c" stroke-width="1.6">
-            <circle cx="250" cy="112" r="5" />
-            <circle cx="352" cy="110" r="5" />
-          </g>
-        </svg>
-        <p class="xp-caption" style="margin-bottom: 0">Samen, Feld und Nachricht – Ihr Betrieb, Ihre Frage</p>
-      </section>
-      <section id="anfrage" class="contact-page section wrap">
-        <div class="contact-page-copy">
-          <span class="eyebrow">Lassen Sie uns sprechen</span>
-          <h2>Ihr Betrieb.<br />Ihre Frage.<br />Unser nächster Schritt.</h2>
-          <p>
-            Ob Pilotprojekt, Produktfrage, Partnerschaft oder Investition:
-            Erzählen Sie uns, worum es geht. Die Nachricht wird in Ihrem
-            E-Mail-Programm vorbereitet; Sie senden sie anschließend selbst ab.
-          </p>
-          <a class="contact-address" href="mailto:info@air2growth.com"
-            >info@air2growth.com ↗</a
-          ><a
-            class="inline-link"
-            href="https://www.linkedin.com/company/air2growth"
-            target="_blank"
-            rel="noopener"
-            >Air2Growth auf LinkedIn ↗</a
-          >
-          <div class="contact-location">
-            <span>Entwickelt in München</span>
-            <p>Air2Growth<br />Sedelhofstraße 13<br />81247 München</p>
+      <section class="kt-desk" id="anfrage" aria-labelledby="kontakt-title">
+        <div class="kt-desk-inner wrap">
+          <div class="kt-intro">
+            <p class="page-label">Kontakt & Fragen</p>
+            <h1 id="kontakt-title">Ein Gespräch.<br />Viele Möglichkeiten.</h1>
+            <p class="page-lead">
+              Sie möchten eine Pilotanlage erproben, die Technologie verstehen
+              oder Air2Growth als Partner begleiten? Hier beginnt der Austausch.
+            </p>
           </div>
-        </div>
-        <div class="contact-form-panel">
+          <div class="kt-blotter">
+            <div class="contact-form-panel">
           <h2>Schreiben Sie uns.</h2>
+          <p class="mobile-form-intro">
+            Ihre Nachricht wird im E-Mail-Programm vorbereitet. Dort senden Sie
+            sie selbst ab.
+          </p>
           <form
             id="contact-form"
             class="inquiry-form"
@@ -179,164 +155,446 @@
               maxlength="3000"
             ></textarea
             ><button class="button" type="submit">
-              E-Mail vorbereiten <span aria-hidden="true">↗</span>
+              E-Mail vorbereiten
+              <span aria-hidden="true"
+                ><svg
+                  class="direction-arrow"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <path
+                    d="M5 19 19 5M5 5h14v14"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  /></svg
+              ></span>
             </button>
             <p class="form-status" role="status"></p>
             <a class="direct-email" href="mailto:info@air2growth.com"
               >Oder direkt: info@air2growth.com</a
             >
-          </form>
+            </form>
+            </div>
+          </div>
+          <div class="kt-support">
+            <div class="kt-copy">
+              <span class="eyebrow">Lassen Sie uns sprechen</span>
+              <h2>Ihr Betrieb.<br />Ihre Frage.<br />Unser nächster Schritt.</h2>
+              <p>
+                Ob Pilotprojekt, Produktfrage, Partnerschaft oder Investition:
+                Erzählen Sie uns, worum es geht. Die Nachricht wird in Ihrem
+                E-Mail-Programm vorbereitet; Sie senden sie anschließend selbst
+                ab.
+              </p>
+            </div>
+            <div class="kt-channels">
+              <a class="contact-address" href="mailto:info@air2growth.com"
+                >info@air2growth.com
+                <svg
+                  class="direction-arrow"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <path
+                    d="M5 19 19 5M5 5h14v14"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  /></svg></a
+              ><a
+                class="inline-link"
+                href="https://www.linkedin.com/company/air2growth"
+                target="_blank"
+                rel="noopener"
+                >Air2Growth auf LinkedIn
+                <svg
+                  class="direction-arrow"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <path
+                    d="M5 19 19 5M5 5h14v14"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  /></svg
+              ></a>
+              <div class="contact-location">
+                <span>Entwickelt in München</span>
+                <p>Air2Growth<br />Sedelhofstraße 13<br />81247 München</p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
+      <section class="xp-constellation wrap">
+        <svg
+          id="xp-k-seeds"
+          viewBox="0 0 600 150"
+          focusable="false"
+          aria-hidden="true"
+        >
+          <g
+            fill="none"
+            stroke="#8ca86d"
+            stroke-width="2"
+            stroke-dasharray="4 8"
+          >
+            <ellipse cx="300" cy="75" rx="220" ry="52" />
+            <ellipse cx="300" cy="75" rx="140" ry="32" />
+          </g>
+          <g class="xp-float">
+            <path
+              d="M300 112 V82"
+              stroke="#183c2c"
+              stroke-width="4"
+              stroke-linecap="round"
+            />
+            <path
+              d="M300 92 C282 92 276 82 275 72 c14 0 23 6 25 20 Z"
+              fill="#6d8f4e"
+            />
+            <path
+              d="M300 86 C318 86 324 76 325 66 c-14 0 -23 6 -25 20 Z"
+              fill="#d6eda7"
+              stroke="#183c2c"
+              stroke-width="2"
+            />
+            <ellipse cx="300" cy="114" rx="40" ry="9" fill="#183c2c" />
+            <path
+              d="M268 112 H332"
+              stroke="#d6eda7"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-dasharray="1 8"
+            />
+          </g>
+          <g fill="#183c2c">
+            <ellipse
+              class="xp-twinkle"
+              cx="96"
+              cy="52"
+              rx="7"
+              ry="9"
+              transform="rotate(-24 96 52)"
+            />
+            <ellipse
+              class="xp-twinkle"
+              cx="150"
+              cy="100"
+              rx="6"
+              ry="8"
+              transform="rotate(18 150 100)"
+              style="animation-delay: -1s"
+            />
+            <ellipse
+              class="xp-twinkle"
+              cx="452"
+              cy="48"
+              rx="7"
+              ry="9"
+              transform="rotate(22 452 48)"
+              style="animation-delay: -2s"
+            />
+            <ellipse
+              class="xp-twinkle"
+              cx="508"
+              cy="102"
+              rx="6"
+              ry="8"
+              transform="rotate(-18 508 102)"
+              style="animation-delay: -0.5s"
+            />
+          </g>
+          <g
+            stroke="#6d8f4e"
+            stroke-width="2"
+            fill="none"
+            stroke-linecap="round"
+          >
+            <path d="M96 34 v-8 M150 84 v-8 M452 30 v-8 M508 86 v-8" />
+          </g>
+          <g fill="none" stroke="#183c2c" stroke-width="2.2">
+            <rect
+              x="196"
+              y="52"
+              width="34"
+              height="24"
+              rx="6"
+              transform="rotate(-10 213 64)"
+            />
+            <path
+              d="M230 60 l14 -6 v18 l-14 -6"
+              transform="rotate(-10 213 64)"
+              fill="#d6eda7"
+            />
+            <rect
+              x="370"
+              y="52"
+              width="34"
+              height="24"
+              rx="12"
+              transform="rotate(10 387 64)"
+            />
+            <circle cx="379" cy="64" r="2.4" fill="#183c2c" stroke="none" />
+            <circle cx="388" cy="64" r="2.4" fill="#183c2c" stroke="none" />
+          </g>
+          <g fill="#d6eda7" stroke="#183c2c" stroke-width="1.6">
+            <circle cx="250" cy="112" r="5" />
+            <circle cx="352" cy="110" r="5" />
+          </g>
+        </svg>
+        <p class="xp-caption" style="margin-bottom: 0">
+          Samen, Feld und Nachricht – Ihr Betrieb, Ihre Frage
+        </p>
+      </section>
       <section class="faq section wrap">
-        <div>
+        <div class="faq-introduction">
           <span class="eyebrow">Gut zu wissen</span>
           <h2>Neue Wege.<br /><em>Klare Antworten.</em></h2>
           <p>
             Noch eine Frage offen?<br /><a href="mailto:info@air2growth.com"
-              >Schreiben Sie uns <span aria-hidden="true">↗</span></a
-            >
+              >Schreiben Sie uns
+              <span aria-hidden="true"
+                ><svg
+                  class="direction-arrow"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <path
+                    d="M5 19 19 5M5 5h14v14"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  /></svg></span
+            ></a>
           </p>
         </div>
-        <div class="faq-list">
-          <details>
+        <div class="faq-list faq-stack">
+          <details class="faq-item">
             <summary>
-              Was genau macht Air2Growth?<span aria-hidden="true">+</span>
+              <span class="faq-question">Was genau macht Air2Growth?</span
+              ><span class="faq-icon" aria-hidden="true"></span>
             </summary>
-            <p>
-              Wir entwickeln ein modulares System, das CO₂ aus der Luft erfasst
-              und mithilfe von Mikroalgen in Bio-Flüssigdünger umwandelt. Der
-              validierte V3-Prototyp läuft bereits im Feldtest bei unserem
-              ersten Partnerbetrieb.
-            </p>
+            <div class="faq-answer">
+              <p>
+                Wir entwickeln ein modulares System, das CO₂ aus der Luft
+                erfasst und mithilfe von Mikroalgen in Bio-Flüssigdünger
+                umwandelt. Der validierte V3-Prototyp läuft bereits im Feldtest
+                bei unserem ersten Partnerbetrieb.
+              </p>
+            </div>
           </details>
-          <details>
+          <details class="faq-item">
             <summary>
-              Für wen ist das System gedacht?<span aria-hidden="true">+</span>
+              <span class="faq-question">Für wen ist das System gedacht?</span
+              ><span class="faq-icon" aria-hidden="true"></span>
             </summary>
-            <p>
-              Für Gewächshausbetriebe, Vertical Farming und Bio-Betriebe, die
-              ihre Düngerproduktion lokaler und unabhängiger gestalten möchten.
-              Gemeinsam betrachten wir die Voraussetzungen an Ihrem Standort.
-            </p>
+            <div class="faq-answer">
+              <p>
+                Für Gewächshausbetriebe, Vertical Farming und Bio-Betriebe, die
+                ihre Düngerproduktion lokaler und unabhängiger gestalten
+                möchten. Gemeinsam betrachten wir die Voraussetzungen an Ihrem
+                Standort.
+              </p>
+            </div>
           </details>
-          <details>
+          <details class="faq-item">
             <summary>
-              Was kostet eine Anlage?<span aria-hidden="true">+</span>
+              <span class="faq-question">Was kostet eine Anlage?</span
+              ><span class="faq-icon" aria-hidden="true"></span>
             </summary>
-            <p>
-              Das aktuelle Modell kalkuliert mit 3.000 € Hardware pro Modul und
-              50 € Verbrauchsmaterial alle zwei Monate. Diese Modellpreise sind
-              keine verbindlichen Angebote. Wir besprechen die Konditionen und
-              Betriebskosten individuell mit Ihnen.
-            </p>
+            <div class="faq-answer">
+              <p>
+                Das aktuelle Modell kalkuliert mit 3.000 € Hardware pro Modul
+                und 50 € Verbrauchsmaterial alle zwei Monate. Diese Modellpreise
+                sind keine verbindlichen Angebote. Wir besprechen die
+                Konditionen und Betriebskosten individuell mit Ihnen.
+              </p>
+            </div>
           </details>
-          <details>
+          <details class="faq-item">
             <summary>
-              Wie kann ich am Pilotprojekt teilnehmen?<span aria-hidden="true"
-                >+</span
-              >
+              <span class="faq-question"
+                >Wie kann ich am Pilotprojekt teilnehmen?</span
+              ><span class="faq-icon" aria-hidden="true"></span>
             </summary>
-            <p>
-              Unser V3-Prototyp ist bereits im Feldtest. Schreiben Sie uns mit
-              Informationen zu Ihrem Betrieb, wenn Sie einen Pilotplatz anfragen
-              möchten. Das Kunden-Onboarding ist für Dezember 2026, die
-              Markteinführung für März 2027 geplant.
-            </p>
+            <div class="faq-answer">
+              <p>
+                Unser V3-Prototyp ist bereits im Feldtest. Schreiben Sie uns mit
+                Informationen zu Ihrem Betrieb, wenn Sie einen Pilotplatz
+                anfragen möchten. Das Kunden-Onboarding ist für Dezember 2026,
+                die Markteinführung für März 2027 geplant.
+              </p>
+            </div>
           </details>
         </div>
       </section>
+      <figure class="editorial-photo wrap">
+        <img
+          src="/images/stock/leaves.webp"
+          srcset="
+            /images/stock/leaves-small.webp  640w,
+            /images/stock/leaves.webp       1600w
+          "
+          sizes="(max-width: 760px) calc(100vw - 40px), (max-width: 1400px) calc(100vw - 96px), 1320px"
+          alt="Grüne Blätter im natürlichen Licht"
+          width="1600"
+          height="1067"
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption>Hier beginnt der Austausch.</figcaption>
+      </figure>
       <section class="detail-section section wrap">
-        <div class="detail-heading">
-          <h2>So bereiten Sie eine Pilotanfrage vor</h2>
-          <p>
-            Ein paar konkrete Informationen zu Ihrem Betrieb helfen uns, Ihre
-            Anfrage einzuordnen. Eine kurze Beschreibung genügt für den ersten
-            Austausch.
-          </p>
-        </div>
-        <p class="vp-lede">
-          Drei Schritte zur Pilotanfrage: kurz beschreiben, Nachricht im
-          E-Mail-Programm absenden, gemeinsam einordnen.
-        </p>
-        <ol
-          class="vp-path"
-          data-reveal
-          aria-label="In drei Schritten zur Anfrage"
-        >
-          <li>
-            <strong>Beschreiben</strong>
-            <p>Betrieb, Kulturen und Düngung in wenigen Sätzen.</p>
-          </li>
-          <li>
-            <strong>Senden</strong>
-            <p>Formular ausfüllen – die E-Mail wird vorbereitet.</p>
-          </li>
-          <li>
-            <strong>Austauschen</strong>
-            <p>Eignung und nächste Schritte klären wir gemeinsam.</p>
-          </li>
-        </ol>
-        <figure class="vp-figure" data-reveal aria-labelledby="vp-checkliste">
-          <span class="vp-kicker" id="vp-checkliste"
-            >Hilfreiche Angaben für das Erstgespräch</span
-          >
-          <ul class="vp-checks">
-            <li>
-              Betriebsform &amp; Kulturen<small>bisherige Düngestrategie</small>
-            </li>
-            <li>
-              Standort &amp; Flächen<small>vorhandene Infrastruktur</small>
-            </li>
-            <li>
-              Menge &amp; Kontinuität<small>Erwartungen und Zeitrahmen</small>
-            </li>
-            <li>
-              Offene Fragen<small
-                >Stellfläche, Anschlüsse, Integration, Betreuung</small
+        <details class="mobile-disclosure" open data-mobile-disclosure>
+          <summary>
+            <span>Pilotanfrage vorbereiten</span
+            ><span class="faq-icon" aria-hidden="true"></span>
+          </summary>
+          <div class="mobile-disclosure-content">
+            <div class="detail-heading">
+              <h2>So bereiten Sie eine Pilotanfrage vor</h2>
+              <p>
+                Ein paar konkrete Informationen zu Ihrem Betrieb helfen uns,
+                Ihre Anfrage einzuordnen. Eine kurze Beschreibung genügt für den
+                ersten Austausch.
+              </p>
+            </div>
+            <p class="vp-lede">
+              Drei Schritte zur Pilotanfrage: kurz beschreiben, Nachricht im
+              E-Mail-Programm absenden, gemeinsam einordnen.
+            </p>
+            <ol
+              class="vp-path"
+              data-reveal
+              aria-label="In drei Schritten zur Anfrage"
+            >
+              <li>
+                <strong>Beschreiben</strong>
+                <p>Betrieb, Kulturen und Düngung in wenigen Sätzen.</p>
+              </li>
+              <li>
+                <strong>Senden</strong>
+                <p>Formular ausfüllen – die E-Mail wird vorbereitet.</p>
+              </li>
+              <li>
+                <strong>Austauschen</strong>
+                <p>Eignung und nächste Schritte klären wir gemeinsam.</p>
+              </li>
+            </ol>
+            <figure
+              class="vp-figure"
+              data-reveal
+              aria-labelledby="vp-checkliste"
+            >
+              <span class="vp-kicker" id="vp-checkliste"
+                >Hilfreiche Angaben für das Erstgespräch</span
               >
-            </li>
-          </ul>
-        </figure>
-        <details class="vp-more">
-          <summary>Welche Unterlagen sollte ich gleich mitschicken?</summary>
-          <p>
-            Eine kurze Betriebsbeschreibung genügt für den Anfang. Messreihen,
-            Bodenanalysen oder Fotos sind hilfreich, aber keine Voraussetzung.
-            Senden Sie nur Unterlagen, die Sie teilen möchten.
-          </p>
+              <ul class="vp-checks">
+                <li>
+                  Betriebsform &amp; Kulturen<small
+                    >bisherige Düngestrategie</small
+                  >
+                </li>
+                <li>
+                  Standort &amp; Flächen<small>vorhandene Infrastruktur</small>
+                </li>
+                <li>
+                  Menge &amp; Kontinuität<small
+                    >Erwartungen und Zeitrahmen</small
+                  >
+                </li>
+                <li>
+                  Offene Fragen<small
+                    >Stellfläche, Anschlüsse, Integration, Betreuung</small
+                  >
+                </li>
+              </ul>
+            </figure>
+            <div class="faq-stack">
+              <details class="vp-more faq-item">
+                <summary>
+                  <span class="faq-question"
+                    >Welche Unterlagen sollte ich gleich mitschicken?</span
+                  ><span class="faq-icon" aria-hidden="true"></span>
+                </summary>
+                <div class="faq-answer">
+                  <p>
+                    Eine kurze Betriebsbeschreibung genügt für den Anfang.
+                    Messreihen, Bodenanalysen oder Fotos sind hilfreich, aber
+                    keine Voraussetzung. Senden Sie nur Unterlagen, die Sie
+                    teilen möchten.
+                  </p>
+                </div>
+              </details>
+              <details class="vp-more faq-item">
+                <summary>
+                  <span class="faq-question"
+                    >An wen richtet sich das Pilotprojekt?</span
+                  ><span class="faq-icon" aria-hidden="true"></span>
+                </summary>
+                <div class="faq-answer">
+                  <p>
+                    An Gewächshausbetriebe, Vertical Farming und Bio-Betriebe,
+                    die ihre Düngerproduktion lokaler gestalten möchten. Details
+                    zu
+                    <a class="inline-link" href="/produkt.html">Produkt</a> und
+                    <a class="inline-link" href="/technologie.html"
+                      >Technologie</a
+                    >
+                    helfen bei der ersten Einordnung.
+                  </p>
+                </div>
+              </details>
+              <details class="vp-more faq-item">
+                <summary>
+                  <span class="faq-question"
+                    >Wie geht es nach dem Erstgespräch weiter?</span
+                  ><span class="faq-icon" aria-hidden="true"></span>
+                </summary>
+                <div class="faq-answer">
+                  <p>
+                    Wir prüfen gemeinsam Eignung und offene Fragen. Der
+                    Laborprototyp ist validiert (TRL 4), die Version V3 läuft im
+                    Feldtest; Onboarding ist für Dezember 2026 und die
+                    Markteinführung für März 2027 geplant. Daraus ergibt sich,
+                    ob und wann ein nächster Schritt sinnvoll ist.
+                  </p>
+                </div>
+              </details>
+            </div>
+            <p class="detail-note">
+              Starten Sie mit dem Thema
+              <a
+                class="inline-link"
+                href="/kontakt.html?thema=Pilotprojekt#anfrage"
+                >Pilotprojekt</a
+              >
+              oder fordern Sie als Investor das
+              <a
+                class="inline-link"
+                href="/kontakt.html?thema=Pitch%20Deck#anfrage"
+                >Pitch Deck</a
+              >
+              an. Allgemeine Fragen richten Sie an die Übersicht der
+              <a class="inline-link" href="/vorteile.html">Vorteile</a>.
+            </p>
+          </div>
         </details>
-        <details class="vp-more">
-          <summary>An wen richtet sich das Pilotprojekt?</summary>
-          <p>
-            An Gewächshausbetriebe, Vertical Farming und Bio-Betriebe, die ihre
-            Düngerproduktion lokaler gestalten möchten. Details zu
-            <a class="inline-link" href="/produkt.html">Produkt</a> und
-            <a class="inline-link" href="/technologie.html">Technologie</a>
-            helfen bei der ersten Einordnung.
-          </p>
-        </details>
-        <details class="vp-more">
-          <summary>Wie geht es nach dem Erstgespräch weiter?</summary>
-          <p>
-            Wir prüfen gemeinsam Eignung und offene Fragen. Der Laborprototyp
-            ist validiert (TRL 4), die Version V3 läuft im Feldtest; Onboarding
-            ist für Dezember 2026 und die Markteinführung für März 2027 geplant.
-            Daraus ergibt sich, ob und wann ein nächster Schritt sinnvoll ist.
-          </p>
-        </details>
-        <p class="detail-note">
-          Starten Sie mit dem Thema
-          <a class="inline-link" href="/kontakt.html?thema=Pilotprojekt#anfrage"
-            >Pilotprojekt</a
-          >
-          oder fordern Sie als Investor das
-          <a class="inline-link" href="/kontakt.html?thema=Pitch%20Deck#anfrage"
-            >Pitch Deck</a
-          >
-          an. Allgemeine Fragen richten Sie an die Übersicht der
-          <a class="inline-link" href="/vorteile.html">Vorteile</a>.
-        </p>
       </section>
     </main>
     <footer class="footer wrap">
@@ -346,7 +604,23 @@
             >.</span
           ></a
         ><span>From Carbon to Crop.</span
-        ><a href="mailto:info@air2growth.com">info@air2growth.com ↗</a>
+        ><a href="mailto:info@air2growth.com"
+          >info@air2growth.com
+          <svg
+            class="direction-arrow"
+            viewBox="0 0 24 24"
+            fill="none"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path
+              d="M5 19 19 5M5 5h14v14"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            /></svg
+        ></a>
       </div>
       <nav class="footer-pages" aria-label="Weitere Seiten">
         <a href="/produkt.html">Produkt</a
@@ -365,13 +639,57 @@
             href="https://air2growth.de/#impressum"
             target="_blank"
             rel="noopener"
-            >Impressum ↗</a
+            >Impressum
+            <svg
+              class="direction-arrow"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                d="M5 19 19 5M5 5h14v14"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              /></svg></a
           ><a
             href="https://air2growth.de/#datenschutz"
             target="_blank"
             rel="noopener"
-            >Datenschutz ↗</a
-          ><a href="#">Nach oben ↑</a>
+            >Datenschutz
+            <svg
+              class="direction-arrow"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                d="M5 19 19 5M5 5h14v14"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              /></svg></a
+          ><a href="#"
+            >Nach oben
+            <svg
+              class="ui-icon icon-up"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                d="M12 20V4M5 11l7-7 7 7"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              /></svg
+          ></a>
         </div>
       </div>
     </footer>

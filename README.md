@@ -1,6 +1,6 @@
 # Air2Growth website redesign
 
-A responsive German website with seven static pages, implemented with plain HTML, CSS, and JavaScript. Vite is used only for local development and production asset bundling; there is no UI framework or runtime dependency.
+A responsive German and English website with seven static pages, implemented with plain HTML, CSS, and JavaScript. Vite is used only for local development and production asset bundling; there is no UI framework or runtime dependency.
 
 ## Run on the cloud machine over Tailscale
 
@@ -34,6 +34,9 @@ Deploy the contents of `dist/` to a static host. The site expects deployment at 
 - `vite.config.js`: all seven HTML entry points for the production build.
 - `content/`: editorial source fragments for the added details; the live copy is in the page HTML files.
 - `src/style.css`: responsive layouts, design tokens, local fonts, reduced-motion support.
+- `src/design-system.css`: shared expressive tokens (exact forest/leaf/citron/cobalt/mist/white), Barlow Condensed 700 + Open Sans, header/nav/footer, buttons, focus, reduced-motion; no page composition.
+- `src/page-designs/index.css`, `produkt.css`, `technologie.css`, `vorteile.css`, `team.css`, `investoren.css`, `kontakt.css`: one scoped expressive composition per page (`body[data-page="<page>"]`, linked only in its own HTML head); seven distinct layouts sharing the palette and type.
+- `docs/designs/shared.md`, `index.md`, `produkt.md`, `technologie.md`, `vorteile.md`, `team.md`, `investoren.md`, `review-first.md`, `review-final.md`: per-page token/type/layout plans, ASCII wireframes, critiques, preservation records, and review findings.
 - `src/main.js`: mobile navigation, keyboard-accessible process tabs, contact handling, and shared interaction setup.
 - `src/scroll.js` / `src/scroll.css`: native scroll progress, pinned visual stories, CAD rotation, animation controls, and reduced-motion fallbacks.
 - `src/visual-pages.css`: cost figures, timelines, and concise summaries on the secondary pages.
@@ -48,6 +51,9 @@ Deploy the contents of `dist/` to a static host. The site expects deployment at 
 
 ## Interactions and content
 
+- On the first visit, the browser’s language preferences select the first supported language (German or English). Regional variants such as `de-AT`, `de-CH` and `en-GB` are supported; English is the fallback when no preferred language is supported.
+- The DE/EN switch in the navigation opens the same page in the chosen language, preserving inquiry topics and anchors. An explicit choice is saved locally. `?lang=de` and `?lang=en` also open a specific version directly and override the saved choice. Internal links carry manual choices even when local storage is unavailable. Automatic visits keep following browser preferences.
+- German source copy stays in the HTML; `src/translations/en.js` contains English translations keyed by normalized German text. Update the matching translation when changing source copy. `src/i18n.js` translates text and accessible labels without replacing markup; interactive states and email drafts use the same translations. The document language, titles and descriptions follow the selected language. Without JavaScript, the German source version remains available.
 - Desktop scrolling advances the homepage carbon cycle, rotates the current full-machine CAD concept, and selects the six technology stages. Chapter controls and the model slider also work directly.
 - Small/short screens and reduced-motion preferences use ordinary document flow with all story chapters visible. An animation switch remembers an explicit choice locally. Native wheel, touch, and keyboard scrolling remain available.
 - Technology tabs support arrows, Home, and End.

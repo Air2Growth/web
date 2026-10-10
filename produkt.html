@@ -18,6 +18,7 @@
       crossorigin
     />
     <link rel="stylesheet" href="/src/style.css" />
+    <link rel="stylesheet" href="/src/page-designs/produkt.css" />
     <script type="module" src="/src/main.js"></script>
   </head>
   <body data-page="produkt">
@@ -45,12 +46,45 @@
         ><a href="/vorteile.html">Vorteile</a><a href="/team.html">Team</a
         ><a href="/investoren.html">Investoren</a
         ><a href="/kontakt.html">Kontakt</a>
+        <div class="language-switch" role="group" aria-label="Sprache wählen">
+          <a
+            href="?lang=de"
+            data-language="de"
+            lang="de"
+            hreflang="de"
+            aria-label="Deutsch"
+            >DE</a
+          >
+          <a
+            href="?lang=en"
+            data-language="en"
+            lang="en"
+            hreflang="en"
+            aria-label="English"
+            >EN</a
+          >
+        </div>
       </nav>
       <a
         class="button small header-cta"
         href="/kontakt.html?thema=Pilotprojekt#anfrage"
-        >Pilotprojekt anfragen <span aria-hidden="true">↗</span></a
-      >
+        >Pilotprojekt anfragen
+        <span aria-hidden="true"
+          ><svg
+            class="direction-arrow"
+            viewBox="0 0 24 24"
+            fill="none"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path
+              d="M5 19 19 5M5 5h14v14"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            /></svg></span
+      ></a>
       <button
         class="menu-toggle"
         aria-label="Menü öffnen"
@@ -61,30 +95,69 @@
       </button>
     </header>
     <main id="main">
-      <nav class="breadcrumbs wrap" aria-label="Brotkrumennavigation">
-        <a href="/">Start</a><span aria-hidden="true">/</span
-        ><span aria-current="page">Produkt & Prototyp</span>
-      </nav>
-      <section class="page-intro wrap">
-        <div>
-          <p class="page-label">Produkt & Prototyp</p>
-          <h1>Von der Luft<br />auf Ihren Hof.</h1>
+      <section
+        class="page-intro subpage-hero pd-studio"
+        aria-labelledby="produkt-title"
+      >
+        <div class="subpage-hero-inner wrap pd-studio-grid">
+          <div class="pd-type">
+            <p class="page-label">Produkt & Prototyp</p>
+            <h1 id="produkt-title">Von der Luft<br />auf Ihren Hof.</h1>
+            <p class="page-lead">
+              CO₂ filtern. Algen kultivieren. Dünger vor Ort gewinnen.
+            </p>
+            <a class="pd-scroll-hint" href="#anlage">Zur Anlage</a>
+          </div>
+          <div class="pd-hero-media">
+            <figure class="pd-specimen">
+              <span class="pd-specimen-badge">Aktueller CAD-Entwurf</span
+              ><img
+                src="/images/machine-frames/000.png"
+                width="800"
+                height="800"
+                alt="CAD-Ansicht der aktuellen Air2Growth-Gesamtanlage"
+                fetchpriority="high"
+                decoding="async"
+              />
+              <figcaption>Gesamtanlage · CAD-Konzept</figcaption>
+            </figure>
+            <p class="pd-fieldnote">
+              V3 läuft im Feldtest beim ersten Partnerbetrieb.
+            </p>
+            <p class="pd-modular">
+              <strong>Modular</strong
+              ><span>Für die Produktion auf Ihrem Hof</span>
+            </p>
+          </div>
         </div>
-        <p class="page-lead">
-          CO₂ filtern. Algen kultivieren. Dünger vor Ort gewinnen.
-        </p>
       </section>
       <section
         class="scroll-scene model-scene"
         data-scene="model"
+        id="anlage"
         aria-label="Eine Anlage. Ein eigener Kreislauf."
       >
         <div class="scene-sticky wrap">
           <div class="scene-heading">
             <h2>Eine Anlage. Ein eigener Kreislauf.</h2>
             <span class="scroll-cue"
-              >Scrollen und entdecken <span aria-hidden="true">↓</span></span
-            >
+              >Scrollen und entdecken
+              <span aria-hidden="true"
+                ><svg
+                  class="ui-icon icon-down"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <path
+                    d="M12 4v16M5 13l7 7 7-7"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  /></svg></span
+            ></span>
           </div>
           <div class="scene-layout">
             <figure class="scene-figure">
@@ -293,10 +366,21 @@
             </g>
           </svg>
           <div class="mobile-module-map" aria-hidden="true">
-            <div><b>A</b><strong>CO₂ gewinnen</strong><span>Luft & Filter</span></div>
-            <div><b>B</b><strong>Algen kultivieren</strong><span>Wasser & Nährstoffe</span></div>
-            <div><b>C</b><strong>Ernten & reinigen</strong><span>Biomasse & Kreislauf</span></div>
-            <div><b>D</b><strong>Steuern & versorgen</strong><span>Verbindung & Energie</span></div>
+            <div>
+              <b>A</b><strong>CO₂ gewinnen</strong><span>Luft & Filter</span>
+            </div>
+            <div>
+              <b>B</b><strong>Algen kultivieren</strong
+              ><span>Wasser & Nährstoffe</span>
+            </div>
+            <div>
+              <b>C</b><strong>Ernten & reinigen</strong
+              ><span>Biomasse & Kreislauf</span>
+            </div>
+            <div>
+              <b>D</b><strong>Steuern & versorgen</strong
+              ><span>Verbindung & Energie</span>
+            </div>
           </div>
         </figure>
       </section>
@@ -309,7 +393,23 @@
           <div><strong>TRL 4</strong><span>Laborprototyp validiert</span></div>
           <div>
             <strong>7 kg</strong><span>Bio-Dünger / Woche / Modul*</span>
-            <div class="harvest-dots" aria-hidden="true">● ● ● ● ● ● ●</div>
+            <div class="harvest-dots" aria-hidden="true">
+              <svg
+                class="harvest-particles"
+                viewBox="0 0 140 20"
+                fill="currentColor"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <circle cx="10" cy="10" r="4" />
+                <circle cx="30" cy="10" r="4" />
+                <circle cx="50" cy="10" r="4" />
+                <circle cx="70" cy="10" r="4" />
+                <circle cx="90" cy="10" r="4" />
+                <circle cx="110" cy="10" r="4" />
+                <circle cx="130" cy="10" r="4" />
+              </svg>
+            </div>
           </div>
           <div>
             <strong>Modular</strong
@@ -320,24 +420,75 @@
           * Aktueller Modellwert; tatsächliche Mengen sind standort- und
           betriebsabhängig.
         </p>
-        <details class="visual-details">
-          <summary>Was braucht Ihr Standort?</summary>
-          <p>
-            Stellfläche, Wasser, Strom, Licht und die Einbindung in Ihre
-            Düngetechnik klären wir im Pilotgespräch. Ernte, Betreuung und
-            Nährsalzversorgung werden für Ihren Betrieb geplant.
-          </p>
-        </details>
+        <div class="faq-stack">
+          <details class="visual-details faq-item">
+            <summary>
+              <span class="faq-question">Was braucht Ihr Standort?</span
+              ><span class="faq-icon" aria-hidden="true"></span>
+            </summary>
+            <div class="faq-answer">
+              <p>
+                Stellfläche, Wasser, Strom, Licht und die Einbindung in Ihre
+                Düngetechnik klären wir im Pilotgespräch. Ernte, Betreuung und
+                Nährsalzversorgung werden für Ihren Betrieb geplant.
+              </p>
+            </div>
+          </details>
+        </div>
         <a class="button" href="/kontakt.html?thema=Pilotprojekt#anfrage"
-          >Pilotprojekt anfragen ↗</a
-        >
+          >Pilotprojekt anfragen
+          <svg
+            class="direction-arrow"
+            viewBox="0 0 24 24"
+            fill="none"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path
+              d="M5 19 19 5M5 5h14v14"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            /></svg
+        ></a>
       </section>
+      <figure class="editorial-photo wrap">
+        <img
+          src="/images/stock/growing.webp"
+          srcset="
+            /images/stock/growing-small.webp  640w,
+            /images/stock/growing.webp       1600w
+          "
+          sizes="(max-width: 760px) calc(100vw - 40px), (max-width: 1400px) calc(100vw - 96px), 1320px"
+          alt="Pflanzschaufel und Erde auf einem Gartentisch"
+          width="1600"
+          height="1067"
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption>Anbau beginnt mit guten Grundlagen.</figcaption>
+      </figure>
       <section class="page-next wrap">
         <a href="/technologie.html"
           ><span>Weiter entdecken</span
           ><strong>So funktioniert der Kreislauf</strong
-          ><span aria-hidden="true">↗</span></a
-        >
+          ><span aria-hidden="true"
+            ><svg
+              class="direction-arrow"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                d="M5 19 19 5M5 5h14v14"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              /></svg></span
+        ></a>
       </section>
     </main>
     <footer class="footer wrap">
@@ -347,7 +498,23 @@
             >.</span
           ></a
         ><span>From Carbon to Crop.</span
-        ><a href="mailto:info@air2growth.com">info@air2growth.com ↗</a>
+        ><a href="mailto:info@air2growth.com"
+          >info@air2growth.com
+          <svg
+            class="direction-arrow"
+            viewBox="0 0 24 24"
+            fill="none"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path
+              d="M5 19 19 5M5 5h14v14"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            /></svg
+        ></a>
       </div>
       <nav class="footer-pages" aria-label="Weitere Seiten">
         <a href="/produkt.html">Produkt</a
@@ -366,13 +533,57 @@
             href="https://air2growth.de/#impressum"
             target="_blank"
             rel="noopener"
-            >Impressum ↗</a
+            >Impressum
+            <svg
+              class="direction-arrow"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                d="M5 19 19 5M5 5h14v14"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              /></svg></a
           ><a
             href="https://air2growth.de/#datenschutz"
             target="_blank"
             rel="noopener"
-            >Datenschutz ↗</a
-          ><a href="#">Nach oben ↑</a>
+            >Datenschutz
+            <svg
+              class="direction-arrow"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                d="M5 19 19 5M5 5h14v14"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              /></svg></a
+          ><a href="#"
+            >Nach oben
+            <svg
+              class="ui-icon icon-up"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                d="M12 20V4M5 11l7-7 7 7"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              /></svg
+          ></a>
         </div>
       </div>
     </footer>

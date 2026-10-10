@@ -28,7 +28,7 @@
 @media (max-width: 760px) {
   body { font-size: 15px; }
   .page-lead, .scene-chapter p, .detail-heading p,
-  .detail-section details p, .lab-status { font-size: 15px; line-height: 1.7; }
+  .detail-section details:not(.mobile-disclosure) p, .lab-status { font-size: 15px; line-height: 1.7; }
   .team-names strong, .team-names span { font-size: 13px; }
   .team-names { gap: 20px; }
   .recognition {

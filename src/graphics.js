@@ -1,3 +1,5 @@
+import { translate as t } from "./i18n.js";
+
 export function initGraphics() {
   const lens = document.querySelector(".lab-lens");
   if (!lens) return;
@@ -12,7 +14,7 @@ export function initGraphics() {
   function select(state) {
     lens.dataset.lab = state;
     growth.dataset.lab = state;
-    status.textContent = labels[state];
+    status.textContent = t(labels[state]);
     buttons.forEach((button) =>
       button.setAttribute(
         "aria-pressed",

@@ -1,0 +1,859 @@
+/* Team — bright leaf-green founder photo studio.
+   Scope: body[data-page="team"] only. Palette EXACT: forest #123D2B,
+   leaf #36CF73, citron #DAF52F, cobalt #284AE8, mist #EFF9F1, white #FFFFFF.
+   Type: Barlow Condensed 700 display, Open Sans body. One focal device: the
+   leaf studio card holding the composed founder print with a hard cobalt
+   offset. Everything else stays quiet mist/white. No photo-overlay hero,
+   no gradient washes, no all-caps labels, no gratuitous numbers. */
+
+body[data-page="team"] {
+  --forest: #123d2b;
+  --leaf: #36cf73;
+  --citron: #daf52f;
+  --cobalt: #284ae8;
+  --mist: #eff9f1;
+  --white: #ffffff;
+  background: var(--mist);
+  color: var(--forest);
+  font-family: "Open Sans", Arial, sans-serif;
+}
+
+body[data-page="team"] :is(h1, h2, h3, .team-names strong, .vp-roles strong, .page-next strong, .editorial-photo figcaption, .mobile-disclosure > summary) {
+  font-family: "Barlow Condensed", "Arial Narrow", Arial, sans-serif;
+  font-weight: 700;
+}
+
+/* ---------- Focal device: leaf studio hero holds type + composed print ---------- */
+
+body[data-page="team"] .page-intro.subpage-hero {
+  display: block;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: var(--mist);
+  position: static;
+  overflow: visible;
+}
+
+body[data-page="team"] .page-intro.subpage-hero::before,
+body[data-page="team"] .page-intro.subpage-hero::after {
+  content: none;
+  display: none;
+}
+
+body[data-page="team"] .subpage-hero-image {
+  display: none;
+}
+
+body[data-page="team"] .subpage-hero-inner {
+  display: block;
+  min-height: 0;
+  padding-block: 36px 40px;
+}
+
+body[data-page="team"] .tm-hero-grid {
+  display: grid;
+  grid-template-columns: 0.92fr 1.08fr;
+  gap: clamp(20px, 3vw, 44px);
+  align-items: center;
+  width: 100%;
+  background: var(--leaf);
+  border: 3px solid var(--forest);
+  border-radius: 22px;
+  box-shadow: 12px 12px 0 var(--cobalt);
+  padding: clamp(20px, 2.6vw, 36px);
+}
+
+body[data-page="team"] .tm-hero-type {
+  min-width: 0;
+  padding-top: 0;
+}
+
+body[data-page="team"] .subpage-hero .page-label {
+  display: inline-block;
+  margin: 0 0 18px;
+  padding: 8px 18px;
+  font-size: 14px;
+  line-height: 1.5;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--forest);
+  background: var(--white);
+  border: 2px solid var(--forest);
+  border-radius: 999px;
+}
+
+body[data-page="team"] .subpage-hero h1 {
+  color: var(--forest);
+  font-size: clamp(56px, 7vw, 108px);
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+  margin: 0;
+  max-width: 14ch;
+}
+
+body[data-page="team"] .subpage-hero .page-lead {
+  color: var(--forest);
+  font-size: 17px;
+  line-height: 1.65;
+  max-width: 44ch;
+  margin: 14px 0 0;
+}
+
+/* Small cobalt offset: the one sharp mark in the leaf studio. */
+body[data-page="team"] .tm-hero-rule {
+  display: block;
+  width: 72px;
+  height: 10px;
+  margin-top: 20px;
+  background: var(--cobalt);
+  border-radius: 2px;
+}
+
+/* Composed founder print lives in the hero: white mat + factual caption. */
+body[data-page="team"] .team-image.tm-hero-photo {
+  position: static;
+  background: var(--white);
+  border: 3px solid var(--forest);
+  border-radius: 16px;
+  padding: 12px 12px 10px;
+  overflow: hidden;
+  align-self: center;
+  margin: 0;
+}
+
+body[data-page="team"] .team-image.tm-hero-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 10px;
+}
+
+/* ---------- Quiet #team ledger: image moved to hero, no second giant card ---------- */
+
+body[data-page="team"] .team {
+  background: var(--white);
+  border: 2px solid var(--forest);
+  border-radius: 18px;
+  box-shadow: none;
+  padding: clamp(20px, 2.6vw, 32px);
+  margin-block: 0 32px;
+  display: block;
+}
+
+body[data-page="team"] .photo-label {
+  position: static;
+  display: block;
+  margin-top: 10px;
+  padding: 10px 4px 2px;
+  border-top: 2px solid var(--forest);
+  background: var(--white);
+  color: var(--forest);
+  font-size: 13px;
+  line-height: 1.6;
+  letter-spacing: 0;
+  text-transform: none;
+  text-align: left;
+  border-radius: 0;
+}
+
+body[data-page="team"] .team-copy {
+  min-width: 0;
+}
+
+body[data-page="team"] .team-copy .eyebrow {
+  font-size: 14px;
+  line-height: 1.6;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--forest);
+  margin: 0 0 12px;
+}
+
+body[data-page="team"] .team-copy h2 {
+  color: var(--forest);
+  font-size: clamp(44px, 4.8vw, 72px);
+  line-height: 0.98;
+  letter-spacing: -0.01em;
+  margin: 0;
+  max-width: 16ch;
+}
+
+body[data-page="team"] .team-copy h2 em {
+  font-style: italic;
+  color: inherit;
+}
+
+body[data-page="team"] .team-copy > p {
+  color: var(--forest);
+  font-size: 16px;
+  line-height: 1.65;
+  max-width: 64ch;
+  margin: 14px 0 0;
+}
+
+/* Four-person ledger: distinct rows with dividers, never cloned cards. */
+body[data-page="team"] .team-names {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 22px 0 0;
+  padding: 0;
+  border-top: 3px solid var(--forest);
+}
+
+body[data-page="team"] .team-names > div {
+  padding: 13px 4px;
+  border-bottom: 1px solid var(--forest);
+  min-width: 0;
+  background: var(--white);
+}
+
+body[data-page="team"] .team-names > div:last-child {
+  border-bottom: 0;
+  padding-bottom: 2px;
+}
+
+body[data-page="team"] .team-names a {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 4px 14px;
+  align-items: center;
+  color: var(--forest);
+  text-decoration: none;
+  border-radius: 8px;
+}
+
+body[data-page="team"] .team-names strong {
+  font-size: clamp(24px, 2.4vw, 30px);
+  line-height: 1.05;
+  letter-spacing: 0;
+  color: var(--forest);
+  display: block;
+}
+
+body[data-page="team"] .team-names a:hover strong {
+  text-decoration: underline;
+  text-underline-offset: 5px;
+  text-decoration-thickness: 2px;
+}
+
+body[data-page="team"] .team-names span {
+  display: block;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--forest);
+  margin-top: 4px;
+}
+
+body[data-page="team"] .team-names .direction-arrow {
+  width: 24px;
+  height: 24px;
+  color: var(--forest);
+  flex: none;
+}
+
+/* ---------- Quiet mist surroundings ---------- */
+
+body[data-page="team"] .milestones {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr 1fr 1fr;
+  gap: clamp(16px, 2vw, 28px);
+  align-items: start;
+  background: transparent;
+  background-image: none;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  padding-block: 20px 28px;
+  border-bottom: 0;
+}
+
+body[data-page="team"] .milestones .eyebrow {
+  font-size: 14px;
+  color: var(--cobalt);
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+body[data-page="team"] .milestones h3 {
+  color: var(--forest);
+  font-size: clamp(34px, 3.4vw, 48px);
+  line-height: 1;
+  letter-spacing: -0.01em;
+  margin: 8px 0 0;
+}
+
+body[data-page="team"] .award {
+  background: transparent;
+  border: 0;
+  border-left: 3px solid var(--forest);
+  border-radius: 0;
+  padding-left: 16px;
+}
+
+body[data-page="team"] .award > span {
+  font-size: 13px;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--forest);
+}
+
+body[data-page="team"] .award strong {
+  display: block;
+  font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+  font-size: 22px;
+  line-height: 1.15;
+  color: var(--forest);
+  margin-top: 8px;
+  font-weight: 700;
+}
+
+body[data-page="team"] .award p {
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--forest);
+  margin: 6px 0 0;
+}
+
+body[data-page="team"] .recognition {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 24px;
+  background: var(--white);
+  border: 2px solid var(--forest);
+  border-radius: 16px;
+  padding: 16px 22px;
+  margin-block: 0 16px;
+  color: var(--forest);
+}
+
+body[data-page="team"] .recognition > p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--forest);
+  max-width: 22ch;
+  margin: 0;
+}
+
+body[data-page="team"] .partner {
+  color: var(--forest);
+  filter: none;
+  line-height: 1.15;
+}
+
+/* ---------- Detail: roles ledger + work-cycle diagram ---------- */
+
+body[data-page="team"] .detail-section {
+  background: var(--mist);
+  border-top: 0;
+  padding-block: 40px 56px;
+}
+
+body[data-page="team"] .detail-heading {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(18px, 2.4vw, 40px);
+  align-items: end;
+  margin-bottom: 20px;
+}
+
+body[data-page="team"] .detail-heading h2 {
+  color: var(--forest);
+  font-size: clamp(40px, 4.6vw, 64px);
+  line-height: 1;
+  margin: 0;
+}
+
+body[data-page="team"] .detail-heading p {
+  color: var(--forest);
+  font-size: 16px;
+  line-height: 1.7;
+  max-width: 52ch;
+  margin: 0;
+}
+
+body[data-page="team"] .vp-lede {
+  background: var(--white);
+  border: 2px solid var(--forest);
+  border-left: 10px solid var(--citron);
+  border-radius: 0 14px 14px 0;
+  padding: 16px 20px;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--forest);
+  max-width: 88ch;
+  margin: 0;
+}
+
+/* Role summary as a second ledger: rows carry dots that match the cycle. */
+body[data-page="team"] .vp-roles {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  margin: 20px 0 0;
+  padding: 0;
+  background: var(--white);
+  background-image: none;
+  border: 2px solid var(--forest);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+body[data-page="team"] .vp-roles div {
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1fr);
+  gap: 4px 14px;
+  align-items: center;
+  padding: 14px 20px;
+  border: 0;
+  border-radius: 0;
+  background: var(--white);
+  background-image: none;
+  min-width: 0;
+}
+
+body[data-page="team"] .vp-roles div + div {
+  border-left: 0;
+  border-top: 1px solid var(--forest);
+}
+
+body[data-page="team"] .vp-roles div::before {
+  content: "";
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--forest);
+  border: 2px solid var(--forest);
+  justify-self: center;
+}
+
+body[data-page="team"] .vp-roles div:nth-child(2)::before {
+  background: var(--cobalt);
+  border-color: var(--cobalt);
+}
+
+body[data-page="team"] .vp-roles div:nth-child(4)::before {
+  background: var(--citron);
+  border-color: var(--forest);
+}
+
+body[data-page="team"] .vp-roles strong {
+  font-size: 19px;
+  line-height: 1.25;
+  color: var(--forest);
+  display: block;
+}
+
+body[data-page="team"] .vp-roles span {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--forest);
+  grid-column: 2;
+}
+
+/* Work-cycle diagram retained: quiet white bench card, flat fills only. */
+body[data-page="team"] .xp-cycle {
+  margin-block: 20px 6px;
+  background: var(--white);
+  background-image: none;
+  border: 3px solid var(--forest);
+  border-radius: 18px;
+  padding: clamp(16px, 2.4vw, 24px) clamp(16px, 2.2vw, 26px) clamp(12px, 1.8vw, 18px);
+  overflow: hidden;
+  position: relative;
+}
+
+body[data-page="team"] .xp-cycle::after {
+  content: none;
+  display: none;
+}
+
+body[data-page="team"] .xp-cycle figure {
+  margin: 0;
+  max-width: 760px;
+  margin-inline: auto;
+  position: relative;
+}
+
+body[data-page="team"] .xp-cycle svg.xp-ring {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: none;
+}
+
+body[data-page="team"] .xp-caption {
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: var(--forest);
+  margin: 12px 0 0;
+  max-width: 72ch;
+}
+
+body[data-page="team"] .mobile-team-cycle {
+  gap: 12px;
+  padding: 6px 0 2px;
+}
+
+body[data-page="team"] .mobile-team-cycle > div {
+  background: var(--forest);
+  color: var(--white);
+  border: 2px solid var(--forest);
+  border-radius: 16px;
+  min-height: 88px;
+  padding: 12px 10px;
+}
+
+body[data-page="team"] .mobile-team-cycle > div:nth-child(2n) {
+  background: var(--citron);
+  color: var(--forest);
+  border-color: var(--forest);
+}
+
+body[data-page="team"] .mobile-team-cycle strong {
+  font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+  font-size: 20px;
+  line-height: 1.1;
+}
+
+body[data-page="team"] .mobile-team-cycle span {
+  font-size: 12.5px;
+  line-height: 1.55;
+}
+
+/* Timeline: true sequence keeps markers, now in the exact palette. */
+body[data-page="team"] .vp-figure {
+  margin: 24px 0;
+  background: transparent;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+}
+
+body[data-page="team"] .vp-kicker {
+  font-size: 14px;
+  color: var(--forest);
+  margin-bottom: 12px;
+}
+
+body[data-page="team"] .vp-timeline {
+  margin: 16px 0 0;
+  padding-left: 26px;
+}
+
+body[data-page="team"] .vp-timeline::before {
+  background: var(--forest);
+  opacity: 0.28;
+}
+
+body[data-page="team"] .vp-timeline > li::before {
+  background: var(--citron);
+  border: 3px solid var(--forest);
+}
+
+body[data-page="team"] .vp-timeline > li.is-plan::before {
+  background: var(--white);
+  border-style: dashed;
+}
+
+body[data-page="team"] .vp-timeline strong {
+  font-size: 16px;
+  color: var(--forest);
+}
+
+body[data-page="team"] .vp-timeline .vp-when {
+  font-size: 13px;
+  color: var(--cobalt);
+}
+
+body[data-page="team"] .vp-timeline p {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--forest);
+  margin: 6px 0 0;
+}
+
+/* Disclosures stay native and quiet. */
+body[data-page="team"] .mobile-disclosure {
+  border: 0;
+}
+
+body[data-page="team"] .mobile-disclosure > summary {
+  color: var(--forest);
+  font-size: clamp(30px, 3.4vw, 44px);
+  line-height: 1.05;
+}
+
+body[data-page="team"] .faq-stack {
+  margin-top: 20px;
+  display: grid;
+  gap: 10px;
+  background: transparent;
+  background-image: none;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+}
+
+body[data-page="team"] .faq-item {
+  background: var(--white);
+  background-image: none;
+  border: 2px solid var(--forest);
+  border-radius: 14px;
+}
+
+body[data-page="team"] .faq-item[open],
+body[data-page="team"] .faq-stack details[open] {
+  background: var(--white);
+  background-image: none;
+}
+
+body[data-page="team"] .faq-question {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--forest);
+}
+
+body[data-page="team"] .faq-answer p {
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--forest);
+}
+
+body[data-page="team"] details.vp-more {
+  border-top: 0;
+  margin-top: 20px;
+  padding-top: 0;
+}
+
+body[data-page="team"] .detail-note {
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: var(--forest);
+  background: var(--white);
+  border-left: 10px solid var(--leaf);
+  border-radius: 0 12px 12px 0;
+  border-top: 2px solid var(--forest);
+  border-right: 2px solid var(--forest);
+  border-bottom: 2px solid var(--forest);
+  padding: 16px 20px;
+  margin: 22px 0 0;
+  max-width: 88ch;
+}
+
+body[data-page="team"] .inline-link {
+  color: var(--cobalt);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  font-size: inherit;
+}
+
+body[data-page="team"] .editorial-photo {
+  margin-block: 8px 32px;
+}
+
+body[data-page="team"] .editorial-photo img {
+  border: 3px solid var(--forest);
+  border-radius: 16px;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 2.8 / 1;
+  object-fit: cover;
+  display: block;
+}
+
+body[data-page="team"] .editorial-photo figcaption {
+  color: var(--forest);
+  font-size: clamp(30px, 3.4vw, 44px);
+  line-height: 1.05;
+  margin-top: 12px;
+}
+
+/* Next step: citron bench card, forest type. */
+body[data-page="team"] .page-next a {
+  background: var(--citron);
+  background-image: none;
+  border: 3px solid var(--forest);
+  border-radius: 18px;
+  color: var(--forest);
+  padding: 20px 24px;
+  display: grid;
+}
+
+body[data-page="team"] .page-next a > span:first-child {
+  color: var(--forest);
+  font-size: 14px;
+}
+
+body[data-page="team"] .page-next strong {
+  color: var(--forest);
+  font-size: clamp(28px, 3vw, 40px);
+  line-height: 1.02;
+}
+
+body[data-page="team"] .page-next a:hover strong {
+  color: var(--forest);
+  text-decoration: underline;
+  text-underline-offset: 5px;
+  text-decoration-thickness: 2px;
+}
+
+/* ---------- Visible keyboard focus ---------- */
+
+body[data-page="team"] .team :is(a, button, summary, [tabindex]):focus-visible,
+body[data-page="team"] :is(.milestones, .recognition, .detail-section, .editorial-photo, .page-next) :is(a, button, summary, [tabindex]):focus-visible {
+  outline: 3px solid var(--cobalt);
+  outline-offset: 4px;
+  border-radius: 6px;
+}
+
+body[data-page="team"] .page-intro :is(a, button, summary, [tabindex]):focus-visible {
+  outline: 3px solid var(--forest);
+  outline-offset: 4px;
+  border-radius: 6px;
+}
+
+/* ---------- Restore team content on phones: nothing hidden to simplify ---------- */
+
+@media (max-width: 760px) {
+  body[data-page="team"] .team-image,
+  body[data-page="team"] .team-copy > .eyebrow,
+  body[data-page="team"] .team-copy > h2,
+  body[data-page="team"] .team-copy > p + p,
+  body[data-page="team"] .milestones,
+  body[data-page="team"] .recognition,
+  body[data-page="team"] .detail-heading,
+  body[data-page="team"] .vp-lede,
+  body[data-page="team"] .vp-roles,
+  body[data-page="team"] .xp-cycle,
+  body[data-page="team"] .editorial-photo {
+    display: revert;
+  }
+
+  body[data-page="team"] .team-image {
+    display: block;
+  }
+
+  body[data-page="team"] .milestones {
+    display: grid;
+  }
+
+  body[data-page="team"] .recognition {
+    display: flex;
+  }
+
+  body[data-page="team"] .vp-roles {
+    display: grid;
+  }
+
+  body[data-page="team"] .xp-cycle {
+    display: block;
+  }
+}
+
+/* ---------- Responsive from 320px onward ---------- */
+
+@media (max-width: 960px) {
+  body[data-page="team"] .tm-hero-grid {
+    grid-template-columns: 1fr;
+    align-items: start;
+    gap: 18px;
+  }
+
+  body[data-page="team"] .subpage-hero .page-lead {
+    max-width: 62ch;
+  }
+
+  body[data-page="team"] .milestones {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  body[data-page="team"] .detail-heading {
+    grid-template-columns: 1fr;
+    align-items: start;
+    gap: 14px;
+  }
+}
+
+@media (max-width: 560px) {
+  body[data-page="team"] .subpage-hero-inner {
+    padding-block: 24px 24px;
+  }
+
+  body[data-page="team"] .tm-hero-grid {
+    border-radius: 18px;
+    box-shadow: 8px 8px 0 var(--cobalt);
+    padding: 16px;
+  }
+
+  body[data-page="team"] .subpage-hero h1 {
+    font-size: clamp(48px, 14vw, 64px);
+  }
+
+  body[data-page="team"] .team {
+    border-radius: 16px;
+    box-shadow: none;
+    padding: 16px;
+    margin-block: 0 32px;
+  }
+
+  body[data-page="team"] .team-image {
+    padding: 10px;
+  }
+
+  body[data-page="team"] .team-image img {
+    aspect-ratio: 4 / 3;
+  }
+
+  body[data-page="team"] .team-copy h2 {
+    font-size: clamp(40px, 12vw, 54px);
+  }
+
+  body[data-page="team"] .team-names strong {
+    font-size: 24px;
+  }
+
+  body[data-page="team"] .milestones {
+    grid-template-columns: 1fr;
+    padding-block: 8px 32px;
+  }
+
+  body[data-page="team"] .recognition {
+    padding: 16px;
+    gap: 14px;
+  }
+
+  body[data-page="team"] .vp-roles div {
+    padding: 13px 16px;
+  }
+
+  body[data-page="team"] .xp-cycle {
+    padding: 16px 14px 14px;
+    border-radius: 16px;
+  }
+
+  body[data-page="team"] .editorial-photo img {
+    aspect-ratio: 4 / 3;
+  }
+}
+
+/* ---------- Reduced motion: no animation anywhere on this page ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  body[data-page="team"] *,
+  body[data-page="team"] *::before,
+  body[data-page="team"] *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}

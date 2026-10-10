@@ -1,0 +1,801 @@
+/* Air2Growth index.css — HOME page only. Every selector is scoped to
+   body[data-page="index"] so existing styles stay intact and this file wins
+   safely by specificity. Palette: forest #123D2B, leaf #36CF73,
+   citron #DAF52F, cobalt #284AE8, mist #EFF9F1, white #FFFFFF.
+   Type: Barlow Condensed 700 display, Open Sans body.
+   Composition: carbon-to-crop typographic poster on leaf green. The giant
+   poster headline is the one memorable device; everything else stays quiet.
+   No gradients, no photo-overlay hero, no cards, no all-caps labels. */
+
+/* ---- Page root ---- */
+
+body[data-page="index"] {
+  background: var(--mist);
+  color: var(--forest);
+}
+
+/* ================= POSTER HERO (leaf field, forest ink) ================= */
+
+/* ================= OPEN HERO (page canvas, no card) =================
+   Unboxed per brief: no outer leaf card, no border/radius/shadow.
+   Type + photo align to normal gutters; vibrant accents live on
+   buttons/stickers/photo panel, not on a heading card. */
+
+body[data-page="index"] .hero.wrap {
+  width: min(1320px, calc(100% - 96px));
+  max-width: 1320px;
+  min-height: 0;
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: clamp(28px, 4vw, 64px);
+  align-items: center;
+  margin-inline: auto;
+  margin-top: clamp(24px, 4vw, 56px);
+  margin-bottom: 0;
+  padding: clamp(8px, 2vw, 24px) 0 clamp(32px, 4vw, 56px);
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--forest);
+  overflow: visible;
+  box-shadow: none;
+}
+
+body[data-page="index"] .hero-copy {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+  align-self: center;
+  min-width: 0;
+}
+
+/* Open eyebrow: sentence case, no card/pill treatment. */
+body[data-page="index"] .hero .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  color: var(--forest);
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+  line-height: 1.5;
+}
+
+body[data-page="index"] .hero .live-dot {
+  background: var(--cobalt);
+  box-shadow: 0 0 0 4px rgba(40, 74, 232, 0.18);
+}
+
+/* The poster headline: whole-lines Barlow, monochrome forest. */
+body[data-page="index"] .hero h1 {
+  font-family: var(--display);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: clamp(64px, 8.2vw, 148px);
+  line-height: 0.9;
+  letter-spacing: -0.01em;
+  color: var(--forest);
+  margin: 26px 0 22px;
+}
+
+body[data-page="index"] .hero h1 em,
+body[data-page="index"] .hero h1 .carbon-type {
+  font-family: inherit;
+  font-style: normal;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+  background: none;
+  -webkit-text-fill-color: inherit;
+}
+
+body[data-page="index"] .hero-description {
+  color: var(--forest);
+  font-size: 18px;
+  line-height: 1.6;
+  max-width: 42ch;
+  margin: 0 0 28px;
+}
+
+body[data-page="index"] .hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 22px;
+}
+
+body[data-page="index"] .hero .button {
+  background: var(--cobalt);
+  border: 2px solid var(--forest);
+  color: var(--white);
+  box-shadow: 4px 4px 0 var(--forest);
+}
+
+body[data-page="index"] .hero .button:hover {
+  background: #1d3ac0;
+  border-color: var(--forest);
+  transform: translate(-1px, -1px);
+  box-shadow: 5px 5px 0 var(--forest);
+}
+
+body[data-page="index"] .hero .text-link {
+  color: var(--forest);
+  border: 2px solid var(--forest);
+  border-radius: 999px;
+  padding: 12px 20px;
+  background: var(--white);
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+}
+
+body[data-page="index"] .hero .text-link:hover {
+  color: var(--forest);
+  background: var(--citron);
+}
+
+body[data-page="index"] .hero .play {
+  border-color: var(--forest);
+}
+
+body[data-page="index"] .hero-footnote {
+  color: var(--forest);
+  font-size: 13px;
+  margin-top: 24px;
+}
+
+body[data-page="index"] .mini-leaf {
+  color: var(--forest);
+}
+
+/* ---- Field-photo collage: hard border + offset shadow, nothing overlaid ---- */
+
+body[data-page="index"] .hero-visual {
+  position: relative;
+  inset: auto;
+  z-index: 1;
+  height: auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  border: 3px solid var(--forest);
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--white);
+  box-shadow: 8px 8px 0 var(--forest);
+}
+
+body[data-page="index"] .hero-visual > img {
+  width: 100%;
+  height: 380px;
+  object-fit: cover;
+  object-position: center 60%;
+  opacity: 1;
+  transform: none;
+  animation: none;
+}
+
+body[data-page="index"] .hero-visual:after {
+  content: none;
+}
+
+/* Citron sticker label pinned to the photo corner. */
+body[data-page="index"] .hero .image-tag {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  right: auto;
+  translate: none;
+  max-width: calc(100% - 36px);
+  z-index: 2;
+  background: var(--citron);
+  color: var(--forest);
+  border: 2px solid var(--forest);
+  border-radius: 999px;
+  backdrop-filter: none;
+  padding: 8px 16px;
+  font-size: 12px;
+  font-weight: 700;
+  transform: rotate(-2deg);
+  box-shadow: 3px 3px 0 var(--forest);
+}
+
+body[data-page="index"] .hero .image-tag .live-dot {
+  background: var(--forest);
+  box-shadow: none;
+}
+
+/* CO2 orbit badge overlapping the photo edge: collage layer, not overlay text. */
+body[data-page="index"] .hero .orbit {
+  left: auto;
+  right: 22px;
+  top: 64px;
+  transform: none;
+  width: 148px;
+  height: 148px;
+  border: 2px solid var(--forest);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.35);
+  box-shadow: 4px 4px 0 var(--forest);
+}
+
+body[data-page="index"] .hero .orbit:after {
+  border-color: var(--forest);
+  inset: -12px;
+}
+
+body[data-page="index"] .hero .orbit-core {
+  inset: 24px;
+  background: var(--citron);
+  color: var(--forest);
+  border: 2px solid var(--forest);
+  backdrop-filter: none;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 40px;
+}
+
+body[data-page="index"] .hero .orbit-node {
+  background: var(--cobalt);
+  box-shadow: 0 0 0 4px rgba(40, 74, 232, 0.25);
+}
+
+/* Caption + coordinate as solid bars under the photo, never over it. */
+body[data-page="index"] .hero .image-caption {
+  position: static;
+  width: auto;
+  max-width: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  background: var(--white);
+  color: var(--forest);
+  border-top: 3px solid var(--forest);
+  padding: 14px 20px;
+  font-size: 19px;
+  line-height: 1.4;
+  letter-spacing: 0;
+}
+
+body[data-page="index"] .hero .image-caption > span:first-child {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+body[data-page="index"] .hero .image-caption strong {
+  font-weight: 700;
+  color: inherit;
+}
+
+body[data-page="index"] .hero .image-caption a {
+  width: 48px;
+  height: 48px;
+  flex: none;
+  border: 2px solid var(--forest);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: var(--white);
+  background: var(--cobalt);
+}
+
+body[data-page="index"] .hero .image-caption a:hover {
+  background: var(--forest);
+}
+
+body[data-page="index"] .hero .image-coordinate {
+  position: static;
+  display: block;
+  width: auto;
+  max-width: none;
+  background: var(--forest);
+  color: var(--white);
+  padding: 10px 20px;
+  font-size: 12px;
+  letter-spacing: 0;
+}
+
+body[data-page="index"] .hero-molecule {
+  display: none;
+}
+
+/* ================= LEDGER STRIP (qualified model figures) ================= */
+
+body[data-page="index"] .impact-strip {
+  border: 0;
+  border-top: 3px solid var(--forest);
+  border-bottom: 3px solid var(--forest);
+  margin-top: 48px;
+  padding: 30px 0;
+  gap: 28px;
+}
+
+body[data-page="index"] .impact-intro .eyebrow {
+  background: var(--citron);
+  border: 2px solid var(--forest);
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 12px;
+  color: var(--forest);
+  display: inline-block;
+  line-height: 1.5;
+}
+
+body[data-page="index"] .impact-intro p {
+  font-size: 13px;
+  color: var(--forest);
+}
+
+body[data-page="index"] .stat {
+  border-left: 2px solid var(--forest);
+}
+
+body[data-page="index"] .stat > div {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 56px;
+  letter-spacing: -0.01em;
+  color: var(--forest);
+}
+
+body[data-page="index"] .stat svg {
+  stroke: var(--cobalt);
+}
+
+body[data-page="index"] .stat p {
+  color: var(--muted);
+}
+
+body[data-page="index"] .model-note {
+  color: var(--muted);
+}
+
+/* ================= CYCLE SCENE (interaction untouched) ================= */
+
+body[data-page="index"] .scroll-scene {
+  background: var(--white);
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  margin-block: 56px;
+  overflow: visible;
+}
+
+body[data-page="index"] .scene-sticky.wrap {
+  width: min(1320px, calc(100% - 96px));
+  margin-inline: auto;
+}
+
+body[data-page="index"] .scene-sticky {
+  padding-block: 56px;
+}
+
+body[data-page="index"] .scene-heading h2 {
+  color: var(--forest);
+}
+
+body[data-page="index"] .scroll-cue {
+  color: var(--muted);
+}
+
+body[data-page="index"] .scene-chapter h3 {
+  font-size: 34px;
+  color: var(--forest);
+}
+
+body[data-page="index"] .scene-chapter p {
+  color: var(--muted);
+  font-size: 15px;
+}
+
+body[data-page="index"] .chapter-index {
+  display: inline-block;
+  background: var(--citron);
+  border: 2px solid var(--forest);
+  border-radius: 999px;
+  padding: 4px 14px;
+  color: var(--forest);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+body[data-page="index"] .chapter-controls button {
+  min-width: 48px;
+  min-height: 48px;
+  border: 2px solid var(--forest);
+  border-radius: 999px;
+  background: var(--white);
+  color: var(--forest);
+  font-weight: 700;
+}
+
+body[data-page="index"] .chapter-controls button[aria-pressed="true"] {
+  background: var(--forest);
+  color: var(--white);
+}
+
+body[data-page="index"] .scene-skip {
+  color: var(--cobalt);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+body[data-page="index"] .scene-progress {
+  background: var(--mist);
+  border: 2px solid var(--forest);
+  border-radius: 999px;
+}
+
+body[data-page="index"] .scene-progress span {
+  background: var(--cobalt);
+}
+
+/* Recolor the authored cycle SVG into the shared palette. */
+body[data-page="index"] .carbon-figure [fill="#d6eda7"] {
+  fill: var(--citron);
+}
+
+body[data-page="index"] .carbon-figure .algae-fill {
+  fill: var(--leaf);
+}
+
+body[data-page="index"] .carbon-figure [fill="#aec980"] {
+  fill: var(--white);
+}
+
+body[data-page="index"] .carbon-figure [fill="#183c2c"] {
+  fill: var(--forest);
+}
+
+body[data-page="index"] .carbon-figure [stroke="#183c2c"] {
+  stroke: var(--forest);
+}
+
+body[data-page="index"] .carbon-figure .carbon-route {
+  stroke: var(--forest);
+}
+
+body[data-page="index"] .mobile-carbon-labels {
+  color: var(--forest);
+}
+
+/* ================= MICRO-LAB LENS (interaction untouched) ================= */
+
+body[data-page="index"] .micro-lab {
+  background: transparent;
+}
+
+body[data-page="index"] .graphic-heading h2 {
+  color: var(--forest);
+}
+
+body[data-page="index"] .graphic-heading > span {
+  display: inline-block;
+  margin-top: 10px;
+  background: var(--white);
+  border: 2px solid var(--forest);
+  border-radius: 999px;
+  padding: 6px 16px;
+  font-size: 12.5px;
+  color: var(--forest);
+}
+
+body[data-page="index"] .lab-lens {
+  background: var(--white);
+  border: 3px solid var(--forest);
+  border-radius: 24px;
+  box-shadow: 8px 8px 0 var(--forest);
+  padding: 18px;
+}
+
+body[data-page="index"] .lab-caption {
+  display: inline-block;
+  background: var(--citron);
+  border: 2px solid var(--forest);
+  border-radius: 999px;
+  padding: 6px 16px;
+  color: var(--forest);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+body[data-page="index"] .lab-controls button {
+  min-height: 48px;
+  padding: 12px 22px;
+  border: 2px solid var(--forest);
+  border-radius: 999px;
+  background: var(--white);
+  color: var(--forest);
+  font-weight: 700;
+}
+
+body[data-page="index"] .lab-controls button[aria-pressed="true"] {
+  background: var(--cobalt);
+  border-color: var(--cobalt);
+  color: var(--white);
+}
+
+body[data-page="index"] .lab-status {
+  color: var(--forest);
+  font-size: 15px;
+  max-width: 46ch;
+}
+
+/* ================= DIRECTORY (ledger rows, no cards) ================= */
+
+body[data-page="index"] .home-directory {
+  border-top: 3px solid var(--forest);
+}
+
+body[data-page="index"] .section-heading h2 {
+  color: var(--forest);
+}
+
+body[data-page="index"] .section-heading > p {
+  color: var(--muted);
+}
+
+body[data-page="index"] .directory-link {
+  border-top: 2px solid var(--forest);
+  padding: 24px 8px;
+  border-radius: 0;
+}
+
+body[data-page="index"] .directory-link strong {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 32px;
+  letter-spacing: -0.01em;
+  color: var(--forest);
+}
+
+body[data-page="index"] .directory-link > span > span {
+  color: var(--muted);
+}
+
+body[data-page="index"] .directory-link > span:last-child {
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  border: 2px solid var(--forest);
+  border-radius: 50%;
+  color: var(--cobalt);
+  background: var(--white);
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+
+body[data-page="index"] .directory-link:hover {
+  background: var(--white);
+}
+
+body[data-page="index"] .directory-link:hover strong {
+  color: var(--forest);
+}
+
+body[data-page="index"] .directory-link:hover > span:last-child {
+  background: var(--cobalt);
+  border-color: var(--cobalt);
+  color: var(--white);
+  transform: rotate(45deg);
+}
+
+/* ================= CONTACT BAND (forest, monochrome headline) ================= */
+
+body[data-page="index"] .contact {
+  background: var(--forest);
+  color: var(--white);
+  border-top: 4px solid var(--forest);
+}
+
+body[data-page="index"] .contact .eyebrow {
+  display: inline-flex;
+  background: transparent;
+  border: 2px solid var(--citron);
+  border-radius: 999px;
+  padding: 8px 18px;
+  color: var(--white);
+}
+
+body[data-page="index"] .contact .live-dot {
+  background: var(--citron);
+  box-shadow: none;
+}
+
+body[data-page="index"] .contact h2 {
+  color: var(--white);
+}
+
+body[data-page="index"] .contact h2 em {
+  color: inherit;
+  font-family: inherit;
+  font-style: normal;
+  letter-spacing: inherit;
+}
+
+body[data-page="index"] .contact-bottom p {
+  color: var(--white);
+}
+
+body[data-page="index"] .contact .button.lime {
+  box-shadow: 4px 4px 0 rgba(218, 245, 47, 0.35);
+}
+
+/* ================= RECOGNITION (quiet row) ================= */
+
+body[data-page="index"] .recognition {
+  color: var(--forest);
+  opacity: 1;
+}
+
+body[data-page="index"] .recognition > p {
+  color: var(--forest);
+  font-size: 13px;
+}
+
+body[data-page="index"] .partner {
+  color: var(--forest);
+}
+
+/* ================= Focus on leaf + forest surfaces ================= */
+
+body[data-page="index"] .hero :where(a, button):focus-visible {
+  outline: 3px solid var(--forest);
+  outline-offset: 3px;
+}
+
+body[data-page="index"] .contact :where(a, button):focus-visible {
+  outline: 3px solid var(--citron);
+  outline-offset: 3px;
+}
+
+/* ================= Responsive: 320px onward, no overflow ================= */
+
+@media (max-width: 1020px) {
+  body[data-page="index"] .hero.wrap {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  body[data-page="index"] .hero-copy {
+    max-width: 100%;
+  }
+  body[data-page="index"] .hero h1 {
+    font-size: clamp(60px, 13vw, 110px);
+  }
+  body[data-page="index"] .hero-visual > img {
+    height: 320px;
+  }
+  body[data-page="index"] .hero .orbit {
+    width: 128px;
+    height: 128px;
+    top: 56px;
+  }
+  body[data-page="index"] .hero .orbit-core {
+    inset: 20px;
+    font-size: 34px;
+  }
+}
+
+@media (max-width: 760px) {
+  body[data-page="index"] .hero.wrap {
+    width: calc(100% - 40px);
+    margin-inline: auto;
+    margin-top: 16px;
+    padding: 12px 0 32px;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    overflow: visible;
+  }
+  body[data-page="index"] .hero h1 {
+    font-size: clamp(56px, 17vw, 96px);
+    margin: 20px 0 18px;
+  }
+  body[data-page="index"] .hero-description {
+    font-size: 16px;
+  }
+  body[data-page="index"] .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  body[data-page="index"] .hero .button,
+  body[data-page="index"] .hero .text-link {
+    justify-content: center;
+    min-height: 52px;
+  }
+  body[data-page="index"] .hero-visual > img {
+    height: 240px;
+  }
+  body[data-page="index"] .hero .orbit {
+    width: 104px;
+    height: 104px;
+    top: auto;
+    bottom: 148px;
+    right: 16px;
+  }
+  body[data-page="index"] .hero .orbit-core {
+    inset: 16px;
+    font-size: 28px;
+  }
+  body[data-page="index"] .hero .image-caption {
+    font-size: 16px;
+    padding: 14px 16px;
+  }
+  body[data-page="index"] .hero .image-caption a {
+    width: 44px;
+    height: 44px;
+  }
+  body[data-page="index"] .impact-strip {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  body[data-page="index"] .stat {
+    border-left: 0;
+    border-top: 2px solid var(--forest);
+    padding: 16px 0 0;
+  }
+  body[data-page="index"] .stat > div {
+    font-size: 48px;
+  }
+  body[data-page="index"] .scroll-scene {
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    overflow: visible;
+    margin-block: 40px;
+  }
+  body[data-page="index"] .scene-sticky.wrap {
+    width: calc(100% - 40px);
+  }
+  body[data-page="index"] .scene-sticky {
+    padding-block: 36px;
+  }
+  body[data-page="index"] .directory-link strong {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 360px) {
+  body[data-page="index"] .hero.wrap {
+    padding: 8px 0 28px;
+  }
+  body[data-page="index"] .hero h1 {
+    font-size: 54px;
+  }
+  body[data-page="index"] .hero-visual > img {
+    height: 200px;
+  }
+  body[data-page="index"] .hero .orbit {
+    width: 88px;
+    height: 88px;
+    bottom: 160px;
+  }
+  body[data-page="index"] .hero .orbit-core {
+    font-size: 24px;
+  }
+}
+
+/* ================= Reduced motion ================= */
+
+@media (prefers-reduced-motion: reduce) {
+  body[data-page="index"] .hero-visual > img,
+  body[data-page="index"] .hero-copy h1,
+  body[data-page="index"] .directory-link > span:last-child,
+  body[data-page="index"] .hero .button,
+  body[data-page="index"] .hero .text-link {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+    clip-path: none !important;
+  }
+}

@@ -122,6 +122,40 @@ textarea:focus-visible,
 .header nav a:hover:after {
   width: 100%;
 }
+.header .language-switch {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding-left: 12px;
+  border-left: 1px solid var(--line);
+  flex-shrink: 0;
+}
+.header .language-switch a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+}
+.header .language-switch a[aria-current="true"] {
+  background: var(--lime);
+  font-weight: 700;
+}
+.header .language-switch a:after {
+  display: none;
+}
+@media (max-width: 960px) {
+  .header .language-switch {
+    padding: 12px 0 0;
+    margin-top: 8px;
+    border-left: 0;
+    border-top: 1px solid var(--line);
+  }
+}
 .button {
   display: inline-flex;
   justify-content: space-between;
@@ -2354,10 +2388,10 @@ dialog select {
 .inquiry-form .direct-email {
   font-size: 11px;
 }
-.detail-section details {
+.detail-section details:not(.mobile-disclosure) {
   border-bottom: 1px solid var(--line);
 }
-.detail-section details p {
+.detail-section details:not(.mobile-disclosure) p {
   font-size: 13px;
   color: var(--muted);
   line-height: 1.95;

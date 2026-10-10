@@ -1,0 +1,12 @@
+Stock photography downloaded from Unsplash, 2026-10-09.
+License: https://unsplash.com/license
+Locally resized and converted to WebP. 640px variants serve small screens.
+
+agriculture: https://images.unsplash.com/photo-1500937386664-56d1dfef3854
+cultivation: https://images.unsplash.com/photo-1523348837708-15d4a09cfac2
+growing: https://images.unsplash.com/photo-1416879595882-3373a0480b5b
+laboratory: https://images.unsplash.com/photo-1532187863486-abf9dbad1b69
+leaves: https://images.unsplash.com/photo-1501004318641-b39e6451bec6
+
+These are illustrative stock photographs, not documentation of Air2Growth facilities or field tests.
+The team header uses the existing Air2Growth team photograph.

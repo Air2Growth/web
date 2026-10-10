@@ -1,0 +1,161 @@
+/* Full-width photographic openings, composed from the phone layout upward. */
+.page-intro.subpage-hero {
+  display: block;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  border-radius: 0;
+  border: 0;
+  background: var(--green);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+.subpage-hero .subpage-hero-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: -2;
+}
+.page-intro.subpage-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    180deg,
+    rgba(3, 34, 38, 0.92),
+    rgba(3, 34, 38, 0.82) 52%,
+    rgba(3, 34, 38, 0.1)
+  );
+}
+.page-intro.subpage-hero::after {
+  display: none;
+}
+.subpage-hero-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  padding-block: 40px 176px;
+  min-height: 530px;
+  position: relative;
+}
+.subpage-hero .page-label {
+  color: var(--solar);
+  font-size: 13px;
+  margin: 0 0 18px;
+}
+.subpage-hero h1 {
+  font-size: clamp(48px, 12vw, 80px);
+  line-height: 1;
+  letter-spacing: -0.025em;
+  max-width: 18ch;
+  margin: 0;
+  color: white;
+  text-wrap: balance;
+}
+.subpage-hero .page-lead {
+  font-size: 16px;
+  line-height: 1.7;
+  color: #f0f7f3;
+  max-width: 52ch;
+  margin: 0;
+}
+[data-page="team"] .subpage-hero-image {
+  object-position: 50% 35%;
+}
+[data-page="vorteile"] .subpage-hero-image {
+  object-position: 60% 70%;
+}
+[data-page="team"] .page-intro.subpage-hero::before {
+  background: linear-gradient(
+    180deg,
+    rgba(24, 21, 51, 0.92),
+    rgba(24, 21, 51, 0.8) 56%,
+    rgba(24, 21, 51, 0.1)
+  );
+}
+.editorial-photo {
+  margin-block: 16px 40px;
+}
+.editorial-photo img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 8px 36px 8px 8px;
+}
+.editorial-photo figcaption {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 1.15;
+  margin-top: 16px;
+  color: var(--green);
+}
+@media (min-width: 761px) {
+  .subpage-hero-inner {
+    padding-block: 72px 90px;
+    min-height: 550px;
+    justify-content: center;
+    gap: 32px;
+  }
+  .subpage-hero h1 {
+    font-size: clamp(80px, 7.5vw, 120px);
+    max-width: 21ch;
+  }
+  .subpage-hero .page-label {
+    font-size: 15px;
+    margin-bottom: 24px;
+  }
+  .subpage-hero .page-lead {
+    font-size: 18px;
+    max-width: 54ch;
+  }
+  .page-intro.subpage-hero::before {
+    background: linear-gradient(
+      90deg,
+      rgba(3, 34, 38, 0.94),
+      rgba(3, 34, 38, 0.73) 55%,
+      rgba(3, 34, 38, 0.12)
+    );
+  }
+  [data-page="team"] .page-intro.subpage-hero::before {
+    background: linear-gradient(
+      90deg,
+      rgba(24, 21, 51, 0.95),
+      rgba(24, 21, 51, 0.76) 55%,
+      rgba(24, 21, 51, 0.12)
+    );
+  }
+  .editorial-photo {
+    margin-block: 24px 56px;
+  }
+  .editorial-photo img {
+    aspect-ratio: 2.8 / 1;
+    border-radius: 8px 64px 8px 8px;
+  }
+  .editorial-photo figcaption {
+    font-size: 38px;
+    margin-top: 20px;
+  }
+}
+@media (max-width: 360px) {
+  .subpage-hero h1 {
+    font-size: 43px;
+  }
+  .subpage-hero-inner {
+    padding-block: 32px 140px;
+    gap: 20px;
+  }
+}
+@media (min-width: 761px) {
+  [data-page="team"] .subpage-hero-image {
+    object-position: 50% 10%;
+  }
+}

@@ -1,3 +1,5 @@
+import { translate as t } from "./i18n.js";
+
 export function initScrollStories(selectStep) {
   const root = document.documentElement;
   const reduced = matchMedia("(prefers-reduced-motion: reduce)");
@@ -78,11 +80,13 @@ export function initScrollStories(selectStep) {
     root.classList.toggle("has-scroll-scenes", enabled);
     root.classList.toggle("motion-off", disabled || reduced.matches);
     toggle.disabled = reduced.matches;
-    toggle.textContent = reduced.matches
-      ? "Reduzierte Bewegung"
-      : disabled
-        ? "Animationen einschalten"
-        : "Animationen ausschalten";
+    toggle.textContent = t(
+      reduced.matches
+        ? "Reduzierte Bewegung"
+        : disabled
+          ? "Animationen einschalten"
+          : "Animationen ausschalten",
+    );
     toggle.setAttribute("aria-pressed", String(!disabled && !reduced.matches));
     for (const scene of scenes) {
       scene.querySelectorAll("[data-chapter]").forEach((chapter) => {
@@ -143,10 +147,16 @@ export function initScrollStories(selectStep) {
       );
     const model = scene.querySelector(".scroll-model");
     if (model) {
-      // Preload the actual CAD rotation views only near the product scene.
+      // Desktop scroll animation needs the views in advance. Phones request
+      // only the frame selected with the slider, avoiding 36 image downloads.
       const loader = new IntersectionObserver(
         (entries) => {
-          if (!entries.some((entry) => entry.isIntersecting)) return;
+          if (
+            disabled ||
+            !suitable.matches ||
+            !entries.some((entry) => entry.isIntersecting)
+          )
+            return;
           for (let i = 0; i < 36; i++) {
             const image = new Image();
             image.src = `/images/machine-frames/${String(i).padStart(3, "0")}.png`;

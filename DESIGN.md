@@ -103,3 +103,57 @@ The phone audit covered all seven pages at 320–430px portrait widths and short
 Navigation scrolls within a short viewport, moves focus to the first link when opened, restores focus on Escape, and closes on outside taps or focus. The animation switch lives in the footer on phones and short screens so it cannot cover content. Contact fields use 16px type, controls retain generous touch targets, and partner logos occupy separate grid cells. Normal document scrolling, reduced motion, all story chapters, and the native CAD slider remain available.
 
 Verification covered 42 phone layouts (all seven pages at 320×740, 360×800, 390×844, 430×932, 667×375 and 844×390), all six technology stages at three phone widths, native CAD/lens touch controls, navigation focus and dismissal, and reduced motion. Shared route, form, image, link and desktop scroll checks also passed.
+
+## Expressive redesign (seven distinct pages, October 2026)
+
+One shared system, seven compositions. Vanilla HTML/CSS/JS with Vite; no
+new runtime dependencies. Header/footer navigation stays structurally
+consistent; German/English strings, anchors/IDs, JS data hooks, CAD
+controls, tabs, disclosures and form behavior preserved; content never
+hidden merely to simplify.
+
+Shared palette (exact): forest `#123D2B`, leaf `#36CF73`, citron
+`#DAF52F`, cobalt `#284AE8`, mist `#EFF9F1`, white `#FFFFFF` as CSS vars
+`--forest, --leaf, --citron, --cobalt, --mist, --white` (remapped in
+`src/design-system.css`; page files redefine the same values locally).
+Type: locally hosted Barlow Condensed 700 for bold display
+(`public/fonts/barlow-condensed-bold.ttf`), Open Sans for body/UI.
+Matching palette and navigation, unique composition per page: no identical
+photo-overlay heroes, no repeated same cards, no gradients as decoration,
+no all-caps labels, no gratuitous numbers, no single-word colored headline
+accents. One memorable focal device per page, quieter surroundings. Scoped
+selectors `body[data-page="<page>"]`; each page CSS linked only in its own
+HTML head as `/src/page-designs/<page>.css`. Responsive 320px onward,
+visible keyboard focus, readable contrast, reduced-motion respect.
+
+- index (home): leaf poster — giant carbon-to-crop type plus field-photo
+  collage bars; lens/scroll interactions kept.
+- produkt: citron hardware studio — real `/images/machine-frames/000.png`
+  specimen (`Aktueller CAD-Entwurf`, `Gesamtanlage · CAD-Konzept`) with a
+  forest V3 fieldnote; turntable slider untouched.
+- technologie: cobalt process lab — desktop duct SVG plus wrapping pill
+  stages on small screens (no scroll trap); six tabs/panel unchanged.
+- vorteile: citron financial ledger — one white-once vs forest-recurring
+  sheet with a single cobalt €800 cell; qualified model figures kept.
+- team: leaf photo studio — hero leaf card opens with the composed founder
+  print (three-founder photo + factual caption, moved not duplicated) and
+  bold forest type; following `#team` quieted to a white ledger for the
+  four-person roster (Navika Sales, Tim Science, Felicia Finance, Thinh
+  Hardware & Software · Head of Engineering); work-cycle diagram retained.
+- investoren: forest investment staircase — monumental white type on
+  forest; hero `ol.inv-stairs` miniature plus `roadmap-list` staircase in
+  citron achieved vs white/cobalt planned (September 2026 TRL 4 achieved,
+  December 2026 onboarding planned, March 2027 launch planned); pricing
+  and savings assumptions kept qualified; pitch-deck link to contact query
+  kept.
+- kontakt: cobalt form desk (separate reviewer) — native validation,
+  labels, Pitch Deck query topic; mobile form order fixed there.
+
+Final review pass fixed: team photo moved into the first-screen leaf hero
+(mist masthead removed as focal, `#team` quieted); investoren mobile H1
+resized so `Weitergedacht` fits at 320+ with no mid-word split and hero
+stairs labelled with sourced dates/status. Verified: `npm run build`
+passes, `npm test` 6/6, scoped/contrast/a11y audits clean; post-fix visual
+screenshots deferred to root integration (preview unavailable in workers).
+Plans and findings: `docs/designs/{shared,index,produkt,technologie,
+vorteile,team,investoren,review-first,review-final}.md`.

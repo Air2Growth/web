@@ -1,0 +1,56 @@
+/* Inline vectors bypass platform-specific emoji rendering. */
+.direction-arrow {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  flex-shrink: 0;
+  vertical-align: -0.12em;
+  margin-left: 0.2em;
+  overflow: visible;
+}
+[aria-hidden="true"] > .direction-arrow {
+  margin-left: 0;
+}
+.button > .direction-arrow {
+  width: 20px;
+  height: 20px;
+  margin-left: 0;
+  transition: transform 0.3s;
+}
+.button:hover > .direction-arrow {
+  transform: rotate(45deg);
+}
+@media (prefers-reduced-motion: reduce) {
+  .button > .direction-arrow {
+    transition: none;
+  }
+}
+.ui-icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  flex-shrink: 0;
+  vertical-align: -0.12em;
+  overflow: visible;
+}
+.play .ui-icon {
+  width: 14px;
+  height: 14px;
+  display: block;
+}
+.mini-leaf .ui-icon {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+.scroll-cue .ui-icon {
+  width: 22px;
+  height: 22px;
+}
+.harvest-particles {
+  display: block;
+  width: 140px;
+  height: 20px;
+  max-width: 100%;
+  margin-inline: auto;
+}

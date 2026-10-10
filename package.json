@@ -4,6 +4,7 @@
   "type": "module",
   "private": true,
   "scripts": {
+    "test": "node --test",
     "dev": "node scripts/serve.mjs dev",
     "build": "vite build",
     "preview": "node scripts/serve.mjs preview",

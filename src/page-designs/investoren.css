@@ -1,0 +1,1014 @@
+/* Investoren — forest investment staircase.
+   Scope: body[data-page="investoren"] only. Palette EXACT: forest #123D2B,
+   leaf #36CF73, citron #DAF52F, cobalt #284AE8, mist #EFF9F1, white #FFFFFF.
+   Type: Barlow Condensed 700 display, Open Sans body. One focal device: the
+   stepped milestone staircase (citron achieved step, white/cobalt planned
+   steps) on a monumental forest field. Everything else stays quiet
+   mist/white. No photo-overlay hero, no gradients, no all-caps labels. */
+
+body[data-page="investoren"] {
+  --forest: #123d2b;
+  --leaf: #36cf73;
+  --citron: #daf52f;
+  --cobalt: #284ae8;
+  --mist: #eff9f1;
+  --white: #ffffff;
+  --ink-soft: #2e5541;
+  background: var(--mist);
+  color: var(--forest);
+  font-family: "Open Sans", Arial, sans-serif;
+}
+
+body[data-page="investoren"] :is(h1, h2, h3, .page-next strong, .roadmap-list strong, .vp-lane strong, .vp-potential strong, .vp-cost strong) {
+  font-family: "Barlow Condensed", "Arial Narrow", Arial, sans-serif;
+  font-weight: 700;
+}
+
+/* ---------- Hero: monumental forest field, no photo ---------- */
+
+body[data-page="investoren"] .page-intro.subpage-hero {
+  display: block;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: var(--forest);
+  color: var(--white);
+  overflow: hidden;
+}
+
+body[data-page="investoren"] .page-intro.subpage-hero::before,
+body[data-page="investoren"] .page-intro.subpage-hero::after {
+  content: none;
+  display: none;
+}
+
+body[data-page="investoren"] .subpage-hero-image {
+  display: none;
+}
+
+body[data-page="investoren"] .subpage-hero-inner {
+  min-height: 0;
+  padding-block: clamp(40px, 5vw, 76px) clamp(8px, 2vw, 20px);
+}
+
+body[data-page="investoren"] .inv-hero-grid {
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr;
+  gap: clamp(24px, 3vw, 48px);
+  align-items: center;
+}
+
+body[data-page="investoren"] .inv-hero-type {
+  min-width: 0;
+  max-width: 760px;
+}
+
+body[data-page="investoren"] .page-label {
+  display: inline-block;
+  margin: 0 0 20px;
+  padding: 8px 18px;
+  font-size: 13px;
+  line-height: 1.5;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--forest);
+  background: var(--citron);
+  border: 2px solid var(--citron);
+  border-radius: 999px;
+}
+
+body[data-page="investoren"] .subpage-hero h1 {
+  margin: 0;
+  font-size: clamp(60px, 7.6vw, 120px);
+  line-height: 0.94;
+  letter-spacing: -0.015em;
+  color: var(--white);
+  text-wrap: balance;
+  max-width: 12ch;
+  hyphens: none;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+body[data-page="investoren"] .subpage-hero .page-lead {
+  margin: 20px 0 0;
+  font-size: clamp(16px, 1.7vw, 19px);
+  line-height: 1.6;
+  color: var(--white);
+  max-width: 46ch;
+  border-left: 6px solid var(--citron);
+  padding-left: 16px;
+}
+
+/* Focal device: ascending evidence staircase with sourced milestone text. */
+body[data-page="investoren"] .inv-stairs {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  align-items: end;
+  min-height: 0;
+  padding-bottom: 6px;
+}
+
+body[data-page="investoren"] .inv-step {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 8px;
+  border-radius: 12px 12px 6px 6px;
+  border: 2px solid var(--white);
+  min-height: 96px;
+  min-width: 0;
+  overflow-wrap: break-word;
+  padding: 16px 16px 14px;
+  margin: 0;
+}
+
+body[data-page="investoren"] .inv-step:nth-child(1) {
+  min-height: 128px;
+  background: var(--citron);
+  border-color: var(--citron);
+  color: var(--forest);
+}
+
+body[data-page="investoren"] .inv-step:nth-child(2) {
+  min-height: 176px;
+  background: transparent;
+  border-color: var(--white);
+  color: var(--white);
+}
+
+body[data-page="investoren"] .inv-step:nth-child(3) {
+  min-height: 224px;
+  background: var(--cobalt);
+  border-color: var(--cobalt);
+  color: var(--white);
+}
+
+body[data-page="investoren"] .inv-step span {
+  display: block;
+  font-size: 12.5px;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: 0;
+  color: inherit;
+  overflow-wrap: break-word;
+}
+
+body[data-page="investoren"] .inv-step strong {
+  display: block;
+  font-size: clamp(21px, 2vw, 30px);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  color: inherit;
+  text-wrap: pretty;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+body[data-page="investoren"] .inv-step em {
+  display: inline-block;
+  align-self: flex-start;
+  font-style: normal;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: 0;
+  border-radius: 999px;
+  padding: 3px 12px;
+  margin-top: 4px;
+  border: 2px solid currentColor;
+  color: inherit;
+  background: transparent;
+}
+
+/* ---------- Roadmap bench: same forest field, true staircase ---------- */
+
+body[data-page="investoren"] .roadmap-section {
+  display: block;
+  background: var(--forest);
+  background-image: none;
+  color: var(--white);
+  border: 0;
+  border-top: 2px solid rgba(255, 255, 255, 0.22);
+  margin: 0;
+  padding-block: clamp(24px, 3vw, 40px) clamp(32px, 4vw, 56px);
+}
+
+body[data-page="investoren"] .roadmap-section.wrap {
+  width: 100%;
+  max-width: none;
+}
+
+body[data-page="investoren"] .roadmap-section > * {
+  width: min(1320px, calc(100% - 96px));
+  margin-inline: auto;
+}
+
+/* Copy runs full normal-wrap width so the H2 left edge sits on the same
+   48px gutter as the cards below (and the next growth figure's wrap).
+   Line length stays controlled on the text itself (p: 58ch), not the box. */
+body[data-page="investoren"] .roadmap-copy {
+  max-width: none;
+}
+
+body[data-page="investoren"] .roadmap-copy .eyebrow {
+  display: inline-block;
+  font-size: 13px;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--citron);
+  border: 2px solid var(--citron);
+  border-radius: 999px;
+  padding: 6px 16px;
+  margin: 0 0 16px;
+}
+
+body[data-page="investoren"] .roadmap-copy h2 {
+  margin: 0;
+  font-size: clamp(48px, 5.4vw, 84px);
+  line-height: 0.96;
+  letter-spacing: -0.015em;
+  color: var(--white);
+}
+
+/* Neutralize single-word accent: whole headline stays monumental white. */
+body[data-page="investoren"] .roadmap-copy h2 em {
+  font-style: normal;
+  font-family: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+  background: none;
+}
+
+body[data-page="investoren"] .roadmap-copy p {
+  margin: 16px 0 0;
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--white);
+  max-width: 58ch;
+}
+
+body[data-page="investoren"] .roadmap-copy .text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 18px;
+  min-height: 48px;
+  padding: 12px 22px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--forest);
+  background: var(--citron);
+  border: 2px solid var(--citron);
+  border-radius: 999px;
+}
+
+body[data-page="investoren"] .roadmap-copy .text-link:hover {
+  background: var(--white);
+  border-color: var(--white);
+}
+
+body[data-page="investoren"] .roadmap-copy .text-link svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* The staircase: three physical steps ascending left to right.
+   margin-inline:auto here (not 0) so this late equal-specificity rule keeps
+   the centered normal-wrap gutters from `.roadmap-section > *` instead of
+   pulling the row to the viewport edge. */
+body[data-page="investoren"] .roadmap-list {
+  list-style: none;
+  margin: 28px auto 0;
+  padding: 0;
+  border: 0;
+  border-left: 0;
+  background: transparent;
+  background-image: none;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  align-items: end;
+}
+
+body[data-page="investoren"] .roadmap-list li {
+  position: static;
+  min-width: 0;
+  overflow-wrap: break-word;
+  background: var(--white);
+  background-image: none;
+  color: var(--forest);
+  border: 2px solid var(--white);
+  border-radius: 16px;
+  border-top: 10px solid var(--cobalt);
+  padding: 18px 20px 20px;
+}
+
+body[data-page="investoren"] .roadmap-list li::before,
+body[data-page="investoren"] .roadmap-list li::after {
+  content: none;
+  display: none;
+}
+
+body[data-page="investoren"] .roadmap-list li:nth-child(1) {
+  margin-top: 48px;
+  background: var(--citron);
+  border-color: var(--citron);
+  border-top-color: var(--forest);
+}
+
+body[data-page="investoren"] .roadmap-list li:nth-child(2) {
+  margin-top: 24px;
+}
+
+body[data-page="investoren"] .roadmap-list li:nth-child(3) {
+  margin-top: 0;
+}
+
+body[data-page="investoren"] .roadmap-list span {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--cobalt);
+  overflow-wrap: break-word;
+}
+
+body[data-page="investoren"] .roadmap-list li:nth-child(1) span {
+  color: var(--forest);
+}
+
+body[data-page="investoren"] .roadmap-list strong {
+  display: block;
+  margin-top: 8px;
+  min-width: 0;
+  font-size: clamp(26px, 2.6vw, 38px);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  color: var(--forest);
+  text-wrap: pretty;
+  overflow-wrap: break-word;
+  word-break: normal;
+  hyphens: auto;
+}
+
+/* ---------- Growth strip: quiet mist, recolored diagram ---------- */
+
+body[data-page="investoren"] .xp-growth {
+  background: var(--mist);
+  background-image: none;
+  margin-block: 0;
+  padding-block: clamp(28px, 3vw, 44px);
+}
+
+body[data-page="investoren"] .xp-growth > * {
+  width: min(1280px, calc(100% - 112px));
+  margin-inline: auto;
+}
+
+body[data-page="investoren"] .xp-growth figure {
+  background: var(--white);
+  background-image: none;
+  border: 2px solid var(--forest);
+  border-radius: 20px;
+  padding: clamp(14px, 2vw, 22px);
+}
+
+body[data-page="investoren"] .xp-stages {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Remap authored greens into the exact shared palette. */
+body[data-page="investoren"] .xp-stages [stroke="#8ca86d"] {
+  stroke: var(--leaf);
+}
+
+body[data-page="investoren"] .xp-stages [fill="#6d8f4e"] {
+  fill: var(--leaf);
+}
+
+body[data-page="investoren"] .xp-stages [fill="#d6eda7"] {
+  fill: var(--citron);
+}
+
+body[data-page="investoren"] .xp-stages [fill="#e7f2cf"] {
+  fill: var(--mist);
+}
+
+body[data-page="investoren"] .xp-stages [stroke="#183c2c"] {
+  stroke: var(--forest);
+}
+
+body[data-page="investoren"] .xp-stages [fill="#183c2c"] {
+  fill: var(--forest);
+}
+
+body[data-page="investoren"] .xp-caption {
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--ink-soft);
+  margin: 8px 0 0;
+  max-width: 70ch;
+}
+
+body[data-page="investoren"] .xp-growth ol {
+  list-style: none;
+  margin: 10px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+body[data-page="investoren"] .xp-growth ol li {
+  background: var(--white);
+  background-image: none;
+  border: 2px solid var(--forest);
+  border-radius: 14px;
+  padding: 12px 16px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--forest);
+}
+
+body[data-page="investoren"] .xp-growth ol li strong {
+  display: block;
+  font-size: 15px;
+  margin-bottom: 2px;
+}
+
+body[data-page="investoren"] .xp-growth ol li:nth-child(1) {
+  border-left: 8px solid var(--forest);
+}
+
+body[data-page="investoren"] .xp-growth ol li:nth-child(n + 2) {
+  border-left: 8px solid var(--cobalt);
+}
+
+/* ---------- Detail: quiet ledger, evidence vs plan instantly distinct ---------- */
+
+body[data-page="investoren"] .detail-section {
+  background: var(--mist);
+  background-image: none;
+  border-top: 0;
+  padding-block: 16px clamp(32px, 4vw, 56px);
+}
+
+body[data-page="investoren"] .detail-heading h2 {
+  color: var(--forest);
+  font-size: clamp(44px, 4.8vw, 72px);
+  line-height: 0.98;
+  margin: 0 0 16px;
+}
+
+body[data-page="investoren"] .detail-heading p {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--forest);
+  font-weight: 700;
+  border-left: 6px solid var(--leaf);
+  padding-left: 16px;
+  max-width: 62ch;
+}
+
+body[data-page="investoren"] .vp-lede {
+  margin: 22px 0 0;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--ink-soft);
+  max-width: 72ch;
+}
+
+body[data-page="investoren"] .vp-figure {
+  background: var(--white);
+  border: 2px solid var(--forest);
+  border-radius: 20px;
+  padding: clamp(18px, 2.8vw, 32px);
+  margin: 22px 0 0;
+}
+
+body[data-page="investoren"] .vp-kicker {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--forest);
+  background: var(--mist);
+  border: 2px solid var(--forest);
+  border-radius: 999px;
+  padding: 6px 16px;
+  margin-bottom: 18px;
+}
+
+/* Quiet timeline: solid forest edge = achieved, cobalt edge = planned.
+   Inherited rail + dots from the shared lane are removed: the top-edge
+   caps carry the meaning, not corner markers. */
+body[data-page="investoren"] .vp-lane {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  position: static;
+}
+
+body[data-page="investoren"] .vp-lane::before {
+  content: none;
+  display: none;
+}
+
+body[data-page="investoren"] .vp-lane li {
+  background: var(--mist);
+  background-image: none;
+  border: 2px solid var(--forest);
+  border-radius: 14px;
+  padding: 16px 18px;
+  border-top: 8px solid var(--forest);
+  position: static;
+}
+
+body[data-page="investoren"] .vp-lane li::before,
+body[data-page="investoren"] .vp-lane li::after {
+  content: none;
+  display: none;
+}
+
+body[data-page="investoren"] .vp-lane li.is-plan {
+  background: var(--white);
+  border-top-color: var(--cobalt);
+}
+
+body[data-page="investoren"] .vp-when {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+
+body[data-page="investoren"] .vp-lane strong {
+  display: block;
+  margin-top: 4px;
+  font-size: clamp(24px, 2.4vw, 34px);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  color: var(--forest);
+}
+
+body[data-page="investoren"] .vp-lane p {
+  margin: 6px 0 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--forest);
+  max-width: 34ch;
+}
+
+body[data-page="investoren"] .vp-tag {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 13px;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 6px 16px;
+}
+
+body[data-page="investoren"] .vp-tag.is-done {
+  color: var(--white);
+  background: var(--forest);
+  border: 2px solid var(--forest);
+}
+
+body[data-page="investoren"] .vp-lane .is-plan .vp-tag,
+body[data-page="investoren"] .vp-tag:not(.is-done) {
+  color: var(--cobalt);
+  background: var(--white);
+  border: 2px solid var(--cobalt);
+}
+
+/* Business-model figure: flat proportionate bars, qualified. */
+body[data-page="investoren"] .vp-cost {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+
+body[data-page="investoren"] .vp-cost li {
+  display: grid;
+  grid-template-columns: minmax(180px, 260px) minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+  background: var(--mist);
+  background-image: none;
+  border: 2px solid var(--forest);
+  border-radius: 14px;
+  padding: 14px 18px;
+}
+
+body[data-page="investoren"] .vp-cost-label {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--forest);
+}
+
+body[data-page="investoren"] .vp-cost-label small {
+  display: block;
+  font-size: 12.5px;
+  font-weight: 400;
+  color: var(--ink-soft);
+  margin-top: 2px;
+}
+
+body[data-page="investoren"] .vp-track {
+  display: block;
+  height: 14px;
+  background: var(--white);
+  border: 2px solid var(--forest);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+body[data-page="investoren"] .vp-bar {
+  display: block;
+  height: 100%;
+  width: var(--w, 10%);
+  background: var(--forest);
+  border-radius: 999px;
+}
+
+body[data-page="investoren"] .vp-cost li:nth-child(2) .vp-bar {
+  background: var(--leaf);
+}
+
+body[data-page="investoren"] .vp-cost strong {
+  font-size: clamp(28px, 3vw, 44px);
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: var(--forest);
+  white-space: nowrap;
+}
+
+body[data-page="investoren"] .vp-potential {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+body[data-page="investoren"] .vp-potential > div {
+  border: 2px solid var(--forest);
+  border-radius: 14px;
+  padding: 16px 18px;
+  background: var(--mist);
+  background-image: none;
+}
+
+body[data-page="investoren"] .vp-potential > div:nth-child(2) {
+  background: var(--cobalt);
+  border-color: var(--cobalt);
+  color: var(--white);
+}
+
+body[data-page="investoren"] .vp-potential strong {
+  display: block;
+  font-size: clamp(30px, 3.2vw, 46px);
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+
+body[data-page="investoren"] .vp-potential strong small {
+  font-size: 15px;
+  font-family: "Open Sans", Arial, sans-serif;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+body[data-page="investoren"] .vp-potential span {
+  display: block;
+  margin-top: 6px;
+  font-size: 13.5px;
+}
+
+body[data-page="investoren"] .vp-potential > div:nth-child(2) span {
+  color: var(--white);
+}
+
+body[data-page="investoren"] .vp-figure figcaption {
+  margin-top: 14px;
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: var(--ink-soft);
+  border-top: 2px solid var(--forest);
+  padding-top: 14px;
+  max-width: 80ch;
+}
+
+body[data-page="investoren"] .vp-qual {
+  display: block;
+  font-weight: 700;
+  color: var(--forest);
+  border-left: 6px solid var(--leaf);
+  padding-left: 14px;
+  margin-bottom: 10px;
+}
+
+body[data-page="investoren"] .inline-link {
+  color: var(--cobalt);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 2px;
+}
+
+body[data-page="investoren"] .inline-link:hover {
+  color: var(--forest);
+}
+
+body[data-page="investoren"] .faq-stack {
+  margin: 18px 0 0;
+  display: grid;
+  gap: 10px;
+  background: transparent;
+  background-image: none;
+  border: 0;
+  padding: 0;
+}
+
+body[data-page="investoren"] .faq-item {
+  background: var(--white);
+  background-image: none;
+  border: 2px solid var(--forest);
+  border-radius: 14px;
+}
+
+body[data-page="investoren"] .faq-item[open],
+body[data-page="investoren"] .faq-stack details[open] {
+  background: var(--white);
+  background-image: none;
+}
+
+body[data-page="investoren"] .faq-question {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--forest);
+}
+
+body[data-page="investoren"] .faq-answer p {
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--forest);
+  max-width: 72ch;
+}
+
+body[data-page="investoren"] .detail-note {
+  margin: 18px 0 0;
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: var(--forest);
+  background: var(--white);
+  border: 2px solid var(--forest);
+  border-left: 10px solid var(--leaf);
+  border-radius: 0 14px 14px 0;
+  padding: 14px 18px;
+  max-width: 80ch;
+}
+
+/* Laboratory photo becomes a small field-note inset, not a hero. */
+body[data-page="investoren"] .editorial-photo {
+  background: var(--white);
+  background-image: none;
+  border: 2px solid var(--forest);
+  border-radius: 18px;
+  padding: 12px 12px 14px;
+  max-width: 760px;
+  margin-bottom: 40px;
+}
+
+body[data-page="investoren"] .editorial-photo img {
+  border-radius: 10px;
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  height: auto;
+}
+
+body[data-page="investoren"] .editorial-photo figcaption {
+  font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: var(--forest);
+  margin-top: 10px;
+}
+
+/* ---------- Onward link: quiet white card ---------- */
+
+body[data-page="investoren"] .page-next a {
+  background: var(--white);
+  border: 2px solid var(--forest);
+  border-radius: 18px;
+  padding: 24px 28px;
+}
+
+body[data-page="investoren"] .page-next a > span:first-child {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--cobalt);
+}
+
+body[data-page="investoren"] .page-next strong {
+  font-size: clamp(30px, 3.6vw, 50px);
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: var(--forest);
+}
+
+body[data-page="investoren"] .page-next a:hover {
+  background: var(--citron);
+}
+
+body[data-page="investoren"] .page-next a:hover strong {
+  color: var(--forest);
+}
+
+/* ---------- Visible keyboard focus ---------- */
+
+body[data-page="investoren"] :is(a, button, input, summary, [tabindex]):focus-visible {
+  outline: 3px solid var(--cobalt);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+body[data-page="investoren"] :is(.page-intro, .roadmap-section) :is(a, button, summary):focus-visible {
+  outline-color: var(--citron);
+}
+
+/* ---------- Reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  body[data-page="investoren"] *,
+  body[data-page="investoren"] *::before,
+  body[data-page="investoren"] *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body[data-page="investoren"].motion-off *,
+body[data-page="investoren"].motion-off *::before,
+body[data-page="investoren"].motion-off *::after {
+  animation: none !important;
+  transition: none !important;
+}
+
+/* ---------- Responsive from 320px, staircase survives by indent ---------- */
+
+@media (max-width: 1020px) {
+  body[data-page="investoren"] .inv-hero-grid {
+    grid-template-columns: 1fr;
+  }
+
+  body[data-page="investoren"] .inv-stairs {
+    min-height: 0;
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 560px;
+  }
+
+  body[data-page="investoren"] .inv-step:nth-child(1) {
+    min-height: 140px;
+  }
+
+  body[data-page="investoren"] .inv-step:nth-child(2) {
+    min-height: 176px;
+  }
+
+  body[data-page="investoren"] .inv-step:nth-child(3) {
+    min-height: 212px;
+  }
+
+  body[data-page="investoren"] .roadmap-list,
+  body[data-page="investoren"] .vp-lane {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  body[data-page="investoren"] .roadmap-list li:nth-child(1) {
+    margin-top: 0;
+  }
+
+  body[data-page="investoren"] .roadmap-list li:nth-child(2) {
+    margin-top: 0;
+  }
+
+  body[data-page="investoren"] .roadmap-list li:nth-child(3) {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 760px) {
+  body[data-page="investoren"] .roadmap-section > * {
+    width: calc(100% - 40px);
+  }
+
+  body[data-page="investoren"] .subpage-hero h1 {
+    font-size: clamp(42px, 12vw, 64px);
+    line-height: 0.95;
+    max-width: 100%;
+    text-wrap: pretty;
+    hyphens: none;
+    overflow-wrap: normal;
+    word-break: normal;
+  }
+
+  body[data-page="investoren"] .inv-stairs {
+    grid-template-columns: 1fr;
+    max-width: 100%;
+    gap: 8px;
+  }
+
+  body[data-page="investoren"] .inv-step:nth-child(1),
+  body[data-page="investoren"] .inv-step:nth-child(2),
+  body[data-page="investoren"] .inv-step:nth-child(3) {
+    min-height: 0;
+  }
+
+  body[data-page="investoren"] .inv-step:nth-child(2) {
+    margin-left: 16px;
+  }
+
+  body[data-page="investoren"] .inv-step:nth-child(3) {
+    margin-left: 32px;
+  }
+
+  body[data-page="investoren"] .roadmap-list,
+  body[data-page="investoren"] .vp-lane,
+  body[data-page="investoren"] .xp-growth ol,
+  body[data-page="investoren"] .vp-potential {
+    grid-template-columns: 1fr;
+  }
+
+  /* Stacked staircase keeps its stepped reading order by indent. */
+  body[data-page="investoren"] .roadmap-list li:nth-child(1) {
+    margin-left: 0;
+  }
+
+  body[data-page="investoren"] .roadmap-list li:nth-child(2) {
+    margin-left: 20px;
+  }
+
+  body[data-page="investoren"] .roadmap-list li:nth-child(3) {
+    margin-left: 40px;
+    grid-column: auto;
+  }
+
+  body[data-page="investoren"] .vp-cost li {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  body[data-page="investoren"] .vp-cost strong {
+    white-space: normal;
+  }
+
+  body[data-page="investoren"] .editorial-photo {
+    margin-inline: 0;
+  }
+
+  body[data-page="investoren"] .roadmap-copy .text-link {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 380px) {
+  body[data-page="investoren"] .subpage-hero h1 {
+    font-size: clamp(40px, 12vw, 48px);
+  }
+
+  body[data-page="investoren"] .inv-step:nth-child(2),
+  body[data-page="investoren"] .roadmap-list li:nth-child(2) {
+    margin-left: 12px;
+  }
+
+  body[data-page="investoren"] .inv-step:nth-child(3),
+  body[data-page="investoren"] .roadmap-list li:nth-child(3) {
+    margin-left: 24px;
+  }
+
+  body[data-page="investoren"] .vp-figure {
+    border-radius: 16px;
+    padding: 14px 12px 18px;
+  }
+}

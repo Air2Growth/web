@@ -3,13 +3,25 @@ import { initGraphics } from "./graphics.js";
 import "./visual-pages.css";
 import "./scroll.css";
 import "./mobile.css";
+import "./identity.css";
+import "./subpage-headers.css";
+import "./faq.css";
+import "./icons.css";
+import "./mobile-simplify.css";
+import "./design-system.css";
+import { initMobileDisclosures } from "./mobile-simplify.js";
 import { initScrollStories } from "./scroll.js";
+import { initLanguage, translate as t } from "./i18n.js";
+
+initLanguage();
+initMobileDisclosures();
+
 const menuToggle = document.querySelector(".menu-toggle");
 const navigation = document.querySelector("#navigation");
 function closeMenu(returnFocus = false) {
   navigation.classList.remove("is-open");
   menuToggle.setAttribute("aria-expanded", "false");
-  menuToggle.setAttribute("aria-label", "Menü öffnen");
+  menuToggle.setAttribute("aria-label", t("Menü öffnen"));
   if (returnFocus) menuToggle.focus();
 }
 menuToggle.addEventListener("click", () => {
@@ -18,7 +30,7 @@ menuToggle.addEventListener("click", () => {
   menuToggle.setAttribute("aria-expanded", String(open));
   menuToggle.setAttribute(
     "aria-label",
-    open ? "Menü schließen" : "Menü öffnen",
+    t(open ? "Menü schließen" : "Menü öffnen"),
   );
   if (open) navigation.querySelector("a")?.focus({ preventScroll: true });
 });
@@ -26,13 +38,16 @@ navigation
   .querySelectorAll("a")
   .forEach((link) => link.addEventListener("click", () => closeMenu()));
 document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape" && navigation.classList.contains("is-open")) closeMenu(true);
+  if (event.key === "Escape" && navigation.classList.contains("is-open"))
+    closeMenu(true);
 });
 document.addEventListener("pointerdown", (event) => {
-  if (!navigation.contains(event.target) && !menuToggle.contains(event.target)) closeMenu();
+  if (!navigation.contains(event.target) && !menuToggle.contains(event.target))
+    closeMenu();
 });
 document.addEventListener("focusin", (event) => {
-  if (!navigation.contains(event.target) && !menuToggle.contains(event.target)) closeMenu();
+  if (!navigation.contains(event.target) && !menuToggle.contains(event.target))
+    closeMenu();
 });
 window.matchMedia("(min-width: 961px)").addEventListener("change", (event) => {
   if (event.matches) closeMenu();
@@ -99,12 +114,14 @@ function selectStep(index, focus = false) {
   });
   panel.setAttribute("aria-labelledby", `tab-${index}`);
   panel.dataset.active = index;
-  document.querySelector("#process-kicker").textContent = step.kicker;
-  document.querySelector("#process-title").textContent = step.title;
-  document.querySelector("#process-description").textContent = step.description;
-  document.querySelector(".flow-label").textContent = step.input;
-  document.querySelector(".output-label").textContent = step.output;
-  document.querySelector(".reactor-label span").textContent = step.reactor;
+  document.querySelector("#process-kicker").textContent = t(step.kicker);
+  document.querySelector("#process-title").textContent = t(step.title);
+  document.querySelector("#process-description").textContent = t(
+    step.description,
+  );
+  document.querySelector(".flow-label").textContent = t(step.input);
+  document.querySelector(".output-label").textContent = t(step.output);
+  document.querySelector(".reactor-label span").textContent = t(step.reactor);
   if (focus) tabs[index].focus();
 }
 tabs.forEach((tab, index) => {
@@ -143,12 +160,14 @@ if (contactForm) {
     event.preventDefault();
     if (!contactForm.reportValidity()) return;
     const data = new FormData(contactForm);
-    const subject = `${data.get("interest")} – Air2Growth Anfrage von ${data.get("name")}`;
-    const body = `Name: ${data.get("name")}\nE-Mail: ${data.get("email")}\nThema: ${data.get("interest")}\n\n${data.get("message")}`;
+    const topic = interest.selectedOptions[0].textContent.trim();
+    const subject = `${topic} – Air2Growth ${t("Anfrage von")} ${data.get("name")}`;
+    const body = `${t("Name")}: ${data.get("name")}\n${t("E-Mail")}: ${data.get("email")}\n${t("Thema")}: ${topic}\n\n${data.get("message")}`;
     const mailto = `mailto:info@air2growth.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     window.location.href = mailto;
-    contactForm.querySelector(".form-status").textContent =
-      "Ihr E-Mail-Programm wird geöffnet. Bitte senden Sie die Nachricht dort ab. Falls es sich nicht öffnet, schreiben Sie direkt an info@air2growth.com.";
+    contactForm.querySelector(".form-status").textContent = t(
+      "Ihr E-Mail-Programm wird geöffnet. Bitte senden Sie die Nachricht dort ab. Falls es sich nicht öffnet, schreiben Sie direkt an info@air2growth.com.",
+    );
   });
 }
 

@@ -1,0 +1,307 @@
+/* Air2Growth shared design-system.css — tokens + disciplined globals ONLY.
+   Owned by the home worker on behalf of the coordinator. Page compositions
+   live in scoped src/page-designs/*.css files, never here.
+   Palette (exact): forest #123D2B, leaf #36CF73, citron #DAF52F,
+   cobalt #284AE8, mist #EFF9F1, white #FFFFFF. */
+
+@font-face {
+  font-family: "Barlow Condensed";
+  src: url("/fonts/barlow-condensed-bold.ttf") format("truetype");
+  font-weight: 700;
+  font-display: swap;
+}
+
+:root {
+  --forest: #123d2b;
+  --leaf: #36cf73;
+  --citron: #daf52f;
+  --cobalt: #284ae8;
+  --mist: #eff9f1;
+  --white: #ffffff;
+  /* Original wordmark greens (authoritative: git HEAD src/style.css).
+     Logo ink/leaf #183c2c, "2" #7fa451, dot #83aa53. Dedicated tokens so
+     the wordmark never inherits cobalt or palette guesses. */
+  --brand-ink: #183c2c;
+  --brand-two: #7fa451;
+  --brand-dot: #83aa53;
+  /* Canonical remaps so every existing token resolves to the shared palette. */
+  --paper: #eff9f1;
+  --green: #123d2b;
+  --lime: #daf52f;
+  --algae: #36cf73;
+  --solar: #daf52f;
+  --violet: #284ae8;
+  --muted: #2e5541;
+  --line: #b9dcc3;
+  --display: "Barlow Condensed", "Arial Narrow", sans-serif;
+  --body: "Open Sans", Arial, sans-serif;
+  --section-space: clamp(48px, 6vw, 88px);
+  --content-gap: clamp(24px, 4vw, 48px);
+}
+
+/* ---- Base ---- */
+
+body {
+  background: var(--mist);
+  color: var(--forest);
+  font-family: var(--body);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+::selection {
+  background: var(--citron);
+  color: var(--forest);
+}
+
+/* ---- Disciplined typography (global scale only, no page composition) ---- */
+
+h1,
+h2,
+h3,
+.page-next strong {
+  font-family: var(--display);
+  font-weight: 700;
+  line-height: 0.98;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+h2 {
+  font-size: clamp(44px, 5vw, 72px);
+}
+
+p,
+.detail-card p,
+.plain-text {
+  max-width: 72ch;
+}
+
+/* Sentence-case eyebrows everywhere: never all-caps labels. */
+.eyebrow {
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+  line-height: 1.6;
+}
+
+.live-dot {
+  background: var(--leaf);
+  box-shadow: 0 0 0 5px rgba(54, 207, 115, 0.22);
+}
+
+/* ---- Navigation (structurally consistent across all seven pages) ---- */
+
+.header {
+  border-bottom: 2px solid var(--forest);
+}
+
+/* Wordmark: locally hosted Open Sans bold, original greens only.
+   Specificity (body ...) wins style.css + identity.css cobalt accents. */
+
+body .brand {
+  font-family: var(--body);
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  color: var(--brand-ink);
+}
+
+body .brand svg {
+  color: var(--brand-ink);
+}
+
+body .brand-two {
+  color: var(--brand-two);
+}
+
+body .brand-dot {
+  color: var(--brand-dot);
+}
+
+/* Footer contiguity (ALL 7 pages): footer .brand has anonymous "air" /
+   "growth" flex items; gap:10 splits them ~10px per fragment rects.
+   Header nests the wordmark in one span so its gap is only icon↔word.
+   gap:0 renders one contiguous wordmark, links/structure untouched. */
+
+body .footer .brand {
+  gap: 0;
+}
+
+body .footer .brand .brand-two,
+body .footer .brand .brand-dot {
+  margin: 0;
+  padding: 0;
+}
+
+.header nav {
+  font-family: var(--body);
+}
+
+.header nav a[aria-current="page"] {
+  font-weight: 700;
+}
+
+.header nav a[aria-current="page"]:after {
+  width: 100%;
+  background: var(--cobalt);
+  height: 2px;
+}
+
+.header .language-switch a[aria-current="true"] {
+  background: var(--citron);
+  color: var(--forest);
+  font-weight: 700;
+}
+
+/* ---- Buttons (solid palette only, no gradients) ---- */
+
+.button {
+  background: var(--forest);
+  border: 2px solid var(--forest);
+  border-radius: 999px;
+  color: var(--white);
+  font-family: var(--body);
+}
+
+.button:hover {
+  background: #0b2c1f;
+  border-color: #0b2c1f;
+  transform: translateY(-2px);
+}
+
+.button.lime {
+  background: var(--citron);
+  border-color: var(--forest);
+  color: var(--forest);
+}
+
+.button.lime:hover {
+  background: #e7fb6a;
+  border-color: var(--forest);
+}
+
+/* ---- Footer (shared structure, quiet) ---- */
+
+/* Shared gutters: header/footer align to normal gutters.
+   body specificity wins style.css (100%-112) + identity.css (100%-96)
+   conflicts; mobile restores 20px gutters. */
+
+body .header {
+  width: min(1400px, calc(100% - 96px));
+  margin-inline: auto;
+}
+
+body .footer.wrap {
+  width: min(1320px, calc(100% - 96px));
+  margin-inline: auto;
+}
+
+/* Footer rows: even insets, intentional wrapping, no overlap.
+   Display untouched (desktop flex, phones grid via simplifier). */
+
+body .footer-top {
+  gap: 16px 28px;
+  flex-wrap: wrap;
+}
+
+body .footer-top > a:last-child {
+  margin-left: auto;
+}
+
+body .footer-pages {
+  gap: 8px 24px;
+  margin-top: 24px;
+}
+
+body .footer-bottom {
+  gap: 12px 20px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 24px;
+  padding-top: 20px;
+}
+
+/* Motion toggle in normal footer flow (ALL 7 pages): scroll.js appends
+   button.motion-toggle inside .footer; base scroll.css fixes it
+   bottom-right where it covers legal links at 1440
+   (index-1440-footer.png: toggle over Datenschutz).
+   Static flow keeps DOM/keyboard order, hooks, reduced-motion intact;
+   mobile.css already static <=760px — this unifies desktop. */
+body .motion-toggle {
+  position: static;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  max-width: 100%;
+  margin: 20px 0 4px;
+  min-height: 44px;
+  padding: 12px 20px;
+  box-shadow: none;
+}
+
+@media (max-width: 760px) {
+  body .header,
+  body .footer.wrap {
+    width: calc(100% - 40px);
+  }
+  body .footer-top {
+    gap: 12px 16px;
+  }
+  body .footer-top > a:last-child {
+    margin-left: 0;
+  }
+  body .footer-bottom {
+    margin-top: 16px;
+    padding-top: 16px;
+  }
+}
+
+.footer-top > span {
+  font-family: var(--display);
+  font-style: normal;
+  color: var(--forest);
+}
+
+.footer-pages a:hover {
+  color: var(--cobalt);
+}
+
+/* ---- Visible keyboard focus (global default: cobalt on light) ---- */
+
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 3px solid var(--cobalt);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+.skip-link {
+  background: var(--forest);
+  color: var(--white);
+}
+
+.skip-link:focus {
+  outline: 3px solid var(--citron);
+}
+
+/* ---- Motion discipline ---- */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *:before,
+  *:after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+.motion-off *,
+.motion-off *:before,
+.motion-off *:after {
+  animation: none !important;
+  transition: none !important;
+}

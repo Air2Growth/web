@@ -1,0 +1,900 @@
+/* Produkt — Citron Hardware Studio.
+   Scope: body[data-page="produkt"] only. Palette EXACT: forest #123D2B,
+   leaf #36CF73, citron #DAF52F, cobalt #284AE8, mist #EFF9F1, white #FFFFFF.
+   Type: Barlow Condensed 700 display, Open Sans body. One focal device: the
+   white CAD specimen card on citron. Everything else stays quiet mist/white.
+   No photo-overlay hero, no gradient washes, no all-caps labels. */
+
+body[data-page="produkt"] {
+  --forest: #123d2b;
+  --leaf: #36cf73;
+  --citron: #daf52f;
+  --cobalt: #284ae8;
+  --mist: #eff9f1;
+  --white: #ffffff;
+  --pd-display: "Barlow Condensed", "Arial Narrow", sans-serif;
+  --pd-ink: #123d2b;
+  --pd-line: #123d2b;
+  background: var(--mist);
+  color: var(--forest);
+}
+
+/* ---------- Studio hero: split specimen, no photo ---------- */
+
+body[data-page="produkt"] .page-intro.subpage-hero {
+  display: block;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: var(--citron);
+  color: var(--forest);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Drafting-grid device: hard-stop dots only, no gradient wash. */
+body[data-page="produkt"] .page-intro.subpage-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(18, 61, 43, 0.16) 0 1.4px, transparent 1.5px) 0 0 / 26px 26px;
+  pointer-events: none;
+}
+
+body[data-page="produkt"] .subpage-hero-image {
+  display: none;
+}
+
+body[data-page="produkt"] .subpage-hero-inner {
+  display: block;
+  padding: 0;
+  min-height: 0;
+}
+
+body[data-page="produkt"] .pd-studio-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.12fr 0.88fr;
+  gap: clamp(24px, 4vw, 56px);
+  align-items: end;
+  padding-block: clamp(36px, 5vw, 72px) clamp(36px, 5vw, 72px);
+}
+
+body[data-page="produkt"] .pd-type {
+  min-width: 0;
+}
+
+body[data-page="produkt"] .page-label {
+  display: inline-block;
+  margin: 0 0 18px;
+  padding: 8px 16px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--forest);
+  background: var(--white);
+  border: 2px solid var(--forest);
+  border-radius: 999px;
+}
+
+body[data-page="produkt"] .subpage-hero h1 {
+  font-family: var(--pd-display);
+  font-weight: 700;
+  font-size: clamp(68px, 9.2vw, 152px);
+  line-height: 0.92;
+  letter-spacing: -0.015em;
+  color: var(--forest);
+  margin: 0;
+  max-width: 10ch;
+  text-wrap: balance;
+}
+
+body[data-page="produkt"] .subpage-hero .page-lead {
+  margin: 22px 0 0;
+  font-size: clamp(16px, 1.8vw, 20px);
+  line-height: 1.6;
+  color: var(--forest);
+  max-width: 34ch;
+  font-weight: 700;
+}
+
+body[data-page="produkt"] .pd-scroll-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 26px;
+  min-height: 44px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--white);
+  background: var(--forest);
+  border: 2px solid var(--forest);
+  border-radius: 12px;
+  padding: 10px 20px;
+}
+
+body[data-page="produkt"] .pd-scroll-hint:hover {
+  background: var(--cobalt);
+  border-color: var(--cobalt);
+}
+
+/* Hero media: the actual current-machine CAD as the focal object. */
+body[data-page="produkt"] .pd-hero-media {
+  min-width: 0;
+  display: grid;
+  gap: 12px;
+  align-content: end;
+}
+
+body[data-page="produkt"] .pd-specimen {
+  margin: 0;
+  background: var(--white);
+  border: 2px solid var(--forest);
+  border-radius: 18px;
+  padding: 14px 14px 0;
+  overflow: hidden;
+  position: relative;
+}
+
+body[data-page="produkt"] .pd-specimen-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 1;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--white);
+  background: var(--forest);
+  border-radius: 999px;
+  padding: 8px 16px;
+}
+
+body[data-page="produkt"] .pd-specimen img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: contain;
+  background: var(--white);
+}
+
+body[data-page="produkt"] .pd-specimen figcaption {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--forest);
+  border-top: 2px solid var(--forest);
+  margin: 12px -14px 0;
+  padding: 10px 18px 14px;
+}
+
+body[data-page="produkt"] .pd-fieldnote {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--white);
+  background: var(--forest);
+  border: 2px solid var(--forest);
+  border-radius: 14px;
+  padding: 12px 18px 12px 16px;
+  border-left: 8px solid var(--leaf);
+}
+
+body[data-page="produkt"] .pd-modular {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--forest);
+}
+
+body[data-page="produkt"] .pd-modular strong {
+  font-family: var(--pd-display);
+  font-weight: 700;
+  font-size: 22px;
+  letter-spacing: -0.01em;
+  margin-right: 10px;
+}
+
+/* ---------- Machine bench: CAD specimen card on citron ---------- */
+
+body[data-page="produkt"] .scroll-scene.model-scene {
+  background: var(--citron);
+  margin: 0;
+  padding: 0 0 clamp(40px, 5vw, 72px);
+}
+
+body[data-page="produkt"] .scene-sticky {
+  padding-block: clamp(24px, 3.5vw, 44px) 0;
+}
+
+body[data-page="produkt"] .scene-heading h2 {
+  font-family: var(--pd-display);
+  font-weight: 700;
+  font-size: clamp(44px, 5vw, 76px);
+  line-height: 0.98;
+  letter-spacing: -0.015em;
+  color: var(--forest);
+}
+
+body[data-page="produkt"] .scroll-cue {
+  font-size: 13px;
+  color: var(--forest);
+}
+
+body[data-page="produkt"] .scene-layout {
+  align-items: start;
+}
+
+/* The one memorable object: white specimen card, forest frame. */
+body[data-page="produkt"] .scene-figure {
+  background: var(--white);
+  border: 2px solid var(--forest);
+  border-radius: 22px;
+  padding: clamp(18px, 2.6vw, 30px) clamp(16px, 2.4vw, 28px) clamp(16px, 2.2vw, 24px);
+  position: relative;
+}
+
+body[data-page="produkt"] .scene-figure::after {
+  content: "Massstab frei · Entwurf";
+  position: absolute;
+  right: 18px;
+  bottom: 12px;
+  font-size: 11px;
+  color: var(--forest);
+  opacity: 0.65;
+}
+
+body[data-page="produkt"] .model-stage {
+  max-width: 560px;
+}
+
+body[data-page="produkt"] .model-label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--white);
+  background: var(--forest);
+  border-radius: 999px;
+  padding: 8px 16px;
+}
+
+body[data-page="produkt"] .model-angle {
+  font-weight: 700;
+  color: var(--cobalt);
+  font-size: 14px;
+}
+
+body[data-page="produkt"] .scene-figure figcaption {
+  text-align: left;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--forest);
+  margin-top: 12px;
+  border-top: 2px solid var(--forest);
+  padding-top: 10px;
+}
+
+body[data-page="produkt"] .model-range-label {
+  max-width: 340px;
+  margin: 14px 0 0;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--forest);
+}
+
+body[data-page="produkt"] .model-range {
+  accent-color: var(--cobalt);
+  min-height: 44px;
+}
+
+/* Chapter bench: quiet white ledger cards beside the specimen. */
+body[data-page="produkt"] .scene-chapter {
+  background: var(--white);
+  border: 2px solid var(--forest);
+  border-radius: 16px;
+  padding: 20px 22px;
+  margin-bottom: 14px;
+}
+
+body[data-page="produkt"] .chapter-index {
+  color: var(--cobalt);
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+body[data-page="produkt"] .scene-chapter h3 {
+  font-family: var(--pd-display);
+  font-weight: 700;
+  font-size: clamp(30px, 3vw, 42px);
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: var(--forest);
+  margin: 0 0 10px;
+}
+
+body[data-page="produkt"] .scene-chapter p {
+  color: var(--forest);
+  font-size: 15px;
+  max-width: 40ch;
+}
+
+body[data-page="produkt"] .chapter-controls button {
+  height: 44px;
+  min-width: 44px;
+  border: 2px solid var(--forest);
+  color: var(--forest);
+  font-weight: 700;
+}
+
+body[data-page="produkt"] .chapter-controls button[aria-pressed="true"] {
+  background: var(--forest);
+  color: var(--white);
+  border-color: var(--forest);
+}
+
+body[data-page="produkt"] .scene-skip {
+  color: var(--cobalt);
+  font-weight: 700;
+}
+
+body[data-page="produkt"] .scene-progress {
+  background: rgba(18, 61, 43, 0.18);
+}
+
+body[data-page="produkt"] .scene-progress span {
+  background: var(--cobalt);
+}
+
+/* ---------- Pinned-fit: keep heading + CAD figure/caption/range + chapter
+   controls inside the 100svh sticky viewport (normal motion only).
+   Root cause: `body[data-page="produkt"] .model-stage{max-width:560px}`
+   (0,2,1) outranks `scroll.css:.has-scroll-scenes .model-stage
+   {max-width:min(540px,100svh-260px)}` (0,2,0), so the square CAD stage
+   plus taller Barlow H2 and figure/chapter padding overflow the pinned
+   900px viewport — caption barely fits, range slider drops below the fold
+   (produkt-normal-0.45.png). Scoped `html.has-scroll-scenes` (0,3,2) wins
+   without touching scroll.css. Reduced-motion has no has-scroll-scenes
+   class, phones need min-width:761px, so both stay on full content. */
+@media (min-width: 761px) {
+  html.has-scroll-scenes body[data-page="produkt"] .scene-sticky {
+    padding-block: clamp(16px, 2.5vw, 32px) 0;
+  }
+
+  html.has-scroll-scenes body[data-page="produkt"] .scene-heading {
+    gap: 16px;
+    margin-bottom: 12px;
+  }
+
+  html.has-scroll-scenes body[data-page="produkt"] .scene-heading h2 {
+    font-size: clamp(36px, 3.4vw, 56px);
+    line-height: 1;
+  }
+
+  html.has-scroll-scenes body[data-page="produkt"] .scene-layout {
+    gap: clamp(24px, 3vw, 48px);
+    align-items: center;
+    flex: 1 1 auto;
+    min-height: 0;
+    max-height: none;
+  }
+
+  html.has-scroll-scenes body[data-page="produkt"] .scene-figure {
+    padding: 16px 16px 12px;
+    min-width: 0;
+  }
+
+  html.has-scroll-scenes body[data-page="produkt"] .model-stage {
+    width: 100%;
+    max-width: min(440px, calc(100svh - 400px));
+    margin-inline: auto;
+  }
+
+  html.has-scroll-scenes body[data-page="produkt"] .scene-figure figcaption {
+    margin-top: 8px;
+    padding-top: 8px;
+  }
+
+  html.has-scroll-scenes body[data-page="produkt"] .model-range-label {
+    margin: 10px 0 0;
+  }
+
+  html.has-scroll-scenes body[data-page="produkt"] .scene-chapter {
+    padding: 16px 18px;
+    margin-bottom: 10px;
+  }
+
+  html.has-scroll-scenes body[data-page="produkt"] .scene-chapter h3 {
+    font-size: clamp(26px, 2.4vw, 34px);
+    margin-bottom: 8px;
+  }
+
+  html.has-scroll-scenes body[data-page="produkt"] .scene-chapter p {
+    font-size: 15px;
+  }
+
+  html.has-scroll-scenes body[data-page="produkt"] .chapter-controls {
+    margin-top: 14px;
+  }
+
+  html.has-scroll-scenes body[data-page="produkt"] .scene-progress {
+    margin-top: 12px;
+  }
+}
+
+/* Short viewports (768/700): tighten further, keep 44px controls + readable image. */
+@media (min-width: 761px) and (max-height: 800px) {
+  html.has-scroll-scenes body[data-page="produkt"] .scene-sticky {
+    padding-block: 12px 0;
+  }
+
+  html.has-scroll-scenes body[data-page="produkt"] .scene-heading {
+    margin-bottom: 8px;
+  }
+
+  html.has-scroll-scenes body[data-page="produkt"] .scene-heading h2 {
+    font-size: clamp(30px, 3vw, 40px);
+  }
+
+  html.has-scroll-scenes body[data-page="produkt"] .model-stage {
+    max-width: min(400px, calc(100svh - 360px));
+  }
+
+  html.has-scroll-scenes body[data-page="produkt"] .scene-figure {
+    padding: 12px 12px 10px;
+  }
+
+  html.has-scroll-scenes body[data-page="produkt"] .scene-chapter {
+    padding: 12px 16px;
+    margin-bottom: 8px;
+  }
+
+  html.has-scroll-scenes body[data-page="produkt"] .scene-chapter h3 {
+    font-size: 28px;
+    margin-bottom: 6px;
+  }
+
+  html.has-scroll-scenes body[data-page="produkt"] .chapter-controls {
+    margin-top: 10px;
+  }
+
+  html.has-scroll-scenes body[data-page="produkt"] .scene-progress {
+    margin-top: 10px;
+  }
+}
+
+/* ---------- Module board: A/B/C/D with distinct treatments ---------- */
+
+body[data-page="produkt"] .machine-anatomy {
+  background: var(--mist);
+  border-top: 4px solid var(--forest);
+  padding-block: clamp(48px, 6vw, 72px);
+}
+
+body[data-page="produkt"] .graphic-heading h2 {
+  font-family: var(--pd-display);
+  font-weight: 700;
+  font-size: clamp(44px, 4.8vw, 72px);
+  line-height: 0.98;
+  letter-spacing: -0.015em;
+}
+
+body[data-page="produkt"] .graphic-heading span {
+  font-size: 13px;
+  color: var(--forest);
+  border: 2px solid var(--forest);
+  border-radius: 999px;
+  padding: 6px 14px;
+  display: inline-block;
+  margin-top: 14px;
+}
+
+body[data-page="produkt"] .assembly-map {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  background: var(--mist);
+  border: 2px solid var(--forest);
+  border-radius: 22px;
+  padding: clamp(14px, 2vw, 22px);
+  overflow: hidden;
+}
+
+body[data-page="produkt"] .assembly-map svg {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  height: auto;
+  margin-inline: auto;
+}
+
+/* Desktop default: schematic only. This scoped display:none (0,2,1) must
+   outrank the expressive card geometry below so exactly one representation
+   is visible above the tablet breakpoint. Base mobile.css already hides the
+   map, but without this the card rules would re-show it at every size. */
+body[data-page="produkt"] .mobile-module-map {
+  display: none;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+}
+
+body[data-page="produkt"] .mobile-module-map div {
+  min-width: 0;
+  overflow-wrap: break-word;
+  border: 2px solid var(--forest);
+  padding: 14px 16px;
+  background: var(--white);
+}
+
+body[data-page="produkt"] .mobile-module-map div:nth-child(1) {
+  border-radius: 6px;
+}
+
+body[data-page="produkt"] .mobile-module-map div:nth-child(2) {
+  border-radius: 60px 60px 14px 14px;
+  background: var(--citron);
+}
+
+body[data-page="produkt"] .mobile-module-map div:nth-child(3) {
+  border-radius: 14px 14px 60px 60px;
+  background: var(--leaf);
+}
+
+body[data-page="produkt"] .mobile-module-map div:nth-child(4) {
+  grid-column: 1 / -1;
+  border-radius: 14px;
+  background: var(--forest);
+  color: var(--white);
+  border-color: var(--forest);
+}
+
+body[data-page="produkt"] .mobile-module-map b {
+  display: inline-grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--cobalt);
+  color: var(--white);
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+body[data-page="produkt"] .mobile-module-map div:nth-child(4) b {
+  background: var(--citron);
+  color: var(--forest);
+}
+
+body[data-page="produkt"] .mobile-module-map strong {
+  display: block;
+  font-size: 15px;
+  line-height: 1.35;
+}
+
+body[data-page="produkt"] .mobile-module-map span {
+  display: block;
+  font-size: 13px;
+  line-height: 1.5;
+  margin-top: 2px;
+  opacity: 0.85;
+}
+
+/* D card (forest) subtitle: explicit white beats mobile.css
+   `.mobile-module-map span{color:#4f5b52}` (direct rule beats inheritance),
+   restoring contrast on the dark card. Same for the title. */
+body[data-page="produkt"] .mobile-module-map div:nth-child(4) strong {
+  color: var(--white);
+}
+
+body[data-page="produkt"] .mobile-module-map div:nth-child(4) span {
+  color: var(--white);
+  opacity: 0.82;
+}
+
+/* ---------- Field ledger: facts, FAQ, growing inset ---------- */
+
+body[data-page="produkt"] #modul-alltag {
+  background: var(--mist);
+  border-top: 4px solid var(--forest);
+  padding-block: clamp(48px, 6vw, 72px);
+}
+
+body[data-page="produkt"] .detail-heading h2 {
+  font-family: var(--pd-display);
+  font-weight: 700;
+  font-size: clamp(44px, 4.8vw, 72px);
+  line-height: 0.98;
+  letter-spacing: -0.015em;
+}
+
+body[data-page="produkt"] .detail-heading p {
+  font-size: 16px;
+  color: var(--forest);
+  font-weight: 700;
+  border-left: 6px solid var(--leaf);
+  padding-left: 16px;
+}
+
+body[data-page="produkt"] .module-facts {
+  border: 0;
+  padding: 0;
+  margin: 30px 0;
+  gap: 12px;
+}
+
+body[data-page="produkt"] .module-facts > div {
+  border: 2px solid var(--forest);
+  border-radius: 16px;
+  padding: 20px 22px;
+  background: var(--white);
+}
+
+body[data-page="produkt"] .module-facts > div:nth-child(2) {
+  background: var(--citron);
+}
+
+body[data-page="produkt"] .module-facts > div:nth-child(3) {
+  background: var(--forest);
+  color: var(--white);
+  border-color: var(--forest);
+}
+
+body[data-page="produkt"] .module-facts > div:nth-child(3) span {
+  color: var(--white);
+}
+
+body[data-page="produkt"] .module-facts strong {
+  font-family: var(--pd-display);
+  font-weight: 700;
+  font-size: clamp(40px, 4.4vw, 62px);
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
+
+body[data-page="produkt"] .module-facts span {
+  color: var(--forest);
+  font-size: 14px;
+  margin-top: 6px;
+}
+
+body[data-page="produkt"] .harvest-dots {
+  color: var(--cobalt);
+}
+
+body[data-page="produkt"] .detail-note {
+  background: var(--white);
+  border: 2px solid var(--forest);
+  border-left: 8px solid var(--cobalt);
+  border-radius: 0 16px 16px 0;
+  color: var(--forest);
+  font-size: 13px;
+}
+
+body[data-page="produkt"] .faq-stack {
+  margin: 26px 0;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  overflow: visible;
+}
+
+body[data-page="produkt"] .visual-details.faq-item {
+  background: var(--white);
+  border: 2px solid var(--forest);
+  border-radius: 16px;
+  padding: 6px 22px;
+  max-width: none;
+}
+
+body[data-page="produkt"] .faq-stack .faq-item summary {
+  padding: 14px 2px;
+  min-height: 44px;
+}
+
+body[data-page="produkt"] .faq-question {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--forest);
+}
+
+body[data-page="produkt"] .faq-answer p {
+  color: var(--forest);
+  font-size: 15px;
+  max-width: 70ch;
+}
+
+body[data-page="produkt"] main .button {
+  background: var(--cobalt);
+  border: 2px solid var(--forest);
+  color: var(--white);
+  border-radius: 12px;
+}
+
+body[data-page="produkt"] main .button:hover {
+  background: var(--forest);
+  border-color: var(--forest);
+  transform: translateY(-2px);
+}
+
+/* Growing photo becomes a small field-note inset, not a hero. */
+body[data-page="produkt"] .editorial-photo {
+  background: var(--white);
+  border: 2px solid var(--forest);
+  border-radius: 18px;
+  padding: 14px 14px 18px;
+  max-width: 760px;
+}
+
+body[data-page="produkt"] .editorial-photo img {
+  border-radius: 10px;
+  aspect-ratio: 16 / 9;
+}
+
+body[data-page="produkt"] .editorial-photo figcaption {
+  font-family: var(--pd-display);
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  margin-top: 12px;
+}
+
+/* ---------- Onward link ---------- */
+
+body[data-page="produkt"] .page-next a {
+  background: var(--white);
+  border: 2px solid var(--forest);
+  border-radius: 18px;
+  padding: 24px 28px;
+}
+
+body[data-page="produkt"] .page-next strong {
+  font-family: var(--pd-display);
+  font-weight: 700;
+  font-size: clamp(30px, 3.6vw, 50px);
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+
+body[data-page="produkt"] .page-next a > span:first-child {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--cobalt);
+}
+
+body[data-page="produkt"] .page-next a:hover {
+  background: var(--citron);
+}
+
+body[data-page="produkt"] .page-next a:hover strong {
+  color: var(--forest);
+}
+
+/* ---------- Focus, motion, responsive ---------- */
+
+body[data-page="produkt"] :is(a, button, input, summary, [tabindex]):focus-visible {
+  outline: 3px solid var(--cobalt);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body[data-page="produkt"] *,
+  body[data-page="produkt"] *::before,
+  body[data-page="produkt"] *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+body[data-page="produkt"].motion-off *,
+body[data-page="produkt"].motion-off *::before,
+body[data-page="produkt"].motion-off *::after {
+  animation: none !important;
+  transition: none !important;
+}
+
+@media (max-width: 1020px) {
+  body[data-page="produkt"] .pd-studio-grid {
+    grid-template-columns: 1fr;
+  }
+
+  body[data-page="produkt"] .pd-hero-media {
+    max-width: 640px;
+  }
+
+  body[data-page="produkt"] .assembly-map svg {
+    min-width: 0;
+  }
+}
+
+/* Tablet + phones (≤960px): deliberate card map only, schematic hidden.
+   960px chosen over the 760px shared-system default because the 1080-unit
+   SVG scales to ~9–10px effective labels at 768px — below the 12px phone
+   minimum — while cards stay at 14/13px. 1024px+ keeps the schematic at
+   ~12–14px+ effective. Scoped display rules (0,2,1+) outrank shared
+   mobile.css/graphics.css without touching them. */
+@media (max-width: 960px) {
+  body[data-page="produkt"] .assembly-map {
+    padding: 16px 14px;
+    overflow: hidden;
+  }
+
+  body[data-page="produkt"] .assembly-map svg {
+    display: none;
+    min-width: 0;
+  }
+
+  body[data-page="produkt"] .mobile-module-map {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    margin: 0;
+  }
+
+  body[data-page="produkt"] .mobile-module-map div:nth-child(3),
+  body[data-page="produkt"] .mobile-module-map div:nth-child(4) {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 760px) {
+  body[data-page="produkt"] .pd-studio-grid {
+    padding-block: 30px 26px;
+  }
+
+  body[data-page="produkt"] .subpage-hero h1 {
+    font-size: clamp(58px, 17vw, 96px);
+  }
+
+  body[data-page="produkt"] .pd-hero-media {
+    max-width: none;
+  }
+
+  body[data-page="produkt"] .scene-figure::after {
+    display: none;
+  }
+
+  body[data-page="produkt"] .module-facts {
+    grid-template-columns: 1fr;
+  }
+
+  body[data-page="produkt"] .editorial-photo {
+    margin-inline: 0;
+  }
+}
+
+/* Narrow phones: single-column cards (~300px at 390, ~233px at 320 need
+   full width for DE strings like "Wasser & Nährstoffe"); 2-col above. */
+@media (max-width: 600px) {
+  body[data-page="produkt"] .mobile-module-map {
+    grid-template-columns: 1fr;
+  }
+
+  body[data-page="produkt"] .mobile-module-map div:nth-child(4) {
+    grid-column: auto;
+  }
+}
+
+@media (max-width: 380px) {
+  body[data-page="produkt"] .subpage-hero h1 {
+    font-size: 54px;
+  }
+
+  body[data-page="produkt"] .pd-scroll-hint {
+    width: 100%;
+    justify-content: center;
+  }
+
+  body[data-page="produkt"] .scene-figure {
+    border-radius: 16px;
+    padding: 14px 12px 16px;
+  }
+}

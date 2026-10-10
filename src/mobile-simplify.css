@@ -1,0 +1,444 @@
+/* One explanation per subject on phones. Optional content uses native disclosures. */
+.mobile-disclosure > summary {
+  display: none;
+}
+.mobile-disclosure,
+.mobile-disclosure-content {
+  display: contents;
+}
+.mobile-form-intro {
+  display: none;
+}
+.contact-page-copy {
+  order: 1;
+}
+.contact-form-panel {
+  order: 2;
+}
+@media (min-width: 761px) {
+  .mobile-disclosure-content > .vp-figure:first-child {
+    margin-top: 28px;
+  }
+}
+
+@media (max-width: 760px) {
+  :root {
+    --section-space: 32px;
+  }
+  /* Remove ornamental repeats; their facts are retained in the primary sections. */
+  .editorial-photo,
+  .xp-constellation,
+  .xp-band,
+  .xp-growth,
+  .hero .orbit,
+  .hero .image-caption,
+  .hero .image-coordinate,
+  .hero .hero-footnote,
+  .hero .hero-molecule,
+  [data-page="index"] .recognition,
+  .carbon-scene .scene-figure,
+  .chapter-controls,
+  .scene-progress,
+  .model-scene .scene-copy,
+  .harvest-dots,
+  [data-page="technologie"] .resource-equation,
+  [data-page="technologie"] .detail-heading,
+  .process-tabs small,
+  .process-tabs b,
+  .process-waves,
+  [data-page="vorteile"] .detail-heading,
+  [data-page="vorteile"] .vp-lede,
+  [data-page="vorteile"] .vp-figure:has(.vp-cost),
+  [data-page="vorteile"] .vp-flow,
+  [data-page="vorteile"] .xp-sproutline,
+  [data-page="vorteile"] .economy-copy > .text-link,
+  [data-page="team"] .team-image,
+  [data-page="team"] .team-copy > .eyebrow,
+  [data-page="team"] .team-copy > h2,
+  [data-page="team"] .team-copy > p + p,
+  [data-page="team"] .milestones,
+  [data-page="team"] .recognition,
+  [data-page="team"] .detail-heading,
+  [data-page="team"] .vp-lede,
+  [data-page="team"] .vp-roles,
+  [data-page="team"] .xp-cycle,
+  [data-page="investoren"] .roadmap-list,
+  [data-page="investoren"] .roadmap-copy,
+  [data-page="investoren"] .detail-heading,
+  [data-page="investoren"] .vp-lede,
+  [data-page="kontakt"] .contact-page-copy > .eyebrow,
+  [data-page="kontakt"] .contact-page-copy > h2,
+  [data-page="kontakt"] .contact-page-copy > p,
+  [data-page="kontakt"] .contact-address,
+  [data-page="kontakt"] .vp-lede,
+  [data-page="kontakt"] .vp-path,
+  [data-page="kontakt"] .detail-heading,
+  .home-directory .section-heading > p,
+  .directory-link > span:first-child > span,
+  .page-next a > span:first-child,
+  .footer-top > span {
+    display: none;
+  }
+  .page-intro.subpage-hero::before {
+    background: linear-gradient(90deg, #032226ed, #032226bf 65%, #03222680);
+  }
+  [data-page="team"] .page-intro.subpage-hero::before {
+    background: linear-gradient(90deg, #181533ed, #181533bf 65%, #18153380);
+  }
+  .subpage-hero .subpage-hero-inner {
+    min-height: 0;
+    padding-block: 36px 44px;
+    gap: 20px;
+  }
+  .subpage-hero h1 {
+    font-size: clamp(43px, 12vw, 68px);
+  }
+  .subpage-hero .page-label {
+    margin-bottom: 12px;
+  }
+  .subpage-hero .page-lead {
+    font-size: 15px;
+    line-height: 1.65;
+  }
+  .hero.wrap {
+    min-height: 0;
+    padding: 36px 24px 40px;
+    border-radius: 16px 16px 36px 16px;
+  }
+  .hero h1 {
+    font-size: clamp(60px, 17vw, 100px);
+    margin-block: 22px;
+  }
+  .hero-visual::after {
+    background: linear-gradient(110deg, #073c43e8, #073c43a6);
+  }
+  .hero-actions {
+    gap: 16px;
+  }
+  .scroll-scene {
+    margin-block: 24px 0;
+    border-radius: 28px 0 28px 0;
+  }
+  .scene-sticky {
+    position: static;
+    padding-block: 28px;
+  }
+  .scene-heading h2 {
+    font-size: 38px;
+  }
+  .scene-chapters {
+    gap: 0;
+  }
+  .scene-chapter {
+    padding-block: 18px;
+  }
+  .scene-chapter:last-child {
+    padding-bottom: 0;
+  }
+  .scene-chapter h3 {
+    font-size: 27px;
+    margin-bottom: 8px;
+  }
+  .model-stage {
+    max-width: 300px;
+  }
+  .module-facts {
+    gap: 0;
+  }
+  .module-facts > div,
+  .module-facts > div:first-child {
+    display: grid;
+    grid-template-columns: 112px minmax(0, 1fr);
+    align-items: center;
+    gap: 12px;
+    padding-block: 16px;
+  }
+  .module-facts strong {
+    font-family: var(--display);
+    font-size: 34px;
+    line-height: 1.1;
+  }
+  .technology.section {
+    margin-top: 0;
+  }
+  .technology .section-heading > p {
+    font-size: 15px;
+  }
+  .process-layout {
+    gap: 20px;
+  }
+  .process-tabs {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
+  }
+  .process-tabs button {
+    padding: 12px 10px;
+    min-height: 52px;
+    gap: 8px;
+    border-radius: 8px;
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+  .process-tabs button > div {
+    font-size: 13px;
+  }
+  .process-tabs button > span {
+    font-size: 12px;
+  }
+  .process-diagram {
+    min-height: 100px;
+    height: 100px;
+    padding: 16px 8px;
+  }
+  .process-diagram .reactor {
+    width: 64px;
+    height: 64px;
+  }
+  .process-diagram .reactor-label {
+    top: 22px;
+    font-size: 20px;
+  }
+  .process-diagram .reactor-label span {
+    display: none;
+  }
+  .process-panel .panel-bottom {
+    padding: 24px 20px;
+  }
+  .panel-bottom h3 {
+    font-size: 32px;
+  }
+  .detail-section .detail-note {
+    margin-top: 20px;
+    padding: 16px;
+  }
+  .detail-section .faq-stack {
+    margin-block: 20px;
+  }
+  .vp-figure {
+    padding: 20px 16px;
+  }
+  .vp-potential {
+    gap: 20px;
+  }
+  .vp-potential > div {
+    padding: 16px 0;
+  }
+  .vp-potential strong {
+    font-size: 44px;
+  }
+  .vp-cost .vp-track {
+    display: none;
+  }
+  .vp-cost li {
+    grid-template-columns: minmax(0, 1fr) auto;
+    padding-block: 12px;
+  }
+  .vp-cost strong {
+    font-size: 30px;
+  }
+  .team-names {
+    gap: 0;
+    margin-top: 24px;
+  }
+  .team-names > div {
+    padding-block: 14px;
+  }
+  [data-page="team"] .detail-section {
+    padding-top: 0;
+  }
+  [data-page="investoren"] .roadmap-section {
+    display: block;
+    padding-block: 0;
+  }
+  [data-page="investoren"] .detail-section {
+    padding-top: 20px;
+  }
+  .vp-lane li {
+    padding-bottom: 20px;
+  }
+  .contact-form-panel {
+    order: 1;
+    padding: 24px 16px;
+    border-radius: 16px;
+  }
+  .contact-page-copy {
+    order: 2;
+  }
+  .mobile-form-intro {
+    display: block;
+    font-size: 14px;
+    line-height: 1.65;
+    margin: -8px 0 20px;
+  }
+  .contact-location {
+    margin-top: 16px;
+    padding-top: 16px;
+  }
+  .faq .faq-introduction {
+    padding: 0;
+    border-radius: 0;
+    background: transparent;
+  }
+  .faq-introduction > .eyebrow,
+  .faq-introduction > p {
+    display: none;
+  }
+  .faq .faq-introduction h2 {
+    margin: 0;
+    font-size: 38px;
+  }
+  .faq-stack .faq-item summary {
+    padding: 18px 16px;
+    min-height: 72px;
+    gap: 16px;
+    font-size: 15px;
+  }
+  .faq-stack .faq-item .faq-icon {
+    width: 32px;
+    height: 32px;
+    flex-basis: 32px;
+  }
+  .faq-stack .faq-item .faq-answer {
+    padding-inline: 16px;
+  }
+  .mobile-disclosure {
+    display: block;
+    border: 0;
+    border-block: 1px solid var(--line);
+    margin: 0;
+  }
+  .mobile-disclosure > summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    min-height: 72px;
+    padding-block: 16px;
+    list-style: none;
+    cursor: pointer;
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 1.1;
+    color: var(--green);
+  }
+  .mobile-disclosure > summary > span {
+    font: inherit;
+    color: inherit;
+    float: none;
+    transform: none;
+  }
+  .mobile-disclosure > summary::-webkit-details-marker {
+    display: none;
+  }
+  .mobile-disclosure > summary:focus-visible {
+    outline: 3px solid var(--violet);
+    outline-offset: 4px;
+  }
+  .mobile-disclosure > summary .faq-icon {
+    position: relative;
+    flex: 0 0 32px;
+    height: 32px;
+    border: 1px solid currentColor;
+    border-radius: 50%;
+  }
+  .mobile-disclosure[open] > summary .faq-icon::after {
+    opacity: 0;
+  }
+  .mobile-disclosure-content {
+    display: block;
+    padding-bottom: 20px;
+  }
+  .mobile-disclosure-content .graphic-heading,
+  .mobile-disclosure-content .vp-kicker {
+    display: none;
+  }
+  .mobile-disclosure-content .vp-figure {
+    margin-top: 0;
+  }
+  .micro-lab.section {
+    padding-bottom: 0;
+  }
+  .home-directory .section-heading h2 {
+    font-size: 38px;
+  }
+  .home-directory .directory-grid {
+    display: block;
+    border-top: 1px solid var(--line);
+  }
+  .home-directory .directory-link {
+    padding: 18px 0;
+    min-height: 64px;
+    border-radius: 0;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    background: transparent;
+    gap: 16px;
+  }
+  .directory-link strong {
+    font-size: 26px;
+  }
+  .directory-link > span:last-child {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+  }
+  .contact {
+    padding-block: 32px;
+  }
+  .contact .eyebrow,
+  .contact-bottom > p,
+  .contact-decoration {
+    display: none;
+  }
+  .contact h2 {
+    font-size: 44px;
+    margin-block: 0 24px;
+  }
+  .contact-bottom {
+    margin-top: 0;
+  }
+  .page-next a {
+    padding: 20px;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 16px;
+    border-radius: 16px;
+  }
+  .page-next strong {
+    font-size: 26px;
+  }
+  .footer-top {
+    gap: 12px;
+  }
+  .footer-top > .brand {
+    font-size: 28px;
+  }
+  .footer-pages {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0 8px;
+    margin-block: 16px 0;
+  }
+  .footer-pages a {
+    padding-block: 12px;
+  }
+  .footer-bottom {
+    margin-top: 16px;
+    padding-top: 16px;
+    gap: 12px;
+  }
+  /* Phones keep interaction feedback, without continuous ornamental motion. */
+  .hero-visual > img,
+  .hero-copy h1,
+  .carbon-type,
+  .live-dot,
+  .micro-cell,
+  .micro-carbon,
+  .plant-orbit {
+    animation: none;
+  }
+  [data-reveal].reveal-pending {
+    opacity: 1;
+    transform: none;
+  }
+}
