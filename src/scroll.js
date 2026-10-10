@@ -176,7 +176,9 @@ export function initScrollStories(selectStep) {
         scrollY +
         tech.getBoundingClientRect().top +
         travel * ((event.detail + 0.1) / 6),
-      behavior: "smooth",
+      // Keep the explicit choice selected as the pinned story advances.
+      // Smooth scrolling would render every intermediate stage instead.
+      behavior: "instant",
     });
   });
   const observer = new IntersectionObserver(

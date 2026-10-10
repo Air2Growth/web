@@ -598,6 +598,19 @@ body[data-page="produkt"] .mobile-module-map div:nth-child(4) span {
   opacity: 0.82;
 }
 
+/* Explicit forest keeps subtitles legible on white, citron and leaf cards,
+   overriding the shared mobile text color. */
+body[data-page="produkt"] .mobile-module-map div:nth-child(1) span,
+body[data-page="produkt"] .mobile-module-map div:nth-child(2) span,
+body[data-page="produkt"] .mobile-module-map div:nth-child(3) span {
+  color: var(--forest);
+}
+
+/* The saturated leaf card needs full opacity; size preserves hierarchy. */
+body[data-page="produkt"] .mobile-module-map div:nth-child(3) span {
+  opacity: 1;
+}
+
 /* ---------- Field ledger: facts, FAQ, growing inset ---------- */
 
 body[data-page="produkt"] #modul-alltag {

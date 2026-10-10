@@ -19,7 +19,7 @@ body[data-page="investoren"] {
   font-family: "Open Sans", Arial, sans-serif;
 }
 
-body[data-page="investoren"] :is(h1, h2, h3, .page-next strong, .roadmap-list strong, .vp-lane strong, .vp-potential strong, .vp-cost strong) {
+body[data-page="investoren"] :is(h1, h2, h3, .page-next strong, .roadmap-list strong, .vp-lane strong, .vp-potential strong, .vp-cost strong, .inv-step strong) {
   font-family: "Barlow Condensed", "Arial Narrow", Arial, sans-serif;
   font-weight: 700;
 }
@@ -56,7 +56,7 @@ body[data-page="investoren"] .subpage-hero-inner {
 
 body[data-page="investoren"] .inv-hero-grid {
   display: grid;
-  grid-template-columns: 1.25fr 0.75fr;
+  grid-template-columns: 1.05fr 0.95fr;
   gap: clamp(24px, 3vw, 48px);
   align-items: center;
 }
@@ -126,7 +126,7 @@ body[data-page="investoren"] .inv-step {
   min-height: 96px;
   min-width: 0;
   overflow-wrap: break-word;
-  padding: 16px 16px 14px;
+  padding: 16px 12px 14px;
   margin: 0;
 }
 
@@ -163,13 +163,17 @@ body[data-page="investoren"] .inv-step span {
 
 body[data-page="investoren"] .inv-step strong {
   display: block;
-  font-size: clamp(21px, 2vw, 30px);
-  line-height: 1.05;
+  font-size: clamp(19px, 1.6vw, 26px);
+  line-height: 1.08;
   letter-spacing: -0.01em;
   color: inherit;
   text-wrap: pretty;
   overflow-wrap: break-word;
-  hyphens: auto;
+  word-break: normal;
+  /* Manual hyphenation: German compounds break only at the authored
+     hyphen (Kunden-/Onboarding) or spaces, never mid-word fragments
+     (Kun-den-Onboar-ding) or mid-brand splits (Air2Gro wth). */
+  hyphens: manual;
 }
 
 body[data-page="investoren"] .inv-step em {
@@ -693,6 +697,14 @@ body[data-page="investoren"] .vp-potential strong small {
   font-family: "Open Sans", Arial, sans-serif;
   font-weight: 400;
   letter-spacing: 0;
+  /* Shared visual-pages.css paints this small muted; pin to the page
+     palette so the qualifier stays legible on both cells. */
+  color: var(--ink-soft);
+}
+
+body[data-page="investoren"] .vp-potential > div:nth-child(2) strong,
+body[data-page="investoren"] .vp-potential > div:nth-child(2) strong small {
+  color: var(--white);
 }
 
 body[data-page="investoren"] .vp-potential span {

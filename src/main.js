@@ -142,6 +142,9 @@ tabs.forEach((tab, index) => {
     if (next !== undefined) {
       event.preventDefault();
       selectStep(next, true);
+      tab.dispatchEvent(
+        new CustomEvent("process-select", { bubbles: true, detail: next }),
+      );
     }
   });
 });

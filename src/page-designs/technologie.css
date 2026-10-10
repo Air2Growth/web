@@ -575,6 +575,13 @@ body[data-page="technologie"] :is(.detail-section, .page-next, .editorial-photo)
     gap: 10px 14px;
     padding: 20px 16px;
   }
+  /* At narrow widths the wrapped trail arrow would start a row on its own
+     (e.g. lone "→" before the output pill at 320px). The diagram is
+     aria-hidden decoration — the step text below carries the meaning —
+     so drop the trail arrow here and let the output pill center below. */
+  body[data-page="technologie"] .process-diagram .flow-arrow--trail {
+    display: none;
+  }
   body[data-page="technologie"] .resource-equation {
     flex-direction: column;
     align-items: stretch;

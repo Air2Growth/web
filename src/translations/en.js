@@ -135,6 +135,9 @@ export default {
   "Produkt & Prototyp | Air2Growth": "Product & prototype | Air2Growth",
   Brotkrumennavigation: "Breadcrumb navigation",
   "Produkt & Prototyp": "Product & prototype",
+  "Zur Anlage": "Explore the system",
+  "CAD-Ansicht der aktuellen Air2Growth-Gesamtanlage":
+    "CAD view of the current complete Air2Growth system",
   "Von der Luft": "From the air",
   "auf Ihren Hof.": "to your farm.",
   "CO₂ filtern. Algen kultivieren. Dünger vor Ort gewinnen.":
@@ -473,7 +476,7 @@ export default {
     "Whether it is a pilot project, product question, partnership or investment: tell us what you have in mind. Your message is prepared in your email app; you then send it yourself.",
   "Air2Growth auf LinkedIn ↗": "Air2Growth on LinkedIn ↗",
   "Entwickelt in München": "Developed in Munich",
-  "81247 München": "81247 Munich",
+  "81247 München": "81247 München",
   "Schreiben Sie uns.": "Write to us.",
   "Worum geht es?": "What is your inquiry about?",
   Pilotprojekt: "Pilot project",
