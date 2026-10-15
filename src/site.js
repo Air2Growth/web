@@ -19,6 +19,13 @@
   var menu = document.getElementById('mobile-menu');
   if (toggle && menu) {
     var closeBtn = menu.querySelector('[data-nav-close]');
+    var menuAnimation = null;
+    var menuClosing = false;
+    var menuMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    var background = Array.from(document.body.children).filter(function (element) {
+      return element !== menu && !['SCRIPT', 'LINK'].includes(element.tagName);
+    });
+    var previousInert = new Map();
     var mq = null;
     try { mq = window.matchMedia('(min-width: 1024px)'); } catch (e) { mq = null; }
     var lastFocus = null;
@@ -33,27 +40,61 @@
       try { document.body.style.overflow = isOpen() ? 'hidden' : ''; } catch (e) {}
     }
     function openMenu() {
-      if (isOpen()) return;
+      if (isOpen() && !menuClosing) return;
+      if (menuAnimation) menuAnimation.cancel();
+      menuClosing = false;
       try { lastFocus = document.activeElement; } catch (e) { lastFocus = null; }
       menu.classList.remove('hidden');
       menu.setAttribute('aria-hidden', 'false');
       try { menu.inert = false; } catch (e) { try { menu.removeAttribute('inert'); } catch (e2) {} }
       toggle.setAttribute('aria-expanded', 'true');
       toggle.setAttribute('aria-label', 'Menü schließen');
+      background.forEach(function (element) {
+        if (!previousInert.has(element)) previousInert.set(element, element.inert);
+        element.inert = true;
+      });
       applyScrollLock();
+      if (!menuMotion.matches && typeof menu.animate === 'function') {
+        menuAnimation = menu.animate(
+          [{ opacity: 0, transform: 'translateY(-10px)' }, { opacity: 1, transform: 'translateY(0)' }],
+          { duration: 220, easing: 'cubic-bezier(.2,.7,.2,1)' }
+        );
+      }
       var target = closeBtn || focusables()[0];
       if (target && target.focus) { try { target.focus(); } catch (e) {} }
     }
     function closeMenu(returnFocus) {
       if (!isOpen()) { applyScrollLock(); return; }
-      menu.classList.add('hidden');
-      menu.setAttribute('aria-hidden', 'true');
-      try { menu.inert = true; } catch (e) { try { menu.setAttribute('inert', ''); } catch (e2) {} }
-      toggle.setAttribute('aria-expanded', 'false');
-      toggle.setAttribute('aria-label', 'Menü öffnen');
-      applyScrollLock();
-      if (returnFocus !== false && toggle.focus) { try { toggle.focus(); } catch (e) {} }
-      else if (returnFocus && returnFocus.focus) { try { returnFocus.focus(); } catch (e) {} }
+      if (menuClosing) return;
+      menuClosing = true;
+      if (menuAnimation) menuAnimation.cancel();
+      function finishClose() {
+        menu.classList.add('hidden');
+        menu.setAttribute('aria-hidden', 'true');
+        menu.inert = true;
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.setAttribute('aria-label', 'Menü öffnen');
+        previousInert.forEach(function (inert, element) { element.inert = inert; });
+        previousInert.clear();
+        menuClosing = false;
+        applyScrollLock();
+        if (returnFocus && typeof returnFocus.focus === 'function') {
+          returnFocus.setAttribute('tabindex', '-1');
+          returnFocus.focus({ preventScroll: true });
+          returnFocus.addEventListener('blur', function () { returnFocus.removeAttribute('tabindex'); }, { once: true });
+        } else if (returnFocus !== false && toggle.focus) {
+          toggle.focus({ preventScroll: true });
+        }
+      }
+      if (!menuMotion.matches && typeof menu.animate === 'function' && !(mq && mq.matches)) {
+        menuAnimation = menu.animate(
+          [{ opacity: 1, transform: 'translateY(0)' }, { opacity: 0, transform: 'translateY(-8px)' }],
+          { duration: 160, easing: 'ease-out' }
+        );
+        menuAnimation.onfinish = finishClose;
+      } else {
+        finishClose();
+      }
     }
     toggle.addEventListener('click', function () {
       if (isOpen()) closeMenu(true);
@@ -61,7 +102,12 @@
     });
     if (closeBtn) closeBtn.addEventListener('click', function () { closeMenu(true); });
     menu.querySelectorAll('a[href]').forEach(function (link) {
-      link.addEventListener('click', function () { closeMenu(false); });
+      link.addEventListener('click', function () {
+        var url = new URL(link.href, location.href);
+        var destination = url.origin === location.origin && url.pathname === location.pathname && url.hash
+          ? document.getElementById(url.hash.slice(1)) : null;
+        closeMenu(destination || false);
+      });
     });
     document.addEventListener('keydown', function (event) {
       if (!isOpen()) return;
@@ -95,15 +141,28 @@
         else if (typeof mq.addListener === 'function') mq.addListener(handleBreakpoint);
       } catch (e) {}
     }
+    menuMotion.addEventListener('change', function (event) {
+      if (event.matches && menuAnimation && menuAnimation.playState === 'running') menuAnimation.finish();
+    });
     try { window.addEventListener('resize', handleBreakpoint); } catch (e) {}
   }
+
+  // Expected validation errors use the server's specific field guidance.
+  document.body.addEventListener('htmx:beforeSwap', function (event) {
+    var detail = event.detail;
+    if (detail && detail.target && detail.target.hasAttribute('data-status') &&
+        detail.xhr && [400, 422].includes(detail.xhr.status)) {
+      detail.shouldSwap = true;
+      detail.isError = false;
+    }
+  });
 
   // htmx: Server-Fehlfragmente (4xx/5xx) sichtbar in der Statusregion zeigen.
   document.body.addEventListener('htmx:responseError', function (event) {
     var target = event.detail && event.detail.target;
     if (target && (target.hasAttribute('data-status') || (target.classList && target.classList.contains('form-status')))) {
       var status = event.detail.xhr ? event.detail.xhr.status : '?';
-      target.innerHTML = '<span class="error">Anfrage fehlgeschlagen (' + status + '). Bitte prüfen Sie die Eingaben.</span>';
+      target.innerHTML = '<span class="error">Die Anfrage konnte nicht verarbeitet werden (' + status + '). Bitte versuchen Sie es erneut oder schreiben Sie an info@air2growth.com.</span>';
     }
   });
 

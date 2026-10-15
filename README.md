@@ -13,6 +13,48 @@
 
 ## Gestaltung (Redesign 15.10.2026)
 
+### Aktuelle Verfeinerung: minimalistische Sektionen
+
+Der Hero behält sein bisheriges Layout mit Landschaftsvideo, Overlay,
+Serifentitel und zwei CTAs; nur die Texte und eine dezente Eintrittsanimation
+wurden angepasst. Die übrigen Sektionen nutzen ruhigere Spalten, weniger
+Kacheln und präzisere deutsche Erklärungen. Die neue, selbst erstellte
+`public/img/system-loop.svg` zeigt das Systemprinzip; eine zweite, inline
+eingebundene SVG erklärt die drei Prozessschritte.
+
+Die einzige Styling-Pipeline bleibt Vite/Tailwind. Ihr Einstieg ist jetzt
+`src/styles.css`: Tailwind-Import, lokal gehostete Open-Sans-Schriftschnitte
+und zentrale Farb-/Schrifttokens. Die Layouts und Zustände bleiben
+Tailwind-Utilities in den Templates; es gibt keine Komponenten-CSS-Dateien.
+Dieser Absatz ersetzt die älteren Hinweise zu direktem CSS-Paketimport
+und dem Verzicht auf `@theme` weiter unten.
+
+`src/experience.js` ergänzt native Details-Elemente um unterbrechbare
+Höhenübergänge, aktualisiert die Prozessgrafik und rechnet die bestehenden
+Modellwerte für 1–8 Module hoch. Ohne JavaScript bleiben die Erklärungen
+und die Werte für ein Modul sichtbar. Die Zahlen sind ausdrücklich
+Entwicklungs-/Modellwerte. `prefers-reduced-motion` verhindert die neuen
+Animationen; es gibt keine laufenden Effekte in den Inhaltssektionen.
+
+Das mobile Menü animiert Öffnen/Schließen, sperrt den Hintergrund per
+`inert`, hält den Tastaturfokus und gibt ihn bei Navigation an den
+Zielabschnitt zurück. Formulare zeigen konkrete Servervalidierungen sowie
+Verbindungsfehler und sperren den Button während einer Anfrage. Kontakt
+und Newsletter bleiben lokale Demos ohne Versand oder Speicherung;
+die Oberfläche macht das vor der Eingabe deutlich.
+
+Die folgenden Gestaltungs- und QA-Notizen beschreiben frühere Stände.
+
+Validierung der Verfeinerung: Produktionsbuild erfolgreich; Browserbreiten
+320/390/768/1024/1440 px ohne horizontalen Überlauf oder defekte Bilder.
+Menü mit Escape/Fokusrückgabe, Prozess mit Tastatur und schnellen
+Mehrfachklicks, Modulrechnung für 1/3/8 Module sowie beide Demoformulare
+und konkrete Servervalidierung (422) geprüft. Der per `matchMedia`
+simulierte Reduced-Motion-Pfad startet keine neuen Animationen und lädt
+keine Hero-Videos. Ohne Skripte bleiben die nativen Prozess-Details
+bedienbar. Alle sechs Produktionsrouten antworten auf GET/HEAD mit 200;
+lokale Assets, SVG, eindeutige IDs und strukturierte JSON-Daten geprüft.
+
 - Visuelle Richtung angelehnt an `https://climeworks.com/` (betrachtet am
   15.10.2026; Live-Seite teils per Bot-Schutz blockiert, daher zusätzlich
   Textfassung per Fetch gegengeprüft): schwebende weiße Pill-Navigation,

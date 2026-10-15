@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="560" viewBox="0 0 720 560" fill="none" role="img" aria-labelledby="title desc">
+  <title id="title">Vom CO₂ zum Flüssigdünger</title>
+  <desc id="desc">Prinzipdarstellung: Umgebungsluft gelangt in einen Filter. Das gewonnene CO₂ wird für Mikroalgen nutzbar gemacht. Daraus entsteht Flüssigdünger für Pflanzen.</desc>
+  <defs>
+    <linearGradient id="tank" x1="333" y1="174" x2="470" y2="372" gradientUnits="userSpaceOnUse"><stop stop-color="#c9dcb8"/><stop offset="1" stop-color="#76a87a"/></linearGradient>
+    <linearGradient id="glass" x1="330" x2="470" gradientUnits="userSpaceOnUse"><stop stop-color="white" stop-opacity=".7"/><stop offset="1" stop-color="white" stop-opacity=".1"/></linearGradient>
+  </defs>
+  <rect width="720" height="560" rx="24" fill="white"/>
+  <g stroke="#39784b" stroke-width="1.5" stroke-linecap="round">
+    <path d="M57 214h91c28 0 28-30 6-30-10 0-15 7-15 14M76 234h61M60 254h79c24 0 24 27 6 27-10 0-14-6-14-12"/>
+  </g>
+  <g fill="#183e33" font-family="Arial,sans-serif" font-size="15"><text x="67" y="159">Umgebungsluft</text><text x="199" y="429" text-anchor="middle">CO₂-Filter</text><text x="402" y="429" text-anchor="middle">Mikroalgen</text><text x="601" y="429" text-anchor="middle">Flüssigdünger</text></g>
+  <g stroke="#183e33" stroke-width="1.8" stroke-linejoin="round">
+    <path d="m173 193 28-16 48 28v150l-28 16-48-28Z" fill="#d9e3da"/>
+    <path d="m173 193 48 28 28-16m-28 16v150"/>
+    <path d="m185 220 23 13v88l-23-13Z" fill="#eff4f0"/>
+    <path d="m190 232 13 7m-13 8 13 7m-13 8 13 7m-13 8 13 7m-13 8 13 7" stroke="#8baa91"/>
+    <path d="M173 343v25m48 3v14m28-30v14"/>
+    <path d="M249 286h37c12 0 18-7 18-18v-25h25" stroke-width="5" stroke="#b2c7b7"/>
+    <path d="M249 286h37c12 0 18-7 18-18v-25h25" stroke-width="1.5"/>
+  </g>
+  <g>
+    <rect x="327" y="168" width="149" height="211" rx="32" fill="url(#glass)" stroke="#183e33" stroke-width="1.8"/>
+    <path d="M336 227c44 14 87-16 131 0v119c0 13-11 24-24 24h-83c-13 0-24-11-24-24Z" fill="url(#tank)"/>
+    <path d="M336 227c44 14 87-16 131 0" stroke="#39784b" stroke-width="1.4"/>
+    <path d="M344 181v166m17-169v175" stroke="white" stroke-opacity=".6" stroke-width="3" stroke-linecap="round"/>
+    <path d="M373 168v-24h57v24m-46-24v-17h35v17" stroke="#183e33" stroke-width="1.8" fill="#d9e3da"/>
+    <rect x="317" y="370" width="169" height="17" rx="5" fill="#183e33"/>
+    <path d="M338 387v13m127-13v13" stroke="#183e33" stroke-width="3" stroke-linecap="round"/>
+    <g fill="#39784b" fill-opacity=".7"><ellipse cx="366" cy="276" rx="7" ry="3" transform="rotate(-35 366 276)"/><ellipse cx="418" cy="251" rx="7" ry="3" transform="rotate(24 418 251)"/><ellipse cx="433" cy="307" rx="7" ry="3" transform="rotate(-30 433 307)"/><ellipse cx="387" cy="334" rx="7" ry="3" transform="rotate(35 387 334)"/><ellipse cx="396" cy="293" rx="6" ry="3" transform="rotate(-15 396 293)"/></g>
+    <g stroke="#fff" stroke-opacity=".8"><circle cx="380" cy="247" r="3"/><circle cx="447" cy="274" r="4"/><circle cx="366" cy="318" r="3"/><circle cx="414" cy="345" r="3"/></g>
+    <rect x="379" y="190" width="45" height="18" rx="9" fill="white" fill-opacity=".8"/>
+    <circle cx="390" cy="199" r="3" fill="#39784b"/>
+    <path d="M399 199h15" stroke="#39784b" stroke-width="1.5"/>
+  </g>
+  <g stroke="#183e33" stroke-width="1.8" stroke-linejoin="round">
+    <path d="M476 314h31c11 0 18 7 18 18v23h36" stroke="#b2c7b7" stroke-width="5"/>
+    <path d="M476 314h31c11 0 18 7 18 18v23h36"/>
+    <path d="M564 326h32l13 13v46h-45Z" fill="#c9dcb8"/>
+    <path d="M574 326v-13h14v13m8 0v13h13"/>
+    <path d="M573 352h26m-26 7h18" stroke="#39784b"/>
+  </g>
+  <g stroke="#39784b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M648 386v-63m0 30c-20 0-29-13-29-26 20 0 29 12 29 26Zm0-15c0-19 12-32 31-32 0 19-12 32-31 32Z" fill="#c9dcb8"/>
+    <path d="M631 387h35"/>
+  </g>
+  <path d="m287 275 8 11-8 10m221 47 9 12-9 10" stroke="#39784b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <g fill="#39784b"><circle cx="271" cy="286" r="3"/><circle cx="488" cy="314" r="3"/></g>
+</svg>
