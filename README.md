@@ -1,82 +1,194 @@
-# Air2Growth website redesign
+# Air2Growth — lokale Website-Nachbildung (Bun + htmx)
 
-A responsive German and English website with seven static pages, implemented with plain HTML, CSS, and JavaScript. Vite is used only for local development and production asset bundling; there is no UI framework or runtime dependency.
+ originalgetreue lokale Nachbildung der öffentlichen Website
+ <https://air2growth.com> — statisch gehostet mit `Bun.serve`, Styling per
+ lokalem Tailwind CSS v4 (`tailwindcss` + `@tailwindcss/cli`, gepinnt).
+ htmx ist eine gepinnte lokale
+ npm-Abhängigkeit (`htmx.org@2.0.11`) und wird unter
+ `/assets/htmx.min.js` ausgeliefert — kein CDN, kein Browser-Compiler.
 
-## Run on the cloud machine over Tailscale
+## Gestaltung (Redesign 15.10.2026)
+
+- Visuelle Richtung angelehnt an `https://climeworks.com/` (betrachtet am
+  15.10.2026; Live-Seite teils per Bot-Schutz blockiert, daher zusätzlich
+  Textfassung per Fetch gegengeprüft): schwebende weiße Pill-Navigation,
+  Hero im vollen Viewport mit Foto und dunklem Overlay, ruhige
+  Editorial-Serifen (Georgia, Systemschrift), großzügige Weißräume,
+  schmale Textspalten (~800 px), blasse Grau-/Grünpanels, grüne CTAs,
+  dunkler Footer.
+- **Abgrenzung:** Keine Climeworks-Assets, -Texte, -Claims, kein Logo und
+  keine proprietären Fonts übernommen. Serif = Georgia
+  (Systemschrift), Sans = lokal gehostetes Open Sans wie bisher.
+- Header nutzt eine schlichte Text-Wortmarke „Air2Growth“ (das bisherige
+  `img/a2g-logo-green.jpg` liegt weiter lokal vor, sitzt aber als
+  JPEG-Kachel nicht sauber in der Pill-Nav). Marke, Inhalte, deutsche
+  Texte, Hero- und Team-Bilder sowie alle Sektions-Anker
+  (`#problem`, `#loesung`, `#vorteile`, `#funktionsweise`,
+  `#rechenmodell`, `#meilensteine`, `#vision`, `#team`, `#kontakt`,
+  `#newsletter`) und Rechtstexte bleiben erhalten.
+- Styling-Quelle in `src/styles.css` (`@import "tailwindcss"`, `@theme` grün, `@source` index/server, nur Font-Faces/Hero/htmx/Reduced-Motion als Custom-CSS), kompiliert nach `public/styles.css`, Verhalten in `public/site.js`
+  (mobiles Menü, Escape für Menü/Rechtstexte, htmx-Fehleranzeige).
+  Kein Cookie-Banner (kein Tracking).
+- Einschränkungen: Hero-Foto (`hero.webp`) und Team-Foto sind die
+  einzigen lokalen Bilder und werden bewusst beschnitten eingesetzt;
+  es wurden keine Auszeichnungen/Partner/Bilder erfunden.
+
+## Herkunft
+
+- Quelle: öffentlich abgerufenes HTML/CSS/Fonts/Bilder von
+  `https://air2growth.com/` (Stand: 15.10.2026, single-page, ca. 7.109 px
+  hoch @1280).
+- Alle relativen Abhängigkeiten (`img/*`, `fonts/*.woff2`,
+  `favicon.ico`) liegen lokal unter `public/`; verschachtelte
+  `url()`-/`img`-Referenzen wurden geprüft — kein lokales Asset fehlt.
+- Entfernt: Umami-Analyse-Skript, Cloudflare-E-Mail-Decode-Skript,
+  eigener Zähler (`/_z`, Scrolltiefe), Web3Forms-Handler inkl.
+  `access_key`, `data-umami-event`-Attribute. Cloudflare-geschützte
+  E-Mails wurden zu denselben `mailto:`-Adressen dekodiert. Die
+  Datenschutz-Texte (u. a. Erwähnung von Umami/Web3Forms) bleiben als
+  Inhalt erhalten.
+- Design, Texte, Logo, Hero-Foto, Icons, Team-Bild, Meilensteine,
+  Navigation (inkl. mobiles Burger-Menü per Checkbox), Impressum/
+  Datenschutz-Overlays (`:target`) und das mobile Menü-Auto-Schließen
+  (Escape/Link-Klick) entsprechen der Quelle.
+
+## Voraussetzungen
+
+- [Bun](https://bun.sh) >= 1.2 (verifiziert mit 1.4.2)
+
+## Setup
 
 ```sh
-npm install
-npm run dev
+bun install
+bun run build   # Tailwind kompilieren: src/styles.css -> public/styles.css
 ```
 
-The scripts detect the machine’s current Tailscale IPv4 address and bind to that interface. Open the printed URL from a device on the same tailnet. Development uses port 5173; preview uses port 4173. They exit if the port is already occupied.
-
-For loopback-only use, run `npm run dev:local` or `npm run preview:local`.
-
-## Production build
+## Run
 
 ```sh
-npm run build
-npm run preview
+bun run dev       # koordiniert: bun --hot server.ts + Tailwind --watch (scripts/dev.ts, sauberes SIGINT/SIGTERM-Shutdown)
+bun run dev:server  # nur Server ohne Watcher
+bun run dev:css     # nur Tailwind-Watcher
+bun run start     # baut CSS (prestart/build) und startet bun server.ts
 ```
 
-Deploy the contents of `dist/` to a static host. The site expects deployment at the domain root.
+Server bindet `0.0.0.0:3000` (Override via `PORT`):
 
-## Files
+```sh
+PORT=4000 bun run start
+```
 
-- `index.html`: concise home page and links to the dedicated pages.
-- `produkt.html`: product, prototype, operating context, and pilot preparation.
-- `technologie.html`: six-step process, inputs, and development details.
-- `vorteile.html`: pricing, running-cost assumptions, and use cases.
-- `team.html`: founders, responsibilities, awards, and working context.
-- `investoren.html`: roadmap, business model, and pitch-deck inquiry.
-- `kontakt.html`: visible inquiry form and expanded questions and answers.
-- `vite.config.js`: all seven HTML entry points for the production build.
-- `content/`: editorial source fragments for the added details; the live copy is in the page HTML files.
-- `src/style.css`: responsive layouts, design tokens, local fonts, reduced-motion support.
-- `src/design-system.css`: shared expressive tokens (exact forest/leaf/citron/cobalt/mist/white), Barlow Condensed 700 + Open Sans, header/nav/footer, buttons, focus, reduced-motion; no page composition.
-- `src/page-designs/index.css`, `produkt.css`, `technologie.css`, `vorteile.css`, `team.css`, `investoren.css`, `kontakt.css`: one scoped expressive composition per page (`body[data-page="<page>"]`, linked only in its own HTML head); seven distinct layouts sharing the palette and type.
-- `docs/designs/shared.md`, `index.md`, `produkt.md`, `technologie.md`, `vorteile.md`, `team.md`, `investoren.md`, `review-first.md`, `review-final.md`: per-page token/type/layout plans, ASCII wireframes, critiques, preservation records, and review findings.
-- `src/main.js`: mobile navigation, keyboard-accessible process tabs, contact handling, and shared interaction setup.
-- `src/scroll.js` / `src/scroll.css`: native scroll progress, pinned visual stories, CAD rotation, animation controls, and reduced-motion fallbacks.
-- `src/visual-pages.css`: cost figures, timelines, and concise summaries on the secondary pages.
-- `src/graphics.css` and `src/graphics.js`: field contours, the interactive algae lens, and module architecture.
-- `src/expressive-pages.css`: cultivation, team, roadmap and contact illustrations.
-- `src/mobile.css`: readable phone diagrams, compact graphics, form sizing and short-viewport navigation.
-- `public/`: locally served images, favicon, and licensed fonts.
-- `scripts/serve.mjs`: Tailscale address discovery and server launcher.
-- `DESIGN.md`: source analysis and design decisions.
-- `src/index.ts`: preserved Bun starter entry (`bun run src/index.ts`).
-- `docs/reference/studio-north.html`: preserved previous sample page, moved out of the active entry points.
+Dann öffnen: <http://localhost:3000>.
 
-## Interactions and content
+Der bereits laufende `bun --hot`-Dev-Server lädt `server.ts`-Änderungen
+automatisch nach (kein Neustart, kein `pkill` nötig). `public/styles.css`
+ist generiert und wird per `prestart`/`start` auf Clean-Checkouts neu gebaut
+(`bun run build:css`); Quelle bleibt `src/styles.css`.
 
-- On the first visit, the browser’s language preferences select the first supported language (German or English). Regional variants such as `de-AT`, `de-CH` and `en-GB` are supported; English is the fallback when no preferred language is supported.
-- The DE/EN switch in the navigation opens the same page in the chosen language, preserving inquiry topics and anchors. An explicit choice is saved locally. `?lang=de` and `?lang=en` also open a specific version directly and override the saved choice. Internal links carry manual choices even when local storage is unavailable. Automatic visits keep following browser preferences.
-- German source copy stays in the HTML; `src/translations/en.js` contains English translations keyed by normalized German text. Update the matching translation when changing source copy. `src/i18n.js` translates text and accessible labels without replacing markup; interactive states and email drafts use the same translations. The document language, titles and descriptions follow the selected language. Without JavaScript, the German source version remains available.
-- Desktop scrolling advances the homepage carbon cycle, rotates the current full-machine CAD concept, and selects the six technology stages. Chapter controls and the model slider also work directly.
-- Small/short screens and reduced-motion preferences use ordinary document flow with all story chapters visible. An animation switch remembers an explicit choice locally. Native wheel, touch, and keyboard scrolling remain available.
-- Technology tabs support arrows, Home, and End.
-- Product information follows the newer user-supplied `sample.html`: V3 in field testing, TRL 4, 7 kg fertilizer per week per module, and planned onboarding/launch dates.
-- Pricing is summarized as €3,000 hardware and €50 consumables every two months per module. The calculator was removed in line with the sample’s feedback. Figures remain model values, not performance guarantees or quotes.
-- Pilot and pitch-deck links navigate to the contact page and preselect the inquiry topic from the URL. Team names link to the current LinkedIn profiles.
-- FAQ uses native HTML disclosure elements.
-- The contact form validates required fields and prepares an email in the visitor's mail client. It does not send messages itself and has no backend. A direct email link is provided.
-- The imprint and privacy links open the original live website. They must be replaced with deployment-specific documents before this version is published as the production site.
-- No tracking scripts or third-party font requests are included.
+## Endpoints
 
-## Source and asset credits
+| Methode | Pfad                  | Antwort                                    |
+| ------- | --------------------- | ------------------------------------------ |
+| GET/HEAD | `/` / `/index.html`  | Startseite (alle Sektionen, ohne Legal-Overlays; serverseitig aus `templates/` assembliert) |
+| GET/HEAD | `/impressum`         | Impressum (eigenes Dokument, gleiche Nav/Footer, `h1`, „Zur Startseite“) |
+| GET/HEAD | `/datenschutz`       | Datenschutz (eigenes Dokument, gleiche Nav/Footer, `h1`, „Zur Startseite“) |
+| GET     | `/img/*`, `/fonts/*`, `/favicon.ico` | Lokale Bilder/Fonts, korrekte MIME |
+| GET     | `/assets/htmx.min.js` | Lokal gepinntes htmx 2.0.11                |
+| POST    | `/api/kontakt`        | HTML-Fragment (Demo-Status, s. u.)         |
+| POST    | `/api/newsletter`     | HTML-Fragment (Demo-Status, s. u.)         |
 
-Source website: https://air2growth.de (fetched 8 October 2026; redirects to air2growth.com). The original redesign was based on that page. The user-supplied `sample.html` is the newer authority for product progress, process, roles, awards, roadmap, and pricing.
+Statisches Serving: nur `GET`/`HEAD`, Pfad-normalisiert unter
+`./public` (Traversal-Schutz via Verzeichnis-Prefixprüfung),
+MIME-Typen für html/css/js/png/jpg/webp/ico/woff2 u. a.
+Unbekannte Pfade → `404`, falsche Methoden auf `/api/*` → `405`.
+Die alten Starter-Endpunkte (`/api/time`, `/api/greet`,
+`/styles.css`) sind entfernt.
 
-Original plant image (`public/images/field.webp`) and team photograph (`public/images/team.webp`) were downloaded from the source website. The plant image is retained as an available brand asset. Open Sans fonts were downloaded from the source website; their license is included in `public/fonts/LICENSE-OpenSans.txt`.
+## Formulare (lokale htmx-Adaption)
 
-The hero landscape is an Unsplash photograph downloaded from https://images.unsplash.com/photo-1500382017468-9049fed747ef and served locally.
+- `POST /api/kontakt` erwartet `name` (max. 80), `email` (gültig),
+  `message` (10–2000 Zeichen), `datenschutz_zustimmung` gesetzt und
+  leeres Honeypot-Feld `botcheck`. Antwort ist ein HTML-Fragment für
+  `#kontakt-status`.
+- `POST /api/newsletter` erwartet `email` (gültig),
+  `info_einwilligung` gesetzt und leeres `botcheck`. Antwort ist ein
+  HTML-Fragment für `#info-status`.
+- Fehler → `400`/`422`-Fragment; die Seite zeigt es in der
+  zugehörigen Statusregion (`htmx:responseError`-Handler).
+- **Einschränkung (Demo): Es findet kein echter Versand / keine echte
+  Anmeldung statt.** Erfolgsantworten sagen ehrlich
+  „nicht gesendet — kein Versand konfiguriert“ bzw.
+  „nicht angemeldet — kein Versand konfiguriert“ und behaupten niemals
+  „gesendet“/„angemeldet“. Kein API-Key, keine Credentials, keine
+  Weiterleitung an Dritte (kein `danke.html`-Redirect).
 
-The leaf mark, carbon illustration, and process diagram use inline SVG and CSS authored for this redesign.
+## Projektstruktur
 
-The V3 prototype CAD view (`public/images/prototype-v3.webp`) was extracted from the embedded image in `sample.html` without altering the supplied file. It is labeled as a CAD view, not a photograph of the field trial.
+```text
+server.ts            # Bun.serve: HTML-Assemblierung (/, /impressum, /datenschutz) + statische Dateien + /api/kontakt + /api/newsletter (Fragmente mit Tailwind-Utilities, von Tailwind gescannt)
+templates/index.html      # Home-Shell (klein): DOCTYPE/html/body/main + <!-- @include ... -->-Marker
+templates/impressum.html  # Impressum-Shell: head-impressum/nav-legal/impressum-content/footer
+templates/datenschutz.html # Datenschutz-Shell: head-datenschutz/nav-legal/privacy-content/footer
+templates/partials/  # head{,-impressum,-datenschutz}, nav{,-legal}, hero, intro, problem, solution (loesung), benefits (vorteile), process (funktionsweise), economics (rechenmodell), milestones, vision, team, contact, footer, impressum-content, privacy-content — Styling ausschließlich via inline Tailwind-Utilities (keine semantischen Komponentenklassen, kein @apply)
+src/styles.css       # Tailwind-Quelle: @import tailwindcss, @theme grün (#287a3b/#1f6030/#9fcea8/#edf6ee), @source templates/server, nur @font-face/.htmx-indicator/Reduced-Motion custom
+public/styles.css    # GENERIERT via bun run build:css (Tailwind v4.1.14), wird per prestart/start neu gebaut
+public/site.js       # Menü-/htmx-Verhalten via data-Attribute ([data-nav-links], [data-status]), kein Tracking (kein Legal-Escape mehr); Hero-Double-Buffer: 2×[data-hero-video] (aktiv sichtbar/Standby preloadet NUR nächsten Clip 1→2→3→4→1, Übergang ~1 s vor Ende nach echtem Frame (rVFC+Fallback), Standby oben 0→1/~800 ms über opakem Alt, dann Alt-Reset als nächster Preload; Bild nur Initial/Totalausfall/Reduced-Motion; Fehler begrenzt skippen ohne Aufdecken, Pause/Tab global ohne Auto-Resume)
+scripts/dev.ts       # koordinierter Dev-Watcher (Server + Tailwind --watch, clean Shutdown)
+scripts/migrate-html.mjs # einmalige Klassen-Migration (Alt -> Utilities), nicht im Build nötig
+public/img/          # hero.webp, a2g-logo-green.jpg, icon_1a–2c, Team, og-image, icons
+public/fonts/        # Open Sans woff2 (latin/ext/italic/sub), lokal
+package.json         # bun dev/build/start + gepinnt: tailwindcss, @tailwindcss/cli, htmx.org
+bun.lock             # lockfile
+```
 
-The original sample rotation frames in `public/images/prototype-frames/` are retained as reference assets. The product page now uses 36 views rendered from `../air2growth/cad/machine/Air2Growth-machine.FCStd`, served from `public/images/machine-frames/` and loaded near the product scene. This newer assembly is labeled as a CAD concept; the separate V3 field-test claim remains sourced from the sample. Rendering reads the native CAD sources without changing or saving them.
+## Templates bearbeiten
 
-Render provenance, source hashes, and frame hashes are recorded in `docs/reference/current-machine-render.json`.
+- Seiteninhalt liegt in `templates/partials/*.html`, Shells in
+  `templates/*.html` (`<!-- @include <name> -->`, nur im
+  `MANIFEST` in `server.ts` bekannte lokale Dateien). `templates/`
+  liegt außerhalb von `public/` und wird nie direkt ausgeliefert.
+- `server.ts` assembliert `/`, `/impressum`, `/datenschutz`
+  (inkl. `.html`-Varianten, `GET`+`HEAD`) serverseitig pro Request
+  neu aus den Dateien — kein Client-Fetch, keine
+  Templating-Abhängigkeit. Partial-Änderungen sind ohne Server-Neustart
+  sichtbar (zusätzlich lädt `bun --hot` `server.ts`-Änderungen nach).
+- Legal-Seiten teilen `nav-legal` (Root-Anker `/#problem` …,
+  Wortmarke `/`), `footer` und eigene `head-*` (Titel/Canonical/OG je
+  Route) plus `impressum-content`/`privacy-content` (eigene `h1`,
+  „Zur Startseite“-Link, keine `:target`-Overlays/Modal-Close-Links).
+  Footer- und Einwilligungs-Links zeigen auf `/impressum` bzw.
+  `/datenschutz`.
+- Tailwind scannt `templates/**/*.html` rekursiv plus `server.ts`
+  (`@source` in `src/styles.css`); der `--watch`-Watcher aus
+  `scripts/dev.ts` erfasst Partial-Änderungen. Nach Template-Änderung
+  mit neuem Utility ggf. `bun run build` prüfen.
+
+## QA (15.10.2026, lokal Port 3000, Redesign)
+
+- HTTP: `/`, `/index.html`, `/impressum`, `/datenschutz`
+  (`GET`+`HEAD` → `200` text/html; Home ohne Legal-Langtexte,
+  Legal-Texte nur auf eigenen Routen mit eigener `h1`/Meta),
+  `/styles.css` (text/css), `/site.js`
+  (text/javascript), `/assets/htmx.min.js`, `favicon.ico`,
+  `hero.webp`, Team-Bild, Fonts → `200` mit korrekter MIME;
+  `/nonexistent`, `/../server.ts` → `404`. Keine Inline-`style=`-Attribute
+  mehr im HTML; keine Remote-Requests (nur localhost).
+- Browser (T3-Preview, eigener Tab): Desktop 1280 — schwebende Nav
+  (48/24/68 px, Radius 18), Logo-Wortmarke links, Title-Case-Nav,
+  grüne CTA mit Pfeil; Hero volles Viewport-Foto mit Overlay,
+  H1 x48/776 px Georgia, Sub + zwei Pill-CTAs; Sektionen als
+  800-px-Editorialspalten (Problem/Lösung als Zeilen mit Icons +
+  Quellen, Vorteile als Serif-Kennzahlen auf Blassgrün (#edf6ee), Funktion als
+  01–03-Sequenz, Rechenmodell-Kacheln, Meilensteine-Timeline,
+  Vision, Team mit gerundetem Bildmodul, Kontakt + Newsletter-Card,
+  dunkler Footer). Keine Konsoleneinträge.
+- `/impressum`/`/datenschutz` sind eigene Dokumente (geteilte
+  Nav mit Root-Ankern `/#…`/Wortmarke `/`, `h1`, „Zur Startseite“-Link,
+  keine `:target`-Overlays/Modal-Close-Links/Escape-Handler mehr).
+  Kontakt- und
+  Newsletter-Formulare per htmx mit ehrlichem Demo-Status;
+  Validierungs- (422) und Honeypot-Fälle geprüft.
+- Mobil 390 px: Burger sichtbar, Nav per Toggle öffenbar (Menü
+  schließt per Link/Escape), Hero-Typo skaliert (44 px),
+  einspaltige Layouts, kein horizontaler Overflow
+  (`scrollWidth == innerWidth` bei 390 und 1280).

@@ -1,21 +1,19 @@
 {
-  "name": "web",
-  "module": "src/index.ts",
-  "type": "module",
+  "name": "air2growth-web-htmx-starter",
+  "version": "0.1.0",
   "private": true,
+  "description": "Minimal complete htmx starter on Bun native HTTP server.",
   "scripts": {
-    "test": "node --test",
-    "dev": "node scripts/serve.mjs dev",
-    "build": "vite build",
-    "preview": "node scripts/serve.mjs preview",
-    "dev:local": "vite --host 127.0.0.1 --port 5173 --strictPort",
-    "preview:local": "vite preview --host 127.0.0.1 --port 4173 --strictPort"
+    "build:css": "bunx @tailwindcss/cli -i ./src/styles.css -o ./public/styles.css",
+    "build": "bun run build:css",
+    "dev:server": "bun --hot server.ts",
+    "dev:css": "bunx @tailwindcss/cli -i ./src/styles.css -o ./public/styles.css --watch",
+    "dev": "bun scripts/dev.ts",
+    "start": "bun run build:css && bun server.ts"
   },
-  "devDependencies": {
-    "@types/bun": "latest",
-    "vite": "^8.3.4"
-  },
-  "peerDependencies": {
-    "typescript": "^7"
+  "dependencies": {
+    "@tailwindcss/cli": "4.1.14",
+    "htmx.org": "2.0.11",
+    "tailwindcss": "4.1.14"
   }
 }
