@@ -11,19 +11,91 @@
      wiederverwendet. Bild (hero.webp) liegt IMMER darunter, nur für
      Initial-Load/totalen Ausfall/Reduced-Motion sichtbar. */
 (function () {
+  // Mobiles Vollbild-Menü: Button-Toggle steuert #mobile-menu (Overlay
+  // außerhalb des transformierten Headers, fixed inset-0). Klassen
+  // hidden/flex sind statisch im Markup (Tailwind-generiert), JS toggelt
+  // nur hidden + aria/inert; Scroll-Lock via body.style (kein CSS nötig).
   var toggle = document.getElementById('nav-toggle');
-  if (toggle) {
-    document.querySelectorAll('[data-nav-links] a').forEach(function (link) {
-      link.addEventListener('click', function () {
-        toggle.checked = false;
+  var menu = document.getElementById('mobile-menu');
+  if (toggle && menu) {
+    var closeBtn = menu.querySelector('[data-nav-close]');
+    var mq = null;
+    try { mq = window.matchMedia('(min-width: 1024px)'); } catch (e) { mq = null; }
+    var lastFocus = null;
+    var FOCUS_SEL = 'a[href], button:not([disabled])';
+    function focusables() {
+      return Array.prototype.slice.call(menu.querySelectorAll(FOCUS_SEL)).filter(function (el) {
+        return !!(el.offsetWidth || el.offsetHeight || el.getClientRects().length);
       });
+    }
+    function isOpen() { return !menu.classList.contains('hidden'); }
+    function applyScrollLock() {
+      try { document.body.style.overflow = isOpen() ? 'hidden' : ''; } catch (e) {}
+    }
+    function openMenu() {
+      if (isOpen()) return;
+      try { lastFocus = document.activeElement; } catch (e) { lastFocus = null; }
+      menu.classList.remove('hidden');
+      menu.setAttribute('aria-hidden', 'false');
+      try { menu.inert = false; } catch (e) { try { menu.removeAttribute('inert'); } catch (e2) {} }
+      toggle.setAttribute('aria-expanded', 'true');
+      toggle.setAttribute('aria-label', 'Menü schließen');
+      applyScrollLock();
+      var target = closeBtn || focusables()[0];
+      if (target && target.focus) { try { target.focus(); } catch (e) {} }
+    }
+    function closeMenu(returnFocus) {
+      if (!isOpen()) { applyScrollLock(); return; }
+      menu.classList.add('hidden');
+      menu.setAttribute('aria-hidden', 'true');
+      try { menu.inert = true; } catch (e) { try { menu.setAttribute('inert', ''); } catch (e2) {} }
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-label', 'Menü öffnen');
+      applyScrollLock();
+      if (returnFocus !== false && toggle.focus) { try { toggle.focus(); } catch (e) {} }
+      else if (returnFocus && returnFocus.focus) { try { returnFocus.focus(); } catch (e) {} }
+    }
+    toggle.addEventListener('click', function () {
+      if (isOpen()) closeMenu(true);
+      else openMenu();
+    });
+    if (closeBtn) closeBtn.addEventListener('click', function () { closeMenu(true); });
+    menu.querySelectorAll('a[href]').forEach(function (link) {
+      link.addEventListener('click', function () { closeMenu(false); });
     });
     document.addEventListener('keydown', function (event) {
-      if (event.key === 'Escape' && toggle.checked) {
-        toggle.checked = false;
-        toggle.focus();
+      if (!isOpen()) return;
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        closeMenu(true);
+        return;
+      }
+      if (event.key === 'Tab') {
+        var items = focusables();
+        if (items.length === 0) { event.preventDefault(); return; }
+        var first = items[0];
+        var last = items[items.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          try { last.focus(); } catch (e) {}
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          try { first.focus(); } catch (e) {}
+        }
       }
     });
+    function handleBreakpoint() {
+      var desktop = false;
+      try { desktop = !!(mq && mq.matches); } catch (e) {}
+      if (desktop && isOpen()) closeMenu(false);
+    }
+    if (mq) {
+      try {
+        if (typeof mq.addEventListener === 'function') mq.addEventListener('change', handleBreakpoint);
+        else if (typeof mq.addListener === 'function') mq.addListener(handleBreakpoint);
+      } catch (e) {}
+    }
+    try { window.addEventListener('resize', handleBreakpoint); } catch (e) {}
   }
 
   // htmx: Server-Fehlfragmente (4xx/5xx) sichtbar in der Statusregion zeigen.

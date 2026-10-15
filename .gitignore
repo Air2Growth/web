@@ -1,4 +1,6 @@
 node_modules/
+dist/
+public/assets/
 bun.lockb
 .DS_Store
 *.log

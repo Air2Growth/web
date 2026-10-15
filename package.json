@@ -2,18 +2,20 @@
   "name": "air2growth-web-htmx-starter",
   "version": "0.1.0",
   "private": true,
-  "description": "Minimal complete htmx starter on Bun native HTTP server.",
+  "description": "Minimal complete htmx site: Vite frontend (templates + Tailwind) + Bun APIs.",
   "scripts": {
-    "build:css": "bunx @tailwindcss/cli -i ./src/styles.css -o ./public/styles.css",
-    "build": "bun run build:css",
-    "dev:server": "bun --hot server.ts",
-    "dev:css": "bunx @tailwindcss/cli -i ./src/styles.css -o ./public/styles.css --watch",
+    "build:htmx": "mkdir -p public/assets && cp node_modules/htmx.org/dist/htmx.min.js public/assets/htmx.min.js",
+    "build": "bun run build:htmx && bunx vite build",
     "dev": "bun scripts/dev.ts",
-    "start": "bun run build:css && bun server.ts"
+    "dev:api": "bun server.ts",
+    "dev:vite": "bunx vite --host 0.0.0.0 --port 3000 --strictPort",
+    "start": "NODE_ENV=production bun server.ts",
+    "preview": "bunx vite preview --port 4173 --strictPort"
   },
   "dependencies": {
-    "@tailwindcss/cli": "4.1.14",
+    "@tailwindcss/vite": "4.1.14",
     "htmx.org": "2.0.11",
-    "tailwindcss": "4.1.14"
+    "tailwindcss": "4.1.14",
+    "vite": "7.3.7"
   }
 }

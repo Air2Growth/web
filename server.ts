@@ -1,13 +1,36 @@
-// Air2Growth local mirror (Bun + htmx, no framework, no build step).
-// Serves ./public (index.html + img/fonts) and local htmx from node_modules.
-// Forms POST to local /api/* endpoints (demo: validated, never sent).
+// Air2Growth: Bun HTTP server (APIs always; pages + static only in prod).
+// Dev (`bun run dev`, scripts/dev.ts): API-only on 127.0.0.1:3001 — the
+// visible frontend is Vite on :3000 (single pipeline: templates/ ->
+// transformIndexHtml -> Tailwind via @tailwindcss/vite). Page/static paths
+// on this port answer 404 by design so no stale server-rendered markup can
+// shadow Vite. Prod (`bun run start`, NODE_ENV=production): pre-rendered
+// dist/*.html (built once via `bun run build`) + static from dist/ + APIs,
+// on 0.0.0.0:3000. No template reads in prod.
 
-const PORT = Number(process.env.PORT) || 3000;
-const HOSTNAME = "0.0.0.0";
-const PUBLIC_DIR = `${import.meta.dir}/public`;
-const TEMPLATES_DIR = `${import.meta.dir}/templates`;
-const PARTIALS_DIR = `${TEMPLATES_DIR}/partials`;
-const HTMX_FILE = `${import.meta.dir}/node_modules/htmx.org/dist/htmx.min.js`;
+const PROD = process.env.NODE_ENV === "production";
+const PORT = Number(process.env.PORT ?? process.env.BACKEND_PORT ?? (PROD ? 3000 : 3001));
+const HOSTNAME = process.env.HOST ?? (PROD ? "0.0.0.0" : "127.0.0.1");
+const DIST_DIR = `${import.meta.dir}/dist`;
+const STATIC_DIR = DIST_DIR;
+
+// Prod pages are read ONCE at startup (build once, not per request).
+const prodPages = new Map<string, string>();
+if (PROD) {
+  for (const f of ["index.html", "impressum.html", "datenschutz.html"]) {
+    const file = Bun.file(`${DIST_DIR}/${f}`);
+    if (!(await file.exists())) {
+      console.error(
+        `prod: missing ${DIST_DIR}/${f} — run "bun run build" first, then "bun run start".`,
+      );
+      process.exit(1);
+    }
+    prodPages.set(f, await file.text());
+  }
+}
+
+async function pageHtml(distFile: string): Promise<string> {
+  return prodPages.get(distFile) as string;
+}
 
 const MIME: Record<string, string> = {
   ".html": "text/html; charset=utf-8",
@@ -50,62 +73,8 @@ function fragment(body: string, status = 200): Response {
   });
 }
 
-// --- Server-side HTML assembly (no templating dependency) ----------------
-// Small shell (templates/index.html, templates/impressum.html,
-// templates/datenschutz.html) with explicit named markers:
-//   <!-- @include <name> -->
-// Only known local files from the fixed manifest below are resolved.
-// Templates live outside public/; files are reread per request so edits
-// show without a server restart (bun --hot also reloads server.ts).
-const MANIFEST: Record<string, string> = {
-  head: "partials/head.html",
-  "head-impressum": "partials/head-impressum.html",
-  "head-datenschutz": "partials/head-datenschutz.html",
-  nav: "partials/nav.html",
-  "nav-legal": "partials/nav-legal.html",
-  hero: "partials/hero.html",
-  intro: "partials/intro.html",
-  problem: "partials/problem.html",
-  solution: "partials/solution.html",
-  benefits: "partials/benefits.html",
-  process: "partials/process.html",
-  economics: "partials/economics.html",
-  milestones: "partials/milestones.html",
-  vision: "partials/vision.html",
-  team: "partials/team.html",
-  contact: "partials/contact.html",
-  footer: "partials/footer.html",
-  "impressum-content": "partials/impressum-content.html",
-  "privacy-content": "partials/privacy-content.html",
-};
-
-const INCLUDE_RE = /<!--\s*@include\s+([a-z-]+)\s*-->/g;
-
-async function renderShell(shellFile: string): Promise<string> {
-  let html = await Bun.file(`${TEMPLATES_DIR}/${shellFile}`).text();
-  // Resolve recursively (footer/shells may nest markers); cap depth.
-  for (let depth = 0; depth < 5; depth++) {
-    if (!INCLUDE_RE.test(html)) break;
-    INCLUDE_RE.lastIndex = 0;
-    const matches = [...html.matchAll(INCLUDE_RE)];
-    if (matches.length === 0) break;
-    let out = "";
-    let last = 0;
-    for (const m of matches) {
-      const name = m[1];
-      const rel = MANIFEST[name];
-      if (!rel) throw new Error(`unknown include: ${name}`);
-      // Fixed manifest only: no path separators from marker input.
-      const partial = await Bun.file(`${PARTIALS_DIR}/${rel.split("/").pop()}`).text();
-      out += html.slice(last, m.index) + partial;
-      last = (m.index ?? 0) + m[0].length;
-    }
-    out += html.slice(last);
-    html = out;
-  }
-  if (INCLUDE_RE.test(html)) throw new Error("unresolved includes remain");
-  return html;
-}
+// --- Pages: prod serves dist/*.html (read once at startup) ---
+// (templates/ is never served; dev pages come from Vite, see vite.config.ts).
 
 function pageResponse(html: string, req: Request): Response {
   const headers = {
@@ -187,13 +156,13 @@ async function serveStatic(pathname: string, req: Request): Promise<Response | n
   let rel = decodeURIComponent(pathname);
   if (rel === "/") rel = "/index.html";
   if (rel.includes("\0")) return fragment("Bad request", 400);
-  // Normalize, block traversal: must stay inside PUBLIC_DIR.
-  const target = Bun.file(PUBLIC_DIR + rel);
+  // Normalize, block traversal: must stay inside STATIC_DIR.
+  const target = Bun.file(STATIC_DIR + rel);
   void target;
-  const normalized = new URL("file://" + PUBLIC_DIR + rel).pathname;
-  const base = new URL("file://" + PUBLIC_DIR + "/").pathname;
+  const normalized = new URL("file://" + STATIC_DIR + rel).pathname;
+  const base = new URL("file://" + STATIC_DIR + "/").pathname;
   if (!normalized.startsWith(base)) return fragment("Not found", 404);
-  const file = Bun.file(PUBLIC_DIR + rel);
+  const file = Bun.file(STATIC_DIR + rel);
   if (!(await file.exists())) return null;
   // Explicit accept-ranges helps browsers use progressive/range requests for
   // large hero videos. Bun.file streams via sendfile (no full read into
@@ -212,37 +181,26 @@ const server = Bun.serve({
   async fetch(req) {
     const url = new URL(req.url);
 
-    if (url.pathname === "/assets/htmx.min.js" && (req.method === "GET" || req.method === "HEAD")) {
-      const f = Bun.file(HTMX_FILE);
-      if (!(await f.exists())) return new Response("Not found", { status: 404 });
-      return new Response(f, { headers: { "content-type": "text/javascript; charset=utf-8" } });
-    }
     if (url.pathname === "/api/kontakt") return handleKontakt(req);
     if (url.pathname === "/api/newsletter") return handleNewsletter(req);
 
+    // Dev is API-only: pages + static come from Vite (:3000). A 404 here
+    // (instead of a server-rendered page) keeps exactly one markup source
+    // and avoids stale-style confusion from two competing pipelines.
+    if (!PROD) {
+      return new Response("dev: use the Vite frontend on :3000 (this port serves /api/* only)", {
+        status: 404,
+      });
+    }
+
     if ((url.pathname === "/" || url.pathname === "/index.html") && (req.method === "GET" || req.method === "HEAD")) {
-      try {
-        return pageResponse(await renderShell("index.html"), req);
-      } catch (err) {
-        console.error("render index failed:", err);
-        return new Response("Internal Server Error", { status: 500 });
-      }
+      return pageResponse(await pageHtml("index.html"), req);
     }
     if ((url.pathname === "/impressum" || url.pathname === "/impressum.html") && (req.method === "GET" || req.method === "HEAD")) {
-      try {
-        return pageResponse(await renderShell("impressum.html"), req);
-      } catch (err) {
-        console.error("render impressum failed:", err);
-        return new Response("Internal Server Error", { status: 500 });
-      }
+      return pageResponse(await pageHtml("impressum.html"), req);
     }
     if ((url.pathname === "/datenschutz" || url.pathname === "/datenschutz.html") && (req.method === "GET" || req.method === "HEAD")) {
-      try {
-        return pageResponse(await renderShell("datenschutz.html"), req);
-      } catch (err) {
-        console.error("render datenschutz failed:", err);
-        return new Response("Internal Server Error", { status: 500 });
-      }
+      return pageResponse(await pageHtml("datenschutz.html"), req);
     }
 
     const staticRes = await serveStatic(url.pathname, req);
