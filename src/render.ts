@@ -7,6 +7,7 @@
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { renderSeoTags } from "./seo.ts";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 export const TEMPLATES_DIR = path.join(HERE, "..", "templates");
@@ -20,6 +21,10 @@ export const MANIFEST: Record<string, string> = {
   head: "partials/head.html",
   "head-impressum": "partials/head-impressum.html",
   "head-datenschutz": "partials/head-datenschutz.html",
+  "head-assets": "partials/head-assets.html",
+  "head-function": "partials/head-function.html",
+  "function-tour": "partials/function-tour.html",
+  "function-illustration": "partials/function-illustration.html",
   nav: "partials/nav.html",
   hero: "partials/hero.html",
   intro: "partials/intro.html",
@@ -29,6 +34,7 @@ export const MANIFEST: Record<string, string> = {
   benefits: "partials/benefits.html",
   process: "partials/process.html",
   economics: "partials/economics.html",
+  faq: "partials/faq.html",
   milestones: "partials/milestones.html",
   vision: "partials/vision.html",
   team: "partials/team.html",
@@ -69,5 +75,7 @@ export async function renderShell(shellFile: string): Promise<string> {
   }
   INCLUDE_RE.lastIndex = 0;
   if (INCLUDE_RE.test(html)) throw new Error("unresolved includes remain");
-  return html;
+  const seoParts = html.split("<!-- @seo -->");
+  if (seoParts.length !== 2) throw new Error(`expected one SEO marker in ${shellFile}`);
+  return seoParts[0] + renderSeoTags(shellFile) + seoParts[1];
 }

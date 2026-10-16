@@ -11,6 +11,46 @@
  npm-Abhängigkeit (`htmx.org@2.0.11`) und wird unter
  `/assets/htmx.min.js` ausgeliefert — kein CDN, kein Browser-Compiler.
 
+## Technisches SEO (15.10.2026)
+
+- `src/seo.ts` ist die gemeinsame Quelle für Seitentitel, individuelle
+  Beschreibungen, kanonische URLs, Open-Graph-/Twitter-Metadaten und
+  JSON-LD. Die Daten werden beim Rendern/Build direkt ins HTML geschrieben.
+  `Organization`, `WebSite`, `ImageObject` und die jeweilige `WebPage`
+  sind über absolute IDs miteinander verbunden. Die Bild- und Logo-URLs
+  verwenden die Produktionsdomain `https://air2growth.com`.
+- `public/robots.txt` verweist auf `public/sitemap.xml`. Die Sitemap listet
+  ausschließlich `/`, `/impressum` und `/datenschutz` als kanonische URLs.
+  Beim Hinzufügen weiterer Seiten beide Dateien und `SEO_PAGES` abstimmen.
+- Bun-Produktion und Vite-Dev leiten `/index.html` dauerhaft auf `/` und
+  die `.html`-/Slash-Varianten der Rechtstexte auf ihre sauberen URLs um
+  (301 für GET/HEAD, Query-Parameter bleiben erhalten). Bei statischem
+  Hosting diese Weiterleitungen im jeweiligen Host konfigurieren;
+  die gebauten `.html`-Dateien enthalten weiterhin die Canonical-Tags.
+- Die FAQ unter `#fragen` beantwortet Fragen zu Funktionsweise,
+  Zielbetrieben, Modellkosten und Testmöglichkeiten. Alle Antworten sind
+  im initialen HTML enthalten und über native Details-Elemente bedienbar.
+- Der Hero behält sein Layout; sein Hintergrundbild wird mit hoher
+  Priorität vorgeladen und hat explizite Abmessungen. Gehashte CSS-/JS-
+  Assets werden in Bun-Produktion ein Jahr unveränderlich gecacht;
+  weitere statische Dateien eine Stunde, HTML mit Revalidierung.
+- `bun run test:seo` baut die Seite und startet einen isolierten
+  Produktionsserver auf einem freien lokalen Port. 15 Tests prüfen
+  Seitendaten, JSON-LD-Verknüpfungen, initiale Inhalte, Sitemap/Robots,
+  Weiterleitungen, HEAD-Antworten, Asset-Caching und das lokale Kontakt-API.
+
+Nach dem Deployment kann `https://air2growth.com/sitemap.xml` in der
+Google Search Console eingereicht werden. Indexierung und tatsächliche
+Suchdarstellung lassen sich dort prüfen.
+
+Grundlage: Google Search Central zu
+[kanonischen URLs](https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls),
+[Sitemaps](https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap)
+und [Organisationsdaten](https://developers.google.com/search/docs/appearance/structured-data/organization).
+
+Die früheren QA-Notizen mit 200-Antworten für HTML-Aliase sind historisch;
+die oben beschriebenen Canonical-Weiterleitungen gelten für den aktuellen Stand.
+
 ## Gestaltung (Redesign 15.10.2026)
 
 ### Aktuelle Verfeinerung: minimalistische Sektionen
@@ -374,3 +414,49 @@ bun.lock             # lockfile
   Produktions-Build purgt exakt auf genutzte Klassen.
 - Nach den Tests: alle eigenen PIDs gekillt, `:3000`/`:3001` gestoppt;
   fremder Node-Prozess auf `:4173` unangetastet.
+
+## Illustrated tour (`/function`)
+
+The English route `/function` follows `Air2Growth-animation-script.txt` and
+uses the original `public/img/logo.svg`. It is part of both Vite development
+and the Bun production server; `/function.html` and `/function/` redirect to
+its canonical URL. The shared navigation and home process section link to it.
+
+- Player markup: `templates/partials/function-tour.html`; the detailed SVG
+  world and shared character symbols: `templates/partials/function-illustration.html`.
+- Scoped layout: `src/function-tour.css` (included in the shared stylesheet
+  so the production poster and explanation also work without JavaScript).
+- Progressive enhancement: `src/function-tour.js`, exported
+  `initFunctionTour(root)` with a cleanup function, and the single
+  `TOUR_SCENES` manifest. `src/main.ts` loads the GSAP chunk only for the tour.
+- Exact dependency: GSAP `3.14.2`, with its bundled ScrollTrigger plugin.
+
+The source storyboard is expanded to 60 seconds: order 0–6, delivery 6–14,
+installation 14–22, the biological process 22–39, touchscreen 39–46,
+fault detection 46–51, maintenance 51–57 and the closing view 57–60.
+Capture, regeneration, water/nutrient inputs, culture growth and harvesting
+are separate phases. Finite cloud, bubble, wheel, hand and liquid animations
+belong to the same reversible timeline. The supplied logo remains intact.
+
+“Animation Begin” deliberately creates a four-viewport scroll runway.
+A linear scroll driver maps real document scrolling to one 60-second GSAP
+master timeline. Pause, wheel/touch/scrollbar intervention and navigation keys
+allow manual forward or reverse scrubbing. Resume uses the remaining logical
+duration. Escape/Exit restores the poster; Skip/Continue focuses the following
+explanation. Completion preserves the closing farm view in normal flow.
+Replay rebuilds the tour. A hidden tab or viewport change pauses playback.
+Reduced motion replaces automatic scrolling with Previous/Next still scenes.
+The illustrated workflow makes no order, telemetry or notification requests.
+During playback, the illustration spans the full viewport width. Supporting
+copy and the machine-monitoring notice sit in the explanation below the
+canvas; the player contains the artwork, progress indicator and controls.
+
+Run `bun run build` and `bun test tests/seo.test.ts` to check production routes,
+redirects, language/metadata, the static explanation and existing pages/APIs.
+For the playback regression checks, open `/function` on the Vite dev server
+and run `await (await import('/tests/function-tour.browser.js')).runFunctionTourChecks()`
+in its browser context. The checks cover real-time duration, all eight scenes,
+manual reverse scrolling, replay cleanup, pause/resume, hidden-tab behaviour,
+Escape/Skip focus and an isolated reduced-motion instance. They take about
+63 seconds; browser automation callers with shorter timeouts can store the
+promise result and read it after completion.

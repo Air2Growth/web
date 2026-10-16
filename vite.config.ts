@@ -9,6 +9,7 @@ import { defineConfig, type Plugin } from "vite";
 import tailwindcss from "@tailwindcss/vite";
 import { basename, resolve } from "node:path";
 import { renderShell, TEMPLATES_DIR } from "./src/render.ts";
+import { canonicalRedirect, SEO_PAGES } from "./src/seo.ts";
 
 // Root proxy entries (./index.html etc.) -> canonical template shells.
 // Plugin output lands as dist/index.html, dist/impressum.html,
@@ -17,6 +18,7 @@ const SHELLS: Record<string, string> = {
   "index.html": "index.html",
   "impressum.html": "impressum.html",
   "datenschutz.html": "datenschutz.html",
+  "function.html": "function.html",
 };
 
 // Canonical template heads already reference the Vite module entry
@@ -57,11 +59,19 @@ function a2gIncludes(): Plugin {
       },
     },
     configureServer(server) {
-      // Clean URLs in dev: /impressum -> /impressum.html (same for
-      // /datenschutz, / -> /index.html) before Vite resolves the id.
+      // Match production canonical redirects, then resolve clean legal URLs.
       server.middlewares.use((req, _res, next) => {
-        if (req.url === "/impressum" || req.url === "/impressum/") req.url = "/impressum.html";
-        else if (req.url === "/datenschutz" || req.url === "/datenschutz/") req.url = "/datenschutz.html";
+        const url = new URL(req.url ?? "/", "http://localhost");
+        if (req.method === "GET" || req.method === "HEAD") {
+          const canonical = canonicalRedirect(url.pathname);
+          if (canonical) {
+            _res.writeHead(301, { location: canonical + url.search });
+            _res.end();
+            return;
+          }
+        }
+        const entry = Object.entries(SEO_PAGES).find(([, page]) => page.path === url.pathname);
+        if (entry && entry[0] !== "index.html") req.url = "/" + entry[0] + url.search;
         next();
       });
       // Entries are proxies: partial edits are invisible to Vite's module
@@ -92,6 +102,7 @@ export default defineConfig({
         main: resolve(import.meta.dirname, "index.html"),
         impressum: resolve(import.meta.dirname, "impressum.html"),
         datenschutz: resolve(import.meta.dirname, "datenschutz.html"),
+        function: resolve(import.meta.dirname, "function.html"),
       },
     },
   },

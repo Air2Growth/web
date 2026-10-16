@@ -1,0 +1,39 @@
+<section class="function-tour" data-function-tour data-tour-state="poster" aria-label="The Air2Growth journey">
+  <h1 class="tour-sr-only">From carbon to crop</h1>
+  <div class="tour-stage" data-tour-stage>
+    <div class="tour-art" data-tour-art>
+      <img class="tour-logo" data-art="logo" src="/img/logo.svg" width="1006" height="715" alt="Air2Growth — From Carbon to Crop" decoding="async">
+      <!-- @include function-illustration -->
+    </div>
+    <div class="tour-launch" data-tour-launch>
+      <button class="tour-button tour-button-primary" type="button" data-tour-begin disabled><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m7 4 9 6-9 6Z" fill="currentColor"/></svg>Animation Begin</button>
+    </div>
+    <div class="tour-controls" data-tour-controls hidden aria-label="Tour controls" tabindex="-1">
+      <div class="tour-progress"><div class="tour-progress-track" role="progressbar" aria-label="Tour progress" aria-valuemin="0" aria-valuemax="60" aria-valuenow="0" data-tour-progress><span data-progress-fill></span></div><span class="tour-time" data-tour-time>0:00 / 1:00</span></div>
+      <div class="tour-control-buttons">
+        <button class="tour-button tour-button-primary" type="button" data-tour-toggle>Pause</button>
+        <button class="tour-button tour-button-primary" type="button" data-tour-replay hidden>Replay</button>
+        <button class="tour-button tour-button-quiet" type="button" data-tour-previous hidden>Previous</button>
+        <button class="tour-button tour-button-primary" type="button" data-tour-next hidden>Next</button>
+        <button class="tour-button tour-button-quiet" type="button" data-tour-exit>Exit tour</button>
+        <a class="tour-text-link tour-skip" href="#journey-explained" data-tour-skip>Skip tour</a>
+      </div>
+    </div>
+  </div>
+  <p class="tour-sr-only" role="status" aria-live="polite" aria-atomic="true" data-tour-announce></p>
+  <p class="tour-sr-only" data-tour-hint>Scroll to take over. Escape to exit.</p>
+  <section id="journey-explained" class="tour-explanation" aria-labelledby="journey-heading">
+    <div class="tour-explanation-heading"><p>A closer look</p><h2 id="journey-heading" tabindex="-1">A living process.<br>A team beside you.</h2><a class="tour-text-link" href="/#kontakt">Talk to Air2Growth</a></div>
+    <div class="tour-explanation-content">
+      <p class="tour-explanation-note">60-second guided tour · Pause or exit any time</p>
+      <p>You order an Air2Growth machine, and our employee delivers it, installs it on site, and shows you how to use it. The machine captures CO₂ from ambient air and supplies it to algae cultivation. With water, nutrients, and light, the algae grow. Harvesting and preparation produce liquid algae-based fertiliser.</p>
+      <p>You can check operating status, production, tank levels, and energy on the integrated touchscreen. Through IoT, Air2Growth receives machine states and fault information so our team can monitor problems. You receive service notifications and updates during maintenance. Machine monitoring collects operating states and fault codes only, with no other private information from your site.</p>
+      <p class="tour-explanation-note">The illustrations show a sample workflow and a time-lapse of the biological process. Ordering and service communication are separate from machine monitoring and may require contact details.</p>
+    <aside class="tour-privacy" data-tour-privacy hidden>
+      <svg viewBox="0 0 24 28" aria-hidden="true"><path d="m12 2 9 4v8c0 6-9 11-9 11S3 20 3 14V6Z" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m8 13 3 3 5-6" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>
+      <p><strong>Machine monitoring</strong><span>Machine states only. No private information.</span></p>
+    </aside>
+      <ol class="tour-process-summary"><li>Capture &amp; release CO₂</li><li>Cultivate algae with water, nutrients &amp; light</li><li>Harvest &amp; prepare liquid fertiliser</li></ol>
+    </div>
+  </section>
+</section>

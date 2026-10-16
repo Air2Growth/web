@@ -7,6 +7,8 @@
 // dist/*.html (built once via `bun run build`) + static from dist/ + APIs,
 // on 0.0.0.0:3000. No template reads in prod.
 
+import { canonicalRedirect, SEO_PAGES } from "./src/seo.ts";
+
 const PROD = process.env.NODE_ENV === "production";
 const PORT = Number(process.env.PORT ?? process.env.BACKEND_PORT ?? (PROD ? 3000 : 3001));
 const HOSTNAME = process.env.HOST ?? (PROD ? "0.0.0.0" : "127.0.0.1");
@@ -16,7 +18,7 @@ const STATIC_DIR = DIST_DIR;
 // Prod pages are read ONCE at startup (build once, not per request).
 const prodPages = new Map<string, string>();
 if (PROD) {
-  for (const f of ["index.html", "impressum.html", "datenschutz.html"]) {
+  for (const f of Object.keys(SEO_PAGES)) {
     const file = Bun.file(`${DIST_DIR}/${f}`);
     if (!(await file.exists())) {
       console.error(
@@ -80,6 +82,7 @@ function pageResponse(html: string, req: Request): Response {
   const headers = {
     "content-type": "text/html; charset=utf-8",
     "content-length": String(new TextEncoder().encode(html).length),
+    "cache-control": "no-cache",
   };
   if (req.method === "HEAD") return new Response(null, { headers });
   return new Response(html, { headers });
@@ -171,6 +174,9 @@ async function serveStatic(pathname: string, req: Request): Promise<Response | n
   const headers: Record<string, string> = {
     "content-type": mimeFor(rel),
     "accept-ranges": "bytes",
+    "cache-control": /^\/assets\/[^/]+-[A-Za-z0-9_-]{8,}\.(css|js)$/.test(rel)
+      ? "public, max-age=31536000, immutable"
+      : "public, max-age=3600",
   };
   return new Response(file, { headers });
 }
@@ -193,14 +199,13 @@ const server = Bun.serve({
       });
     }
 
-    if ((url.pathname === "/" || url.pathname === "/index.html") && (req.method === "GET" || req.method === "HEAD")) {
-      return pageResponse(await pageHtml("index.html"), req);
-    }
-    if ((url.pathname === "/impressum" || url.pathname === "/impressum.html") && (req.method === "GET" || req.method === "HEAD")) {
-      return pageResponse(await pageHtml("impressum.html"), req);
-    }
-    if ((url.pathname === "/datenschutz" || url.pathname === "/datenschutz.html") && (req.method === "GET" || req.method === "HEAD")) {
-      return pageResponse(await pageHtml("datenschutz.html"), req);
+    if (req.method === "GET" || req.method === "HEAD") {
+      const canonical = canonicalRedirect(url.pathname);
+      if (canonical) {
+        return new Response(null, { status: 301, headers: { location: canonical + url.search } });
+      }
+      const entry = Object.entries(SEO_PAGES).find(([, page]) => page.path === url.pathname);
+      if (entry) return pageResponse(await pageHtml(entry[0]), req);
     }
 
     const staticRes = await serveStatic(url.pathname, req);
