@@ -1,10 +1,14 @@
 // One Vite styling pipeline: Tailwind utilities, local fonts and brand tokens.
 import "./styles.css";
+import { initLanguageLinks } from "./locale-browser.js";
 import "./site.js";
 import "./experience.js";
 // Poster styles remain available when the optional animation chunk cannot load.
 import "./function-tour.css";
 import "./supporters.css";
+
+const cleanupLanguages = initLanguageLinks();
+if (import.meta.hot) import.meta.hot.dispose(cleanupLanguages);
 
 const supporters = document.querySelector<HTMLElement>("[data-supporters]");
 if (supporters) {

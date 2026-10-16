@@ -1,3 +1,9 @@
+import { message } from './messages.ts';
+import { localizedHref } from './locale-paths.ts';
+
+const locale = document.documentElement.lang === 'en' ? 'en' : 'de';
+const homePath = localizedHref('/', locale);
+
 // Small, progressively enhanced interactions. All content is readable without JS.
 // Preserve bookmarks when detailed product sections move off the homepage.
 const movedHomeSections = {
@@ -8,9 +14,9 @@ const movedHomeSections = {
   '#fragen': '/loesung#fragen',
 };
 function redirectMovedHomeSection() {
-  const movedDestination = window.location.pathname === '/' && movedHomeSections[window.location.hash];
+  const movedDestination = window.location.pathname === homePath && movedHomeSections[window.location.hash];
   if (!movedDestination) return;
-  const destination = new URL(movedDestination, window.location.href);
+  const destination = new URL(localizedHref(movedDestination, locale), window.location.href);
   destination.search = window.location.search;
   window.location.replace(destination.href);
 }
@@ -62,7 +68,7 @@ if (process) {
       group.classList.toggle('opacity-40', !active);
     });
     if (caption) {
-      caption.textContent = captions[stage];
+      caption.textContent = message(captions[stage]);
       if (respondToAction) animate(caption, [{ opacity: 0.4 }, { opacity: 1 }], { duration: 220 });
     }
     if (flowAnimation) flowAnimation.cancel();
@@ -123,12 +129,12 @@ if (navLinks.length) {
     const threshold = Math.min(window.innerHeight * 0.35, 220);
     let current = '';
     sections.forEach((section) => {
-      if (section.getBoundingClientRect().top <= threshold) current = `/#${section.id}`;
+      if (section.getBoundingClientRect().top <= threshold) current = `${homePath}#${section.id}`;
     });
     navLinks.forEach((link) => {
       const destination = new URL(link.href, window.location.href);
-      if (destination.pathname === window.location.pathname && !destination.hash && destination.pathname !== '/') link.setAttribute('aria-current', 'page');
-      else if (window.location.pathname === '/' && link.getAttribute('href') === current) link.setAttribute('aria-current', 'location');
+      if (destination.pathname === window.location.pathname && !destination.hash && destination.pathname !== homePath) link.setAttribute('aria-current', 'page');
+      else if (window.location.pathname === homePath && destination.pathname + destination.hash === current) link.setAttribute('aria-current', 'location');
       else link.removeAttribute('aria-current');
     });
   }
@@ -176,7 +182,7 @@ document.body.addEventListener('htmx:afterSwap', (event) => {
     const status = form.querySelector('[data-status]');
     const error = document.createElement('span');
     error.className = 'error';
-    error.textContent = 'Die Verbindung ist fehlgeschlagen. Bitte versuchen Sie es erneut oder schreiben Sie an info@air2growth.com.';
+    error.textContent = message('Die Verbindung ist fehlgeschlagen. Bitte versuchen Sie es erneut oder schreiben Sie an info@air2growth.com.');
     status.replaceChildren(error);
   });
 });

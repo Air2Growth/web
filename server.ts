@@ -7,7 +7,8 @@
 // dist/*.html (built once via `bun run build`) + static from dist/ + APIs,
 // on 0.0.0.0:3000. No template reads in prod.
 
-import { canonicalRedirect, SEO_PAGES } from "./src/seo.ts";
+import { canonicalRedirect, SITE_PAGES } from "./src/seo.ts";
+import { message as translateMessage } from "./src/messages.ts";
 
 const PROD = process.env.NODE_ENV === "production";
 const PORT = Number(process.env.PORT ?? process.env.BACKEND_PORT ?? (PROD ? 3000 : 3001));
@@ -18,7 +19,7 @@ const STATIC_DIR = DIST_DIR;
 // Prod pages are read ONCE at startup (build once, not per request).
 const prodPages = new Map<string, string>();
 if (PROD) {
-  for (const f of Object.keys(SEO_PAGES)) {
+  for (const f of Object.keys(SITE_PAGES)) {
     const file = Bun.file(`${DIST_DIR}/${f}`);
     if (!(await file.exists())) {
       console.error(
@@ -75,6 +76,11 @@ function fragment(body: string, status = 200): Response {
   });
 }
 
+function methodNotAllowed(req: Request): Response {
+  const locale = new URL(req.url).searchParams.get("lang") === "en" ? "en" : "de";
+  return fragment(`<span class="error">${escapeHtml(translateMessage("Methode nicht erlaubt.", {}, locale))}</span>`, 405);
+}
+
 // --- Pages: prod serves dist/*.html (read once at startup) ---
 // (templates/ is never served; dev pages come from Vite, see vite.config.ts).
 
@@ -95,62 +101,64 @@ function isValidEmail(email: string): boolean {
 
 async function handleKontakt(req: Request): Promise<Response> {
   if (req.method !== "POST") {
-    return fragment(`<span class="error">Methode nicht erlaubt.</span>`, 405);
+    return methodNotAllowed(req);
   }
   const form = new URLSearchParams(await req.text());
+  const t = (source: string, values: Record<string, string | number> = {}) => escapeHtml(translateMessage(source, values, form.get("lang") === "en" ? "en" : "de"));
   const botcheck = (form.get("botcheck") ?? "").trim();
   if (botcheck) {
-    return fragment(`<span class="error">Spam-Schutz ausgelöst. Bitte erneut versuchen.</span>`, 400);
+    return fragment(`<span class="error">${t("Spam-Schutz ausgelöst. Bitte erneut versuchen.")}</span>`, 400);
   }
   const name = (form.get("name") ?? "").trim();
   const email = (form.get("email") ?? "").trim();
   const message = (form.get("message") ?? "").trim();
   const consent = form.get("datenschutz_zustimmung");
   if (!name || !email || !message) {
-    return fragment(`<span class="error">Bitte Name, E-Mail und Nachricht ausfüllen.</span>`, 400);
+    return fragment(`<span class="error">${t("Bitte Name, E-Mail und Nachricht ausfüllen.")}</span>`, 400);
   }
   if (name.length > 80) {
-    return fragment(`<span class="error">Name ist zu lang (max. 80 Zeichen).</span>`, 422);
+    return fragment(`<span class="error">${t("Name ist zu lang (max. 80 Zeichen).")}</span>`, 422);
   }
   if (!isValidEmail(email)) {
-    return fragment(`<span class="error">Bitte eine gültige E-Mail-Adresse eingeben.</span>`, 422);
+    return fragment(`<span class="error">${t("Bitte eine gültige E-Mail-Adresse eingeben.")}</span>`, 422);
   }
   if (message.length < 10) {
-    return fragment(`<span class="error">Nachricht ist zu kurz (min. 10 Zeichen).</span>`, 422);
+    return fragment(`<span class="error">${t("Nachricht ist zu kurz (min. 10 Zeichen).")}</span>`, 422);
   }
   if (message.length > 2000) {
-    return fragment(`<span class="error">Nachricht ist zu lang (max. 2000 Zeichen).</span>`, 422);
+    return fragment(`<span class="error">${t("Nachricht ist zu lang (max. 2000 Zeichen).")}</span>`, 422);
   }
   if (!consent) {
-    return fragment(`<span class="error">Bitte der Datenverarbeitung zustimmen.</span>`, 400);
+    return fragment(`<span class="error">${t("Bitte der Datenverarbeitung zustimmen.")}</span>`, 400);
   }
   return fragment(
-    `<span class="ok">Demo-Hinweis: Ihre Nachricht an ${escapeHtml(email)} wurde nicht gesendet — kein Versand konfiguriert. Ihre Eingabe (${escapeHtml(String(message.length))} Zeichen) wurde nur lokal geprüft.</span>`,
+    `<span class="ok">${t("Demo-Hinweis: Ihre Nachricht an {email} wurde nicht gesendet — kein Versand konfiguriert. Ihre Eingabe ({count} Zeichen) wurde nur lokal geprüft.", { email, count: message.length })}</span>`,
   );
 }
 
 async function handleNewsletter(req: Request): Promise<Response> {
   if (req.method !== "POST") {
-    return fragment(`<span class="error">Methode nicht erlaubt.</span>`, 405);
+    return methodNotAllowed(req);
   }
   const form = new URLSearchParams(await req.text());
+  const t = (source: string, values: Record<string, string | number> = {}) => escapeHtml(translateMessage(source, values, form.get("lang") === "en" ? "en" : "de"));
   const botcheck = (form.get("botcheck") ?? "").trim();
   if (botcheck) {
-    return fragment(`<span class="error">Spam-Schutz ausgelöst. Bitte erneut versuchen.</span>`, 400);
+    return fragment(`<span class="error">${t("Spam-Schutz ausgelöst. Bitte erneut versuchen.")}</span>`, 400);
   }
   const email = (form.get("email") ?? "").trim();
   const consent = form.get("info_einwilligung");
   if (!email) {
-    return fragment(`<span class="error">Bitte E-Mail-Adresse eingeben.</span>`, 400);
+    return fragment(`<span class="error">${t("Bitte E-Mail-Adresse eingeben.")}</span>`, 400);
   }
   if (!isValidEmail(email)) {
-    return fragment(`<span class="error">Bitte eine gültige E-Mail-Adresse eingeben.</span>`, 422);
+    return fragment(`<span class="error">${t("Bitte eine gültige E-Mail-Adresse eingeben.")}</span>`, 422);
   }
   if (!consent) {
-    return fragment(`<span class="error">Bitte der Datenverarbeitung zustimmen.</span>`, 400);
+    return fragment(`<span class="error">${t("Bitte der Datenverarbeitung zustimmen.")}</span>`, 400);
   }
   return fragment(
-    `<span class="ok">Demo-Hinweis: ${escapeHtml(email)} wurde nicht angemeldet — kein Versand konfiguriert. Ihre Adresse wurde nur lokal geprüft.</span>`,
+    `<span class="ok">${t("Demo-Hinweis: {email} wurde nicht angemeldet — kein Versand konfiguriert. Ihre Adresse wurde nur lokal geprüft.", { email })}</span>`,
   );
 }
 
@@ -204,7 +212,7 @@ const server = Bun.serve({
       if (canonical) {
         return new Response(null, { status: 301, headers: { location: canonical + url.search } });
       }
-      const entry = Object.entries(SEO_PAGES).find(([, page]) => page.path === url.pathname);
+      const entry = Object.entries(SITE_PAGES).find(([, page]) => page.path === url.pathname);
       if (entry) return pageResponse(await pageHtml(entry[0]), req);
     }
 

@@ -1,7 +1,7 @@
 import { afterAll, beforeAll, describe, expect, test } from "bun:test";
 import { resolve } from "node:path";
 import { renderShell } from "../src/render.ts";
-import { SEO_PAGES, SITE_URL } from "../src/seo.ts";
+import { SITE_PAGES, SITE_URL } from "../src/seo.ts";
 
 const root = resolve(import.meta.dir, "..");
 let baseUrl: string;
@@ -85,14 +85,14 @@ beforeAll(async () => {
 afterAll(async () => { await stopServer?.(); });
 
 describe("crawlable production pages", () => {
-  for (const [file, page] of Object.entries(SEO_PAGES)) {
+  for (const [file, page] of Object.entries(SITE_PAGES)) {
     test(`${page.path} has unique, consistent metadata before JavaScript`, async () => {
       const response = await fetch(baseUrl + page.path);
       expect(response.status).toBe(200);
       expect(response.headers.get("content-type")).toContain("text/html");
       const html = await response.text();
       const parsed = await inspectHtml(html);
-      const source = await inspectHtml(await renderShell(file));
+      const source = await inspectHtml(await renderShell(page.shellFile, page.locale));
       expect(decodeText(parsed.title)).toBe(page.title);
       expect(parsed.title).toBe(source.title);
       expect(parsed.metadata.get("description")).toEqual([page.description]);
@@ -160,7 +160,7 @@ describe("crawlable production pages", () => {
     expect(sitemap.headers.get("content-type")).toContain("application/xml");
     const xml = await sitemap.text();
     const locations = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
-    expect(locations.sort()).toEqual(Object.values(SEO_PAGES).map((page) => SITE_URL + page.path).sort());
+    expect(locations.sort()).toEqual(Object.values(SITE_PAGES).map((page) => SITE_URL + page.path).sort());
   });
 
   test("the home links to product details on the solution page and both pages have valid anchors", async () => {
@@ -190,14 +190,14 @@ describe("crawlable production pages", () => {
   });
 
   test("the function tour has a poster, full explanation and deliberate activation before JavaScript", async () => {
-    const html = await (await fetch(baseUrl + "/function")).text();
+    const html = await (await fetch(baseUrl + "/en/how-it-works")).text();
     expect(html).toContain("data-function-tour");
     expect(html).toContain('data-tour-state="poster"');
-    expect(html).toContain("Animation Begin");
-    expect(html).toContain("60-second guided tour · Pause or exit any time");
-    expect(html).toContain("With water, nutrients, and light, the algae grow.");
-    expect(html).toContain("Harvesting and preparation produce liquid algae-based fertiliser.");
-    expect(html).toContain("Machine states only. No private information.");
+    expect(html).toContain("Start the tour");
+    expect(html).toContain("A 60-second tour of the proposed system. Pause or exit at any time.");
+    expect(html).toContain("With water, nutrients and light, the algae grow.");
+    expect(html).toContain("The algae are then harvested and processed into liquid fertiliser.");
+    expect(html).toContain("Operating data only. No other private information.");
     expect(html).not.toContain('class="pin-spacer');
     const home = await inspectHtml(await (await fetch(baseUrl + "/")).text());
     expect(home.links).toContain("/function");
@@ -223,5 +223,26 @@ describe("crawlable production pages", () => {
     });
     expect(response.status).toBe(200);
     expect(await response.text()).toContain("wurde nicht gesendet");
+  });
+
+  test("English forms receive English validation and demo feedback", async () => {
+    const wrongMethod = await fetch(baseUrl + "/api/kontakt?lang=en");
+    expect(wrongMethod.status).toBe(405);
+    expect(await wrongMethod.text()).toContain("Method not allowed.");
+    const invalid = await fetch(baseUrl + "/api/kontakt", {
+      method: "POST", body: new URLSearchParams({ lang: "en", name: "Test", email: "invalid", message: "A message for validation.", datenschutz_zustimmung: "Ja" }),
+    });
+    expect(invalid.status).toBe(422);
+    expect(await invalid.text()).toContain("Please enter a valid email address.");
+    const valid = await fetch(baseUrl + "/api/kontakt", {
+      method: "POST", body: new URLSearchParams({ lang: "en", name: "Test", email: "qa@example.com", message: "A message for validation.", datenschutz_zustimmung: "Ja" }),
+    });
+    expect(valid.status).toBe(200);
+    expect(await valid.text()).toContain("was not sent");
+    const newsletter = await fetch(baseUrl + "/api/newsletter", {
+      method: "POST", body: new URLSearchParams({ lang: "en", email: "qa@example.com", info_einwilligung: "Ja" }),
+    });
+    expect(newsletter.status).toBe(200);
+    expect(await newsletter.text()).toContain("no subscription was created");
   });
 });

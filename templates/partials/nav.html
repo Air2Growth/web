@@ -3,18 +3,21 @@
 <header data-header class="fixed left-1/2 top-3 z-[1000] w-[calc(100%_-_1.5rem)] max-w-[1169px] -translate-x-1/2 md:top-5 md:w-[calc(100%_-_2.5rem)]">
     <nav class="flex h-[72px] items-center justify-between gap-4 rounded-2xl border border-white/60 bg-white/95 px-4 shadow-[0_6px_28px_#183e3310] backdrop-blur-xl md:px-6" aria-label="Hauptnavigation">
         <a class="shrink-0 rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-leaf" href="/#top" aria-label="Air2Growth – zum Seitenanfang"><span class="flex h-12 w-[108px] items-center justify-center overflow-hidden"><img src="/img/logo.svg" alt="Air2Growth" width="1006" height="715" fetchpriority="high" decoding="async" class="h-[80px] w-[113px] max-w-none object-contain"></span></a>
-        <div class="hidden items-center gap-1 lg:flex">
+        <div class="hidden items-center gap-1 xl:flex">
             <a data-section-link href="/loesung" class="rounded-lg px-3 py-3 text-sm text-ink transition-colors hover:bg-mist hover:text-pine aria-[current]:bg-mist aria-[current]:text-pine focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-leaf motion-reduce:transition-none">Lösung</a>
             <a data-section-link href="/function" class="rounded-lg px-3 py-3 text-sm text-ink transition-colors hover:bg-mist aria-[current]:bg-mist focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-leaf motion-reduce:transition-none">So funktioniert’s</a>
             <a data-section-link href="/meilensteine" class="rounded-lg px-3 py-3 text-sm text-ink transition-colors hover:bg-mist aria-[current]:bg-mist focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-leaf motion-reduce:transition-none">Meilensteine</a>
             <a data-section-link href="/vision" class="rounded-lg px-3 py-3 text-sm text-ink transition-colors hover:bg-mist aria-[current]:bg-mist focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-leaf motion-reduce:transition-none">Vision</a>
             <a data-section-link href="/ueber-uns" class="rounded-lg px-3 py-3 text-sm text-ink transition-colors hover:bg-mist aria-[current]:bg-mist focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-leaf motion-reduce:transition-none">Über uns</a>
         </div>
-        <a class="hidden min-h-11 items-center justify-center rounded-lg bg-pine px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-leaf focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-leaf motion-reduce:transition-none lg:inline-flex" href="/#kontakt">Ins Gespräch kommen</a>
-        <button type="button" id="nav-toggle" data-nav-toggle aria-expanded="false" aria-controls="mobile-menu" aria-label="Menü öffnen" class="flex min-h-11 items-center gap-3 rounded-lg px-3 text-sm text-pine focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-leaf lg:hidden">Menü <svg width="22" height="18" viewBox="0 0 22 18" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 4h20M1 13h20"/></svg></button>
+        <div class="ml-auto flex shrink-0 items-center gap-2 md:gap-3">
+            <!-- @languages -->
+            <a class="hidden min-h-11 items-center justify-center rounded-lg bg-pine px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-leaf focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-leaf motion-reduce:transition-none xl:inline-flex" href="/#kontakt">Ins Gespräch kommen</a>
+            <button type="button" id="nav-toggle" data-nav-toggle aria-expanded="false" aria-controls="mobile-menu" aria-label="Menü öffnen" class="flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-lg px-2 text-sm text-pine focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-leaf xl:hidden"><span class="hidden min-[360px]:inline">Menü</span><svg width="22" height="18" viewBox="0 0 22 18" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 4h20M1 13h20"/></svg></button>
+        </div>
     </nav>
 </header>
-<div id="mobile-menu" data-mobile-menu role="dialog" aria-modal="true" aria-label="Hauptmenü" aria-hidden="true" inert class="fixed inset-0 z-[1500] hidden flex min-h-[100dvh] flex-col overflow-y-auto bg-mist text-pine lg:hidden">
+<div id="mobile-menu" data-mobile-menu role="dialog" aria-modal="true" aria-label="Hauptmenü" aria-hidden="true" inert class="fixed inset-0 z-[1500] hidden flex min-h-[100dvh] flex-col overflow-y-auto bg-mist text-pine xl:hidden">
     <div class="flex h-24 shrink-0 items-center justify-between px-6">
         <a href="/#top" class="rounded font-serif text-2xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-leaf">Air2Growth</a>
         <button type="button" data-nav-close aria-label="Menü schließen" class="flex h-12 w-12 items-center justify-center rounded-full border border-pine/20 transition-colors hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-leaf motion-reduce:transition-none"><svg width="20" height="20" viewBox="0 0 20 20" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m4 4 12 12M16 4 4 16"/></svg></button>
@@ -27,5 +30,8 @@
         <a href="/ueber-uns" data-section-link data-nav-link class="aria-[current=page]:text-leaf">Das Team</a>
         <a href="/#kontakt" data-nav-link>Ins Gespräch kommen</a>
     </nav>
-    <p class="border-t border-pine/15 px-7 py-6 text-sm">Von der Luft auf Ihr Feld.</p>
+    <div class="flex items-center justify-between gap-4 border-t border-pine/15 px-7 py-6">
+        <p class="text-sm">Von der Luft auf Ihr Feld.</p>
+        <!-- @languages -->
+    </div>
 </div>

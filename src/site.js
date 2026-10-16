@@ -1,3 +1,5 @@
+import { message } from './messages.ts';
+
 /* Air2Growth — kleine Verhaltensschicht (kein Tracking, kein Versand).
    - Mobiles Menü: schließt per Link-Klick und Escape.
    - htmx: Server-Fehlfragmente (4xx/5xx) in der Statusregion zeigen.
@@ -27,7 +29,7 @@
     });
     var previousInert = new Map();
     var mq = null;
-    try { mq = window.matchMedia('(min-width: 1024px)'); } catch (e) { mq = null; }
+    try { mq = window.matchMedia('(min-width: 1280px)'); } catch (e) { mq = null; }
     var lastFocus = null;
     var FOCUS_SEL = 'a[href], button:not([disabled])';
     function focusables() {
@@ -48,7 +50,7 @@
       menu.setAttribute('aria-hidden', 'false');
       try { menu.inert = false; } catch (e) { try { menu.removeAttribute('inert'); } catch (e2) {} }
       toggle.setAttribute('aria-expanded', 'true');
-      toggle.setAttribute('aria-label', 'Menü schließen');
+      toggle.setAttribute('aria-label', message('Menü schließen'));
       background.forEach(function (element) {
         if (!previousInert.has(element)) previousInert.set(element, element.inert);
         element.inert = true;
@@ -73,7 +75,7 @@
         menu.setAttribute('aria-hidden', 'true');
         menu.inert = true;
         toggle.setAttribute('aria-expanded', 'false');
-        toggle.setAttribute('aria-label', 'Menü öffnen');
+        toggle.setAttribute('aria-label', message('Menü öffnen'));
         previousInert.forEach(function (inert, element) { element.inert = inert; });
         previousInert.clear();
         menuClosing = false;
@@ -162,7 +164,10 @@
     var target = event.detail && event.detail.target;
     if (target && (target.hasAttribute('data-status') || (target.classList && target.classList.contains('form-status')))) {
       var status = event.detail.xhr ? event.detail.xhr.status : '?';
-      target.innerHTML = '<span class="error">Die Anfrage konnte nicht verarbeitet werden (' + status + '). Bitte versuchen Sie es erneut oder schreiben Sie an info@air2growth.com.</span>';
+      var error = document.createElement('span');
+      error.className = 'error';
+      error.textContent = message('Die Anfrage konnte nicht verarbeitet werden ({status}). Bitte versuchen Sie es erneut oder schreiben Sie an info@air2growth.com.', { status });
+      target.replaceChildren(error);
     }
   });
 
@@ -220,9 +225,9 @@
     control.setAttribute('aria-pressed', playing ? 'false' : 'true');
     control.setAttribute(
       'aria-label',
-      playing ? 'Hintergrundvideo pausieren' : 'Hintergrundvideo abspielen'
+      message(playing ? 'Hintergrundvideo pausieren' : 'Hintergrundvideo abspielen')
     );
-    if (controlLabel) controlLabel.textContent = playing ? 'Pause' : 'Play';
+    if (controlLabel) controlLabel.textContent = message(playing ? 'Pause' : 'Play');
     if (controlIcon) controlIcon.textContent = playing ? '\u275A\u275A' : '\u25B6';
   }
 

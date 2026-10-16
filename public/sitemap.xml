@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://air2growth.com/</loc></url>
-  <url><loc>https://air2growth.com/loesung</loc></url>
-  <url><loc>https://air2growth.com/meilensteine</loc></url>
-  <url><loc>https://air2growth.com/vision</loc></url>
-  <url><loc>https://air2growth.com/ueber-uns</loc></url>
-  <url><loc>https://air2growth.com/function</loc></url>
-  <url><loc>https://air2growth.com/impressum</loc></url>
-  <url><loc>https://air2growth.com/datenschutz</loc></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url><loc>https://air2growth.com/ueber-uns</loc><xhtml:link rel="alternate" hreflang="de" href="https://air2growth.com/ueber-uns"/><xhtml:link rel="alternate" hreflang="en" href="https://air2growth.com/en/about"/><xhtml:link rel="alternate" hreflang="x-default" href="https://air2growth.com/ueber-uns"/></url>
+  <url><loc>https://air2growth.com/vision</loc><xhtml:link rel="alternate" hreflang="de" href="https://air2growth.com/vision"/><xhtml:link rel="alternate" hreflang="en" href="https://air2growth.com/en/vision"/><xhtml:link rel="alternate" hreflang="x-default" href="https://air2growth.com/vision"/></url>
+  <url><loc>https://air2growth.com/meilensteine</loc><xhtml:link rel="alternate" hreflang="de" href="https://air2growth.com/meilensteine"/><xhtml:link rel="alternate" hreflang="en" href="https://air2growth.com/en/milestones"/><xhtml:link rel="alternate" hreflang="x-default" href="https://air2growth.com/meilensteine"/></url>
+  <url><loc>https://air2growth.com/loesung</loc><xhtml:link rel="alternate" hreflang="de" href="https://air2growth.com/loesung"/><xhtml:link rel="alternate" hreflang="en" href="https://air2growth.com/en/solution"/><xhtml:link rel="alternate" hreflang="x-default" href="https://air2growth.com/loesung"/></url>
+  <url><loc>https://air2growth.com/function</loc><xhtml:link rel="alternate" hreflang="de" href="https://air2growth.com/function"/><xhtml:link rel="alternate" hreflang="en" href="https://air2growth.com/en/how-it-works"/><xhtml:link rel="alternate" hreflang="x-default" href="https://air2growth.com/function"/></url>
+  <url><loc>https://air2growth.com/</loc><xhtml:link rel="alternate" hreflang="de" href="https://air2growth.com/"/><xhtml:link rel="alternate" hreflang="en" href="https://air2growth.com/en"/><xhtml:link rel="alternate" hreflang="x-default" href="https://air2growth.com/"/></url>
+  <url><loc>https://air2growth.com/impressum</loc><xhtml:link rel="alternate" hreflang="de" href="https://air2growth.com/impressum"/><xhtml:link rel="alternate" hreflang="en" href="https://air2growth.com/en/legal-notice"/><xhtml:link rel="alternate" hreflang="x-default" href="https://air2growth.com/impressum"/></url>
+  <url><loc>https://air2growth.com/datenschutz</loc><xhtml:link rel="alternate" hreflang="de" href="https://air2growth.com/datenschutz"/><xhtml:link rel="alternate" hreflang="en" href="https://air2growth.com/en/privacy"/><xhtml:link rel="alternate" hreflang="x-default" href="https://air2growth.com/datenschutz"/></url>
+  <url><loc>https://air2growth.com/en/about</loc><xhtml:link rel="alternate" hreflang="de" href="https://air2growth.com/ueber-uns"/><xhtml:link rel="alternate" hreflang="en" href="https://air2growth.com/en/about"/><xhtml:link rel="alternate" hreflang="x-default" href="https://air2growth.com/ueber-uns"/></url>
+  <url><loc>https://air2growth.com/en/vision</loc><xhtml:link rel="alternate" hreflang="de" href="https://air2growth.com/vision"/><xhtml:link rel="alternate" hreflang="en" href="https://air2growth.com/en/vision"/><xhtml:link rel="alternate" hreflang="x-default" href="https://air2growth.com/vision"/></url>
+  <url><loc>https://air2growth.com/en/milestones</loc><xhtml:link rel="alternate" hreflang="de" href="https://air2growth.com/meilensteine"/><xhtml:link rel="alternate" hreflang="en" href="https://air2growth.com/en/milestones"/><xhtml:link rel="alternate" hreflang="x-default" href="https://air2growth.com/meilensteine"/></url>
+  <url><loc>https://air2growth.com/en/solution</loc><xhtml:link rel="alternate" hreflang="de" href="https://air2growth.com/loesung"/><xhtml:link rel="alternate" hreflang="en" href="https://air2growth.com/en/solution"/><xhtml:link rel="alternate" hreflang="x-default" href="https://air2growth.com/loesung"/></url>
+  <url><loc>https://air2growth.com/en/how-it-works</loc><xhtml:link rel="alternate" hreflang="de" href="https://air2growth.com/function"/><xhtml:link rel="alternate" hreflang="en" href="https://air2growth.com/en/how-it-works"/><xhtml:link rel="alternate" hreflang="x-default" href="https://air2growth.com/function"/></url>
+  <url><loc>https://air2growth.com/en</loc><xhtml:link rel="alternate" hreflang="de" href="https://air2growth.com/"/><xhtml:link rel="alternate" hreflang="en" href="https://air2growth.com/en"/><xhtml:link rel="alternate" hreflang="x-default" href="https://air2growth.com/"/></url>
+  <url><loc>https://air2growth.com/en/legal-notice</loc><xhtml:link rel="alternate" hreflang="de" href="https://air2growth.com/impressum"/><xhtml:link rel="alternate" hreflang="en" href="https://air2growth.com/en/legal-notice"/><xhtml:link rel="alternate" hreflang="x-default" href="https://air2growth.com/impressum"/></url>
+  <url><loc>https://air2growth.com/en/privacy</loc><xhtml:link rel="alternate" hreflang="de" href="https://air2growth.com/datenschutz"/><xhtml:link rel="alternate" hreflang="en" href="https://air2growth.com/en/privacy"/><xhtml:link rel="alternate" hreflang="x-default" href="https://air2growth.com/datenschutz"/></url>
 </urlset>

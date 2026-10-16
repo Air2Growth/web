@@ -1,4 +1,5 @@
 import { gsap } from 'gsap';
+import { message } from './messages.ts';
 
 const PIXELS_PER_SECOND = 32;
 
@@ -46,8 +47,8 @@ export function initSupporters(root) {
     }
 
     function updateButton() {
-      label.textContent = userPaused ? 'Fortsetzen' : 'Pause';
-      button.setAttribute('aria-label', userPaused ? 'Logo-Animation fortsetzen' : 'Logo-Animation pausieren');
+      label.textContent = message(userPaused ? 'Fortsetzen' : 'Pause');
+      button.setAttribute('aria-label', message(userPaused ? 'Logo-Animation fortsetzen' : 'Logo-Animation pausieren'));
       pauseIcon.hidden = userPaused;
       playIcon.hidden = !userPaused;
     }

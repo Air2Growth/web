@@ -1,4 +1,5 @@
 import { gsap } from "gsap";
+import { message } from "./messages.ts";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -197,10 +198,10 @@ export function initFunctionTour(root) {
     controls.hidden = value === "poster";
     $("[data-tour-launch]").hidden = value !== "poster";
     toggle.hidden = value === "complete" || value === "still";
-    toggle.textContent = value === "playing" ? "Pause" : "Resume";
+    toggle.textContent = message(value === "playing" ? "Pause" : "Resume");
     replay.hidden = value !== "complete";
     previous.hidden = next.hidden = value !== "still";
-    skip.textContent = value === "complete" ? "Continue website" : "Skip tour";
+    skip.textContent = message(value === "complete" ? "Continue website" : "Skip tour");
   }
 
   function renderFrame(time, announce = true) {
@@ -211,15 +212,15 @@ export function initFunctionTour(root) {
     if (index !== currentScene) {
       currentScene = index;
       root.dataset.scene = scene.id;
-      if (announce) $("[data-tour-announce]").textContent = scene.title;
+      if (announce) $("[data-tour-announce]").textContent = message(scene.title);
     }
     $("[data-tour-privacy]").hidden = time < monitoringStart;
     $("[data-progress-fill]").style.transform = `scaleX(${progress})`;
     $("[data-tour-progress]").setAttribute("aria-valuenow", time.toFixed(1));
-    $("[data-tour-progress]").setAttribute("aria-valuetext", `${Math.floor(time)} of ${TOUR_DURATION} seconds. ${scene.title}`);
+    $("[data-tour-progress]").setAttribute("aria-valuetext", message("{elapsed} of {duration} seconds. {scene}", { elapsed: Math.floor(time), duration: TOUR_DURATION, scene: message(scene.title) }));
     $("[data-tour-time]").textContent = `${formatTourTime(time)} / ${formatTourTime(TOUR_DURATION)}`;
     previous.disabled = index === 0;
-    next.textContent = index === 7 ? "Finish" : "Next";
+    next.textContent = message(index === 7 ? "Finish" : "Next");
   }
 
   function stopDriver() {
@@ -232,11 +233,11 @@ export function initFunctionTour(root) {
     }
   }
 
-  function pause(message = "Paused. Scroll to explore, or resume the guided tour.") {
+  function pause(sourceMessage = "Paused. Scroll to explore, or resume the guided tour.") {
     if (state !== "playing") return;
     stopDriver();
     setState("paused");
-    hint.textContent = message;
+    hint.textContent = message(sourceMessage);
   }
 
   function releasePin(preservePosition = true) {
@@ -258,7 +259,7 @@ export function initFunctionTour(root) {
     releasePin();
     timeline?.progress(1, true);
     renderFrame(TOUR_DURATION);
-    hint.textContent = "The journey is complete. Take your time with the final view.";
+    hint.textContent = message("The journey is complete. Take your time with the final view.");
     if (refocus) replay.focus({ preventScroll: true });
   }
 
@@ -296,7 +297,7 @@ export function initFunctionTour(root) {
     const from = clamp((window.scrollY - trigger.start) / (trigger.end - trigger.start));
     if (from >= 1) { finish(); return; }
     setState("playing");
-    hint.textContent = "Scroll to take over. Escape to exit.";
+    hint.textContent = message("Scroll to take over. Escape to exit.");
     savedScrollBehaviour = document.documentElement.style.scrollBehavior;
     document.documentElement.style.scrollBehavior = "auto";
     const clock = { progress: from };
@@ -323,7 +324,7 @@ export function initFunctionTour(root) {
     mediaContext.buildTour();
     if (reduceMotion) {
       showStill(0);
-      hint.textContent = "Reduced motion: explore the eight still scenes at your own pace.";
+      hint.textContent = message("Reduced motion: explore the eight still scenes at your own pace.");
       next.focus({ preventScroll: true });
       return;
     }
@@ -353,7 +354,7 @@ export function initFunctionTour(root) {
     delete root.dataset.scene;
     delete root.dataset.tourTime;
     $("[data-tour-privacy]").hidden = true;
-    $("[data-tour-announce]").textContent = "Tour exited.";
+    $("[data-tour-announce]").textContent = message("Tour exited.");
     begin.focus({ preventScroll: true });
   }
 
@@ -377,7 +378,7 @@ export function initFunctionTour(root) {
       setState(state === "complete" ? "complete" : reduceMotion ? "still" : "paused");
       renderFrame(progress * TOUR_DURATION, false);
       if (!reduceMotion && state !== "complete") attachPin(progress);
-      hint.textContent = "Layout or motion preference changed. Continue when you are ready.";
+      hint.textContent = message("Layout or motion preference changed. Continue when you are ready.");
     }
     return () => { stopDriver(); releasePin(); timeline = null; };
   }, root);

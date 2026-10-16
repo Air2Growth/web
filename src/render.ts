@@ -8,6 +8,8 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { renderSeoTags } from "./seo.ts";
+import type { Locale } from "./locale-paths.ts";
+import { languageSwitcher, loadCatalog, localeScript, localizeHtml, translateHtml } from "./i18n-html.ts";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 export const TEMPLATES_DIR = path.join(HERE, "..", "templates");
@@ -55,7 +57,7 @@ export const MANIFEST: Record<string, string> = {
 
 const INCLUDE_RE = /<!--\s*@include\s+([a-z-]+)\s*-->/g;
 
-export async function renderShell(shellFile: string): Promise<string> {
+export async function renderTemplate(shellFile: string): Promise<string> {
   let html = await readFile(path.join(TEMPLATES_DIR, shellFile), "utf8");
   // Resolve recursively (footer/shells may nest markers); cap depth.
   for (let depth = 0; depth < 5; depth++) {
@@ -83,7 +85,13 @@ export async function renderShell(shellFile: string): Promise<string> {
   }
   INCLUDE_RE.lastIndex = 0;
   if (INCLUDE_RE.test(html)) throw new Error("unresolved includes remain");
+  return html;
+}
+
+export async function renderShell(shellFile: string, locale: Locale = "de"): Promise<string> {
+  let html = localizeHtml(translateHtml(await renderTemplate(shellFile), await loadCatalog(locale)), locale);
+  html = html.replaceAll("<!-- @languages -->", languageSwitcher(shellFile, locale));
   const seoParts = html.split("<!-- @seo -->");
   if (seoParts.length !== 2) throw new Error(`expected one SEO marker in ${shellFile}`);
-  return seoParts[0] + renderSeoTags(shellFile) + seoParts[1];
+  return seoParts[0] + renderSeoTags(shellFile, locale) + localeScript(shellFile, locale) + seoParts[1];
 }

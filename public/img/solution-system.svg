@@ -10,7 +10,7 @@
   <g font-family="Arial,sans-serif" fill="#183e33">
     <text x="62" y="172" font-size="18">Umgebungsluft</text>
     <text x="354" y="83" font-size="18">Mikroalgen</text>
-    <text x="531" y="326" font-size="17">Bio-Flüssigdünger</text>
+    <text x="575" y="326" font-size="17" text-anchor="middle">Bio-Flüssigdünger</text>
     <text x="129" y="510" font-size="16">CO₂-Filter</text>
   </g>
   <g stroke="#39784b" stroke-width="1.7" stroke-linecap="round">

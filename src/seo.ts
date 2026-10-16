@@ -1,4 +1,5 @@
 // Shared by the HTML renderer and HTTP routing so canonical URLs agree.
+import { LOCALES, PAGE_PATHS, localeFile, type Locale } from "./locale-paths.ts";
 export const SITE_URL = "https://air2growth.com";
 
 interface PageSeo {
@@ -37,9 +38,8 @@ export const SEO_PAGES: Record<string, PageSeo> = {
   "function.html": {
     path: "/function",
     aliases: ["/function.html", "/function/"],
-    title: "From carbon to crop: how it works | Air2Growth",
-    description: "Follow the Air2Growth journey: delivery, installation, CO₂ capture, algae cultivation, liquid fertiliser and machine support in a 60-second illustrated tour.",
-    language: "en-GB",
+    title: "Von CO₂ zum Dünger: So funktioniert’s | Air2Growth",
+    description: "Erleben Sie Air2Growth in einer illustrierten Tour: Lieferung, Installation, CO₂-Filterung, Algenkultivierung, Flüssigdünger und Betreuung in 60 Sekunden.",
   },
   "index.html": {
     path: "/",
@@ -61,8 +61,48 @@ export const SEO_PAGES: Record<string, PageSeo> = {
   },
 };
 
+const ENGLISH_SEO: Record<string, Pick<PageSeo, "title" | "description">> = {
+  "index.html": { title: "Air2Growth | From air to your field", description: "We’re developing a system to produce organic liquid fertiliser from CO₂ on farms. Explore the idea, meet our team and see what we’re working towards." },
+  "loesung.html": { title: "Fertiliser from CO₂, made on your farm | Air2Growth", description: "See how Air2Growth combines CO₂ capture and microalgae in a modular system, and explore how it could help your farm produce part of its own fertiliser supply." },
+  "function.html": { title: "How Air2Growth would work | A 60-second tour", description: "Explore the proposed Air2Growth system in a 60-second illustrated tour, from delivery and installation to CO₂ capture, microalgae cultivation and support." },
+  "meilensteine.html": { title: "Milestones, awards and support | Air2Growth", description: "Explore the awards, funding and programmes helping us develop Air2Growth, including Jugend gründet, STARTUP TEENS and Samsung." },
+  "vision.html": { title: "Our vision for farming | Air2Growth", description: "More choice for farmers and careful use of resources. Discover the principles guiding Air2Growth and how practical farming experience shapes our approach." },
+  "ueber-uns.html": { title: "Meet the team | Air2Growth", description: "Meet our founding team in Munich and find your contact for research, development, finance or sales. Learn how we’re working together on Air2Growth." },
+  "impressum.html": { title: "Legal notice and contact | Air2Growth", description: "Provider information for Air2Growth in Munich, including the responsible parties, postal address and email contact." },
+  "datenschutz.html": { title: "Privacy policy | Air2Growth", description: "Learn how Air2Growth handles personal data, contact enquiries and website analytics, and how to exercise your data protection rights." },
+};
+
+export interface LocalizedPage extends PageSeo {
+  shellFile: string;
+  locale: Locale;
+}
+
+export const SITE_PAGES: Record<string, LocalizedPage> = Object.fromEntries(
+  LOCALES.flatMap((locale) => Object.entries(SEO_PAGES).map(([shellFile, page]) => {
+    const path = PAGE_PATHS[shellFile][locale];
+    return [localeFile(shellFile, locale), {
+      ...page,
+      ...(locale === "en" ? ENGLISH_SEO[shellFile] : {}),
+      path,
+      aliases: locale === "de" ? page.aliases : [path + ".html", path + "/", ...(shellFile === "index.html" ? ["/en/index.html"] : [])],
+      language: locale === "en" ? "en-GB" : "de-DE",
+      shellFile,
+      locale,
+    }];
+  })),
+);
+
+export function renderSitemap(): string {
+  const entries = Object.values(SITE_PAGES).map((page) => {
+    const paths = PAGE_PATHS[page.shellFile];
+    const alternates = LOCALES.map((locale) => `<xhtml:link rel="alternate" hreflang="${locale}" href="${SITE_URL + paths[locale]}"/>`).join("");
+    return `  <url><loc>${SITE_URL + page.path}</loc>${alternates}<xhtml:link rel="alternate" hreflang="x-default" href="${SITE_URL + paths.de}"/></url>`;
+  }).join("\n");
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${entries}\n</urlset>\n`;
+}
+
 export function canonicalRedirect(pathname: string): string | null {
-  const page = Object.values(SEO_PAGES).find((entry) => entry.aliases.includes(pathname));
+  const page = Object.values(SITE_PAGES).find((entry) => entry.aliases.includes(pathname));
   return page?.path ?? null;
 }
 
@@ -71,12 +111,12 @@ function escapeAttribute(value: string): string {
     .replaceAll("<", "&lt;").replaceAll(">", "&gt;");
 }
 
-export function renderSeoTags(shellFile: string): string {
+export function renderSeoTags(shellFile: string, locale: Locale = "de"): string {
   if (!Object.hasOwn(SEO_PAGES, shellFile)) throw new Error(`Missing SEO metadata for ${shellFile}`);
-  const page = SEO_PAGES[shellFile];
+  const page = SITE_PAGES[localeFile(shellFile, locale)];
   const url = SITE_URL + page.path;
   const image = SITE_URL + "/img/og-image.jpg";
-  const imageAlt = "Air2Growth – Bio-Flüssigdünger aus CO₂ für die Landwirtschaft";
+  const imageAlt = locale === "en" ? "Air2Growth – organic liquid fertiliser from CO₂ for farming" : "Air2Growth – Bio-Flüssigdünger aus CO₂ für die Landwirtschaft";
   const organizationId = SITE_URL + "/#organization";
   const websiteId = SITE_URL + "/#website";
   const imageId = SITE_URL + "/#social-image";
@@ -91,7 +131,7 @@ export function renderSeoTags(shellFile: string): string {
         logo: { "@type": "ImageObject", url: SITE_URL + "/img/logo.svg", contentUrl: SITE_URL + "/img/logo.svg" },
         image: { "@id": imageId },
         slogan: "From Carbon to Crop",
-        description: "Air2Growth entwickelt ein modulares System für Bio-Flüssigdünger aus CO₂. Luftfilterung und Mikroalgen ermöglichen eine lokale Düngerproduktion in landwirtschaftlichen Betrieben.",
+        description: locale === "en" ? "Air2Growth is developing a modular system that uses captured CO₂ and microalgae to produce organic liquid fertiliser on farms." : "Air2Growth entwickelt ein modulares System für Bio-Flüssigdünger aus CO₂. Luftfilterung und Mikroalgen ermöglichen eine lokale Düngerproduktion in landwirtschaftlichen Betrieben.",
         email: "info@air2growth.com",
         address: {
           "@type": "PostalAddress",
@@ -103,12 +143,12 @@ export function renderSeoTags(shellFile: string): string {
         founder: ["Navika Bhardwaj", "Tim Kothe", "Felicia Kloss", "Thinh Nguyen"].map((name) => ({ "@type": "Person", name })),
         contactPoint: {
           "@type": "ContactPoint",
-          contactType: "Vertrieb",
+          contactType: locale === "en" ? "Sales" : "Vertrieb",
           email: "info@air2growth.com",
-          availableLanguage: ["de"],
+          availableLanguage: ["de", "en"],
         },
       },
-      { "@type": "WebSite", "@id": websiteId, url: SITE_URL + "/", name: "Air2Growth", inLanguage: "de-DE", publisher: { "@id": organizationId } },
+      { "@type": "WebSite", "@id": websiteId, url: SITE_URL + "/", name: "Air2Growth", inLanguage: ["de-DE", "en-GB"], publisher: { "@id": organizationId } },
       { "@type": "ImageObject", "@id": imageId, url: image, contentUrl: image, width: 1200, height: 630, caption: imageAlt },
       {
         "@type": "WebPage",
@@ -130,8 +170,11 @@ export function renderSeoTags(shellFile: string): string {
 <meta name="description" content="${description}">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <link rel="canonical" href="${url}">
+${LOCALES.map((language) => `<link rel="alternate" hreflang="${language}" href="${SITE_URL + PAGE_PATHS[shellFile][language]}">`).join("\n")}
+<link rel="alternate" hreflang="x-default" href="${SITE_URL + PAGE_PATHS[shellFile].de}">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="${(page.language ?? "de-DE").replace("-", "_")}">
+<meta property="og:locale:alternate" content="${locale === "de" ? "en_GB" : "de_DE"}">
 <meta property="og:site_name" content="Air2Growth">
 <meta property="og:url" content="${url}">
 <meta property="og:title" content="${title}">

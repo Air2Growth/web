@@ -11,6 +11,51 @@
  npm-Abhängigkeit (`htmx.org@2.0.11`) und wird unter
  `/assets/htmx.min.js` ausgeliefert — kein CDN, kein Browser-Compiler.
 
+## Sprachen (16.10.2026)
+
+Die Website ist auf Deutsch und Englisch verfügbar. Die bisherigen deutschen
+URLs bleiben erhalten; Englisch verwendet `/en` und übersetzte Pfade:
+
+| Deutsch | Englisch |
+| --- | --- |
+| `/` | `/en` |
+| `/loesung` | `/en/solution` |
+| `/function` | `/en/how-it-works` |
+| `/meilensteine` | `/en/milestones` |
+| `/vision` | `/en/vision` |
+| `/ueber-uns` | `/en/about` |
+| `/impressum` | `/en/legal-notice` |
+| `/datenschutz` | `/en/privacy` |
+
+Ein frühes Skript im HTML-Head wählt beim Besuch einer deutschen URL die erste
+unterstützte Sprache aus `navigator.languages`; ohne Treffer bleibt Deutsch.
+Regionale Varianten wie `en-US` und `de-CH` werden erkannt. Ein direkter
+englischer Link öffnet immer die englische Seite. Die DE-/EN-Links wechseln
+zur entsprechenden Seite und erhalten Query-Parameter sowie Abschnittsanker.
+Eine manuelle Auswahl hat Vorrang vor der Browsersprache und wird als
+`air2growth-language` lokal gespeichert. Bei gesperrtem Speicher bleiben
+Sprachlinks mit `?lang=de` bzw. `?lang=en` funktionsfähig. Ohne JavaScript sind
+beide Sprachversionen über normale Links vollständig lesbar.
+
+`src/locale-paths.ts` ordnet die Seiten einander zu. Vite und Bun verwenden
+`SITE_PAGES` aus `src/seo.ts` für alle 16 vorgerenderten HTML-Seiten. Die
+Kataloge unter `src/locales/` übersetzen Text und zugängliche Beschriftungen
+beim Rendern; JavaScript, IDs und Animations-Hooks bleiben erhalten. Die
+englische Tour-Vorlage wird für Deutsch mit `de/tour.json` übersetzt.
+`en/tour.json` enthält die redigierte englische Fassung der Tour, einschließlich
+der Bedienelemente. Englische Texte beschreiben den geplanten Einsatz und
+kennzeichnen Air2Growth als System in Entwicklung.
+`src/messages.ts` liefert lokalisierte Interaktionstexte und API-Rückmeldungen.
+Formulare geben die aktuelle Sprache als verborgenes Feld an die API weiter.
+Die englischen Systemgrafiken und die zweisprachige Sitemap werden aus den
+gemeinsamen Quellen gebaut. Canonical-, hreflang-, Open-Graph- und JSON-LD-
+Metadaten sind sprachspezifisch. Vercels Clean-URLs gelten auch unter `/en`.
+
+Prüfung: `bun run test:i18n` baut die Website und prüft Browserauswahl,
+gespeicherte/gesperrte Präferenzen, Katalogabdeckung, alle 16 Seiten,
+Sprachverweise, lokale Anker und Formulartexte. Die Tests laufen lokal,
+ohne Deployment oder externe Übersetzungsdienste.
+
 ## Lösungsseite (16.10.2026)
 
 `/loesung` ist eine eigenständige deutsche Produktseite mit eigener
@@ -107,13 +152,15 @@ Startseitenabschnitte werden dadurch nicht verändert.
   sind über absolute IDs miteinander verbunden. Die Bild- und Logo-URLs
   verwenden die Produktionsdomain `https://air2growth.com`.
 - `public/robots.txt` verweist auf `public/sitemap.xml`. Die Sitemap listet
-  ausschließlich `/`, `/loesung`, `/meilensteine`, `/vision`, `/ueber-uns`, `/function`,
-  `/impressum` und `/datenschutz`
-  als kanonische URLs.
-  Beim Hinzufügen weiterer Seiten beide Dateien und `SEO_PAGES` abstimmen.
+  die deutschen URLs `/`, `/loesung`, `/meilensteine`, `/vision`, `/ueber-uns`, `/function`,
+  `/impressum` und `/datenschutz` sowie ihre acht englischen Gegenstücke
+  als kanonische URLs mit Sprachverweisen. Der Build erzeugt die Sitemap aus
+  `SITE_PAGES`. Beim Hinzufügen weiterer Seiten `SEO_PAGES`, `PAGE_PATHS`,
+  die englischen Metadaten und HTML-Proxies ergänzen; die Tests prüfen die Links.
 - Bun-Produktion und Vite-Dev leiten `/index.html` dauerhaft auf `/` und
   die `.html`-/Slash-Varianten der Rechtstexte auf ihre sauberen URLs um
-  (301 für GET/HEAD, Query-Parameter bleiben erhalten). Bei statischem
+  (301 für GET/HEAD, Query-Parameter bleiben erhalten). Auf Vercel regelt
+  `vercel.json` die Clean-URLs und Weiterleitungen (308). Bei anderem statischem
   Hosting diese Weiterleitungen im jeweiligen Host konfigurieren;
   die gebauten `.html`-Dateien enthalten weiterhin die Canonical-Tags.
 - Die FAQ unter `/loesung#fragen` beantwortet Fragen zu Funktionsweise,
@@ -284,13 +331,14 @@ Klassen) — kein Build, kein Neustart, keine generierte CSS-Datei.
   `public/assets/htmx.min.js`, git-ignoriert; denselben Copy-Schritt legt
   `bun run dev` beim Start an, falls die Datei fehlt) + `vite build`.
   Das Plugin `a2g-includes` (`vite.config.ts`) assembliert
-  `./index.html`, `./impressum.html`, `./datenschutz.html`
-  (Root-Proxies) aus `templates/` (Renderer: `src/render.ts`) und macht
+  acht gemeinsame Seitentypen (`index`, `loesung`, `function`, `meilensteine`,
+  `vision`, `ueber-uns`, `impressum`, `datenschutz`)
+  in zwei Sprachen aus `templates/` (Renderer: `src/render.ts`) und macht
   relative `img/`-/`fonts/`-/`favicon`-/`data-playlist`-Pfade
   root-absolut. Die Template-Heads referenzieren kanonisch
   `<script type="module" src="/src/main.ts">` (Tailwind-Paket-Stylesheet
   + `src/site.js`, gebündelt und gehasht) — Dev und Build nutzen
-  dieselbe Quelle, kein Rewrite, kein Duplikat. Ergebnis `dist/`: 3 volle
+  dieselbe Quelle, kein Rewrite, kein Duplikat. Ergebnis `dist/`: 16 volle
   HTML + `assets/main-[hash].{css,js}`, `assets/htmx.min.js`, `fonts/`,
   `img/` (inkl. `logo.svg`), `video/`, `favicon.ico`.
 - **Produktion:** `bun run start` (`NODE_ENV=production`, `0.0.0.0:3000`,
@@ -299,9 +347,18 @@ Klassen) — kein Build, kein Neustart, keine generierte CSS-Datei.
   `.html`-Varianten; Videos mit Range/`206`; APIs `/api/kontakt`,
   `/api/newsletter` unverändert). Fehlt `dist/`, bricht `start` mit
   „run `bun run build` first“ ab (Exit 1).
-- **Statisches Hosting (Anbieter-neutral):** `dist/` enthält
-  `impressum.html`/`datenschutz.html` im Root — Clean-URLs (`/impressum`)
-  funktionieren auf Hosts mit Clean-URL-Support, sonst die `.html`-Pfade.
+- **Vercel:** Projektwurzel ist dieses `web/`-Verzeichnis (bei einem Repository
+  mit mehreren Projekten die Root Directory entsprechend setzen).
+  `vercel.json` legt den Vite-Preset, `bun run build` und das Ausgabeverzeichnis
+  `dist` fest. `cleanUrls: true` liefert beispielsweise `/loesung` aus
+  `dist/loesung.html`; das gilt für alle 16 Sprachseiten, auch bei direktem Aufruf
+  und Neuladen. `.html`-URLs und abschließende Slashes werden mit 308 auf die
+  kanonischen Pfade umgeleitet. Die Vite-Dev-Middleware wird beim statischen
+  Deployment nicht ausgeführt. Nach Übernahme der Konfiguration neu deployen.
+  Grundlage: [Vercel-Konfiguration für Clean-URLs](https://vercel.com/docs/project-configuration/vercel-json#cleanurls).
+- **Statisches Hosting (Anbieter-neutral):** `dist/` enthält alle 16
+  HTML-Seiten im Root bzw. unter `en/`. Clean-URLs funktionieren auf Hosts mit
+  Clean-URL-Support, sonst die `.html`-Pfade.
   **Einschränkung:** Kontakt-/Newsletter-Formulare (`hx-post /api/*`)
   brauchen den Bun-Server; rein statisch gehostet schlagen sie fehl.
   `bun run preview` ist statisch-only (optional `/api`-Proxy auf Bun) und
@@ -508,7 +565,7 @@ bun.lock             # lockfile
 
 ## Illustrated tour (`/function`)
 
-The English route `/function` follows `Air2Growth-animation-script.txt` and
+The German `/function` and English `/en/how-it-works` routes follow the shared storyboard and
 uses the original `public/img/logo.svg`. It is part of both Vite development
 and the Bun production server; `/function.html` and `/function/` redirect to
 its canonical URL. The shared navigation and home process section link to it.
@@ -544,7 +601,7 @@ canvas; the player contains the artwork, progress indicator and controls.
 
 Run `bun run build` and `bun test tests/seo.test.ts` to check production routes,
 redirects, language/metadata, the static explanation and existing pages/APIs.
-For the playback regression checks, open `/function` on the Vite dev server
+For the playback regression checks, open `/function` or `/en/how-it-works` on the Vite dev server
 and run `await (await import('/tests/function-tour.browser.js')).runFunctionTourChecks()`
 in its browser context. The checks cover real-time duration, all eight scenes,
 manual reverse scrolling, replay cleanup, pause/resume, hidden-tab behaviour,
