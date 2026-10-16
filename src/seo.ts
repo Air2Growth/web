@@ -10,12 +10,6 @@ interface PageSeo {
 }
 
 export const SEO_PAGES: Record<string, PageSeo> = {
-  "loesung.html": {
-    path: "/loesung",
-    aliases: ["/loesung.html", "/loesung/"],
-    title: "Unsere Lösung: Bio-Flüssigdünger auf Ihrem Hof | Air2Growth",
-    description: "Vom CO₂ aus der Luft zum Bio-Flüssigdünger: Entdecken Sie das modulare Air2Growth-System, den Mikroalgen-Prozess und unsere Entwicklungsziele für Ihren Hof.",
-  },
   "function.html": {
     path: "/function",
     aliases: ["/function.html", "/function/"],

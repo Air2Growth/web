@@ -11,25 +11,6 @@
  npm-Abhängigkeit (`htmx.org@2.0.11`) und wird unter
  `/assets/htmx.min.js` ausgeliefert — kein CDN, kein Browser-Compiler.
 
-## Eigene Lösungsseite
-
-`/loesung` erklärt das geplante System auf einer eigenen deutschen Seite:
-CO₂-Filterung, Mikroalgenkultivierung, Aufbereitung und Einsatz auf dem Hof.
-Die Navigation auf Desktop und Mobilgeräten sowie der Startseiten-Teaser
-führen dorthin; der bisherige Anker `/#loesung` bleibt erhalten.
-
-Die Inhalte liegen in `templates/partials/solution-page.html`, die eigens
-erstellte SVG-Prinzipdarstellung in `public/img/solution-system.svg`.
-Die Prozessschritte sind native Details-Elemente und funktionieren ohne
-JavaScript. Die Modellwerte werden aus dem bestehenden `benefits`-Partial
-eingebunden. Entwicklungsziele bleiben ausdrücklich als solche benannt.
-
-Die Seite nutzt denselben Template-Renderer und Vite-Build wie die anderen
-Seiten. `SEO_PAGES` steuert Metadaten und HTTP-Routing; `/loesung.html` und
-`/loesung/` leiten mit 301 auf `/loesung` um. Der Renderer markiert Links zur
-aktuellen Seite bereits im HTML mit `aria-current="page"`; die
-Scrollnavigation erhält diesen Seitenzustand. Die Sitemap führt `/loesung`.
-
 ## Technisches SEO (15.10.2026)
 
 - `src/seo.ts` ist die gemeinsame Quelle für Seitentitel, individuelle
@@ -39,7 +20,7 @@ Scrollnavigation erhält diesen Seitenzustand. Die Sitemap führt `/loesung`.
   sind über absolute IDs miteinander verbunden. Die Bild- und Logo-URLs
   verwenden die Produktionsdomain `https://air2growth.com`.
 - `public/robots.txt` verweist auf `public/sitemap.xml`. Die Sitemap listet
-  `/`, `/loesung`, `/function`, `/impressum` und `/datenschutz` als kanonische URLs.
+  ausschließlich `/`, `/impressum` und `/datenschutz` als kanonische URLs.
   Beim Hinzufügen weiterer Seiten beide Dateien und `SEO_PAGES` abstimmen.
 - Bun-Produktion und Vite-Dev leiten `/index.html` dauerhaft auf `/` und
   die `.html`-/Slash-Varianten der Rechtstexte auf ihre sauberen URLs um
@@ -179,7 +160,7 @@ lokale Assets, SVG, eindeutige IDs und strukturierte JSON-Daten geprüft.
 ```sh
 bun install   # Abhängigkeiten aus package.json + bun.lock
 bun run dev   # Frontend Vite 0.0.0.0:3000 + API-Backend 127.0.0.1:3001 (ein Befehl, sauberes Shutdown)
-bun run build # Produktion: htmx kopieren + Vite-Build (Tailwind via @tailwindcss/vite, gehashte CSS/JS, 5 HTML) -> dist/
+bun run build # Produktion: htmx kopieren + Vite-Build (Tailwind via @tailwindcss/vite, gehashte CSS/JS, 3 HTML) -> dist/
 bun run start # Produktion: NODE_ENV=production bun server.ts (serviert dist/ + APIs auf 0.0.0.0:3000)
 ```
 

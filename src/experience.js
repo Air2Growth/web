@@ -117,8 +117,7 @@ if (calculator) {
 }
 
 // The active nav state follows actual document position, including direct hashes.
-const navLinks = [...document.querySelectorAll('[data-section-link]')]
-  .filter((link) => link.getAttribute('aria-current') !== 'page');
+const navLinks = [...document.querySelectorAll('[data-section-link]')];
 const sections = [...document.querySelectorAll('main > section[id]')];
 if (navLinks.length && sections.length) {
   let scheduled = false;
