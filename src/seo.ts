@@ -10,6 +10,30 @@ interface PageSeo {
 }
 
 export const SEO_PAGES: Record<string, PageSeo> = {
+  "ueber-uns.html": {
+    path: "/ueber-uns",
+    aliases: ["/ueber-uns.html", "/ueber-uns/"],
+    title: "Über uns: das Team hinter Air2Growth",
+    description: "Lernen Sie das Air2Growth-Gründerteam aus München kennen: die Menschen, ihre Aufgaben in Forschung, Entwicklung, Finanzen und Vertrieb sowie direkte Kontaktmöglichkeiten.",
+  },
+  "vision.html": {
+    path: "/vision",
+    aliases: ["/vision.html", "/vision/"],
+    title: "Unsere Vision für die Landwirtschaft | Air2Growth",
+    description: "Mehr Entscheidungsfreiheit auf dem Hof: Entdecken Sie die Vision von Air2Growth, unsere Grundsätze und wie wir gemeinsam mit der Praxis entwickeln wollen.",
+  },
+  "meilensteine.html": {
+    path: "/meilensteine",
+    aliases: ["/meilensteine.html", "/meilensteine/"],
+    title: "Meilensteine: Auszeichnungen und Förderung | Air2Growth",
+    description: "Die Meilensteine von Air2Growth: Ergebnisse bei Jugend gründet, STARTUP TEENS und Samsung sowie Förderung und Begleitung durch Gründungsprogramme.",
+  },
+  "loesung.html": {
+    path: "/loesung",
+    aliases: ["/loesung.html", "/loesung/"],
+    title: "Unsere Lösung: Bio-Flüssigdünger vor Ort | Air2Growth",
+    description: "CO₂ aus der Luft, Mikroalgen und ein modulares System auf Ihrem Hof: Entdecken Sie die Air2Growth-Lösung, ihre Funktionsweise und den geplanten Einsatz im Betrieb.",
+  },
   "function.html": {
     path: "/function",
     aliases: ["/function.html", "/function/"],
@@ -20,8 +44,8 @@ export const SEO_PAGES: Record<string, PageSeo> = {
   "index.html": {
     path: "/",
     aliases: ["/index.html"],
-    title: "Bio-Flüssigdünger aus CO₂ für Ihren Hof | Air2Growth",
-    description: "Air2Growth entwickelt modulare Systeme für Bio-Flüssigdünger aus CO₂. So verbinden Luftfilterung und Mikroalgen lokale Düngerproduktion mit CO₂-Nutzung.",
+    title: "Air2Growth | Von der Luft auf Ihr Feld",
+    description: "Wir denken Landwirtschaft weiter: Lernen Sie die Idee hinter Air2Growth, unsere Vision, das Gründerteam und unseren Weg zum Bio-Flüssigdünger aus CO₂ kennen.",
   },
   "impressum.html": {
     path: "/impressum",

@@ -19,6 +19,10 @@ const SHELLS: Record<string, string> = {
   "impressum.html": "impressum.html",
   "datenschutz.html": "datenschutz.html",
   "function.html": "function.html",
+  "loesung.html": "loesung.html",
+  "meilensteine.html": "meilensteine.html",
+  "vision.html": "vision.html",
+  "ueber-uns.html": "ueber-uns.html",
 };
 
 // Canonical template heads already reference the Vite module entry
@@ -103,6 +107,10 @@ export default defineConfig({
         impressum: resolve(import.meta.dirname, "impressum.html"),
         datenschutz: resolve(import.meta.dirname, "datenschutz.html"),
         function: resolve(import.meta.dirname, "function.html"),
+        loesung: resolve(import.meta.dirname, "loesung.html"),
+        meilensteine: resolve(import.meta.dirname, "meilensteine.html"),
+        vision: resolve(import.meta.dirname, "vision.html"),
+        about: resolve(import.meta.dirname, "ueber-uns.html"),
       },
     },
   },

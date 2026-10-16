@@ -1,4 +1,22 @@
 // Small, progressively enhanced interactions. All content is readable without JS.
+// Preserve bookmarks when detailed product sections move off the homepage.
+const movedHomeSections = {
+  '#problem': '/#loesung',
+  '#vorteile': '/loesung#vorteile',
+  '#funktionsweise': '/loesung#funktionsweise',
+  '#rechenmodell': '/loesung',
+  '#fragen': '/loesung#fragen',
+};
+function redirectMovedHomeSection() {
+  const movedDestination = window.location.pathname === '/' && movedHomeSections[window.location.hash];
+  if (!movedDestination) return;
+  const destination = new URL(movedDestination, window.location.href);
+  destination.search = window.location.search;
+  window.location.replace(destination.href);
+}
+redirectMovedHomeSection();
+window.addEventListener('hashchange', redirectMovedHomeSection);
+
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 const animations = new Set();
 
@@ -95,31 +113,10 @@ if (process) {
   showStage('capture', false);
 }
 
-const calculator = document.querySelector('[data-calculator]');
-if (calculator) {
-  const input = calculator.querySelector('[data-module-input]');
-  const count = calculator.querySelector('[data-module-count]');
-  const number = new Intl.NumberFormat('de-DE');
-  const values = [
-    ['[data-calc-investment]', 3000, ' €'],
-    ['[data-calc-savings]', 800, ' €'],
-    ['[data-calc-fertilizer]', 6, ' kg'],
-    ['[data-calc-carbon]', 1, ' t'],
-  ];
-  input.disabled = false;
-  input.addEventListener('input', () => {
-    const modules = Math.min(8, Math.max(1, Number(input.value) || 1));
-    count.value = `${modules} ${modules === 1 ? 'Modul' : 'Module'}`;
-    values.forEach(([selector, base, unit]) => {
-      calculator.querySelector(selector).textContent = `${number.format(modules * base)}${unit}`;
-    });
-  });
-}
-
 // The active nav state follows actual document position, including direct hashes.
 const navLinks = [...document.querySelectorAll('[data-section-link]')];
 const sections = [...document.querySelectorAll('main > section[id]')];
-if (navLinks.length && sections.length) {
+if (navLinks.length) {
   let scheduled = false;
   function updateNavigation() {
     scheduled = false;
@@ -129,7 +126,9 @@ if (navLinks.length && sections.length) {
       if (section.getBoundingClientRect().top <= threshold) current = `/#${section.id}`;
     });
     navLinks.forEach((link) => {
-      if (link.getAttribute('href') === current) link.setAttribute('aria-current', 'location');
+      const destination = new URL(link.href, window.location.href);
+      if (destination.pathname === window.location.pathname && !destination.hash && destination.pathname !== '/') link.setAttribute('aria-current', 'page');
+      else if (window.location.pathname === '/' && link.getAttribute('href') === current) link.setAttribute('aria-current', 'location');
       else link.removeAttribute('aria-current');
     });
   }

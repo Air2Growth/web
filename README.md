@@ -11,6 +11,93 @@
  npm-Abhängigkeit (`htmx.org@2.0.11`) und wird unter
  `/assets/htmx.min.js` ausgeliefert — kein CDN, kein Browser-Compiler.
 
+## Lösungsseite (16.10.2026)
+
+`/loesung` ist eine eigenständige deutsche Produktseite mit eigener
+Prinzipgrafik (`public/img/solution-system.svg`), Nutzen für den Betrieb,
+interaktiver Prozesserklärung, FAQ und direktem E-Mail-Kontakt.
+Prozesserklärung und Produkt-FAQ stehen ausschließlich auf dieser Seite.
+Der Kostenrechner und seine Verweise wurden entfernt.
+Desktop- und Mobilnavigation sowie der Lösungs-Teaser führen zur neuen Seite;
+der Startseitenanker `/#loesung` bleibt erreichbar. Die aktive Navigation
+unterscheidet Seiten von Startseitenabschnitten. Entwicklungsstand und
+Modellannahmen sind ausdrücklich gekennzeichnet.
+
+Vite und Bun liefern `/loesung`; `/loesung.html` und `/loesung/` werden
+mit 301 auf die kanonische URL umgeleitet. Metadaten und JSON-LD liegen in
+`src/seo.ts`, die Route ist in der Sitemap enthalten. Die Seitenshell liegt
+in `templates/loesung.html`; Gestaltung über die bestehende Tailwind-Pipeline.
+
+Die Startseite ist als Einstieg in Air2Growth gestaltet: ein Landschaftshero
+mit direktem Lösungslink, eine kurze Orientierung zu `/loesung` und `/function`,
+Vision, Meilensteine, Unterstützer, Team und Kontakt. Sie wiederholt keine
+Produktgrafiken, Leistungszahlen, Prozessschritte oder Produkt-FAQ.
+Der Kontakttext richtet sich auch an Forschung und mögliche Partner.
+Alte Startseiten-Bookmarks zu `#funktionsweise`, `#fragen`
+und `#vorteile` werden mit JavaScript an den passenden Abschnitt auf
+`/loesung` weitergeleitet; Query-Parameter bleiben erhalten. Der entfernte
+Abschnitt `#rechenmodell` führt zur Lösungsseite. `#problem`
+führt zur kurzen Einführung unter `/#loesung`. Ohne JavaScript führen die
+sichtbaren Navigationslinks direkt zu den jeweiligen Seiten.
+
+## Meilensteine (16.10.2026)
+
+`/meilensteine` enthält die sechs bisherigen Einträge, gegliedert in
+Auszeichnungen sowie Förderung und Begleitung. Die Seitenshell liegt in
+`templates/meilensteine.html`, der Inhalt in `partials/milestones-page.html`.
+Die Startseite zeigt unter `#meilensteine` nur noch einen kurzen Einstieg
+mit Link zur vollständigen Seite. Die übrigen Startseitenabschnitte bleiben
+unverändert. Desktop-/Mobilnavigation und der Verweis auf der Lösungsseite
+führen direkt zu `/meilensteine`. `.html`- und Slash-Varianten werden mit 301
+umgeleitet; SEO-Metadaten und Sitemap enthalten die neue kanonische Route.
+
+## Vision (16.10.2026)
+
+`/vision` erläutert die langfristige Ausrichtung von Air2Growth: mehr
+Entscheidungsfreiheit für Betriebe, Grundsätze zu Praxisnähe und Ressourcen,
+den geplanten Weg zur Erprobung sowie Möglichkeiten zum Mitgestalten.
+Die erweiterten deutschen Texte beschreiben Ziele und Entwicklungsansprüche.
+Die Systemtechnik bleibt auf `/loesung`.
+
+Die Seitenshell liegt in `templates/vision.html`, der Inhalt in
+`templates/partials/vision-page.html`. Nur der Vision-Abschnitt der Startseite
+wurde zu einem kurzen Einstieg mit Link umgestaltet; `/#vision` bleibt
+erreichbar. Desktop- und Mobilnavigation führen zu `/vision`. SEO, Sitemap
+und die 301-Weiterleitungen für `/vision.html` sowie `/vision/` sind integriert.
+
+## Über uns (16.10.2026)
+
+`/ueber-uns` stellt das Gründerteam aus München mit dem vorhandenen Teamfoto,
+den vier Aufgabenbereichen und direkten E-Mail-Kontakten vor. Ergänzende
+Texte erläutern den gemeinsamen Ansatz und Möglichkeiten zur Kontaktaufnahme.
+Die Seitenshell liegt in `templates/ueber-uns.html`, der Inhalt in
+`templates/partials/about-page.html`.
+
+Nur der Team-Abschnitt der Startseite wurde zu einer kurzen Vorschau mit
+Link umgestaltet; `/#team` bleibt erreichbar. Navigation und Team-Verweise
+auf Vision- und Meilensteinseite führen direkt zu `/ueber-uns`. SEO, Sitemap
+und 301-Weiterleitungen für `/ueber-uns.html` sowie `/ueber-uns/` sind integriert.
+
+## Unterstützer-Logos (16.10.2026)
+
+Der Unterstützerstreifen nutzt die Logos der fünf bereits genannten
+Organisationen in ihren Originalfarben. Die lokalen Dateien liegen unter
+`public/img/supporters/`; `sources.json` dokumentiert die offiziellen
+Fundstellen und den Abruf. Auf der Seite sind Quellen und der Bildnachweis
+für JUGEND GRÜNDET unter „Logoquellen“ zugänglich.
+
+`src/supporters.js` wird nur auf Seiten mit dem Unterstützerstreifen geladen.
+GSAP bewegt zwei identische Logogruppen mit 32 px/s in einer nahtlosen
+Endlosschleife. Die Kopie bleibt für Hilfstechnologien verborgen. Pause/
+Fortsetzen funktioniert per Button und Tastatur; Hover, ein unsichtbarer
+Streifen oder ein inaktiver Tab pausieren die Bewegung ebenfalls.
+Bei reduzierter Bewegung oder ohne Animationsskript bleibt die vollständige
+Liste statisch sichtbar. Änderungen der Bewegungseinstellung und Vite-HMR
+räumen Animation, Beobachter und Ereignisbehandlung auf.
+
+Die gekapselten Layoutregeln liegen in `src/supporters.css`. Die übrigen
+Startseitenabschnitte werden dadurch nicht verändert.
+
 ## Technisches SEO (15.10.2026)
 
 - `src/seo.ts` ist die gemeinsame Quelle für Seitentitel, individuelle
@@ -20,14 +107,16 @@
   sind über absolute IDs miteinander verbunden. Die Bild- und Logo-URLs
   verwenden die Produktionsdomain `https://air2growth.com`.
 - `public/robots.txt` verweist auf `public/sitemap.xml`. Die Sitemap listet
-  ausschließlich `/`, `/impressum` und `/datenschutz` als kanonische URLs.
+  ausschließlich `/`, `/loesung`, `/meilensteine`, `/vision`, `/ueber-uns`, `/function`,
+  `/impressum` und `/datenschutz`
+  als kanonische URLs.
   Beim Hinzufügen weiterer Seiten beide Dateien und `SEO_PAGES` abstimmen.
 - Bun-Produktion und Vite-Dev leiten `/index.html` dauerhaft auf `/` und
   die `.html`-/Slash-Varianten der Rechtstexte auf ihre sauberen URLs um
   (301 für GET/HEAD, Query-Parameter bleiben erhalten). Bei statischem
   Hosting diese Weiterleitungen im jeweiligen Host konfigurieren;
   die gebauten `.html`-Dateien enthalten weiterhin die Canonical-Tags.
-- Die FAQ unter `#fragen` beantwortet Fragen zu Funktionsweise,
+- Die FAQ unter `/loesung#fragen` beantwortet Fragen zu Funktionsweise,
   Zielbetrieben, Modellkosten und Testmöglichkeiten. Alle Antworten sind
   im initialen HTML enthalten und über native Details-Elemente bedienbar.
 - Der Hero behält sein Layout; sein Hintergrundbild wird mit hoher
@@ -70,10 +159,8 @@ Dieser Absatz ersetzt die älteren Hinweise zu direktem CSS-Paketimport
 und dem Verzicht auf `@theme` weiter unten.
 
 `src/experience.js` ergänzt native Details-Elemente um unterbrechbare
-Höhenübergänge, aktualisiert die Prozessgrafik und rechnet die bestehenden
-Modellwerte für 1–8 Module hoch. Ohne JavaScript bleiben die Erklärungen
-und die Werte für ein Modul sichtbar. Die Zahlen sind ausdrücklich
-Entwicklungs-/Modellwerte. `prefers-reduced-motion` verhindert die neuen
+Höhenübergänge und aktualisiert die Prozessgrafik. Ohne JavaScript bleiben
+die Erklärungen sichtbar. `prefers-reduced-motion` verhindert die neuen
 Animationen; es gibt keine laufenden Effekte in den Inhaltssektionen.
 
 Das mobile Menü animiert Öffnen/Schließen, sperrt den Hintergrund per
@@ -230,6 +317,10 @@ Klassen) — kein Build, kein Neustart, keine generierte CSS-Datei.
 | Methode | Pfad                  | Antwort                                    |
 | ------- | --------------------- | ------------------------------------------ |
 | GET/HEAD | `/` / `/index.html`  | Startseite (alle Sektionen, ohne Legal-Overlays; serverseitig aus `templates/` assembliert) |
+| GET/HEAD | `/loesung`           | Eigenständige Lösungsseite mit Prozess und FAQ |
+| GET/HEAD | `/meilensteine`      | Auszeichnungen, Förderung und Begleitung von Air2Growth |
+| GET/HEAD | `/vision`           | Vision, Entwicklungsgrundsätze und Einladung zum Mitgestalten |
+| GET/HEAD | `/ueber-uns`        | Gründerteam, Aufgabenbereiche und direkte Kontakte |
 | GET/HEAD | `/impressum`         | Impressum (eigenes Dokument, gleiche Nav/Footer, `h1`, „Zur Startseite“) |
 | GET/HEAD | `/datenschutz`       | Datenschutz (eigenes Dokument, gleiche Nav/Footer, `h1`, „Zur Startseite“) |
 | GET     | `/img/*`, `/fonts/*`, `/favicon.ico` | Lokale Bilder/Fonts, korrekte MIME |
@@ -274,7 +365,7 @@ src/site.js          # Verhaltensschicht (Menü/htmx-Errors/Hero-Double-Buffer);
 templates/index.html      # Home-Shell (klein): DOCTYPE/html/body/main + <!-- @include ... -->-Marker
 templates/impressum.html  # Impressum-Shell: head-impressum/nav/impressum-content/footer
 templates/datenschutz.html # Datenschutz-Shell: head-datenschutz/nav/privacy-content/footer
-templates/partials/  # head{,-impressum,-datenschutz} (mit `<script type="module" src="/src/main.ts">`), nav, hero, intro, supporters, problem, solution (loesung), benefits (vorteile), process (funktionsweise), economics (rechenmodell), milestones, vision, team, contact, footer, impressum-content, privacy-content — Styling ausschließlich via inline Tailwind-Utilities (keine semantischen Komponentenklassen, kein @apply, kein Custom-CSS)
+templates/partials/  # head{,-impressum,-datenschutz} (mit `<script type="module" src="/src/main.ts">`), nav, hero, intro, supporters, problem, solution (loesung), benefits (vorteile), process (funktionsweise), milestones, vision, team, contact, footer, impressum-content, privacy-content — Styling ausschließlich via inline Tailwind-Utilities (keine semantischen Komponentenklassen, kein @apply, kein Custom-CSS)
 src/site.js          # Menü-/htmx-Verhalten via data-Attribute ([data-nav-links], [data-status]), kein Tracking (kein Legal-Escape mehr); Hero-Double-Buffer: 2×[data-hero-video] (aktiv sichtbar/Standby preloadet NUR nächsten Clip 1→2→3→4→1, Übergang ~1 s vor Ende nach echtem Frame (rVFC+Fallback), Standby oben 0→1/~800 ms über opakem Alt, dann Alt-Reset als nächster Preload; Bild nur Initial/Totalausfall/Reduced-Motion; Fehler begrenzt skippen ohne Aufdecken, Pause/Tab global ohne Auto-Resume)
 scripts/dev.ts       # koordinierter Dev-Start (Bun-APIs :3001 + Vite :3000, htmx-Copy falls nötig, clean Shutdown)
 scripts/migrate-html.mjs # einmalige Klassen-Migration (Alt -> Utilities), nicht im Build nötig

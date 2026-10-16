@@ -1,0 +1,38 @@
+{
+  "retrieved": "2026-10-16",
+  "assets": [
+    {
+      "organization": "Young Founders Network",
+      "file": "young-founders-network.svg",
+      "sourcePage": "https://youngfounders.network/",
+      "assetUrl": "https://youngfounders.network/yfn-logo.svg"
+    },
+    {
+      "organization": "UnternehmerTUM",
+      "file": "unternehmertum.svg",
+      "sourcePage": "https://www.unternehmertum.de/",
+      "inlineSelector": "svg.brand",
+      "note": "Header SVG extracted; paths and colours unchanged. The page-specific CSS class was removed."
+    },
+    {
+      "organization": "JUGEND GRÜNDET",
+      "file": "jugend-gruendet.svg",
+      "sourcePage": "https://www.jugend-gruendet.de/presse",
+      "assetUrl": "https://www.jugend-gruendet.de/fileadmin/Assets/JG_Logo.svg",
+      "credit": "Quelle: JUGEND GRÜNDET"
+    },
+    {
+      "organization": "STARTUP TEENS",
+      "file": "startup-teens.png",
+      "sourcePage": "https://www.startupteens.de/",
+      "assetUrl": "https://www.startupteens.de/fileadmin/_processed_/5/9/csm_startupteens_freigestellt_df6b80099e.png"
+    },
+    {
+      "organization": "LANXESS",
+      "file": "lanxess.svg",
+      "sourcePage": "https://lanxess.com/",
+      "inlineSelector": "svg.logo__main",
+      "note": "Header SVG extracted; paths and colours unchanged. A viewBox matching the original 112 × 44 viewport was added for proportional scaling."
+    }
+  ]
+}

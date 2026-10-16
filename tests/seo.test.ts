@@ -163,15 +163,28 @@ describe("crawlable production pages", () => {
     expect(locations.sort()).toEqual(Object.values(SEO_PAGES).map((page) => SITE_URL + page.path).sort());
   });
 
-  test("the FAQ, primary content, and internal anchors exist in the initial HTML", async () => {
-    const html = await (await fetch(baseUrl + "/")).text();
-    const parsed = await inspectHtml(html);
-    expect(html).toContain("Wie wird aus CO₂ Bio-Flüssigdünger?");
-    expect(html).toContain("Welche Kosten sind für das System vorgesehen?");
-    expect(parsed.ids).toContain("fragen");
-    for (const href of parsed.links) {
-      if (href.startsWith("#") || href.startsWith("/#")) {
-        expect(parsed.ids).toContain(href.slice(href.indexOf("#") + 1));
+  test("the home links to product details on the solution page and both pages have valid anchors", async () => {
+    const homeHtml = await (await fetch(baseUrl + "/")).text();
+    const solutionHtml = await (await fetch(baseUrl + "/loesung")).text();
+    const home = await inspectHtml(homeHtml);
+    const solution = await inspectHtml(solutionHtml);
+    expect(home.links).toContain("/loesung");
+    expect(home.links).toContain("/loesung#fragen");
+    expect(homeHtml).not.toContain("data-calculator");
+    expect(homeHtml).not.toContain("data-process-step");
+    expect(homeHtml).not.toContain('name="air2growth-faq"');
+    expect(solutionHtml).not.toContain("data-calculator");
+    expect(solution.ids).not.toContain("rechenmodell");
+    expect(solutionHtml).toContain("data-process-step");
+    expect(solutionHtml).toContain("Wie wird aus CO₂ Bio-Flüssigdünger?");
+    expect(solutionHtml).toContain("Welche Kosten sind für das System vorgesehen?");
+    const pages = new Map([["/", home], ["/loesung", solution]]);
+    for (const [path, parsed] of pages) {
+      for (const href of parsed.links) {
+        const target = new URL(href, SITE_URL + path);
+        if (target.origin === SITE_URL && target.hash) {
+          expect(pages.get(target.pathname)?.ids).toContain(decodeURIComponent(target.hash.slice(1)));
+        }
       }
     }
   });

@@ -1,0 +1,67 @@
+/* The complete logo list remains visible without animation or JavaScript. */
+[data-supporters] [data-logo-viewport] {
+  overflow: hidden;
+}
+
+[data-supporters] [data-logo-group] {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 24px 32px;
+  margin: 0;
+  padding: 8px 0;
+  list-style: none;
+}
+
+[data-supporters] [data-logo-group] > li {
+  display: flex;
+  flex: 1 1 120px;
+  align-items: center;
+  justify-content: center;
+  min-width: 120px;
+  max-width: 180px;
+  height: 88px;
+}
+
+[data-supporters] [data-logo-group] img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 68px;
+  object-fit: contain;
+}
+
+[data-supporters] [data-logo="yfn"] img { width: 145px; }
+[data-supporters] [data-logo="unternehmertum"] img { width: 115px; }
+[data-supporters] [data-logo="jugend-gruendet"] img { width: 166px; }
+[data-supporters] [data-logo="startup-teens"] img { width: 180px; }
+[data-supporters] [data-logo="lanxess"] img { width: 164px; }
+
+[data-supporters][data-marquee-ready] [data-logo-viewport] {
+  mask-image: linear-gradient(to right, transparent, black 32px, black calc(100% - 32px), transparent);
+}
+
+[data-supporters][data-marquee-ready] [data-logo-track] {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+}
+
+[data-supporters][data-marquee-ready] [data-logo-group] {
+  flex: 0 0 auto;
+  flex-wrap: nowrap;
+  gap: 56px;
+  padding: 8px 28px;
+}
+
+[data-supporters][data-marquee-ready] [data-logo-group] > li {
+  flex: 0 0 180px;
+  width: 180px;
+  min-width: 180px;
+}
+
+[data-supporters] [data-marquee-toggle][hidden] {
+  display: none;
+}

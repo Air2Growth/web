@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="680" height="570" viewBox="0 0 680 570" fill="none" role="img" aria-labelledby="title desc">
+  <title id="title">Aus Luft wird die Grundlage für Dünger</title>
+  <desc id="desc">Ein modularer CO₂-Filter ist mit einem geschlossenen Mikroalgentank verbunden. Die Algen werden zu Flüssigdünger für Pflanzen verarbeitet. Vereinfachte Prinzipdarstellung, keine technische Bauzeichnung.</desc>
+  <defs>
+    <linearGradient id="liquid" x1="326" y1="221" x2="468" y2="425" gradientUnits="userSpaceOnUse"><stop stop-color="#b4d19b"/><stop offset="1" stop-color="#729c65"/></linearGradient>
+    <linearGradient id="glass" x1="310" x2="492" gradientUnits="userSpaceOnUse"><stop stop-color="white" stop-opacity=".85"/><stop offset=".45" stop-color="white" stop-opacity=".25"/><stop offset="1" stop-color="white" stop-opacity=".7"/></linearGradient>
+  </defs>
+  <circle cx="381" cy="283" r="208" fill="#e1ebe0"/>
+  <ellipse cx="362" cy="476" rx="232" ry="16" fill="#183e33" fill-opacity=".05"/>
+  <g font-family="Arial,sans-serif" fill="#183e33">
+    <text x="62" y="172" font-size="18">Umgebungsluft</text>
+    <text x="354" y="83" font-size="18">Mikroalgen</text>
+    <text x="531" y="326" font-size="17">Bio-Flüssigdünger</text>
+    <text x="129" y="510" font-size="16">CO₂-Filter</text>
+  </g>
+  <g stroke="#39784b" stroke-width="1.7" stroke-linecap="round">
+    <path d="M38 213h72c25 0 26-30 5-30-10 0-14 7-14 13M57 235h51M33 257h64c25 0 26 28 6 28-9 0-13-6-13-12"/>
+    <path d="M399 98v30m192 208v21" stroke-opacity=".5" stroke-dasharray="2 5"/>
+  </g>
+  <g stroke="#183e33" stroke-width="1.8" stroke-linejoin="round">
+    <path d="m132 260 37-21 65 37v165l-37 22-65-38Z" fill="#d5e0d5"/>
+    <path d="m132 260 65 38 37-22m-37 22v165"/>
+    <path d="m144 284 41 24v104l-41-24Z" fill="#f8faf6"/>
+    <path d="m152 301 25 14m-25-1 25 14m-25-1 25 14m-25-1 25 14m-25-1 25 14m-25-1 25 14m-25-1 25 14" stroke="#8ba68a"/>
+    <path d="M142 431v22m55 10v17m27-33v20" stroke-width="3" stroke-linecap="round"/>
+    <path d="m207 312 16-9v42l-16 9Z" fill="#b4c8b1"/>
+    <path d="M234 372h33c15 0 22-9 22-23v-89h24" stroke="#b4c8b1" stroke-width="9"/>
+    <path d="M234 372h33c15 0 22-9 22-23v-89h24"/>
+  </g>
+  <g>
+    <path d="M318 187c0-21 36-38 81-38s81 17 81 38v222c0 24-36 43-81 43s-81-19-81-43Z" fill="url(#glass)" stroke="#183e33" stroke-width="1.8"/>
+    <path d="M328 266c0-17 32-30 71-30s71 13 71 30v141c0 18-32 33-71 33s-71-15-71-33Z" fill="url(#liquid)"/>
+    <ellipse cx="399" cy="266" rx="71" ry="30" fill="#c2dca8" stroke="#6d945e" stroke-width="1.2"/>
+    <ellipse cx="399" cy="187" rx="81" ry="38" stroke="#183e33" stroke-width="1.8"/>
+    <ellipse cx="399" cy="180" rx="60" ry="24" stroke="#183e33" stroke-opacity=".25" stroke-width="1.2"/>
+    <path d="M340 207v199m12-190v201" stroke="white" stroke-opacity=".6" stroke-width="4" stroke-linecap="round"/>
+    <path d="M378 151v-24c0-8 42-8 42 0v24" fill="#d5e0d5" stroke="#183e33" stroke-width="1.8"/>
+    <ellipse cx="399" cy="127" rx="21" ry="6" fill="#eff4f0" stroke="#183e33" stroke-width="1.8"/>
+    <path d="M308 434c0 24 41 42 91 42s91-18 91-42v-9c0 24-41 42-91 42s-91-18-91-42Z" fill="#183e33"/>
+    <path d="M334 460v22m131-22v22" stroke="#183e33" stroke-width="5" stroke-linecap="round"/>
+    <rect x="372" y="209" width="54" height="21" rx="10.5" fill="white" fill-opacity=".85"/>
+    <circle cx="385" cy="219.5" r="3.5" fill="#39784b"/>
+    <path d="M396 219.5h18" stroke="#39784b" stroke-width="1.5" stroke-linecap="round"/>
+    <g fill="#39784b" fill-opacity=".75">
+      <ellipse cx="360" cy="311" rx="10" ry="4" transform="rotate(-34 360 311)"/>
+      <ellipse cx="419" cy="306" rx="10" ry="4" transform="rotate(25 419 306)"/>
+      <ellipse cx="442" cy="357" rx="10" ry="4" transform="rotate(-38 442 357)"/>
+      <ellipse cx="379" cy="390" rx="10" ry="4" transform="rotate(28 379 390)"/>
+      <ellipse cx="399" cy="347" rx="9" ry="4" transform="rotate(-19 399 347)"/>
+      <ellipse cx="432" cy="410" rx="9" ry="4" transform="rotate(-14 432 410)"/>
+    </g>
+    <g stroke="white" stroke-opacity=".8" stroke-width="1.2"><circle cx="377" cy="294" r="4"/><circle cx="446" cy="326" r="5"/><circle cx="362" cy="365" r="3"/><circle cx="410" cy="395" r="4"/><circle cx="401" cy="320" r="2"/></g>
+  </g>
+  <g stroke="#183e33" stroke-width="1.8" stroke-linejoin="round">
+    <path d="M480 388h21c15 0 23 8 23 22v24h23" stroke="#b4c8b1" stroke-width="9"/>
+    <path d="M480 388h21c15 0 23 8 23 22v24h23"/>
+    <path d="M547 384h42l18 18v65h-60Z" fill="#d0dfb8"/>
+    <path d="M558 384v-17h19v17m12 0v18h18"/>
+    <path d="M558 420h36m-36 8h23" stroke="#39784b"/>
+    <path d="M636 465v-72m0 39c-23 0-33-15-33-30 23 0 33 14 33 30Zm0-18c0-20 12-34 33-34 0 21-12 34-33 34Z" fill="#afcb96" stroke="#39784b"/>
+    <path d="M620 469h33m-28 8h23" stroke="#39784b" stroke-linecap="round"/>
+  </g>
+  <g fill="#39784b"><circle cx="254" cy="372" r="3"/><circle cx="289" cy="306" r="3"/><circle cx="500" cy="388" r="3"/></g>
+</svg>

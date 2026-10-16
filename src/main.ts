@@ -4,6 +4,15 @@ import "./site.js";
 import "./experience.js";
 // Poster styles remain available when the optional animation chunk cannot load.
 import "./function-tour.css";
+import "./supporters.css";
+
+const supporters = document.querySelector<HTMLElement>("[data-supporters]");
+if (supporters) {
+  import("./supporters.js").then(({ initSupporters }) => {
+    const cleanup = initSupporters(supporters);
+    if (import.meta.hot) import.meta.hot.dispose(cleanup);
+  }).catch((error) => console.error("The logo animation could not load; the complete supporter list remains visible.", error));
+}
 
 const tour = document.querySelector<HTMLElement>("[data-function-tour]");
 if (tour) {
