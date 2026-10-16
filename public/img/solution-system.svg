@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="740" height="540" viewBox="0 0 740 540" fill="none" role="img" aria-labelledby="title desc">
+  <title id="title">Von der Luft auf Ihr Feld</title>
+  <desc id="desc">Illustration des Systemprinzips: Ein Filter gewinnt CO₂ aus Umgebungsluft. Verbundene Kultivierungsbehälter enthalten grüne Mikroalgen. Aus der Ernte soll Flüssigdünger für die Pflanzen auf dem Hof entstehen. Keine technische Bauzeichnung.</desc>
+  <defs>
+    <linearGradient id="culture" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#bad27e"/><stop offset="1" stop-color="#639762"/></linearGradient>
+    <linearGradient id="vessel" x1="0" x2="1"><stop stop-color="white" stop-opacity=".65"/><stop offset=".45" stop-color="white" stop-opacity=".08"/><stop offset="1" stop-color="white" stop-opacity=".35"/></linearGradient>
+    <g id="plant" stroke="#39784b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M0 0v-49"/><path d="M0-22c-20 0-29-12-29-26 18 0 29 10 29 26Z" fill="#bad27e"/><path d="M0-34c0-17 11-29 29-29 0 17-11 29-29 29Z" fill="#8fb279"/></g>
+    <g id="culture-tank" stroke="#183e33" stroke-width="1.7" stroke-linejoin="round"><path d="M0 0v173c0 9 12 16 27 16s27-7 27-16V0" fill="url(#vessel)"/><path d="M5 54v117c0 7 10 12 22 12s22-5 22-12V54" fill="url(#culture)" stroke="none"/><ellipse cx="27" cy="54" rx="22" ry="8" fill="#bad27e" stroke="#639762"/><ellipse cx="27" rx="27" ry="11" fill="#e0e9df"/><path d="M7 7v156m6-154v157" stroke="white" stroke-opacity=".75" stroke-width="2.5"/><ellipse cx="35" cy="82" rx="5" ry="2" transform="rotate(-30 35 82)" fill="#39784b" stroke="none"/><ellipse cx="20" cy="123" rx="5" ry="2" transform="rotate(30 20 123)" fill="#39784b" stroke="none"/><ellipse cx="33" cy="159" rx="5" ry="2" transform="rotate(-30 33 159)" fill="#39784b" stroke="none"/><circle cx="32" cy="110" r="2.5" stroke="white"/><circle cx="17" cy="150" r="2" stroke="white"/><path d="M9 187v16m36-16v16" stroke-width="3"/></g>
+  </defs>
+  <path d="M79 183C154 43 395 11 571 130" stroke="#cbd9ca" stroke-width="1.5" stroke-dasharray="4 8"/>
+  <circle cx="590" cy="113" r="34" fill="#e3d79a" fill-opacity=".7"/>
+  <g stroke="#b7c9b7" stroke-width="1.5" stroke-linecap="round"><path d="M590 65V54m0 107v11m48-59h11m-107 0h-11m93-34 8-8m-76 76-8 8m76-8 8 8m-76-76-8-8"/></g>
+  <path d="m36 355 304-175 364 207-304 131Z" fill="#dfe8dd"/>
+  <path d="m36 355 364 163 304-131v14L400 532 36 369Z" fill="#cbdac8"/>
+  <g stroke="#c0d0bd" stroke-width="1.4"><path d="m60 352 341 152 278-120M87 336l344 154M116 319l346 156M146 301l348 158M177 283l349 160M209 265l350 162M241 247l350 164M273 229l349 166"/></g>
+  <g stroke="#39784b" stroke-width="1.7" stroke-linecap="round"><path d="M54 191h84c24 0 24-27 5-27-9 0-14 6-14 13M72 212h59M42 233h89c25 0 25 26 6 26-9 0-14-6-14-12"/></g>
+  <g stroke="#183e33" stroke-width="1.7" stroke-linejoin="round">
+    <path d="m151 229 55-32 72 41v139l-55 32-72-41Z" fill="#f8faf6"/>
+    <path d="m223 270 55-32v139l-55 32Z" fill="#cbd9c9"/>
+    <path d="m151 229 72 41 55-32-72-41Z" fill="#e2eadd"/>
+    <path d="M223 270v139M151 368v13m72 28v13m55-45v13"/>
+    <path d="m165 257 43 25v76l-43-25Z" fill="#e4ebe0"/>
+    <path d="m173 271 28 16m-28-5 28 16m-28-5 28 16m-28-5 28 16m-28-5 28 16" stroke="#94ac91" stroke-width="3"/>
+    <path d="m164 347 44 25v13l-44-25Z" fill="#183e33" stroke="none"/>
+    <path d="m238 282 24-14v26l-24 14Z" fill="#183e33"/>
+    <path d="m244 285 11-6m-11 13 7-4" stroke="#bad27e"/>
+    <circle cx="212" cy="235" r="5" fill="#bad27e" stroke="none"/>
+  </g>
+  <path d="M278 332h21c14 0 18-10 18-20V193c0-10 7-17 17-17h20" stroke="#8eaa8e" stroke-width="8" stroke-linejoin="round"/>
+  <path d="M278 332h21c14 0 18-10 18-20V193c0-10 7-17 17-17h20" stroke="#183e33" stroke-width="1.5" stroke-linejoin="round"/>
+  <path d="m304 231 13-8 12 8-12 8Z" fill="#39784b"/>
+  <g stroke="#183e33" stroke-width="1.7" stroke-linejoin="round"><path d="m332 354 100-58 94 54-100 58Z" fill="#cbd9c9"/><path d="m332 354 94 54 100-58v16l-100 58-94-54Z" fill="#a8bda2"/><path d="M343 370v28m82 26v17m91-69v21" stroke-width="4"/></g>
+  <use href="#culture-tank" x="434" y="145"/>
+  <use href="#culture-tank" x="389" y="171"/>
+  <use href="#culture-tank" x="344" y="197"/>
+  <g stroke="#183e33" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M371 197v-28l90-52v28"/><path d="M416 171v-28"/><path d="m405 138 10-6 11 6-11 6Z" fill="#39784b"/><path d="M416 132v-13m-10 0h20"/></g>
+  <g stroke="#183e33" stroke-width="1.5" stroke-linejoin="round"><path d="m345 349 41-24 26 15v43l-41 24-26-15Z" fill="#f8faf6"/><path d="m371 364 41-24v43l-41 24Z" fill="#d4dfce"/><path d="m377 363 28-16v20l-28 16Z" fill="#183e33"/><path d="m383 364 15-9" stroke="#bad27e"/><circle cx="383" cy="384" r="2" fill="#39784b" stroke="none"/></g>
+  <path d="M486 318h22c10 0 16 7 16 17v27h29" stroke="#8eaa8e" stroke-width="7" stroke-linejoin="round"/>
+  <path d="M486 318h22c10 0 16 7 16 17v27h29" stroke="#183e33" stroke-width="1.5" stroke-linejoin="round"/>
+  <g stroke="#183e33" stroke-width="1.7" stroke-linejoin="round"><path d="m550 343 24-14 34 19v49l-24 14-34-19Z" fill="#f8faf6"/><path d="m584 363 24-15v49l-24 14Z" fill="#cbd9c9"/><path d="m550 343 34 20 24-15-34-19Z" fill="#e2eadd"/><path d="M562 343v-17l10-6 10 6v14"/><path d="m558 365 18 10v15l-18-10Z" fill="#39784b" stroke="none"/></g>
+  <path d="m580 442 61-36 51 29-61 36Z" fill="#b5c8a5"/>
+  <path d="m580 442 51 29 61-36v8l-61 36-51-29Z" fill="#94b088"/>
+  <use href="#plant" transform="translate(609 437) scale(.72)"/>
+  <use href="#plant" transform="translate(641 443) scale(.85)"/>
+  <use href="#plant" transform="translate(668 425) scale(.65)"/>
+  <g fill="#183e33" font-family="Georgia,serif"><text x="66" y="139" font-size="35">CO₂</text></g>
+  <g fill="#39784b"><circle cx="86" cy="115" r="2"/><circle cx="126" cy="135" r="3"/><circle cx="148" cy="103" r="2.5"/></g>
+</svg>

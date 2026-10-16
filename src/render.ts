@@ -7,7 +7,7 @@
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { renderSeoTags } from "./seo.ts";
+import { renderSeoTags, SEO_PAGES } from "./seo.ts";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 export const TEMPLATES_DIR = path.join(HERE, "..", "templates");
@@ -23,6 +23,8 @@ export const MANIFEST: Record<string, string> = {
   "head-datenschutz": "partials/head-datenschutz.html",
   "head-assets": "partials/head-assets.html",
   "head-function": "partials/head-function.html",
+  "head-loesung": "partials/head-loesung.html",
+  "solution-page": "partials/solution-page.html",
   "function-tour": "partials/function-tour.html",
   "function-illustration": "partials/function-illustration.html",
   nav: "partials/nav.html",
@@ -75,6 +77,11 @@ export async function renderShell(shellFile: string): Promise<string> {
   }
   INCLUDE_RE.lastIndex = 0;
   if (INCLUDE_RE.test(html)) throw new Error("unresolved includes remain");
+  // Mark links to this page in the initial HTML, including the mobile menu.
+  const currentPath = SEO_PAGES[shellFile]?.path;
+  html = html.replace(/<a\b[^>]*\bhref="([^"]+)"[^>]*>/g, (tag, href: string) =>
+    href === currentPath ? tag.replace("<a ", '<a aria-current="page" ') : tag,
+  );
   const seoParts = html.split("<!-- @seo -->");
   if (seoParts.length !== 2) throw new Error(`expected one SEO marker in ${shellFile}`);
   return seoParts[0] + renderSeoTags(shellFile) + seoParts[1];

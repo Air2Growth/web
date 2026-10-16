@@ -1,7 +1,7 @@
 // Air2Growth — Vite config (single frontend pipeline).
 // Dev: `bun run dev` starts Vite here (0.0.0.0:3000, visible frontend) plus
 // the Bun API backend on 127.0.0.1:3001 (see scripts/dev.ts). /api proxied.
-// Prod: `bun run build` writes dist/ (3 HTML + hashed CSS/JS); `bun run start`
+// Prod: `bun run build` writes dist/ (5 HTML + hashed CSS/JS); `bun run start`
 // serves dist/ + APIs via Bun on 0.0.0.0:3000 (see server.ts).
 // Verified against installed vite@7 (Rollup-based): multi-page entries via
 // `build.rollupOptions.input` (NOT rolldownOptions — that is Vite 8+).
@@ -19,6 +19,7 @@ const SHELLS: Record<string, string> = {
   "impressum.html": "impressum.html",
   "datenschutz.html": "datenschutz.html",
   "function.html": "function.html",
+  "loesung.html": "loesung.html",
 };
 
 // Canonical template heads already reference the Vite module entry
@@ -103,6 +104,7 @@ export default defineConfig({
         impressum: resolve(import.meta.dirname, "impressum.html"),
         datenschutz: resolve(import.meta.dirname, "datenschutz.html"),
         function: resolve(import.meta.dirname, "function.html"),
+        loesung: resolve(import.meta.dirname, "loesung.html"),
       },
     },
   },
