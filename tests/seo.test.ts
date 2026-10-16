@@ -13,11 +13,16 @@ async function inspectHtml(html: string) {
   const ids: string[] = [];
   const links: string[] = [];
   const scripts: string[] = [];
+  const images: string[] = [];
   let title = "";
   let headings = 0;
   let language = "";
   let schemaText = "";
   let schemaCount = 0;
+  let breadcrumbCount = 0;
+  let breadcrumbHome = "";
+  let breadcrumbCurrent = "";
+  const breadcrumbLinks: string[] = [];
 
   await new HTMLRewriter()
     .on("html", { element: (element) => { language = element.getAttribute("lang") ?? ""; } })
@@ -30,14 +35,21 @@ async function inspectHtml(html: string) {
     .on("[id]", { element: (element) => { ids.push(element.getAttribute("id") ?? ""); } })
     .on("a[href]", { element: (element) => { links.push(element.getAttribute("href") ?? ""); } })
     .on("h1", { element: () => { headings += 1; } })
+    .on("nav[data-breadcrumbs]", { element: () => { breadcrumbCount += 1; } })
+    .on("nav[data-breadcrumbs] a", {
+      element: (element) => { breadcrumbLinks.push(element.getAttribute("href") ?? ""); },
+      text: (chunk) => { breadcrumbHome += chunk.text; },
+    })
+    .on('nav[data-breadcrumbs] [aria-current="page"]', { text: (chunk) => { breadcrumbCurrent += chunk.text; } })
     .on("script[src]", { element: (element) => { scripts.push(element.getAttribute("src") ?? ""); } })
+    .on("img[src]", { element: (element) => { images.push(element.getAttribute("src") ?? ""); } })
     .on('script[type="application/ld+json"]', {
       element: () => { schemaCount += 1; },
       text: (chunk) => { schemaText += chunk.text; },
     })
     .transform(new Response(html)).text();
 
-  return { title, metadata, canonicals, ids, links, headings, language, scripts, schemaCount, schema: JSON.parse(schemaText) };
+  return { title, metadata, canonicals, ids, links, headings, language, scripts, images, schemaCount, breadcrumbCount, breadcrumbHome, breadcrumbCurrent, breadcrumbLinks, schema: JSON.parse(schemaText) };
 }
 
 function decodeText(text: string) {
@@ -85,6 +97,23 @@ beforeAll(async () => {
 afterAll(async () => { await stopServer?.(); });
 
 describe("crawlable production pages", () => {
+  test("page titles and descriptions are distinct across all languages", () => {
+    const pages = Object.values(SITE_PAGES);
+    expect(new Set(pages.map((page) => page.title)).size).toBe(pages.length);
+    expect(new Set(pages.map((page) => page.description)).size).toBe(pages.length);
+  });
+
+  test("Vercel explicitly redirects homepage index aliases to the same canonical destinations", async () => {
+    const config = await Bun.file(resolve(root, "vercel.json")).json();
+    expect(config.cleanUrls).toBe(true);
+    expect(config.trailingSlash).toBe(false);
+    for (const page of Object.values(SITE_PAGES).filter((page) => page.shellFile === "index.html")) {
+      for (const source of page.aliases.filter((alias) => alias.includes("index"))) {
+        expect(config.redirects).toContainEqual({ source, destination: page.path, permanent: true });
+      }
+    }
+  });
+
   for (const [file, page] of Object.entries(SITE_PAGES)) {
     test(`${page.path} has unique, consistent metadata before JavaScript`, async () => {
       const response = await fetch(baseUrl + page.path);
@@ -107,6 +136,7 @@ describe("crawlable production pages", () => {
       expect(new Set(parsed.ids).size).toBe(parsed.ids.length);
       expect(html).not.toContain("<!-- @seo -->");
       expect(html).not.toContain("<!-- @include");
+      expect(html).not.toContain("<!-- @breadcrumbs");
 
       const nodes = parsed.schema["@graph"];
       const graphIds = new Set(nodes.map((node: { "@id": string }) => node["@id"]));
@@ -119,6 +149,23 @@ describe("crawlable production pages", () => {
       expect(webpage.inLanguage).toBe(page.language ?? "de-DE");
       expect(graphIds.has(webpage.isPartOf["@id"])).toBe(true);
       expect(graphIds.has(webpage.about["@id"])).toBe(true);
+      expect(graphIds.has(webpage.primaryImageOfPage["@id"])).toBe(true);
+      const breadcrumb = nodes.find((node: { "@type": string }) => node["@type"] === "BreadcrumbList");
+      if (page.shellFile === "index.html") {
+        expect(breadcrumb).toBeUndefined();
+        expect(webpage.breadcrumb).toBeUndefined();
+        expect(parsed.breadcrumbCount).toBe(0);
+      } else {
+        expect(parsed.breadcrumbCount).toBe(1);
+        expect(webpage.breadcrumb["@id"]).toBe(breadcrumb["@id"]);
+        expect(breadcrumb.itemListElement).toEqual([
+          { "@type": "ListItem", position: 1, name: parsed.breadcrumbHome, item: SITE_URL + parsed.breadcrumbLinks[0] },
+          { "@type": "ListItem", position: 2, name: parsed.breadcrumbCurrent, item: SITE_URL + page.path },
+        ]);
+        expect(parsed.breadcrumbHome).toBe(page.locale === "de" ? "Startseite" : "Home");
+        expect(parsed.breadcrumbLinks).toEqual([page.locale === "de" ? "/" : "/en"]);
+        expect(parsed.breadcrumbCurrent).toBe(page.breadcrumbLabel);
+      }
       const organization = nodes.find((node: { "@type": string }) => node["@type"] === "Organization");
       expect(organization.logo.contentUrl).toBe(SITE_URL + "/img/logo.svg");
     });
@@ -161,6 +208,25 @@ describe("crawlable production pages", () => {
     const xml = await sitemap.text();
     const locations = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
     expect(locations.sort()).toEqual(Object.values(SITE_PAGES).map((page) => SITE_URL + page.path).sort());
+  });
+
+  test("all page images and social previews resolve, including generated English diagrams", async () => {
+    const images = new Set<string>();
+    for (const page of Object.values(SITE_PAGES)) {
+      const parsed = await inspectHtml(await (await fetch(baseUrl + page.path)).text());
+      for (const image of [...parsed.images, ...(parsed.metadata.get("og:image") ?? [])]) {
+        const url = new URL(image, SITE_URL + page.path);
+        expect(url.origin).toBe(SITE_URL);
+        images.add(url.pathname);
+      }
+    }
+    expect(images.has("/img/solution-system-en.svg")).toBe(true);
+    for (const image of images) {
+      const response = await fetch(baseUrl + image);
+      expect(response.status, image).toBe(200);
+      expect(response.headers.get("content-type"), image).toStartWith("image/");
+      await response.body?.cancel();
+    }
   });
 
   test("the home links to product details on the solution page and both pages have valid anchors", async () => {

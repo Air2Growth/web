@@ -27,15 +27,15 @@ URLs bleiben erhalten; Englisch verwendet `/en` und übersetzte Pfade:
 | `/impressum` | `/en/legal-notice` |
 | `/datenschutz` | `/en/privacy` |
 
-Ein frühes Skript im HTML-Head wählt beim Besuch einer deutschen URL die erste
-unterstützte Sprache aus `navigator.languages`; ohne Treffer bleibt Deutsch.
-Regionale Varianten wie `en-US` und `de-CH` werden erkannt. Ein direkter
-englischer Link öffnet immer die englische Seite. Die DE-/EN-Links wechseln
-zur entsprechenden Seite und erhalten Query-Parameter sowie Abschnittsanker.
-Eine manuelle Auswahl hat Vorrang vor der Browsersprache und wird als
-`air2growth-language` lokal gespeichert. Bei gesperrtem Speicher bleiben
-Sprachlinks mit `?lang=de` bzw. `?lang=en` funktionsfähig. Ohne JavaScript sind
-beide Sprachversionen über normale Links vollständig lesbar.
+Jede Sprach-URL ist stabil: deutsche URLs bleiben immer Deutsch,
+`/en`-URLs immer Englisch — unabhängig von Browsersprache, früher
+gespeicherten Einstellungen oder alten `?lang=...`-Parametern. Es gibt
+keine automatische Umschaltung, keine gespeicherte Sprachpräferenz und
+keine `?lang`-Weitergabe; alte `?lang`-Parameter werden ignoriert und aus
+der Adresszeile sowie aus Sprachlinks entfernt. Die DE-/EN-Links wechseln
+zur entsprechenden Seite und erhalten übrige Query-Parameter sowie
+Abschnittsanker. Ohne JavaScript sind beide Sprachversionen über normale
+Links vollständig lesbar.
 
 `src/locale-paths.ts` ordnet die Seiten einander zu. Vite und Bun verwenden
 `SITE_PAGES` aus `src/seo.ts` für alle 16 vorgerenderten HTML-Seiten. Die
@@ -51,8 +51,8 @@ Die englischen Systemgrafiken und die zweisprachige Sitemap werden aus den
 gemeinsamen Quellen gebaut. Canonical-, hreflang-, Open-Graph- und JSON-LD-
 Metadaten sind sprachspezifisch. Vercels Clean-URLs gelten auch unter `/en`.
 
-Prüfung: `bun run test:i18n` baut die Website und prüft Browserauswahl,
-gespeicherte/gesperrte Präferenzen, Katalogabdeckung, alle 16 Seiten,
+Prüfung: `bun run test:i18n` baut die Website und prüft stabile Sprach-URLs,
+ignorierte Alt-Parameter/Speicherwerte, Katalogabdeckung, alle 16 Seiten,
 Sprachverweise, lokale Anker und Formulartexte. Die Tests laufen lokal,
 ohne Deployment oder externe Übersetzungsdienste.
 
@@ -142,6 +142,40 @@ räumen Animation, Beobachter und Ereignisbehandlung auf.
 
 Die gekapselten Layoutregeln liegen in `src/supporters.css`. Die übrigen
 Startseitenabschnitte werden dadurch nicht verändert.
+
+## SEO-Verfeinerung (16.10.2026)
+
+Die deutschen und englischen Suchmetadaten für Startseite, Lösung und
+Funktionsweise benennen CO₂, Mikroalgen und Flüssigdünger konkreter; die
+Beschreibungen kennzeichnen das System weiterhin als Entwicklungsvorhaben.
+Auch die Hauptüberschrift der Tour beschreibt den Prozess in beiden Sprachen.
+
+`src/seo.ts` liefert die gemeinsame Quelle für sichtbare Breadcrumbs und
+`BreadcrumbList`-JSON-LD auf allen Unterseiten. Die Marker
+`<!-- @breadcrumbs -->` bzw. `<!-- @breadcrumbs light -->` werden im Renderer
+durch lokalisierte Navigation mit kanonischen Zielen ersetzt. Jede `WebPage`
+verweist außerdem auf das vorhandene Vorschaubild im strukturierten Graphen.
+Explizite Vercel-Weiterleitungen führen `/index`, `/index.html`, `/en/index`
+und `/en/index.html` auf die jeweilige kanonische Startseite; Bun und Vite
+verwenden dieselben Aliasziele aus `SITE_PAGES`.
+
+`src/hero-loading.js` startet das dekorative Video erst nach Seitenladung,
+Bilddekodierung und zwei Animationsframes. In versteckten Tabs, außerhalb des
+sichtbaren Heros, bei reduzierter Bewegung, Datensparmodus oder einer als
+2G/3G erkannten Verbindung bleibt das Standbild erhalten. Beim Zurückscrollen
+zum Hero kann das Video auf einer geeigneten Verbindung starten. Die
+Unterstützer-Logos laden verzögert; die Navigation konkurriert nicht mehr
+mit hoher Bildpriorität um das Laden des Hero-Bilds.
+
+`bun run test:i18n` baut alle 16 Seiten und prüft SEO, Sprachversionen,
+Breadcrumb-Übereinstimmung und verzögerten Videostart. Die Videotests laufen
+ohne Downloads und prüfen insbesondere Hintergrundtabs, Abschnittslinks,
+Verbindungseinstellungen und einen Abbruch während der Bilddekodierung.
+
+Grundlage: Google Search Central zu
+[Seitentiteln](https://developers.google.com/search/docs/appearance/title-link),
+[Breadcrumbs](https://developers.google.com/search/docs/appearance/structured-data/breadcrumb)
+und [Bildern](https://developers.google.com/search/docs/appearance/google-images).
 
 ## Technisches SEO (15.10.2026)
 

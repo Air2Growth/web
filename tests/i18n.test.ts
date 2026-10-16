@@ -2,64 +2,138 @@ import { describe, expect, test } from "bun:test";
 import { runInNewContext } from "node:vm";
 import { readFile } from "node:fs/promises";
 import { renderShell, renderTemplate } from "../src/render.ts";
-import { loadCatalog, translateHtml, translationKey } from "../src/i18n-html.ts";
-import { detectLocale, initLanguageLinks } from "../src/locale-browser.js";
+import { languageSwitcher, loadCatalog, translateHtml, translationKey } from "../src/i18n-html.ts";
+import * as localeBrowser from "../src/locale-browser.js";
+import { initLanguageLinks } from "../src/locale-browser.js";
 import { localizedHref, PAGE_PATHS } from "../src/locale-paths.ts";
 import { SEO_PAGES, SITE_PAGES, SITE_URL } from "../src/seo.ts";
 import { message } from "../src/messages.ts";
 
-function detect({ path = "/loesung", locale = "de", languages = ["en-US"], saved = null, blocked = false }: { path?: string; locale?: string; languages?: string[]; saved?: string | null; blocked?: boolean } = {}) {
-  let url = new URL(path, SITE_URL);
-  let redirected: string | null = null;
-  const window = {
-    location: { get href() { return url.href; }, replace(value: string) { redirected = value; } },
-    localStorage: { getItem() { if (blocked) throw new Error("blocked"); return saved; }, setItem(_key: string, value: string) { if (blocked) throw new Error("blocked"); saved = value; } },
-    history: { state: null, replaceState(_state: unknown, _unused: string, value: string) { url = new URL(value, SITE_URL); } },
+function runLinks({ url = "/loesung", languages = ["en-US"], saved = null, blocked = false }: { url?: string; languages?: string[]; saved?: string | null; blocked?: boolean } = {}) {
+  let href = new URL(url, SITE_URL).href;
+  let cleaned: string | null = null;
+  let storageReads = 0;
+  let storageWrites = 0;
+  const callbacks: Record<string, () => void> = {};
+  function link(hrefValue: string, locale?: string) {
+    let attribute = hrefValue;
+    return {
+      get href() { return new URL(attribute, href).href; },
+      set href(value: string) { attribute = value; },
+      dataset: { localeLink: locale },
+      hasAttribute: () => Boolean(locale),
+    };
+  }
+  const switches = [link("/loesung", "de"), link("/en/solution", "en")];
+  const navigation = [link("/ueber-uns"), link("#fragen"), link("https://other.test/")];
+  const all = [...switches, ...navigation];
+  const document = {
+    querySelectorAll: (selector: string) => (selector.includes("data-locale-link") ? switches : all),
+    addEventListener() {},
   };
-  runInNewContext(`(${detectLocale.toString()})(${JSON.stringify({ locale, paths: PAGE_PATHS["loesung.html"] })})`, { window, navigator: { languages }, URL });
-  return { redirected, saved, path: url.pathname + url.search + url.hash };
+  const window = {
+    location: {
+      get href() { return href; },
+      replace() { throw new Error("stable URLs never redirect"); },
+    },
+    history: {
+      state: null,
+      replaceState(_state: unknown, _unused: string, value: string) {
+        cleaned = value;
+        href = new URL(value, SITE_URL).href;
+      },
+    },
+    localStorage: {
+      getItem() { storageReads++; if (blocked) throw new Error("blocked"); return saved; },
+      setItem() { storageWrites++; if (blocked) throw new Error("blocked"); },
+    },
+    addEventListener: (event: string, callback: () => void) => { callbacks[event] = callback; },
+  };
+  runInNewContext(`(${initLanguageLinks.toString()})()`, {
+    window,
+    document,
+    navigator: { languages, language: languages[0] },
+    URL,
+    URLSearchParams,
+    AbortController,
+  });
+  return {
+    href, cleaned, switches, navigation, callbacks, storageReads, storageWrites,
+    setLocation(value: string) { href = new URL(value, SITE_URL).href; },
+  };
 }
 
-describe("browser language selection", () => {
-  test("matches regional languages in preference order and preserves query and hash", () => {
-    expect(detect({ path: "/loesung?ref=a%20b#fragen", languages: ["fr-FR", "en-GB", "de-DE"] }).redirected).toBe("/en/solution?ref=a%20b#fragen");
-    expect(detect({ languages: ["de-CH", "en-US"] }).redirected).toBeNull();
-    expect(detect({ languages: ["fr-FR"] }).redirected).toBeNull();
-    expect(detect({ languages: [] }).redirected).toBeNull();
+describe("stable canonical language paths", () => {
+  test("serves clean language URLs without automatic switching or stored preferences", async () => {
+    expect("detectLocale" in localeBrowser).toBe(false);
+    expect(localeBrowser.initLanguageLinks.toString()).not.toContain("localStorage");
+    expect(localeBrowser.initLanguageLinks.toString()).not.toContain("navigator");
+    expect(localeBrowser.initLanguageLinks.toString()).not.toContain("location.replace");
+    expect(languageSwitcher("loesung.html", "de")).toContain('href="/loesung"');
+    expect(languageSwitcher("loesung.html", "en")).toContain('href="/en/solution"');
+    expect(languageSwitcher("loesung.html", "de")).not.toContain("?lang=");
+    expect(languageSwitcher("loesung.html", "de")).not.toContain("air2growth-language");
+    for (const locale of ["de", "en"] as const) {
+      const html = await renderShell("loesung.html", locale);
+      expect(html).not.toContain("data-locale-detection");
+      expect(html).not.toContain("air2growth-language");
+      expect(html).not.toContain("navigator.languages");
+    }
   });
-  test("remembers an explicit choice over the browser preference", () => {
-    expect(detect({ saved: "de" }).redirected).toBeNull();
-    expect(detect({ saved: "en", languages: ["de-DE"] }).redirected).toBe("/en/solution");
-    expect(detect({ path: "/loesung?lang=de&ref=test#fragen" })).toEqual({ redirected: null, saved: "de", path: "/loesung?ref=test#fragen" });
-    expect(detect({ path: "/en/solution?lang=de#fragen", locale: "en" }).redirected).toBe("/loesung?lang=de#fragen");
+  test("keeps each URL in its own language despite opposite browsers, saved choices and legacy lang params", () => {
+    // German URL stays German even with an English browser and saved English choice.
+    let result = runLinks({ url: "/loesung?ref=test#fragen", languages: ["en-US", "en"], saved: "en" });
+    expect(new URL(result.href, SITE_URL).pathname).toBe("/loesung");
+    expect(result.switches[1].href).toBe(SITE_URL + "/en/solution?ref=test#fragen");
+    expect(result.storageReads).toBe(0);
+    expect(result.storageWrites).toBe(0);
+
+    // English URL stays English even with a German browser and saved German choice.
+    result = runLinks({ url: "/en/solution?ref=test#fragen", languages: ["de-DE", "de"], saved: "de" });
+    expect(new URL(result.href, SITE_URL).pathname).toBe("/en/solution");
+    expect(result.switches[0].href).toBe(SITE_URL + "/loesung?ref=test#fragen");
+
+    // Conflicting legacy ?lang params never change the served language; only cleaned.
+    result = runLinks({ url: "/loesung?lang=en&ref=test#fragen", languages: ["en-US"], saved: "en" });
+    expect(new URL(result.href, SITE_URL).pathname).toBe("/loesung");
+    expect(new URL(result.href, SITE_URL).searchParams.get("lang")).toBeNull();
+    expect(new URL(result.href, SITE_URL).searchParams.get("ref")).toBe("test");
+    result = runLinks({ url: "/en/solution?lang=de#fragen", languages: ["de-DE"], saved: "de" });
+    expect(new URL(result.href, SITE_URL).pathname).toBe("/en/solution");
+    expect(new URL(result.href, SITE_URL).searchParams.get("lang")).toBeNull();
+
+    // Invalid legacy values are dropped without affecting the path.
+    result = runLinks({ url: "/loesung?lang=fr&ref=test", languages: ["en-US"], saved: "invalid" });
+    expect(new URL(result.href, SITE_URL).pathname).toBe("/loesung");
+    expect(new URL(result.href, SITE_URL).searchParams.get("lang")).toBeNull();
   });
-  test("honours direct English URLs and explicit choices with storage blocked", () => {
-    expect(detect({ path: "/en/solution", locale: "en", saved: "de", languages: ["de-DE"] }).redirected).toBeNull();
-    expect(detect({ path: "/loesung?lang=de#fragen", blocked: true })).toEqual({ redirected: null, saved: null, path: "/loesung?lang=de#fragen" });
-    expect(detect({ blocked: true }).redirected).toBe("/en/solution");
-    expect(detect({ path: "/loesung?lang=fr", saved: "invalid" }).redirected).toBe("/en/solution?lang=fr");
+  test("tolerates old saved preferences and blocked storage without redirects", () => {
+    expect(() => runLinks({ url: "/loesung", saved: "en", languages: ["en-US"] })).not.toThrow();
+    expect(() => runLinks({ url: "/en/solution", saved: "de", languages: ["de-DE"] })).not.toThrow();
+    const blockedDe = runLinks({ url: "/loesung?ref=test#fragen", blocked: true, languages: ["en-US"] });
+    expect(new URL(blockedDe.href, SITE_URL).pathname).toBe("/loesung");
+    expect(blockedDe.switches[1].href).toBe(SITE_URL + "/en/solution?ref=test#fragen");
+    const blockedEn = runLinks({ url: "/en/solution?lang=en&ref=test#fragen", blocked: true, languages: ["de-DE"] });
+    expect(new URL(blockedEn.href, SITE_URL).pathname).toBe("/en/solution");
+    expect(new URL(blockedEn.href, SITE_URL).searchParams.get("lang")).toBeNull();
   });
 
-  test("language links follow later section changes and retain a blocked-storage choice", () => {
-    const location = { href: SITE_URL + "/en/solution?ref=test&lang=en#funktionsweise" };
-    const callbacks: Record<string, () => void> = {};
-    function link(href: string, locale?: string) {
-      return { href: new URL(href, location.href).href, dataset: { localeLink: locale }, hasAttribute: () => Boolean(locale) };
-    }
-    const switches = [link("/loesung?lang=de", "de"), link("/en/solution?lang=en", "en")];
-    const navigation = [link("/en/about"), link("#fragen"), link("https://other.test/")];
-    const document = {
-      querySelectorAll: (selector: string) => selector.includes("data-locale-link") ? switches : [...switches, ...navigation],
-      addEventListener() {},
-    };
-    const window = { location, addEventListener: (event: string, callback: () => void) => { callbacks[event] = callback; } };
-    runInNewContext(`(${initLanguageLinks.toString()})()`, { window, document, URL, AbortController });
-    expect(new URL(switches[0].href, SITE_URL).searchParams.get("lang")).toBe("de");
-    expect(new URL(navigation[0].href, SITE_URL).searchParams.get("lang")).toBe("en");
-    expect(navigation[2].href).toBe("https://other.test/");
-    location.href = SITE_URL + "/en/solution?ref=test&lang=en#fragen";
-    callbacks.hashchange();
-    expect(switches[0].href).toBe("/loesung?ref=test&lang=de#fragen");
+  test("switcher preserves query and hash, strips legacy lang, ordinary links stay clean", () => {
+    const started = runLinks({ url: "/en/solution?ref=test&lang=en#funktionsweise", languages: ["de-DE"], saved: "de" });
+    expect(started.switches[0].href).toBe(SITE_URL + "/loesung?ref=test#funktionsweise");
+    expect(started.switches[1].href).toBe(SITE_URL + "/en/solution?ref=test#funktionsweise");
+    // Absolute-path links never inherit the page query, so they stay clean;
+    // the implementation adds no lang fallback to ordinary links.
+    expect(new URL(started.navigation[0].href, SITE_URL).searchParams.get("lang")).toBeNull();
+    expect(started.navigation[0].href).toBe(new URL("/ueber-uns", SITE_URL).href);
+    expect(started.navigation[2].href).toBe("https://other.test/");
+    // Later section changes refresh the switcher without re-adding lang.
+    started.setLocation("/en/solution?ref=test&utm=x#fragen");
+    started.callbacks.hashchange();
+    expect(started.switches[0].href).toBe(SITE_URL + "/loesung?ref=test&utm=x#fragen");
+    expect(started.switches[1].href).toBe(SITE_URL + "/en/solution?ref=test&utm=x#fragen");
+    expect(started.navigation[0].href).toBe(new URL("/ueber-uns", SITE_URL).href);
+    expect(new URL(started.navigation[1].href, SITE_URL).searchParams.get("lang")).toBeNull();
   });
 });
 

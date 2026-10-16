@@ -1,4 +1,5 @@
 import { message } from './messages.ts';
+import { scheduleHeroVideo } from './hero-loading.js';
 
 /* Air2Growth — kleine Verhaltensschicht (kein Tracking, kein Versand).
    - Mobiles Menü: schließt per Link-Klick und Escape.
@@ -1011,9 +1012,9 @@ import { message } from './messages.ts';
   } catch (e) {}
 
   setHeroState('idle');
-  if (!useDouble) {
-    loadSingleNext();
-  } else {
-    loadInitial();
-  }
+  const cancelHeroStart = scheduleHeroVideo(hero, function () {
+    if (!useDouble) loadSingleNext();
+    else loadInitial();
+  });
+  if (import.meta.hot) import.meta.hot.dispose(cancelHeroStart);
 })();

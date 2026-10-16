@@ -63,7 +63,7 @@
 }
 @media (max-width: 640px) {
   .function-tour { padding-top: 104px; }
-  .tour-stage { width: calc(100% - 24px); height: min(620px, calc(100svh - 120px)); border-radius: 20px; }
+  .tour-stage { width: calc(100% - 24px); height: min(520px, calc(100svh - 120px)); min-height: 320px; border-radius: 20px; }
   .tour-logo { top: 12px; left: 16px; width: 130px; height: 92px; }
   .tour-order-layout { transform: translateX(130px); }
   .tour-support-layout { transform: translate(-180px, -60px); }
@@ -71,8 +71,9 @@
   .tour-controls { width: calc(100% - 32px); padding: 12px 0; }
   .tour-button { min-height: 44px; padding: 10px 14px; font-size: 12px; }
   .tour-control-buttons { gap: 7px; }
-  .tour-skip { margin-left: auto; font-size: 11px; }
-  .tour-explanation { display: block; padding: 65px 28px; }
+  .tour-skip { margin-left: 0; font-size: 12px; }
+  .tour-control-buttons > :not([hidden]) { flex: 1 1 auto; }
+  .tour-explanation { display: block; padding: 56px 24px; }
   .tour-explanation-heading { margin-bottom: 32px; }
 }
 @media (max-height: 600px) and (min-aspect-ratio: 4/3) {

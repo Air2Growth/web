@@ -7,9 +7,9 @@
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { renderSeoTags } from "./seo.ts";
+import { renderBreadcrumbs, renderSeoTags } from "./seo.ts";
 import type { Locale } from "./locale-paths.ts";
-import { languageSwitcher, loadCatalog, localeScript, localizeHtml, translateHtml } from "./i18n-html.ts";
+import { languageSwitcher, loadCatalog, localizeHtml, translateHtml } from "./i18n-html.ts";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 export const TEMPLATES_DIR = path.join(HERE, "..", "templates");
@@ -91,7 +91,8 @@ export async function renderTemplate(shellFile: string): Promise<string> {
 export async function renderShell(shellFile: string, locale: Locale = "de"): Promise<string> {
   let html = localizeHtml(translateHtml(await renderTemplate(shellFile), await loadCatalog(locale)), locale);
   html = html.replaceAll("<!-- @languages -->", languageSwitcher(shellFile, locale));
+  html = html.replace(/<!-- @breadcrumbs( light)? -->/g, (_marker, light) => renderBreadcrumbs(shellFile, locale, Boolean(light)));
   const seoParts = html.split("<!-- @seo -->");
   if (seoParts.length !== 2) throw new Error(`expected one SEO marker in ${shellFile}`);
-  return seoParts[0] + renderSeoTags(shellFile, locale) + localeScript(shellFile, locale) + seoParts[1];
+  return seoParts[0] + renderSeoTags(shellFile, locale) + seoParts[1];
 }

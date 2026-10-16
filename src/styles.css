@@ -48,3 +48,19 @@
   color: var(--color-ink);
   background: var(--color-lime);
 }
+
+/* Allow long translated headings and URLs to reflow on narrow screens. */
+:where(h1, h2, h3, p, li, dd, a) {
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 639px) {
+  /* Keep text usable when a phone rotates or browser text size increases. */
+  html { -webkit-text-size-adjust: 100%; }
+  main :where(h1, h2, h3) { hyphens: auto; }
+  [data-header] { padding-top: env(safe-area-inset-top, 0px); }
+  #mobile-menu { padding-top: env(safe-area-inset-top, 0px); }
+  #mobile-menu > nav { flex-shrink: 0; }
+  [data-form] :where(input[type="checkbox"] + label) { min-height: 44px; }
+  [data-form] button[type="submit"] { width: 100%; }
+}

@@ -1,8 +1,8 @@
 <a class="fixed left-4 -top-24 z-[2000] rounded-b-lg bg-pine px-5 py-3 font-bold text-white focus-visible:top-0 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand" href="#inhalt">Zum Inhalt springen</a>
 
 <header data-header class="fixed left-1/2 top-3 z-[1000] w-[calc(100%_-_1.5rem)] max-w-[1169px] -translate-x-1/2 md:top-5 md:w-[calc(100%_-_2.5rem)]">
-    <nav class="flex h-[72px] items-center justify-between gap-4 rounded-2xl border border-white/60 bg-white/95 px-4 shadow-[0_6px_28px_#2f2f2f0f] backdrop-blur-xl md:px-6" aria-label="Hauptnavigation">
-        <a class="shrink-0 rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand" href="/#top" aria-label="Air2Growth – zum Seitenanfang"><span class="flex h-12 w-[108px] items-center justify-center overflow-hidden"><img src="/img/logo.svg" alt="Air2Growth" width="1006" height="715" fetchpriority="high" decoding="async" class="h-[80px] w-[113px] max-w-none object-contain"></span></a>
+    <nav class="flex h-16 items-center justify-between gap-2 sm:h-[72px] sm:gap-4 rounded-2xl border border-white/60 bg-white/95 px-3 sm:px-4 shadow-[0_6px_28px_#2f2f2f0f] backdrop-blur-xl md:px-6" aria-label="Hauptnavigation">
+        <a class="shrink-0 rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand" href="/#top" aria-label="Air2Growth – zum Seitenanfang"><span class="flex h-12 w-[108px] items-center justify-center overflow-hidden"><img src="/img/logo.svg" alt="Air2Growth" width="1006" height="715" decoding="async" class="h-[80px] w-[113px] max-w-none object-contain"></span></a>
         <div class="hidden items-center gap-1 xl:flex">
             <a data-section-link href="/loesung" class="rounded-lg px-3 py-3 text-sm text-ink transition-colors hover:bg-mist hover:text-pine aria-[current]:bg-mist aria-[current]:text-pine focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand motion-reduce:transition-none">Lösung</a>
             <a data-section-link href="/function" class="rounded-lg px-3 py-3 text-sm text-ink transition-colors hover:bg-mist aria-[current]:bg-mist focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand motion-reduce:transition-none">So funktioniert’s</a>
@@ -11,18 +11,20 @@
             <a data-section-link href="/ueber-uns" class="rounded-lg px-3 py-3 text-sm text-ink transition-colors hover:bg-mist aria-[current]:bg-mist focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand motion-reduce:transition-none">Über uns</a>
         </div>
         <div class="ml-auto flex shrink-0 items-center gap-2 md:gap-3">
-            <!-- @languages -->
+            <div class="hidden xl:block">
+                <!-- @languages -->
+            </div>
             <a class="hidden min-h-11 items-center justify-center rounded-lg bg-pine px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-leaf focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand motion-reduce:transition-none xl:inline-flex" href="/#kontakt">Ins Gespräch kommen</a>
-            <button type="button" id="nav-toggle" data-nav-toggle aria-expanded="false" aria-controls="mobile-menu" aria-label="Menü öffnen" class="flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-lg px-2 text-sm text-pine focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand xl:hidden"><span class="hidden min-[360px]:inline">Menü</span><svg width="22" height="18" viewBox="0 0 22 18" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 4h20M1 13h20"/></svg></button>
+            <button type="button" id="nav-toggle" data-nav-toggle aria-expanded="false" aria-controls="mobile-menu" aria-label="Menü öffnen" class="flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-lg px-2 text-sm text-pine focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand xl:hidden"><svg width="22" height="18" viewBox="0 0 22 18" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 4h20M1 13h20"/></svg></button>
         </div>
     </nav>
 </header>
-<div id="mobile-menu" data-mobile-menu role="dialog" aria-modal="true" aria-label="Hauptmenü" aria-hidden="true" inert class="fixed inset-0 z-[1500] hidden flex min-h-[100dvh] flex-col overflow-y-auto bg-mist text-pine xl:hidden">
-    <div class="flex h-24 shrink-0 items-center justify-between px-6">
+<div id="mobile-menu" data-mobile-menu role="dialog" aria-modal="true" aria-label="Hauptmenü" aria-hidden="true" inert class="fixed inset-0 z-[1500] hidden flex h-[100dvh] flex-col overflow-y-auto overscroll-contain bg-mist text-pine xl:hidden">
+    <div class="flex h-20 shrink-0 sm:h-24 items-center justify-between px-6">
         <a href="/#top" class="rounded font-serif text-2xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand">Air2Growth</a>
         <button type="button" data-nav-close aria-label="Menü schließen" class="flex h-12 w-12 items-center justify-center rounded-full border border-pine/20 transition-colors hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand motion-reduce:transition-none"><svg width="20" height="20" viewBox="0 0 20 20" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m4 4 12 12M16 4 4 16"/></svg></button>
     </div>
-    <nav aria-label="Mobiles Menü" class="flex flex-1 flex-col justify-center gap-1 px-7 py-8 [&_a]:rounded-lg [&_a]:py-4 [&_a]:font-serif [&_a]:text-[clamp(1.8rem,7vw,2.8rem)] [&_a]:leading-tight [&_a]:transition-colors hover:[&_a]:text-leaf focus-visible:[&_a]:outline-2 focus-visible:[&_a]:outline-offset-4 focus-visible:[&_a]:outline-leaf motion-reduce:[&_a]:transition-none">
+    <nav aria-label="Mobiles Menü" class="flex flex-1 flex-col justify-center gap-1 px-6 py-4 sm:px-7 sm:py-8 [&_a]:rounded-lg [&_a]:py-3 sm:[&_a]:py-4 [&_a]:font-serif [&_a]:text-[clamp(1.8rem,7vw,2.8rem)] [&_a]:leading-tight [&_a]:transition-colors hover:[&_a]:text-leaf focus-visible:[&_a]:outline-2 focus-visible:[&_a]:outline-offset-4 focus-visible:[&_a]:outline-leaf motion-reduce:[&_a]:transition-none">
         <a href="/loesung" data-section-link data-nav-link class="aria-[current=page]:text-leaf">Unsere Lösung</a>
         <a href="/function" data-nav-link>So funktioniert’s</a>
         <a href="/meilensteine" data-section-link data-nav-link class="aria-[current=page]:text-leaf">Unsere Meilensteine</a>
@@ -30,7 +32,7 @@
         <a href="/ueber-uns" data-section-link data-nav-link class="aria-[current=page]:text-leaf">Das Team</a>
         <a href="/#kontakt" data-nav-link>Ins Gespräch kommen</a>
     </nav>
-    <div class="flex items-center justify-between gap-4 border-t border-pine/15 px-7 py-6">
+    <div class="flex items-center justify-between gap-4 border-t border-pine/15 px-6 py-4 pb-[max(1rem,env(safe-area-inset-bottom))] sm:px-7 sm:py-6">
         <p class="text-sm">Von der Luft auf Ihr Feld.</p>
         <!-- @languages -->
     </div>

@@ -7,53 +7,62 @@ interface PageSeo {
   aliases: string[];
   title: string;
   description: string;
+  breadcrumbLabel: string;
   language?: string;
 }
 
 export const SEO_PAGES: Record<string, PageSeo> = {
   "ueber-uns.html": {
+    breadcrumbLabel: "Über uns",
     path: "/ueber-uns",
     aliases: ["/ueber-uns.html", "/ueber-uns/"],
     title: "Über uns: das Team hinter Air2Growth",
     description: "Lernen Sie das Air2Growth-Gründerteam aus München kennen: die Menschen, ihre Aufgaben in Forschung, Entwicklung, Finanzen und Vertrieb sowie direkte Kontaktmöglichkeiten.",
   },
   "vision.html": {
+    breadcrumbLabel: "Vision",
     path: "/vision",
     aliases: ["/vision.html", "/vision/"],
     title: "Unsere Vision für die Landwirtschaft | Air2Growth",
     description: "Mehr Entscheidungsfreiheit auf dem Hof: Entdecken Sie die Vision von Air2Growth, unsere Grundsätze und wie wir gemeinsam mit der Praxis entwickeln wollen.",
   },
   "meilensteine.html": {
+    breadcrumbLabel: "Meilensteine",
     path: "/meilensteine",
     aliases: ["/meilensteine.html", "/meilensteine/"],
     title: "Meilensteine: Auszeichnungen und Förderung | Air2Growth",
     description: "Die Meilensteine von Air2Growth: Ergebnisse bei Jugend gründet, STARTUP TEENS und Samsung sowie Förderung und Begleitung durch Gründungsprogramme.",
   },
   "loesung.html": {
+    breadcrumbLabel: "Lösung",
     path: "/loesung",
     aliases: ["/loesung.html", "/loesung/"],
-    title: "Unsere Lösung: Bio-Flüssigdünger vor Ort | Air2Growth",
-    description: "CO₂ aus der Luft, Mikroalgen und ein modulares System auf Ihrem Hof: Entdecken Sie die Air2Growth-Lösung, ihre Funktionsweise und den geplanten Einsatz im Betrieb.",
+    title: "Dünger aus CO₂ und Mikroalgen vor Ort | Air2Growth",
+    description: "Air2Growth entwickelt ein modulares System für Bio-Flüssigdünger direkt auf dem Hof. Lernen Sie CO₂-Filterung, Mikroalgen und den geplanten Einsatz kennen.",
   },
   "function.html": {
+    breadcrumbLabel: "Funktionsweise",
     path: "/function",
     aliases: ["/function.html", "/function/"],
-    title: "Von CO₂ zum Dünger: So funktioniert’s | Air2Growth",
-    description: "Erleben Sie Air2Growth in einer illustrierten Tour: Lieferung, Installation, CO₂-Filterung, Algenkultivierung, Flüssigdünger und Betreuung in 60 Sekunden.",
+    title: "Von CO₂ zu Flüssigdünger: die Funktionsweise | Air2Growth",
+    description: "Wie soll aus CO₂ und Mikroalgen Flüssigdünger entstehen? Die illustrierte Air2Growth-Tour erklärt das geplante System von der Installation bis zur Betreuung.",
   },
   "index.html": {
+    breadcrumbLabel: "Startseite",
     path: "/",
-    aliases: ["/index.html"],
-    title: "Air2Growth | Von der Luft auf Ihr Feld",
-    description: "Wir denken Landwirtschaft weiter: Lernen Sie die Idee hinter Air2Growth, unsere Vision, das Gründerteam und unseren Weg zum Bio-Flüssigdünger aus CO₂ kennen.",
+    aliases: ["/index.html", "/index"],
+    title: "Bio-Flüssigdünger aus CO₂ für Ihren Hof | Air2Growth",
+    description: "Bio-Flüssigdünger aus CO₂ und Mikroalgen direkt auf dem Hof: Entdecken Sie das System in Entwicklung, das Münchner Air2Growth-Team und Möglichkeiten zum Austausch.",
   },
   "impressum.html": {
+    breadcrumbLabel: "Impressum",
     path: "/impressum",
     aliases: ["/impressum.html", "/impressum/"],
     title: "Impressum & Kontakt | Air2Growth",
     description: "Anbieterkennzeichnung von Air2Growth aus München: Verantwortliche, Anschrift und Kontakt für Fragen zu unserem CO₂-zu-Dünger-System.",
   },
   "datenschutz.html": {
+    breadcrumbLabel: "Datenschutz",
     path: "/datenschutz",
     aliases: ["/datenschutz.html", "/datenschutz/"],
     title: "Datenschutzerklärung | Air2Growth",
@@ -61,15 +70,15 @@ export const SEO_PAGES: Record<string, PageSeo> = {
   },
 };
 
-const ENGLISH_SEO: Record<string, Pick<PageSeo, "title" | "description">> = {
-  "index.html": { title: "Air2Growth | From air to your field", description: "We’re developing a system to produce organic liquid fertiliser from CO₂ on farms. Explore the idea, meet our team and see what we’re working towards." },
-  "loesung.html": { title: "Fertiliser from CO₂, made on your farm | Air2Growth", description: "See how Air2Growth combines CO₂ capture and microalgae in a modular system, and explore how it could help your farm produce part of its own fertiliser supply." },
-  "function.html": { title: "How Air2Growth would work | A 60-second tour", description: "Explore the proposed Air2Growth system in a 60-second illustrated tour, from delivery and installation to CO₂ capture, microalgae cultivation and support." },
-  "meilensteine.html": { title: "Milestones, awards and support | Air2Growth", description: "Explore the awards, funding and programmes helping us develop Air2Growth, including Jugend gründet, STARTUP TEENS and Samsung." },
-  "vision.html": { title: "Our vision for farming | Air2Growth", description: "More choice for farmers and careful use of resources. Discover the principles guiding Air2Growth and how practical farming experience shapes our approach." },
-  "ueber-uns.html": { title: "Meet the team | Air2Growth", description: "Meet our founding team in Munich and find your contact for research, development, finance or sales. Learn how we’re working together on Air2Growth." },
-  "impressum.html": { title: "Legal notice and contact | Air2Growth", description: "Provider information for Air2Growth in Munich, including the responsible parties, postal address and email contact." },
-  "datenschutz.html": { title: "Privacy policy | Air2Growth", description: "Learn how Air2Growth handles personal data, contact enquiries and website analytics, and how to exercise your data protection rights." },
+const ENGLISH_SEO: Record<string, Pick<PageSeo, "title" | "description" | "breadcrumbLabel">> = {
+  "index.html": { breadcrumbLabel: "Home", title: "Organic liquid fertiliser from CO₂ | Air2Growth", description: "Air2Growth is developing a modular system to make organic liquid fertiliser from CO₂ and microalgae on farms. Explore the idea and meet our Munich team." },
+  "loesung.html": { breadcrumbLabel: "Solution", title: "On-farm fertiliser from CO₂ and microalgae | Air2Growth", description: "Explore the modular Air2Growth system in development: CO₂ capture and microalgae for on-farm liquid fertiliser production, proposed benefits and practical FAQs." },
+  "function.html": { breadcrumbLabel: "How it works", title: "From CO₂ to liquid fertiliser: how it works | Air2Growth", description: "How could CO₂ and microalgae become liquid fertiliser? Follow the proposed Air2Growth process in a 60-second tour, from installation to cultivation and support." },
+  "meilensteine.html": { breadcrumbLabel: "Milestones", title: "Milestones, awards and support | Air2Growth", description: "Explore the awards, funding and programmes helping us develop Air2Growth, including Jugend gründet, STARTUP TEENS and Samsung." },
+  "vision.html": { breadcrumbLabel: "Vision", title: "Our vision for farming | Air2Growth", description: "More choice for farmers and careful use of resources. Discover the principles guiding Air2Growth and how practical farming experience shapes our approach." },
+  "ueber-uns.html": { breadcrumbLabel: "About us", title: "Meet our founding team in Munich | Air2Growth", description: "Meet our founding team in Munich and find your contact for research, development, finance or sales. Learn how we’re working together on Air2Growth." },
+  "impressum.html": { breadcrumbLabel: "Legal notice", title: "Legal notice and contact | Air2Growth", description: "Provider information for Air2Growth in Munich, including the responsible parties, postal address and email contact." },
+  "datenschutz.html": { breadcrumbLabel: "Privacy", title: "Privacy policy | Air2Growth", description: "Learn how Air2Growth handles personal data, contact enquiries and website analytics, and how to exercise your data protection rights." },
 };
 
 export interface LocalizedPage extends PageSeo {
@@ -84,7 +93,7 @@ export const SITE_PAGES: Record<string, LocalizedPage> = Object.fromEntries(
       ...page,
       ...(locale === "en" ? ENGLISH_SEO[shellFile] : {}),
       path,
-      aliases: locale === "de" ? page.aliases : [path + ".html", path + "/", ...(shellFile === "index.html" ? ["/en/index.html"] : [])],
+      aliases: locale === "de" ? page.aliases : [path + ".html", path + "/", ...(shellFile === "index.html" ? ["/en/index.html", "/en/index"] : [])],
       language: locale === "en" ? "en-GB" : "de-DE",
       shellFile,
       locale,
@@ -111,6 +120,29 @@ function escapeAttribute(value: string): string {
     .replaceAll("<", "&lt;").replaceAll(">", "&gt;");
 }
 
+export function pageBreadcrumbs(shellFile: string, locale: Locale = "de") {
+  if (shellFile === "index.html") return [];
+  const page = SITE_PAGES[localeFile(shellFile, locale)];
+  return [
+    { name: SITE_PAGES[localeFile("index.html", locale)].breadcrumbLabel, path: PAGE_PATHS["index.html"][locale] },
+    { name: page.breadcrumbLabel, path: page.path },
+  ];
+}
+
+// The visible trail and JSON-LD share labels and canonical destinations.
+export function renderBreadcrumbs(shellFile: string, locale: Locale = "de", light = false): string {
+  const crumbs = pageBreadcrumbs(shellFile, locale);
+  if (!crumbs.length) return "";
+  const linkClass = light
+    ? "hover:text-white focus-visible:outline-white"
+    : "hover:text-pine focus-visible:outline-brand";
+  return `<nav data-breadcrumbs aria-label="${locale === "de" ? "Brotkrümelnavigation" : "Breadcrumbs"}" class="text-sm ${light ? "text-white/75" : "text-ink/70"}">
+<ol class="flex flex-wrap items-center gap-x-3 gap-y-1" role="list">
+<li><a href="${crumbs[0].path}" class="inline-flex min-h-11 items-center rounded underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 ${linkClass}">${escapeAttribute(crumbs[0].name)}</a></li>
+<li class="flex items-center gap-3"><span aria-hidden="true">/</span><span aria-current="page">${escapeAttribute(crumbs[1].name)}</span></li>
+</ol></nav>`;
+}
+
 export function renderSeoTags(shellFile: string, locale: Locale = "de"): string {
   if (!Object.hasOwn(SEO_PAGES, shellFile)) throw new Error(`Missing SEO metadata for ${shellFile}`);
   const page = SITE_PAGES[localeFile(shellFile, locale)];
@@ -120,6 +152,7 @@ export function renderSeoTags(shellFile: string, locale: Locale = "de"): string 
   const organizationId = SITE_URL + "/#organization";
   const websiteId = SITE_URL + "/#website";
   const imageId = SITE_URL + "/#social-image";
+  const breadcrumbs = pageBreadcrumbs(shellFile, locale);
   const graph = {
     "@context": "https://schema.org",
     "@graph": [
@@ -159,7 +192,19 @@ export function renderSeoTags(shellFile: string, locale: Locale = "de"): string 
         inLanguage: page.language ?? "de-DE",
         isPartOf: { "@id": websiteId },
         about: { "@id": organizationId },
+        primaryImageOfPage: { "@id": imageId },
+        ...(breadcrumbs.length ? { breadcrumb: { "@id": url + "#breadcrumb" } } : {}),
       },
+      ...(breadcrumbs.length ? [{
+        "@type": "BreadcrumbList",
+        "@id": url + "#breadcrumb",
+        itemListElement: breadcrumbs.map((crumb, index) => ({
+          "@type": "ListItem",
+          position: index + 1,
+          name: crumb.name,
+          item: SITE_URL + crumb.path,
+        })),
+      }] : []),
     ],
   };
   const title = escapeAttribute(page.title);

@@ -40,5 +40,6 @@
   "Tour exited.": "Tour closed.",
   "Layout or motion preference changed. Continue when you are ready.": "The layout or motion settings changed. Continue when you’re ready.",
   "Viewport changed. Resume when you are ready.": "The window size changed. Resume the tour when you’re ready.",
-  "{elapsed} of {duration} seconds. {scene}": "{elapsed} of {duration} seconds. {scene}"
+  "{elapsed} of {duration} seconds. {scene}": "{elapsed} of {duration} seconds. {scene}",
+  "How CO₂ and microalgae become liquid fertiliser": "How CO₂ and microalgae could become liquid fertiliser"
 }
