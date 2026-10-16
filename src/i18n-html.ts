@@ -66,7 +66,7 @@ export function localizeHtml(html: string, locale: Locale): string {
 export function languageSwitcher(shellFile: string, locale: Locale): string {
   const links = (["de", "en"] as const).map((language) => {
     const label = language === "de" ? "Deutsch" : "English";
-    return `<a href="${PAGE_PATHS[shellFile][language]}?lang=${language}" data-locale-link="${language}" hreflang="${language}" lang="${language}" aria-label="${label}"${locale === language ? ' aria-current="true"' : ""} class="inline-flex min-h-11 min-w-10 items-center justify-center rounded-lg px-2 text-xs font-bold text-pine hover:bg-mist aria-[current]:bg-pine aria-[current]:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-leaf">${language.toUpperCase()}</a>`;
+    return `<a href="${PAGE_PATHS[shellFile][language]}?lang=${language}" data-locale-link="${language}" hreflang="${language}" lang="${language}" aria-label="${label}"${locale === language ? ' aria-current="true"' : ""} class="inline-flex min-h-11 min-w-10 items-center justify-center rounded-lg px-2 text-xs font-bold text-pine hover:bg-mist aria-[current]:bg-pine aria-[current]:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand">${language.toUpperCase()}</a>`;
   }).join("");
   return `<div role="group" aria-label="${locale === "de" ? "Sprache" : "Language"}" class="flex shrink-0 items-center gap-0.5">${links}</div>`;
 }

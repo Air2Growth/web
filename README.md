@@ -189,6 +189,23 @@ die oben beschriebenen Canonical-Weiterleitungen gelten für den aktuellen Stand
 
 ## Gestaltung (Redesign 15.10.2026)
 
+### Einheitliche Markenfarben (16.10.2026)
+
+Die Palette basiert auf den Originalfarben des Logos: Grün `#409530`,
+Blattgrün `#68B930`, Limette `#B0E229` und Anthrazit `#2F2F2F`.
+`src/styles.css` definiert die gemeinsamen Farbvariablen. Für kleine weiße
+Buttontexte und Links werden dunklere Grüntöne (`pine` / `leaf`) verwendet;
+die Original-Limette setzt den Akzent im Hero und bei der Textauswahl.
+Überschriften und Fließtext nutzen Anthrazit, Flächen helle Grüntönungen.
+
+Auch Rechtstexte, Formulare, Fokusmarkierungen, Browser-Theme-Farbe und die
+Tour nutzen diese Variablen. Die SVG-Systemgrafiken und die Tour-Illustration
+verwenden dieselbe Farbabstufung; eigenständige SVGs enthalten passende
+Fallback-Werte. Animierte Zustandsfarben werden aus dem Stylesheet gelesen.
+Haut-, Holz- und Wasserfarben sowie Warnzustände bleiben erkennbar.
+Die Originaldateien des Air2Growth-Logos und der Unterstützer-Logos werden
+unverändert verwendet.
+
 ### Aktuelle Verfeinerung: minimalistische Sektionen
 
 Der Hero behält sein bisheriges Layout mit Landschaftsvideo, Overlay,

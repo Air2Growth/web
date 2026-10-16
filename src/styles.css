@@ -16,11 +16,35 @@
   font-display: swap;
 }
 
-@theme {
+@theme static {
   --font-sans: "Open Sans", Arial, sans-serif;
   --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-  --color-mist: #eff4f0;
-  --color-pine: #183e33;
-  --color-leaf: #39784b;
-  --color-ink: #20342b;
+  /* Original logo colours: green, the young leaf, lime and the wordmark. */
+  --color-brand: #409530;
+  --color-sprout: #68b930;
+  --color-lime: #b0e229;
+  --color-ink: #2f2f2f;
+
+  /* Green shades for white labels and pale surfaces for long-form reading. */
+  --color-pine: #2d6b24;
+  --color-leaf: #347d28;
+  --color-mist: #f3f8ef;
+  --color-soft: #e3efd9;
+  --color-line: #7b8f74;
+  --color-muted: #626b5d;
+
+  /* Shared illustration ramp, derived from the logo's green hue. */
+  --color-foliage: #75a567;
+  --color-sage: #a4c78f;
+  --color-tint: #cde0bf;
+
+  /* Status colours retain their meaning independently of the brand palette. */
+  --color-danger: #a63f31;
+  --color-warning: #a46517;
+  --color-warning-soft: #f2d9a4;
+}
+
+::selection {
+  color: var(--color-ink);
+  background: var(--color-lime);
 }

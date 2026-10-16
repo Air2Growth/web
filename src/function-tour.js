@@ -31,6 +31,8 @@ export function sceneAt(time) {
 
 function buildTimeline(root, isMobile) {
   const q = (name) => root.querySelectorAll(`[data-art="${name}"]`);
+  const theme = getComputedStyle(root);
+  const color = (name) => theme.getPropertyValue(`--color-${name}`).trim();
   const tl = gsap.timeline({ paused: true, defaults: { ease: "power2.inOut", duration: .6 } });
   const show = (name, at, duration = .4) => tl.to(q(name), { autoAlpha: 1, duration }, at);
   const hide = (name, at, duration = .4) => tl.to(q(name), { autoAlpha: 0, duration }, at);
@@ -43,7 +45,7 @@ function buildTimeline(root, isMobile) {
   tl.set(q("customer"), { x: -50 }, 0);
   tl.set(q("van"), { x: -125 }, 0);
   tl.set([q("co2-in"), q("co2-release"), q("culture-bubbles"), q("harvest-flow")], { autoAlpha: 0 }, 0);
-  tl.set(q("culture"), { fill: "#b8d5a0", scaleY: .45, transformOrigin: "center bottom" }, 0);
+  tl.set(q("culture"), { fill: color("sage"), scaleY: .45, transformOrigin: "center bottom" }, 0);
 
   // A little atmosphere, entirely determined by the same reversible clock.
   tl.to(q("clouds"), { x: 26, duration: TOUR_DURATION, ease: "none" }, 0);
@@ -103,13 +105,13 @@ function buildTimeline(root, isMobile) {
   tl.to(q("air-stream"), { strokeDashoffset: -72, duration: 3, ease: "none" }, "process+=.6");
   tl.fromTo(q("co2-in"), { x: 0, autoAlpha: 0 }, { x: 56, autoAlpha: 1, duration: 1.4, repeat: 1, repeatDelay: .2, ease: "none", immediateRender: false }, "process+=.6");
   hide("co2-in", "process+=3.6", .25); hide("air-stream", "process+=3.7", .25);
-  tl.to(q("cartridge"), { fill: "#e8bd7e", duration: .55 }, "process+=4");
-  tl.to(q("cartridge"), { fill: "#d8d6c8", duration: .6 }, "process+=6.2");
+  tl.to(q("cartridge"), { fill: color("warning-soft"), duration: .55 }, "process+=4");
+  tl.to(q("cartridge"), { fill: color("tint"), duration: .6 }, "process+=6.2");
   tl.fromTo(q("co2-release"), { autoAlpha: 0, x: -10 }, { autoAlpha: 1, x: 19, duration: 1.2, repeat: 1, repeatDelay: .2, ease: "none", immediateRender: false }, "process+=4.1");
   hide("co2-release", "process+=6.7", .3);
   show("nutrient-flow", "process+=7");
   tl.to(q("nutrient-flow"), { strokeDashoffset: -42, duration: 4.8, ease: "none" }, "process+=7");
-  tl.to(q("culture"), { fill: "#409530", scaleY: 1, duration: 4.8 }, "process+=7");
+  tl.to(q("culture"), { fill: color("brand"), scaleY: 1, duration: 4.8 }, "process+=7");
   tl.fromTo(q("culture-bubbles"), { y: 12, autoAlpha: 0 }, { y: -18, autoAlpha: .85, duration: 1.45, repeat: 2, ease: "none", immediateRender: false }, "process+=7.3");
   hide("culture-bubbles", "process+=11.7"); hide("nutrient-flow", "process+=11.8");
   show("harvest-flow", "process+=12");
@@ -140,7 +142,7 @@ function buildTimeline(root, isMobile) {
 
   tl.to(q("world"), { scale: 1, x: 0, duration: .8 }, "fault");
   tl.to(q("customer"), { x: 0, duration: .8 }, "fault+=.2");
-  tl.to(q("status-light"), { fill: "#dfac51", duration: .25 }, "fault");
+  tl.to(q("status-light"), { fill: color("warning"), duration: .25 }, "fault");
   hide("screen-cards", "fault", .15); show("screen-fault", "fault", .25);
   tl.set(q("data-packet"), { x: 0, y: 0, autoAlpha: 1 }, "fault+=.4");
   tl.to(q("data-packet"), { x: isMobile ? 32 : 65, y: -35, duration: .4, ease: "none" }, "fault+=.5");
