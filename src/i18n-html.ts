@@ -28,7 +28,9 @@ export function escapeText(value: string): string {
 }
 
 export async function loadCatalog(locale: Locale): Promise<Catalog> {
-  const files = locale === "en" ? ["en/marketing.json", "en/legal-shared.json", "en/tour.json", "en/runtime.json"] : ["de/tour.json"];
+  const files = locale === "en"
+    ? ["en/marketing.json", "en/legal-shared.json", "en/tour.json", "en/runtime.json", "en/redesign-shared.json", "en/redesign-solution.json", "en/redesign-editorial.json"]
+    : ["de/tour.json"];
   const catalogs = await Promise.all(files.map(async (file) => JSON.parse(await readFile(new URL(file, catalogRoot), "utf8")) as Catalog));
   return Object.assign({}, ...catalogs);
 }

@@ -17,7 +17,7 @@ export const SEO_PAGES: Record<string, PageSeo> = {
     path: "/ueber-uns",
     aliases: ["/ueber-uns.html", "/ueber-uns/"],
     title: "Über uns: das Team hinter Air2Growth",
-    description: "Lernen Sie das Air2Growth-Gründerteam aus München kennen: die Menschen, ihre Aufgaben in Forschung, Entwicklung, Finanzen und Vertrieb sowie direkte Kontaktmöglichkeiten.",
+    description: "Lernen Sie das Air2Growth-Gründerteam aus München kennen: die Menschen, ihre Aufgaben in Forschung, Entwicklung, Finanzen, Marketing und Vertrieb sowie direkte Kontaktmöglichkeiten.",
   },
   "vision.html": {
     breadcrumbLabel: "Vision",
@@ -45,7 +45,7 @@ export const SEO_PAGES: Record<string, PageSeo> = {
     path: "/function",
     aliases: ["/function.html", "/function/"],
     title: "Von CO₂ zu Flüssigdünger: die Funktionsweise | Air2Growth",
-    description: "Wie soll aus CO₂ und Mikroalgen Flüssigdünger entstehen? Die illustrierte Air2Growth-Tour erklärt das geplante System von der Installation bis zur Betreuung.",
+    description: "Wie soll aus CO₂ und Mikroalgen Flüssigdünger entstehen? Die illustrierte Air2Growth-Tour zeigt das geplante System im Gewächshaus, vom Algenwachstum bis zur Düngung.",
   },
   "index.html": {
     breadcrumbLabel: "Startseite",
@@ -66,17 +66,17 @@ export const SEO_PAGES: Record<string, PageSeo> = {
     path: "/datenschutz",
     aliases: ["/datenschutz.html", "/datenschutz/"],
     title: "Datenschutzerklärung | Air2Growth",
-    description: "Informationen zum Datenschutz bei Air2Growth: Verarbeitung personenbezogener Daten, Kontaktformulare und Ihre Rechte als betroffene Person.",
+    description: "Informationen zum Datenschutz bei Air2Growth: Nutzung der Website, Verarbeitung personenbezogener Daten bei Kontaktanfragen und Ihre Rechte als betroffene Person.",
   },
 };
 
 const ENGLISH_SEO: Record<string, Pick<PageSeo, "title" | "description" | "breadcrumbLabel">> = {
   "index.html": { breadcrumbLabel: "Home", title: "Organic liquid fertiliser from CO₂ | Air2Growth", description: "Air2Growth is developing a modular system to make organic liquid fertiliser from CO₂ and microalgae on farms. Explore the idea and meet our Munich team." },
   "loesung.html": { breadcrumbLabel: "Solution", title: "On-farm fertiliser from CO₂ and microalgae | Air2Growth", description: "Explore the modular Air2Growth system in development: CO₂ capture and microalgae for on-farm liquid fertiliser production, proposed benefits and practical FAQs." },
-  "function.html": { breadcrumbLabel: "How it works", title: "From CO₂ to liquid fertiliser: how it works | Air2Growth", description: "How could CO₂ and microalgae become liquid fertiliser? Follow the proposed Air2Growth process in a 60-second tour, from installation to cultivation and support." },
+  "function.html": { breadcrumbLabel: "How it works", title: "From CO₂ to liquid fertiliser: how it works | Air2Growth", description: "How could CO₂ and microalgae become liquid fertiliser? Follow the proposed Air2Growth greenhouse process, from growing microalgae to fertilising plants." },
   "meilensteine.html": { breadcrumbLabel: "Milestones", title: "Milestones, awards and support | Air2Growth", description: "Explore the awards, funding and programmes helping us develop Air2Growth, including Jugend gründet, STARTUP TEENS and Samsung." },
   "vision.html": { breadcrumbLabel: "Vision", title: "Our vision for farming | Air2Growth", description: "More choice for farmers and careful use of resources. Discover the principles guiding Air2Growth and how practical farming experience shapes our approach." },
-  "ueber-uns.html": { breadcrumbLabel: "About us", title: "Meet our founding team in Munich | Air2Growth", description: "Meet our founding team in Munich and find your contact for research, development, finance or sales. Learn how we’re working together on Air2Growth." },
+  "ueber-uns.html": { breadcrumbLabel: "About us", title: "Meet our founding team in Munich | Air2Growth", description: "Meet our founding team in Munich and find your contact for research, development, finance, marketing or sales. Learn how we’re working together on Air2Growth." },
   "impressum.html": { breadcrumbLabel: "Legal notice", title: "Legal notice and contact | Air2Growth", description: "Provider information for Air2Growth in Munich, including the responsible parties, postal address and email contact." },
   "datenschutz.html": { breadcrumbLabel: "Privacy", title: "Privacy policy | Air2Growth", description: "Learn how Air2Growth handles personal data, contact enquiries and website analytics, and how to exercise your data protection rights." },
 };

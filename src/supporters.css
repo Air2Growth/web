@@ -1,67 +1,34 @@
-/* The complete logo list remains visible without animation or JavaScript. */
-[data-supporters] [data-logo-viewport] {
-  overflow: hidden;
-}
-
-[data-supporters] [data-logo-group] {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 24px 32px;
-  margin: 0;
-  padding: 8px 0;
-  list-style: none;
-}
-
-[data-supporters] [data-logo-group] > li {
-  display: flex;
-  flex: 1 1 120px;
-  align-items: center;
-  justify-content: center;
-  min-width: 120px;
-  max-width: 180px;
-  height: 88px;
-}
-
-[data-supporters] [data-logo-group] img {
-  display: block;
-  width: auto;
-  max-width: 100%;
-  height: auto;
-  max-height: 68px;
-  object-fit: contain;
-}
-
+/* One genuine list. Scrolling, links and focus remain usable without JavaScript. */
+[data-supporters] { padding-block: 2rem 3rem; }
+.supporters-heading-row { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.4rem; }
+.supporters-heading-row h2 { font-size: 1.125rem; line-height: 1.5; letter-spacing: 0; max-width: 32ch; }
+.supporters-heading-row p { margin-top: .3rem; font-size: .8125rem; color: var(--color-muted); }
+[data-supporter-controls] { display: flex; gap: .5rem; }
+[data-supporter-controls][hidden] { display: none; }
+[data-supporter-controls] button { width: 46px; height: 46px; display: grid; place-items: center; border: 1px solid #a7b89c; border-radius: 50%; color: #263e2d; background: #fcfdfc; cursor: pointer; }
+[data-supporter-controls] button:hover:enabled { background: #eef3ec; }
+[data-supporter-controls] button:disabled { opacity: .4; cursor: default; }
+[data-supporter-controls] svg { width: 20px; height: 20px; }
+[data-supporters] [data-logo-viewport] { overflow-x: auto; overflow-y: hidden; overscroll-behavior-x: contain; scroll-snap-type: x proximity; scroll-padding-inline: 10px; scrollbar-width: thin; scrollbar-color: #a7b89c #eef3ec; border-block: 1px solid #a7b89c; padding-block: 1rem; }
+[data-supporters] [data-logo-group] { display: flex; align-items: center; gap: 2.5rem; width: max-content; min-width: 100%; margin: 0; padding: .5rem 10px; list-style: none; }
+[data-supporters] [data-logo-group] > li { flex: 0 0 200px; width: 200px; scroll-snap-align: start; }
+[data-supporters] [data-logo-group] a { display: flex; align-items: center; justify-content: center; width: 100%; min-height: 104px; padding: 12px; border-radius: 8px; }
+[data-supporters] [data-logo-group] a:hover { background: #eef3ec; }
+[data-supporters] [data-logo-group] img { display: block; width: auto; max-width: 100%; height: auto; max-height: 68px; object-fit: contain; }
 [data-supporters] [data-logo="yfn"] img { width: 145px; }
 [data-supporters] [data-logo="unternehmertum"] img { width: 115px; }
 [data-supporters] [data-logo="jugend-gruendet"] img { width: 166px; }
 [data-supporters] [data-logo="startup-teens"] img { width: 180px; }
 [data-supporters] [data-logo="lanxess"] img { width: 164px; }
-
-[data-supporters][data-marquee-ready] [data-logo-viewport] {
-  mask-image: linear-gradient(to right, transparent, black 32px, black calc(100% - 32px), transparent);
+[data-supporters] :is(button, a, summary, [data-logo-viewport]):focus-visible { outline: 3px solid #45714c; outline-offset: 4px; }
+.supporter-sources { margin-top: .9rem; font-size: .75rem; color: var(--color-muted); }
+.supporter-sources summary { width: fit-content; display: list-item; padding-block: .7rem; cursor: pointer; text-decoration: underline; text-underline-offset: 4px; }
+.supporter-sources p { max-width: 75ch; margin-top: .3rem; }
+.supporter-sources a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: underline; text-underline-offset: 4px; }
+@media (max-width: 639px) {
+  [data-supporters] [data-logo-group] { gap: 1rem; }
+  [data-supporters] [data-logo-group] > li { flex-basis: 172px; width: 172px; }
 }
-
-[data-supporters][data-marquee-ready] [data-logo-track] {
-  display: flex;
-  width: max-content;
-  will-change: transform;
-}
-
-[data-supporters][data-marquee-ready] [data-logo-group] {
-  flex: 0 0 auto;
-  flex-wrap: nowrap;
-  gap: 56px;
-  padding: 8px 28px;
-}
-
-[data-supporters][data-marquee-ready] [data-logo-group] > li {
-  flex: 0 0 180px;
-  width: 180px;
-  min-width: 180px;
-}
-
-[data-supporters] [data-marquee-toggle][hidden] {
-  display: none;
+@media (prefers-reduced-motion: reduce) {
+  [data-supporters] [data-logo-viewport] { scroll-behavior: auto; }
 }

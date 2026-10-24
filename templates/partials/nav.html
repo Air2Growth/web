@@ -1,7 +1,7 @@
 <a class="fixed left-4 -top-24 z-[2000] rounded-b-lg bg-pine px-5 py-3 font-bold text-white focus-visible:top-0 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand" href="#inhalt">Zum Inhalt springen</a>
 
 <header data-header class="fixed left-1/2 top-3 z-[1000] w-[calc(100%_-_1.5rem)] max-w-[1169px] -translate-x-1/2 md:top-5 md:w-[calc(100%_-_2.5rem)]">
-    <nav class="flex h-16 items-center justify-between gap-2 sm:h-[72px] sm:gap-4 rounded-2xl border border-white/60 bg-white/95 px-3 sm:px-4 shadow-[0_6px_28px_#2f2f2f0f] backdrop-blur-xl md:px-6" aria-label="Hauptnavigation">
+    <nav class="site-nav flex items-center justify-between gap-2 sm:gap-4 border px-3 sm:px-4 md:px-6" aria-label="Hauptnavigation">
         <a class="shrink-0 rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand" href="/#top" aria-label="Air2Growth – zum Seitenanfang"><span class="flex h-12 w-[108px] items-center justify-center overflow-hidden"><img src="/img/logo.svg" alt="Air2Growth" width="1006" height="715" decoding="async" class="h-[80px] w-[113px] max-w-none object-contain"></span></a>
         <div class="hidden items-center gap-1 xl:flex">
             <a data-section-link href="/loesung" class="rounded-lg px-3 py-3 text-sm text-ink transition-colors hover:bg-mist hover:text-pine aria-[current]:bg-mist aria-[current]:text-pine focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand motion-reduce:transition-none">Lösung</a>
@@ -19,6 +19,13 @@
         </div>
     </nav>
 </header>
+<noscript>
+    <style>[data-nav-toggle]{display:none}</style>
+    <nav class="no-script-nav" aria-label="Seitennavigation">
+        <a href="/loesung">Unsere Lösung</a><a href="/function">So funktioniert’s</a><a href="/meilensteine">Meilensteine</a><a href="/vision">Vision</a><a href="/ueber-uns">Über uns</a><a href="/#kontakt">Kontakt</a>
+        <!-- @languages -->
+    </nav>
+</noscript>
 <div id="mobile-menu" data-mobile-menu role="dialog" aria-modal="true" aria-label="Hauptmenü" aria-hidden="true" inert class="fixed inset-0 z-[1500] hidden flex h-[100dvh] flex-col overflow-y-auto overscroll-contain bg-mist text-pine xl:hidden">
     <div class="flex h-20 shrink-0 sm:h-24 items-center justify-between px-6">
         <a href="/#top" class="rounded font-serif text-2xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand">Air2Growth</a>

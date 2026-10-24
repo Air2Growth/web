@@ -1,94 +1,63 @@
-import { gsap } from 'gsap';
-import { message } from './messages.ts';
-
-const PIXELS_PER_SECOND = 32;
-
 export function initSupporters(root) {
   const viewport = root.querySelector('[data-logo-viewport]');
-  const track = root.querySelector('[data-logo-track]');
   const group = root.querySelector('[data-logo-group]');
-  const button = root.querySelector('[data-marquee-toggle]');
-  const label = button.querySelector('[data-marquee-label]');
-  const pauseIcon = button.querySelector('[data-marquee-pause]');
-  const playIcon = button.querySelector('[data-marquee-play]');
-  const media = gsap.matchMedia();
-  let userPaused = false;
+  const controls = root.querySelector('[data-supporter-controls]');
+  const previous = root.querySelector('[data-supporter-previous]');
+  const next = root.querySelector('[data-supporter-next]');
+  if (!viewport || !group || !controls || !previous || !next) return () => {};
 
-  media.add('(prefers-reduced-motion: no-preference)', () => {
-    const events = new AbortController();
-    const options = { signal: events.signal };
-    let hovered = false;
-    let visible = false;
+  const events = new AbortController();
+  const options = { signal: events.signal };
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let frame = 0;
 
-    // One complete, identical group makes the end and start visually match.
-    // Its fixed logo slots are wider than the section at every breakpoint.
-    const copy = group.cloneNode(true);
-    copy.setAttribute('aria-hidden', 'true');
-    copy.removeAttribute('aria-label');
-    copy.inert = true;
-    copy.dataset.logoCopy = '';
-    copy.querySelectorAll('img').forEach((img) => { img.alt = ''; });
-    track.append(copy);
-    root.dataset.marqueeReady = '';
+  function updateControls() {
+    frame = 0;
+    const maximum = viewport.scrollWidth - viewport.clientWidth;
+    controls.hidden = maximum <= 2;
+    previous.disabled = viewport.scrollLeft <= 2;
+    next.disabled = viewport.scrollLeft >= maximum - 2;
+  }
 
-    const distance = group.getBoundingClientRect().width;
-    const tween = gsap.fromTo(track, { x: 0 }, {
-      x: -distance,
-      duration: distance / PIXELS_PER_SECOND,
-      ease: 'none',
-      repeat: -1,
-      paused: true,
+  function scheduleUpdate() {
+    if (!frame) frame = requestAnimationFrame(updateControls);
+  }
+
+  function move(direction) {
+    viewport.scrollBy({
+      left: direction * Math.max(viewport.clientWidth * 0.75, 200),
+      behavior: reducedMotion.matches ? 'instant' : 'smooth',
     });
+  }
 
-    function updatePlayback() {
-      const running = visible && !document.hidden && !hovered && !userPaused;
-      tween.paused(!running);
-      root.dataset.marqueeState = running ? 'running' : 'paused';
+  previous.addEventListener('click', () => move(-1), options);
+  next.addEventListener('click', () => move(1), options);
+  viewport.addEventListener('scroll', scheduleUpdate, { ...options, passive: true });
+  viewport.addEventListener('keydown', (event) => {
+    if (event.target !== viewport || event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
+    if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+      event.preventDefault();
+      move(event.key === 'ArrowLeft' ? -1 : 1);
+    } else if (event.key === 'Home' || event.key === 'End') {
+      event.preventDefault();
+      viewport.scrollTo({
+        left: event.key === 'Home' ? 0 : viewport.scrollWidth,
+        behavior: reducedMotion.matches ? 'instant' : 'smooth',
+      });
     }
+  }, options);
 
-    function updateButton() {
-      label.textContent = message(userPaused ? 'Fortsetzen' : 'Pause');
-      button.setAttribute('aria-label', message(userPaused ? 'Logo-Animation fortsetzen' : 'Logo-Animation pausieren'));
-      pauseIcon.hidden = userPaused;
-      playIcon.hidden = !userPaused;
-    }
+  // Native scrolling and linked logos work independently of this enhancement.
+  const observer = typeof ResizeObserver === 'function' ? new ResizeObserver(scheduleUpdate) : null;
+  observer?.observe(viewport);
+  observer?.observe(group);
+  window.addEventListener('resize', scheduleUpdate, options);
+  updateControls();
 
-    button.hidden = false;
-    updateButton();
-    button.addEventListener('click', () => {
-      userPaused = !userPaused;
-      updateButton();
-      updatePlayback();
-    }, options);
-
-    viewport.addEventListener('pointerenter', (event) => {
-      if (event.pointerType === 'touch') return;
-      hovered = true;
-      updatePlayback();
-    }, options);
-    viewport.addEventListener('pointerleave', () => {
-      hovered = false;
-      updatePlayback();
-    }, options);
-    document.addEventListener('visibilitychange', updatePlayback, options);
-
-    const observer = new IntersectionObserver(([entry]) => {
-      visible = entry.isIntersecting;
-      updatePlayback();
-    });
-    observer.observe(viewport);
-    updatePlayback();
-
-    return () => {
-      observer.disconnect();
-      events.abort();
-      copy.remove();
-      button.hidden = true;
-      delete root.dataset.marqueeReady;
-      delete root.dataset.marqueeState;
-      // matchMedia reverts the tween and its inline transform automatically.
-    };
-  }, root);
-
-  return () => media.revert();
+  return () => {
+    events.abort();
+    observer?.disconnect();
+    cancelAnimationFrame(frame);
+    controls.hidden = true;
+  };
 }

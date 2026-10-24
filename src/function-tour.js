@@ -4,22 +4,22 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export const TOUR_DURATION = 60;
-// Absolute seconds include transitions and holds. The scroll driver, scene
-// announcements, reduced-motion stills and progress all use this manifest.
+// Absolute seconds, including holds, are the single timing manifest for the
+// animation, guided driver, progress labels and reduced-motion still scenes.
 export const TOUR_SCENES = Object.freeze([
-  { id: "order", start: 0, end: 6, still: 3, title: "Order your Air2Growth" },
-  { id: "delivery", start: 6, end: 14, still: 10, title: "Delivered by our team" },
-  { id: "installation", start: 14, end: 22, still: 19, title: "Installed by Air2Growth" },
-  { id: "process", start: 22, end: 39, still: 36, title: "From air to liquid fertiliser" },
-  { id: "touchscreen", start: 39, end: 46, still: 43, title: "Check the integrated touchscreen" },
-  { id: "fault", start: 46, end: 51, still: 49, title: "Faults reach our support team" },
-  { id: "maintenance", start: 51, end: 57, still: 55, title: "Stay informed during maintenance" },
-  { id: "closing", start: 57, end: TOUR_DURATION, still: TOUR_DURATION, title: "From carbon to crop" },
-]);
+  { id: "delivery", start: 0, end: 3, still: 1.8, title: "Delivery to the greenhouse", description: "The team brings the system into the greenhouse." },
+  { id: "installation", start: 3, end: 6, still: 5, title: "Ready for cultivation", description: "Water and nutrients are already present before growth begins." },
+  { id: "capture", start: 6, end: 11, still: 9, title: "Capture CO₂ from the air", description: "Ambient air passes through the filter, which captures CO₂." },
+  { id: "supply", start: 11, end: 15, still: 13, title: "Supply CO₂ to the culture", description: "The captured CO₂ is released and supplied to the prepared culture." },
+  { id: "growth", start: 15, end: 23, still: 20, title: "Microalgae grow", description: "With light, microalgae use CO₂, water and nutrients to build biomass." },
+  { id: "harvest", start: 23, end: 29, still: 27.5, title: "Harvest and prepare biomass", description: "The harvested microalgae are intended to become liquid fertiliser." },
+  { id: "service", start: 29, end: 32, still: 30.8, title: "Keep track of operation", description: "A touchscreen and machine monitoring are planned to support operation and service." },
+  { id: "closing", start: 32, end: 38, still: 37.5, title: "Fertilise plants on site", description: "The resulting fertiliser is applied to plants in the greenhouse." },
+].map(Object.freeze));
+export const TOUR_DURATION = TOUR_SCENES.at(-1).end;
 
 const clamp = (value) => Math.max(0, Math.min(1, value));
-const monitoringStart = TOUR_SCENES.find((scene) => scene.id === "fault").start;
+const monitoringStart = TOUR_SCENES.find((scene) => scene.id === "service").start;
 export function formatTourTime(seconds) {
   const whole = Math.floor(seconds + 1e-6);
   return `${Math.floor(whole / 60)}:${String(whole % 60).padStart(2, "0")}`;
@@ -38,137 +38,80 @@ function buildTimeline(root, isMobile) {
   const hide = (name, at, duration = .4) => tl.to(q(name), { autoAlpha: 0, duration }, at);
   TOUR_SCENES.forEach((scene) => tl.addLabel(scene.id, scene.start));
   tl.set(root.querySelectorAll(".tour-initial-hidden"), { autoAlpha: 0 }, 0);
-  // Establish the camera pivot once. Reapplying svgOrigin after a pan would
-  // convert it through the transformed world and leave a residual offset.
+  // One stable pivot keeps camera movement reversible when scrubbing.
   tl.set(q("world"), { svgOrigin: "575 480", smoothOrigin: false, x: 0, y: 0, scale: 1 }, 0);
-  tl.set(q("machine"), { autoAlpha: 0 }, 0);
+  tl.set(q("machine"), { autoAlpha: 0, x: 50 }, 0);
   tl.set(q("customer"), { x: -50 }, 0);
-  tl.set(q("van"), { x: -125 }, 0);
   tl.set([q("co2-in"), q("co2-release"), q("culture-bubbles"), q("harvest-flow")], { autoAlpha: 0 }, 0);
-  tl.set(q("culture"), { fill: color("sage"), scaleY: .45, transformOrigin: "center bottom" }, 0);
+  // Liquid volume is present from setup; only algae density changes during growth.
+  tl.set(q("culture"), { fill: color("water"), scaleY: 1 }, 0);
+  tl.set(q("algae-cells"), { autoAlpha: .25 }, 0);
+  tl.set(q("application-plant"), { x: isMobile ? -40 : 0 }, 0);
 
-  // A little atmosphere, entirely determined by the same reversible clock.
-  tl.to(q("clouds"), { x: 26, duration: TOUR_DURATION, ease: "none" }, 0);
-  tl.to(q("glass-shine"), { autoAlpha: .45, duration: 6, repeat: 3, yoyo: true, ease: "sine.inOut" }, "process");
+  show("van", "delivery", .15);
+  tl.fromTo(q("van"), { x: -330 }, { x: -70, duration: 1.4, immediateRender: false }, "delivery");
+  tl.to(q("wheel"), { rotation: 300, transformOrigin: "50% 50%", duration: 1.4, ease: "none" }, "delivery");
+  show("machine", "delivery+=1.1"); show("trolley", "delivery+=1.1");
+  tl.set(q("trolley"), { x: 50 }, "delivery");
+  show("employee", "delivery+=1.2");
+  tl.to([q("machine"), q("trolley")], { x: 0, duration: 1.2 }, "delivery+=1.4");
+  tl.to(q("van"), { x: -650, duration: .8 }, "delivery+=2.1");
+  hide("van", "installation", .1); hide("trolley", "installation", .25);
 
-  show("order", "order", .5);
-  hide("customer-rest-arm", "order", 0);
-  tl.fromTo(q("order-hand"), { x: 6, y: 4 }, { x: -5, y: 0, duration: .9, immediateRender: false }, "order+=1.2");
-  tl.to(q("customer-eyes"), { scaleY: .1, transformOrigin: "center", duration: .1, repeat: 1, yoyo: true }, "order+=2.1");
-  show("confirmation", "order+=2.5", .35);
-  tl.fromTo(q("confirmation"), { scale: .92 }, { scale: 1, transformOrigin: "center", duration: .5, immediateRender: false }, "order+=2.5");
-  tl.to(q("order-hand"), { x: 3, y: 8, duration: .7 }, "order+=3.3");
-  tl.to(q("confirmation"), { x: -43, y: 122, scale: .7, transformOrigin: "center", duration: .75 }, "order+=5");
-  hide("order", "delivery-=.5");
-  show("customer-rest-arm", "delivery-=.4", .1);
-  show("crate", "delivery-=.4"); show("packer", "delivery-=.2");
-  tl.to(q("customer"), { x: 380, duration: .7 }, "delivery-=.5");
-  tl.set(q("employee"), { x: -390 }, "delivery-=.2");
-  show("employee", "delivery");
-  tl.to(q("packer-arm"), { rotation: -20, svgOrigin: "170 414", duration: .45, repeat: 1, yoyo: true }, "delivery+=.2");
-  hide("confirmation", "delivery+=.3");
-  show("van", "delivery+=.6");
-  tl.fromTo(q("van-door"), { scaleX: .2 }, { scaleX: 1, transformOrigin: "left center", duration: .65, immediateRender: false }, "delivery+=.7");
-  tl.to(q("crate"), { x: 45, y: -4, duration: .8 }, "delivery+=.6");
-  hide("crate", "delivery+=1.1"); hide("packer", "delivery+=1.5"); hide("employee", "delivery+=1.5");
-  tl.fromTo(q("van"), { x: -125 }, { x: 310, duration: 3.8, ease: "power1.inOut", immediateRender: false }, "delivery+=2");
-  tl.to(q("wheel"), { rotation: 720, transformOrigin: "50% 50%", duration: 3.8, ease: "none" }, "delivery+=2");
-  tl.to(q("van"), { y: -1.4, duration: .32, repeat: 9, yoyo: true, ease: "sine.inOut" }, "delivery+=2.3");
-  tl.to(q("landscape"), { x: -30, duration: 3.2, ease: "none" }, "delivery+=2.2");
-  tl.to(q("landscape"), { x: 0, duration: .8 }, "delivery+=5.4");
-  show("assistant", "delivery+=5.3");
-  show("machine", "delivery+=6.5"); show("wrap", "delivery+=6.5"); show("trolley", "delivery+=6.5");
-  tl.set([q("machine"), q("wrap"), q("trolley")], { x: 95 }, "delivery+=6.4");
-  tl.set(q("employee"), { x: 45 }, "delivery+=6.4"); show("employee", "delivery+=6.6");
-  tl.to(q("van"), { x: 1000, y: 0, duration: 1, ease: "power2.in" }, "delivery+=6.8");
-  hide("van", "installation", .15); hide("assistant", "installation+=.2");
+  show("connections", "installation", .25);
+  show("checklist", "installation+=.1");
+  tl.fromTo(q("tick"), { autoAlpha: 0, scale: .6 }, { autoAlpha: 1, scale: 1, stagger: .22, duration: .2, transformOrigin: "center", immediateRender: false }, "installation+=.2");
+  show("cutaway", "installation+=.5"); hide("front-panel", "installation+=.5");
+  show("nutrient-flow", "installation+=.5");
+  hide("nutrient-flow", "installation+=1.5");
+  hide("checklist", "installation+=1.7"); hide("connections", "installation+=2");
+  hide("employee", "installation+=2");
+  tl.to(q("customer"), { x: -75, autoAlpha: 0, duration: .6 }, "installation+=2.1");
 
-  tl.to([q("machine"), q("wrap"), q("trolley")], { x: 0, duration: 1.2 }, "installation");
-  tl.to(q("customer"), { x: 0, duration: 1 }, "installation");
-  tl.to(q("employee"), { x: -25, duration: 1.2 }, "installation");
-  hide("trolley", "installation+=1.2");
-  tl.to(q("wrap"), { y: -130, rotation: -7, autoAlpha: 0, duration: 1.1 }, "installation+=1.4");
-  show("connections", "installation+=2.5"); show("checklist", "installation+=2.8");
-  tl.fromTo(q("tick"), { autoAlpha: 0, scale: .6 }, { autoAlpha: 1, scale: 1, stagger: .7, duration: .3, transformOrigin: "center", immediateRender: false }, "installation+=3");
-  show("handover-hand", "installation+=5.2");
-  hide("employee-rest-arm", "installation+=5.2", .1);
-  tl.to(q("customer"), { rotation: 2, transformOrigin: "center bottom", duration: .35, repeat: 1, yoyo: true }, "installation+=6");
-  hide("handover-hand", "installation+=7"); hide("checklist", "installation+=7");
-  show("employee-rest-arm", "installation+=7", .1);
-  hide("connections", "process-=.5"); hide("employee", "process-=.6");
-  tl.to(q("customer"), { x: -75, autoAlpha: 0, duration: .7 }, "process-=.6");
+  // Preserve the detailed cabinet cutaway: capture, supply, growth, preparation.
+  hide("status-light", "capture", .25);
+  tl.to(q("world"), { scale: isMobile ? 1.4 : 1.65, duration: .8 }, "capture");
+  show("air-stream", "capture+=.3");
+  tl.to(q("air-stream"), { strokeDashoffset: -90, duration: 4, ease: "none" }, "capture+=.3");
+  tl.fromTo(q("co2-in"), { x: 0, autoAlpha: 0 }, { x: 56, autoAlpha: 1, duration: 1.5, repeat: 1, repeatDelay: .25, ease: "none", immediateRender: false }, "capture+=.5");
+  hide("co2-in", "capture+=4.3", .25); hide("air-stream", "capture+=4.4", .25);
 
-  // Separate capture, regeneration, biological growth and preparation phases.
-  show("cutaway", "process", .6); hide("front-panel", "process", .6); hide("status-light", "process");
-  tl.to(q("world"), { scale: isMobile ? 1.4 : 1.7, duration: .9 }, "process");
-  show("air-stream", "process+=.6");
-  tl.to(q("air-stream"), { strokeDashoffset: -72, duration: 3, ease: "none" }, "process+=.6");
-  tl.fromTo(q("co2-in"), { x: 0, autoAlpha: 0 }, { x: 56, autoAlpha: 1, duration: 1.4, repeat: 1, repeatDelay: .2, ease: "none", immediateRender: false }, "process+=.6");
-  hide("co2-in", "process+=3.6", .25); hide("air-stream", "process+=3.7", .25);
-  tl.to(q("cartridge"), { fill: color("warning-soft"), duration: .55 }, "process+=4");
-  tl.to(q("cartridge"), { fill: color("tint"), duration: .6 }, "process+=6.2");
-  tl.fromTo(q("co2-release"), { autoAlpha: 0, x: -10 }, { autoAlpha: 1, x: 19, duration: 1.2, repeat: 1, repeatDelay: .2, ease: "none", immediateRender: false }, "process+=4.1");
-  hide("co2-release", "process+=6.7", .3);
-  show("nutrient-flow", "process+=7");
-  tl.to(q("nutrient-flow"), { strokeDashoffset: -42, duration: 4.8, ease: "none" }, "process+=7");
-  tl.to(q("culture"), { fill: color("brand"), scaleY: 1, duration: 4.8 }, "process+=7");
-  tl.fromTo(q("culture-bubbles"), { y: 12, autoAlpha: 0 }, { y: -18, autoAlpha: .85, duration: 1.45, repeat: 2, ease: "none", immediateRender: false }, "process+=7.3");
-  hide("culture-bubbles", "process+=11.7"); hide("nutrient-flow", "process+=11.8");
-  show("harvest-flow", "process+=12");
-  tl.to(q("harvest-flow"), { strokeDashoffset: -70, duration: 4, ease: "none" }, "process+=12");
-  tl.to(q("separator"), { rotation: 360, transformOrigin: "center", duration: 3.8, ease: "none" }, "process+=12");
-  show("product", "process+=12.7");
-  tl.fromTo(q("product-liquid"), { scaleY: .05 }, { scaleY: 1, transformOrigin: "center bottom", duration: 2.4, immediateRender: false }, "process+=13");
-  tl.to(q("field-worker"), { x: isMobile ? -205 : -165, y: 10, scale: 1.23, svgOrigin: "865 387", duration: .75 }, "process+=12.8");
-  tl.set(q("application"), { x: isMobile ? -119 : -79 }, "process+=12.8");
-  hide("rake", "process+=12.8"); show("application", "process+=13.4");
-  tl.to(q("irrigation-water"), { strokeDashoffset: -35, duration: 2.3, ease: "none" }, "process+=13.6");
-  hide("application", "process+=16.1");
-  tl.to(q("field-worker"), { x: 0, y: 0, scale: 1, duration: .6 }, "process+=16.1");
-  show("rake", "process+=16.4"); hide("cutaway", "touchscreen-=.5", .5); show("front-panel", "touchscreen-=.5", .5);
-  hide("air-stream", "touchscreen-=.5"); show("status-light", "touchscreen-=.5");
+  tl.to(q("cartridge"), { fill: color("water"), duration: .5 }, "supply");
+  tl.fromTo(q("co2-release"), { autoAlpha: 0, x: -10 }, { autoAlpha: 1, x: 19, duration: 1.3, repeat: 1, repeatDelay: .2, ease: "none", immediateRender: false }, "supply+=.2");
+  tl.to(q("cartridge"), { fill: color("tint"), duration: .6 }, "supply+=2.9");
+  hide("co2-release", "supply+=3.5", .3);
 
-  tl.to(q("world"), { scale: isMobile ? 1.6 : 1.65, x: isMobile ? -175 : 0, duration: 1 }, "touchscreen");
-  tl.to(q("customer"), { x: 370, autoAlpha: 1, duration: .9 }, "touchscreen");
-  tl.to(q("touchscreen"), { scale: 1.25, transformOrigin: "left center", duration: .8 }, "touchscreen+=.4");
-  show("touch-hand", "touchscreen+=2", .3);
-  hide("customer-rest-arm", "touchscreen+=2", .1);
-  tl.to(q("customer"), { rotation: -3, duration: .35 }, "touchscreen+=2");
-  hide("screen-ok", "touchscreen+=2.4"); show("screen-cards", "touchscreen+=2.4");
-  tl.to(q("customer"), { rotation: 0, duration: .4 }, "touchscreen+=3.1");
-  hide("touch-hand", "touchscreen+=4.8");
-  show("customer-rest-arm", "touchscreen+=4.8", .1);
-  show("data-line", "fault-=.5");
+  tl.to(q("culture"), { fill: color("leaf"), duration: 6 }, "growth+=.2");
+  tl.to(q("algae-cells"), { autoAlpha: 1, duration: 5 }, "growth+=.4");
+  tl.fromTo(q("culture-bubbles"), { y: 10, autoAlpha: 0 }, { y: -16, autoAlpha: .85, duration: 2, repeat: 2, ease: "none", immediateRender: false }, "growth+=.6");
+  hide("culture-bubbles", "growth+=7", .5);
 
-  tl.to(q("world"), { scale: 1, x: 0, duration: .8 }, "fault");
-  tl.to(q("customer"), { x: 0, duration: .8 }, "fault+=.2");
-  tl.to(q("status-light"), { fill: color("warning"), duration: .25 }, "fault");
-  hide("screen-cards", "fault", .15); show("screen-fault", "fault", .25);
-  tl.set(q("data-packet"), { x: 0, y: 0, autoAlpha: 1 }, "fault+=.4");
-  tl.to(q("data-packet"), { x: isMobile ? 32 : 65, y: -35, duration: .4, ease: "none" }, "fault+=.5");
-  tl.to(q("data-packet"), { x: isMobile ? 34 : 88, y: -116, duration: .4, ease: "none" }, "fault+=.9");
-  tl.to(q("data-packet"), { x: isMobile ? 55 : 160, y: -140, duration: .4, ease: "none" }, "fault+=1.3");
-  show("support", "fault+=1.8");
-  tl.to(q("data-line"), { strokeDashoffset: -36, duration: 3.5, ease: "none" }, "fault+=.5");
-  hide("screen-fault", "fault+=3.4", .2); show("screen-needed", "fault+=3.4", .2);
+  show("harvest-flow", "harvest");
+  tl.to(q("harvest-flow"), { strokeDashoffset: -90, duration: 5.2, ease: "none" }, "harvest");
+  tl.to(q("separator"), { rotation: 540, transformOrigin: "center", duration: 4.6, ease: "none" }, "harvest+=.3");
+  show("product", "harvest+=1");
+  tl.fromTo(q("product-liquid"), { scaleY: .05 }, { scaleY: 1, transformOrigin: "center bottom", duration: 3, immediateRender: false }, "harvest+=1.2");
+  hide("harvest-flow", "harvest+=5.3");
 
-  tl.to(q("support"), { scale: .68, svgOrigin: "850 235", y: -45, duration: .6 }, "maintenance");
-  tl.set(q("employee"), { x: 15 }, "maintenance"); show("employee", "maintenance+=.3");
-  tl.to(q("employee"), { x: -25, duration: .9 }, "maintenance+=.3");
-  show("service-hand", "maintenance+=1.2");
-  hide("employee-rest-arm", "maintenance+=1.2", .1);
-  tl.fromTo(q("service-hand"), { rotation: 0 }, { rotation: -5, svgOrigin: "738 398", duration: .6, repeat: 1, yoyo: true, immediateRender: false }, "maintenance+=1.5");
-  hide("screen-needed", "maintenance+=2.4", .2); show("screen-service", "maintenance+=2.4", .3);
-  tl.to(q("customer"), { rotation: 3, duration: .3, repeat: 1, yoyo: true }, "maintenance+=3.1");
-  hide("service-hand", "maintenance+=4.8");
-  show("employee-rest-arm", "maintenance+=4.8", .1);
-  hide("data-line", "closing-=.3");
+  hide("cutaway", "service", .4); show("front-panel", "service", .4);
+  show("status-light", "service");
+  tl.to(q("world"), { scale: isMobile ? 1.35 : 1.3, x: isMobile ? -40 : 0, duration: .6 }, "service");
+  hide("screen-ok", "service", .2); show("screen-cards", "service", .3);
+  tl.to(q("touchscreen"), { scale: 1.2, transformOrigin: "left center", duration: .4 }, "service");
+  show("data-line", "service+=.3"); show("support", "service+=.6");
+  tl.to(q("data-line"), { strokeDashoffset: -25, duration: 1.8, ease: "none" }, "service+=.3");
+  hide("support", "service+=2.2", .4); hide("data-line", "service+=2.2", .4);
 
-  tl.to(q("employee"), { x: isMobile ? -25 : 0, duration: .8 }, "closing");
-  tl.to(q("touchscreen"), { scale: 1, duration: .8 }, "closing");
-  tl.to(q("world"), { scale: 1, x: 0, duration: .8 }, "closing");
-  tl.fromTo(q("logo"), { autoAlpha: 0, y: 8 }, { autoAlpha: 1, y: 0, duration: .9, immediateRender: false }, "closing");
-  // Exactly sixty logical seconds. No independent infinite story animations.
+  // The final hold shows actual application, inside the same greenhouse.
+  tl.to(q("touchscreen"), { scale: 1, duration: .6 }, "closing");
+  tl.to(q("world"), { scale: 1, x: 0, y: 0, duration: .8 }, "closing");
+  tl.to(q("field-worker"), { x: isMobile ? -140 : -100, y: 10, scale: 1.23, svgOrigin: "865 387", duration: .8 }, "closing");
+  tl.set(q("application"), { x: isMobile ? -54 : -14 }, "closing");
+  hide("rake", "closing", .2);
+  show("application", "closing+=.8");
+  tl.to(q("irrigation-water"), { strokeDashoffset: -70, duration: 4, ease: "none" }, "closing+=1");
+  tl.to(q("application-plant"), { scale: 1.08, transformOrigin: "center bottom", duration: 2 }, "closing+=2");
+  // The manifest sets the final hold. No independent repeating animations.
   tl.to({ time: 0 }, { time: TOUR_DURATION, duration: TOUR_DURATION, ease: "none" }, 0);
   return tl;
 }
@@ -187,9 +130,22 @@ export function initFunctionTour(root) {
   const next = $("[data-tour-next]");
   const skip = $("[data-tour-skip]");
   const hint = $("[data-tour-hint]");
+  const progressFill = $("[data-progress-fill]");
+  const progressBar = $("[data-tour-progress]");
+  const timeLabel = $("[data-tour-time]");
+  const caption = $("[data-tour-caption]");
+  const sceneTitle = $("[data-tour-scene-title]");
+  const sceneDescription = $("[data-tour-scene-description]");
+  const announcement = $("[data-tour-announce]");
+  const privacy = $("[data-tour-privacy]");
+  const lastScene = TOUR_SCENES.length - 1;
+  progressBar.setAttribute("aria-valuemax", String(TOUR_DURATION));
+  const durationLabel = $("[data-tour-duration]");
+  durationLabel.textContent = message("A {duration}-second guided tour. Pause or exit at any time.", { duration: TOUR_DURATION });
+  durationLabel.hidden = false;
   const abort = new AbortController();
   let timeline, trigger, driver, mediaContext;
-  let state = "poster", progress = 0, currentScene = -1;
+  let state = "poster", progress = 0, currentScene = -1, displayedSecond = -1;
   let reduceMotion = false, disposed = false, resizing = 0, activation = 0, completionFrame = 0;
   let expectedScroll = null, savedScrollBehaviour = null;
   let layoutPending = false;
@@ -198,6 +154,7 @@ export function initFunctionTour(root) {
     state = value;
     root.dataset.tourState = value;
     controls.hidden = value === "poster";
+    caption.hidden = value === "poster";
     $("[data-tour-launch]").hidden = value !== "poster";
     toggle.hidden = value === "complete" || value === "still";
     toggle.textContent = message(value === "playing" ? "Pause" : "Resume");
@@ -211,18 +168,26 @@ export function initFunctionTour(root) {
     root.dataset.tourTime = time.toFixed(2);
     const index = sceneAt(time);
     const scene = TOUR_SCENES[index];
-    if (index !== currentScene) {
+    const sceneChanged = index !== currentScene;
+    if (sceneChanged) {
       currentScene = index;
       root.dataset.scene = scene.id;
-      if (announce) $("[data-tour-announce]").textContent = message(scene.title);
+      sceneTitle.textContent = message(scene.title);
+      sceneDescription.textContent = message(scene.description);
+      if (announce) announcement.textContent = message(scene.title) + ". " + message(scene.description);
+      privacy.hidden = time < monitoringStart;
+      previous.disabled = index === 0;
+      next.textContent = message(index === lastScene ? "Finish" : "Next");
     }
-    $("[data-tour-privacy]").hidden = time < monitoringStart;
-    $("[data-progress-fill]").style.transform = `scaleX(${progress})`;
-    $("[data-tour-progress]").setAttribute("aria-valuenow", time.toFixed(1));
-    $("[data-tour-progress]").setAttribute("aria-valuetext", message("{elapsed} of {duration} seconds. {scene}", { elapsed: Math.floor(time), duration: TOUR_DURATION, scene: message(scene.title) }));
-    $("[data-tour-time]").textContent = `${formatTourTime(time)} / ${formatTourTime(TOUR_DURATION)}`;
-    previous.disabled = index === 0;
-    next.textContent = message(index === 7 ? "Finish" : "Next");
+    progressFill.style.transform = `scaleX(${progress})`;
+    // Text and accessibility updates need second precision, not frame precision.
+    const whole = Math.floor(time + 1e-6);
+    if (whole !== displayedSecond || sceneChanged) {
+      displayedSecond = whole;
+      progressBar.setAttribute("aria-valuenow", String(whole));
+      progressBar.setAttribute("aria-valuetext", message("{elapsed} of {duration} seconds. {scene}", { elapsed: whole, duration: TOUR_DURATION, scene: message(scene.title) }));
+      timeLabel.textContent = `${formatTourTime(time)} / ${formatTourTime(TOUR_DURATION)}`;
+    }
   }
 
   function stopDriver() {
@@ -277,7 +242,7 @@ export function initFunctionTour(root) {
   function attachPin(atProgress = 0) {
     trigger = ScrollTrigger.create({
       id: "air2growth-function-tour", trigger: stage, pin: stage,
-      start: "top 104px", end: () => `+=${Math.round(window.innerHeight * 4)}`,
+      start: "top 104px", end: () => `+=${Math.round(window.innerHeight * 2.5)}`,
       animation: timeline, scrub: true, invalidateOnRefresh: false,
       onUpdate(self) {
         if (disposed || !trigger || layoutPending) return;
@@ -326,7 +291,7 @@ export function initFunctionTour(root) {
     mediaContext.buildTour();
     if (reduceMotion) {
       showStill(0);
-      hint.textContent = message("Reduced motion: explore the eight still scenes at your own pace.");
+      hint.textContent = message("Reduced motion: explore the still scenes at your own pace.");
       next.focus({ preventScroll: true });
       return;
     }
@@ -339,7 +304,7 @@ export function initFunctionTour(root) {
   }
 
   function showStill(index) {
-    const frame = TOUR_SCENES[Math.max(0, Math.min(7, index))];
+    const frame = TOUR_SCENES[Math.max(0, Math.min(lastScene, index))];
     timeline.time(frame.still, true);
     renderFrame(frame.still);
   }
@@ -355,7 +320,7 @@ export function initFunctionTour(root) {
     progress = 0; currentScene = -1;
     delete root.dataset.scene;
     delete root.dataset.tourTime;
-    $("[data-tour-privacy]").hidden = true;
+    privacy.hidden = true;
     $("[data-tour-announce]").textContent = message("Tour exited.");
     begin.focus({ preventScroll: true });
   }
@@ -410,9 +375,12 @@ export function initFunctionTour(root) {
   on(toggle, "click", () => state === "playing" ? pause() : resume());
   on($("[data-tour-exit]"), "click", exit); on(skip, "click", continueWebsite);
   on(previous, "click", () => showStill(currentScene - 1));
-  on(next, "click", () => currentScene === 7 ? finish() : showStill(currentScene + 1));
+  on(next, "click", () => currentScene === lastScene ? finish() : showStill(currentScene + 1));
   on(window, "wheel", () => pause(), { passive: true });
-  on(window, "touchstart", () => pause(), { passive: true });
+  on(window, "touchstart", (event) => {
+    // A control tap's click handles playback; pausing here would toggle it twice.
+    if (!event.target.closest?.("[data-tour-controls]")) pause();
+  }, { passive: true });
   on(window, "pointerdown", (event) => {
     if (event.clientX >= document.documentElement.clientWidth || event.target.closest?.("header")) pause();
   }, { passive: true });

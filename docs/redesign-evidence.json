@@ -1,0 +1,336 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-10-22",
+  "scope": "Work package 4: milestones, vision and team. Shared checkout; only the nine owned files were edited by this task.",
+  "status": "Implementation and targeted checks complete. Parent integration and final production checks passed; see docs/redesign-validation.json for full-site evidence and review status.",
+  "files": [
+    "templates/meilensteine.html",
+    "templates/vision.html",
+    "templates/ueber-uns.html",
+    "templates/partials/milestones-page.html",
+    "templates/partials/vision-page.html",
+    "templates/partials/about-page.html",
+    "src/editorial.css",
+    "src/locales/en/redesign-editorial.json",
+    "docs/redesign-evidence.json"
+  ],
+  "designReview": {
+    "brief": "docs/redesign-plan.md",
+    "skill": "/root/.codex/skills/frontend-design/SKILL.md",
+    "reviewedBeforeCoding": true,
+    "palette": {
+      "forest": "#263E2D",
+      "leaf": "#45714C",
+      "sage": "#A7B89C",
+      "dew": "#EEF3EC",
+      "white": "#FCFDFC",
+      "water": "#DCEAEC"
+    },
+    "type": "Inherited locally hosted Open Sans. Left-aligned bold headings. Original organisation logos retain their original colours.",
+    "layouts": {
+      "milestones": "Genuine Samsung award photograph beside a concise opening; connected grouped award disclosures with corresponding Munich and national-final photos; separate current Samsung support and two network entries. Original photo credits and post links remain visible.",
+      "vision": "An existing plant photograph in a greenhouse-arch crop beside three connected commitments, followed by a direct invitation.",
+      "team": "Unaltered genuine group photo, four concise responsibilities, accessible email and verified personal LinkedIn icons; company profile separately labelled."
+    },
+    "revisions": [
+      "Reduced inherited 80px opening headings to a 64px maximum; the German team title renders in three lines at 1440px.",
+      "Reduced the awards sidebar title to a 44px maximum and disabled automatic hyphenation; measured no split words at 1440px.",
+      "Removed the shared open-details pseudo-marker from these disclosures so only the local state icon appears.",
+      "Allowed emergency word wrapping for enlarged headings and links; constrained the support grid with minmax(0,1fr) and min-width:0. All six current-source routes pass text-range and element audits at 320px and 200% root font."
+    ]
+  },
+  "sources": [
+    {
+      "id": "samsung-official-2026",
+      "url": "https://de.linkedin.com/posts/samsung-germany_solvefortomorrow-techforlife-enablingpeople-activity-7501650550996881409-Nax4",
+      "publisher": "Samsung Germany",
+      "retrieval": "HTTP 200; full page fetched and inspected",
+      "supports": [
+        "Air2Growth placed first in the 2026 Solve for Tomorrow final.",
+        "The top three teams enter an Impact Phase with six months of support from Samsung mentors, ekipa and the programme network."
+      ],
+      "usedFor": [
+        "Samsung award disclosure",
+        "Separate current programme support"
+      ],
+      "limits": "Only the explicitly confirmed year is used. No precise event day, financial amount or environmental performance claim is inferred."
+    },
+    {
+      "id": "samsung-team-account",
+      "url": "https://de.linkedin.com/posts/timkothe_solvefortomorrow-activity-7502746535722643456-6W-T",
+      "publisher": "Tim Kothe",
+      "retrieval": "HTTP 200; full page fetched and inspected",
+      "supports": [
+        "Air2Growth is entering a six-month Impact Phase.",
+        "The author profile and named links identify Tim, Felicia and Navika's personal LinkedIn destinations."
+      ],
+      "limits": "This is a participant account, corroborated by Samsung for the programme stage. It is not used to infer a precise final date."
+    },
+    {
+      "id": "bayern-challenge",
+      "url": "https://www.startupteens.de/news/das-sind-die-sieger-der-bayern-challenge-2026/",
+      "publisher": "STARTUP TEENS",
+      "retrieval": "HTTP 200; organiser article inspected",
+      "supports": [
+        "Air2Growth finished second in the 2026 Bayern Challenge."
+      ],
+      "correction": {
+        "previousBrief": "3. Platz",
+        "implemented": "2. Platz",
+        "authorization": "User explicitly selected the verified organiser result in this task."
+      },
+      "integrationNote": "Any homepage award summary must also use the corrected second-place result."
+    },
+    {
+      "id": "jugend-gruendet-final",
+      "url": "https://www.jugend-gruendet.de/finale-2026/",
+      "publisher": "JUGEND GRÜNDET",
+      "retrieval": "HTTP 200; organiser results inspected",
+      "supports": [
+        "Air2Growth finished second in the national final."
+      ],
+      "limits": "Historical participant names are not substituted for the current four-person roster provided in the brief."
+    },
+    {
+      "id": "golden-spotlight",
+      "url": "https://de.linkedin.com/posts/felicia-kloss_was-w%C3%A4re-wenn-wir-es-einfach-versuchen-activity-7477038040926879744-FUS1",
+      "publisher": "Felicia Kloss",
+      "retrieval": "HTTP 200; full participant post fetched and inspected",
+      "supports": [
+        "Second place at the national final and a Golden Spotlight Award from Bits & Pretzels.",
+        "The award included an invitation to pitch on the main stage."
+      ],
+      "limits": "The special award is supported by a named team member's first-person account; the organiser final page independently supports second place."
+    },
+    {
+      "id": "munich-pitch",
+      "url": "https://de.linkedin.com/posts/air2growth_wir-freuen-uns-riesig-%C3%BCber-unseren-erfolg-activity-7452047539778023424-kO9z",
+      "publisher": "Air2Growth",
+      "retrieval": "HTTP 200; company post inspected; search also surfaced the reshared organiser announcement",
+      "supports": [
+        "First place at the JUGEND GRÜNDET Munich pitch event.",
+        "Progression towards the national final."
+      ],
+      "officialProgrammeUrl": "https://www.jugend-gruendet.de/",
+      "limits": "No precise event date is added. The award detail links the company account and official programme separately."
+    },
+    {
+      "id": "young-founders-network",
+      "url": "https://youngfounders.network/",
+      "publisher": "Young Founders Network",
+      "retrieval": "HTTP 200; official programme site inspected",
+      "supports": [
+        "Identity and purpose of the network."
+      ],
+      "teamParticipationBasis": "Existing repository content supplied participation in its Incubator; preserved without inventing a date, award or current funding amount."
+    },
+    {
+      "id": "unternehmertum",
+      "url": "https://www.unternehmertum.de/",
+      "publisher": "UnternehmerTUM",
+      "retrieval": "HTTP 200; official organisation site inspected",
+      "supports": [
+        "Identity and purpose of UnternehmerTUM."
+      ],
+      "teamParticipationBasis": "Existing repository content supplied Innovator scholarship access to MakerSpace; preserved without inventing dates or additional programme status."
+    },
+    {
+      "id": "jugend-gruendet-logo-credit",
+      "url": "https://www.jugend-gruendet.de/presse",
+      "publisher": "JUGEND GRÜNDET",
+      "retrieval": "HTTP 200; official press page inspected",
+      "supports": [
+        "Original organisation logo source and existing repository attribution."
+      ],
+      "implementation": "A visible source credit links to the organiser's press page."
+    }
+  ],
+  "assets": [
+    {
+      "path": "public/img/Air2Growth-Team.webp",
+      "source": "Existing genuine team photograph supplied in the repository.",
+      "usedOn": [
+        "Homepage team preview",
+        "Team"
+      ],
+      "treatment": "Original file unchanged. Responsive 4:3 display with rounded arch frame; no invented headshots or person identification.",
+      "accessibleDescription": "Three team members in a field of grain.",
+      "limits": "The photograph depicts three people, not all four current listed roles. The caption does not claim a four-person portrait or a competition event."
+    },
+    {
+      "path": "public/img/hero.webp",
+      "source": "Existing supplied photographic asset.",
+      "usedOn": [
+        "Vision"
+      ],
+      "treatment": "Original file unchanged. Plant detail cropped in a greenhouse-arch frame.",
+      "accessibleDescription": "Green leaves with water droplets in sunlight.",
+      "limits": "Used as agricultural context; not presented as Air2Growth hardware, a tested crop outcome or a team event."
+    },
+    {
+      "paths": [
+        "public/img/supporters/jugend-gruendet.svg",
+        "public/img/supporters/startup-teens.png",
+        "public/img/supporters/young-founders-network.svg",
+        "public/img/supporters/unternehmertum.svg"
+      ],
+      "provenanceManifest": "public/img/supporters/sources.json",
+      "treatment": "Existing genuine logos unchanged. No recolouring, replacement assets or fabricated wordmarks.",
+      "attribution": "JUGEND GRÜNDET visible credit is retained. Other provenance follows the existing manifest."
+    },
+    {
+      "path": "templates/partials/milestones-page.html: inline Samsung SVG",
+      "sourcePage": "https://csr.samsung.com/en/program/samsung-solve-for-tomorrow",
+      "assetUrl": "https://csr.samsung.com/renew/images/common/logo.svg",
+      "retrieval": "HTTP 200",
+      "sourceSha256": "914e177eeeca68258db5533771438c6ea1ecbe40b97b894c05f1196beb66f620",
+      "verification": "All original path attributes, transforms and colours match the official asset.",
+      "treatment": "Original geometry inlined in the owned template; only presentation/accessibility attributes added to the SVG root. No external image request.",
+      "usageAndAttribution": "Samsung trademark used unchanged to identify the programme. Source recorded in the template and this manifest. The source asset does not itself state a public redistribution licence or additional attribution requirement; no open licence is claimed."
+    }
+  ],
+  "contacts": {
+    "roles": [
+      {
+        "name": "Navika Bhardwaj",
+        "responsibilityDe": "Vertrieb",
+        "responsibilityEn": "Sales",
+        "email": "navika.bhardwaj@air2growth.com",
+        "linkedin": "https://de.linkedin.com/in/navika-bhardwaj-1749963b7",
+        "profileEvidence": "Named Navika link in Tim's supplied Samsung post."
+      },
+      {
+        "name": "Tim Kothe",
+        "responsibilityDe": "Forschung",
+        "responsibilityEn": "Research",
+        "email": "tim.kothe@air2growth.com",
+        "linkedin": "https://de.linkedin.com/in/timkothe",
+        "profileEvidence": "Author profile of the supplied Samsung post."
+      },
+      {
+        "name": "Felicia Kloss",
+        "responsibilityDe": "Finanzen und Marketing",
+        "responsibilityEn": "Finance and marketing",
+        "email": "felicia.kloss@air2growth.com",
+        "linkedin": "https://de.linkedin.com/in/felicia-kloss",
+        "profileEvidence": "Named Felicia link in Tim's supplied post, corroborated by her Golden Spotlight account."
+      },
+      {
+        "name": "Thinh Nguyen",
+        "responsibilityDe": "Entwicklung",
+        "responsibilityEn": "Development",
+        "email": "thinh.nguyen@air2growth.com",
+        "linkedin": "https://www.linkedin.com/in/thinisde/",
+        "profileEvidence": "Exact URL explicitly supplied by the user/site owner for Thinh Nguyen on 2026-10-22. No independent identity verification is claimed."
+      }
+    ],
+    "companyLinkedin": "https://linkedin.com/company/air2growth",
+    "companyLinkLabelDe": "Air2Growth auf LinkedIn (Unternehmensprofil)",
+    "companyEvidence": "Verified company destination supplied in the approved brief.",
+    "emailBasis": "All four addresses are preserved from the pre-existing source template."
+  },
+  "unavailableGenuineAssets": [
+    "Individual headshots have not been supplied.",
+    "A genuine photograph of all four listed current team members is not available locally. The historical four-person exhibition photo is not evidence of the current team composition."
+  ],
+  "linkedinPhotoSources": {
+    "checkedAt": "2026-10-23",
+    "manifest": "docs/linkedin-image-sources.json",
+    "scope": "Five original photos downloaded from Air2Growth, Tim Kothe and Felicia Kloss posts at the user's explicit request for use on this website with credits.",
+    "attribution": "Preserve original-post source links and the explicit JUGEND GRÜNDET image credit on Felicia's three photos. No open licence or independent photographer identity is claimed.",
+    "stockImages": "No additional stock images needed for the current layouts. Authentic current portraits and a four-member team photo would address the remaining image gaps."
+  },
+  "validation": {
+    "performedByThisTask": {
+      "translationCoverage": {
+        "milestones": 46,
+        "vision": 15,
+        "about": 31,
+        "missingKeys": [],
+        "integratedCatalogMatches": true,
+        "catalog": "src/locales/en/redesign-editorial.json",
+        "catalogKeys": 91
+      },
+      "templateChecks": "One H1 per owned page, no duplicate IDs, no script elements in owned partials, preserved anchor destinations, git diff --check passed.",
+      "responsive": {
+        "routes": [
+          "/meilensteine",
+          "/vision",
+          "/ueber-uns",
+          "/en/milestones",
+          "/en/vision",
+          "/en/about"
+        ],
+        "widths": [
+          320,
+          390,
+          768,
+          1280,
+          1440
+        ],
+        "combinations": 30,
+        "result": "No page or main-element overflow, no broken loaded images, English accessible labels translated; icon targets at least 44x44px."
+      },
+      "enlargedText": {
+        "rootFont": "200% / 32px",
+        "widths": [
+          320,
+          768
+        ],
+        "routes": 6,
+        "result": "No overflowing editorial boxes at either width. The final 320px pass also checked every nonempty text-node range and measured document widths of exactly 320px on all six routes."
+      },
+      "keyboard": "All four award summaries opened with Enter and retained focus with a visible 3px outline. Enter closed the first disclosure; the final open state has no duplicate pseudo-marker.",
+      "scriptBlocked": "Native disclosures and main text tested in a sandboxed iframe without allow-scripts. Test script did not execute; the heading, all four awards and current Samsung support remained present, and the native disclosure opened.",
+      "motion": "The owned implementation contains no animation or JavaScript. Browser inspection observed zero active editorial animations. A reduced-motion rule disables descendant animations/transitions. Dedicated OS media emulation was not available in the collaborative preview API.",
+      "contrastRatios": {
+        "forestOnWhite": 11.38,
+        "leafOnDew": 5.02,
+        "forestOnWater": 9.41
+      },
+      "externalLinks": "All 10 unique external milestone links returned HTTP 200.",
+      "protectedCode": "This task edited no protected hero templates, clips, site.js or hero-loading.js. Read-only verification found no diff in site.js or hero-loading.js. Homepage supporting-copy changes owned by the parent are outside this package.",
+      "screenshots": [
+        {
+          "description": "German team opening after title refinement, 1440px",
+          "path": "/root/.t3/userdata/browser-artifacts/browser-screenshot-localhost-mvk1styk-bb4e846a.png"
+        },
+        {
+          "description": "German awards at 1440px, intact words and compact sequence",
+          "path": "/root/.t3/userdata/browser-artifacts/browser-screenshot-localhost-mvk1wd89-a25b4be6.png"
+        },
+        {
+          "description": "German awards at 320px after disclosure-marker fix",
+          "path": "/root/.t3/userdata/browser-artifacts/browser-screenshot-localhost-mvk1z1yy-94b5a60e.png"
+        },
+        {
+          "description": "German vision composition at 1440px",
+          "path": "/root/.t3/userdata/browser-artifacts/browser-screenshot-localhost-mvk1zyvj-d6753d4b.png"
+        },
+        {
+          "description": "English team directory at 390px",
+          "path": "/root/.t3/userdata/browser-artifacts/browser-screenshot-localhost-mvk201e2-37baf71a.png"
+        }
+      ]
+    },
+    "reportedByParent": {
+      "checks": [
+        "Production build",
+        "tests/i18n.test.ts",
+        "tests/seo.test.ts",
+        "tests/hero-loading.test.ts",
+        "All 12 marketing routes at 1440,1280,768,390,320px: 60 checks without overflow or broken images",
+        "All 12 production routes in script-blocked 320px frames: readable headings, visible eight-link navigation, functional native disclosures"
+      ],
+      "provenance": "Parent's integration update in this conversation; not rerun by this task.",
+      "timing": "The reported production build preceded the final enlarged-text CSS corrections. Parent was notified that a production rebuild must pick up the final editorial.css."
+    }
+  },
+  "integration": {
+    "css": "Parent confirmed import of src/editorial.css after src/redesign.css.",
+    "catalog": "Parent confirmed loading en/redesign-editorial.json; live translation check confirmed coverage.",
+    "metadata": "Parent owns src/seo.ts and added Felicia's marketing role in both metadata languages.",
+    "finalValidation": "docs/redesign-validation.json records the rebuilt production checks, including all 12 routes at 320px with 200% text and JavaScript disabled.",
+    "publishing": "No commit or publication performed."
+  }
+}

@@ -1,0 +1,297 @@
+{
+  "schema_version": 1,
+  "collected_on": "2026-10-23",
+  "purpose": "Genuine photographs for the Air2Growth website redesign; five selected local assets from the company and known team-member LinkedIn posts.",
+  "authorization": {
+    "basis": "Explicit user authorization to reuse images on this Air2Growth website with credits.",
+    "user_instructions": [
+      "Download images from LinkedIn (with credits) and display it on our websites. Also tell me, if you need more stock images.",
+      "Download them from company's linkedin, from team member posts."
+    ],
+    "scope": "Reuse in this website with visible source credits linked to the original posts and preservation of any supplied image credit.",
+    "open_license_claimed": false,
+    "license_note": "User authorization for this site is not a claim that these photographs have an open license or that LinkedIn grants a reuse license. No independent photographer identity is inferred."
+  },
+  "acquisition": {
+    "access": "Public, unauthenticated LinkedIn post HTML and the image CDN URLs published in that HTML.",
+    "source_pages_http_status": 200,
+    "extraction": "og:image, image data-delayed-url attributes, and the post's JSON-LD image records.",
+    "download": "Original bytes returned by the exact published CDN URLs, saved locally; no hotlinking.",
+    "rendition_note": "These are the unmodified publicly served LinkedIn image renditions, including shrink_800 and shrink_1280 renditions where those are what the post exposes. They are not claimed to be camera-original files.",
+    "transformations": [],
+    "validation": "Every retained file was visually inspected with view_image, decoded and verified as JPEG, measured, and hashed with SHA-256. HTTP Content-Type and decoded MIME both equal image/jpeg.",
+    "post_dates_note": "Published timestamps are from the posts' JSON-LD. They are not asserted to be the dates on which the pictured events took place."
+  },
+  "display_rules": {
+    "retain_original_aspect_ratio": true,
+    "recommended_rendering": "Use the recorded width and height with responsive width and automatic height. Keep the complete frame on desktop and mobile; do not force square, portrait, or banner crops.",
+    "credits": "Display each asset's credit next to the photo and link it to credit.href. Preserve the upstream JUGEND GRÜNDET image credit where present.",
+    "identity": "Do not derive headshots from these group photographs, label unidentified faces, or present the historical exhibition group as the current four-member team.",
+    "processing": "The five files are original downloaded raster bytes. No crops, retouching, generated people, or other image edits were applied."
+  },
+  "assets": [
+    {
+      "id": "samsung-solve-for-tomorrow",
+      "filename": "samsung-solve-for-tomorrow.jpg",
+      "local_path": "public/img/linkedin/samsung-solve-for-tomorrow.jpg",
+      "public_path": "/img/linkedin/samsung-solve-for-tomorrow.jpg",
+      "post_url": "https://de.linkedin.com/posts/timkothe_solvefortomorrow-activity-7502746535722643456-6W-T",
+      "author": "Tim Kothe",
+      "author_type": "known_team_member",
+      "author_profile_url": "https://de.linkedin.com/in/timkothe",
+      "post_published_at": "2026-09-07T15:16:08.382Z",
+      "post_image_index": 1,
+      "original_cdn_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQHMeTT-QZKq3w/feedshare-image-high-res/B4DaB8cN6GHUAU-/0/1788794167189?e=2147483647&v=beta&t=FJcIJJIkuSblAr4WJ7ljKEKWBxhdK0e3_BF-okrBYc8",
+      "mime_type": "image/jpeg",
+      "http_content_type": "image/jpeg",
+      "byte_size": 179564,
+      "width": 1080,
+      "height": 810,
+      "aspect_ratio": "4:3",
+      "sha256": "ac0abc39831dbcc9002325464562a2432aa1825ae87f3710c50fde9765f0f28e",
+      "source_supported_event": "Air2Growth's win at the Samsung Solve for Tomorrow final in Berlin and entry into the six-month Impact Phase.",
+      "source_evidence": "The author describes the Berlin final, says Air2Growth won, and names Felicia, Navika and himself as the attending team. The photograph shows three people with an award and certificate before the Solve for Tomorrow backdrop.",
+      "caption": {
+        "de": "Air2Growth nach dem Gewinn des Samsung Solve for Tomorrow Finales in Berlin.",
+        "en": "Air2Growth after winning the Samsung Solve for Tomorrow final in Berlin."
+      },
+      "alt": {
+        "de": "Drei Mitglieder von Air2Growth stehen mit Urkunde und Trophäe vor einer beleuchteten Solve-for-Tomorrow-Kulisse.",
+        "en": "Three Air2Growth members hold a certificate and trophy in front of an illuminated Solve for Tomorrow backdrop."
+      },
+      "credit": {
+        "de": "Quelle: Tim Kothe / LinkedIn",
+        "en": "Source: Tim Kothe / LinkedIn",
+        "href": "https://de.linkedin.com/posts/timkothe_solvefortomorrow-activity-7502746535722643456-6W-T",
+        "upstream_image_credit_exact": null,
+        "named_photographer": null,
+        "note": "No separate photographer credit is supplied in the inspected post. Credit the source author."
+      },
+      "recommended_placement": {
+        "primary": "Opening photograph on the German and English milestones pages.",
+        "secondary": "Samsung milestone disclosure.",
+        "desktop": "Keep the complete 4:3 frame; suitable for a lead image or an image alongside introductory copy.",
+        "mobile": "Use full width with automatic height so the three people, award and event backdrop remain visible.",
+        "natural_width_limit_px": 1080
+      },
+      "identity_limit": "This records the three-person team at this event. It is not a current four-person team portrait, and no left-to-right identification is asserted."
+    },
+    {
+      "id": "munich-pitch-first-place",
+      "filename": "munich-pitch-01.jpg",
+      "local_path": "public/img/linkedin/munich-pitch-01.jpg",
+      "public_path": "/img/linkedin/munich-pitch-01.jpg",
+      "post_url": "https://de.linkedin.com/posts/air2growth_wir-freuen-uns-riesig-%C3%BCber-unseren-erfolg-activity-7452047539778023424-kO9z",
+      "author": "Air2Growth",
+      "author_type": "company",
+      "author_profile_url": "https://de.linkedin.com/company/air2growth",
+      "post_published_at": "2026-04-20T17:36:25.813Z",
+      "post_image_index": 1,
+      "original_cdn_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQHbV2PDSL8PMw/feedshare-shrink_800/B4DZzi8kMDIoAc-/0/1773334053875?e=2147483647&v=beta&t=u6RE5vnfUquJI0uED994QPjxoKG7Bf2zkfNTy6FU2og",
+      "mime_type": "image/jpeg",
+      "http_content_type": "image/jpeg",
+      "byte_size": 60791,
+      "width": 800,
+      "height": 450,
+      "aspect_ratio": "16:9",
+      "sha256": "22bb8bad5e33476b96a31bfc76a6830549ab16a571e309f616e88776cf454e2a",
+      "source_supported_event": "Air2Growth's first place at the JUGEND GRÜNDET pitch event in Munich.",
+      "source_evidence": "The company's post reports first place at the Munich pitch event. Its first photograph shows the first-place marker. The post's other two photographs show different groups with second- and third-place markers and were excluded.",
+      "caption": {
+        "de": "Air2Growth bei der Preisverleihung für den ersten Platz beim JUGEND GRÜNDET Pitch Event in München.",
+        "en": "Air2Growth at the first-place award presentation at the JUGEND GRÜNDET pitch event in Munich."
+      },
+      "alt": {
+        "de": "Gruppe bei der Münchner JUGEND-GRÜNDET-Preisverleihung mit einer großen orangefarbenen Eins für den ersten Platz.",
+        "en": "Group at the JUGEND GRÜNDET award presentation in Munich holding a large orange number one for first place."
+      },
+      "credit": {
+        "de": "Quelle: Air2Growth / LinkedIn",
+        "en": "Source: Air2Growth / LinkedIn",
+        "href": "https://de.linkedin.com/posts/air2growth_wir-freuen-uns-riesig-%C3%BCber-unseren-erfolg-activity-7452047539778023424-kO9z",
+        "upstream_image_credit_exact": null,
+        "named_photographer": null,
+        "note": "No separate photographer credit is supplied in the inspected post. Keep the image unaltered, including its existing marks, and credit the company source."
+      },
+      "recommended_placement": {
+        "primary": "Munich first-place milestone disclosure on German and English milestones pages.",
+        "desktop": "Use as an inset disclosure image at its native 16:9 ratio, preferably no wider than its 800-pixel source.",
+        "mobile": "Keep all five people and the complete first-place marker in frame; use full width with automatic height.",
+        "natural_width_limit_px": 800
+      },
+      "identity_limit": "The award group includes people beyond the team. Do not label it as the complete Air2Growth team or name individual faces."
+    },
+    {
+      "id": "jugend-gruendet-national-final",
+      "filename": "golden-spotlight-01.jpg",
+      "local_path": "public/img/linkedin/golden-spotlight-01.jpg",
+      "public_path": "/img/linkedin/golden-spotlight-01.jpg",
+      "post_url": "https://de.linkedin.com/posts/felicia-kloss_was-w%C3%A4re-wenn-wir-es-einfach-versuchen-activity-7477038040926879744-FUS1",
+      "author": "Felicia Kloss",
+      "author_type": "known_team_member",
+      "author_profile_url": "https://de.linkedin.com/in/felicia-kloss",
+      "post_published_at": "2026-06-28T16:39:45.589Z",
+      "post_image_index": 1,
+      "original_cdn_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQFcop4sZlSgCA/feedshare-shrink_1280/B4DZ8PGb4yKsAM-/0/1782664773574?e=2147483647&v=beta&t=ujxmdKbAceIxQqBZnrna90a1rC6m0rajL9yM-7XN7N8",
+      "mime_type": "image/jpeg",
+      "http_content_type": "image/jpeg",
+      "byte_size": 140664,
+      "width": 1200,
+      "height": 676,
+      "aspect_ratio": "300:169",
+      "sha256": "479976180df3ce06523a7a18b3bcd4b8b631911df16444a2496b34a4b15f0aeb",
+      "source_supported_event": "Second place in the JUGEND GRÜNDET national final; the same post also announces the Golden Spotlight Award from Bits & Pretzels.",
+      "source_evidence": "The post states both results. This photograph specifically shows a silver number two marked BUNDESFINALE in front of the JUGEND GRÜNDET backdrop. It is not a photograph of a Bits & Pretzels mainstage appearance.",
+      "caption": {
+        "de": "Air2Growth bei der Auszeichnung für den zweiten Platz im Bundesfinale von JUGEND GRÜNDET.",
+        "en": "Air2Growth receiving second place at the JUGEND GRÜNDET national final."
+      },
+      "alt": {
+        "de": "Gruppe vor einer JUGEND-GRÜNDET-Fotowand mit einer silbernen Zwei und der Aufschrift Bundesfinale.",
+        "en": "Group in front of a JUGEND GRÜNDET backdrop holding a silver number two marked Bundesfinale."
+      },
+      "credit": {
+        "de": "Bild: JUGEND GRÜNDET · Quelle: Felicia Kloss / LinkedIn",
+        "en": "Image: JUGEND GRÜNDET · Source: Felicia Kloss / LinkedIn",
+        "href": "https://de.linkedin.com/posts/felicia-kloss_was-w%C3%A4re-wenn-wir-es-einfach-versuchen-activity-7477038040926879744-FUS1",
+        "upstream_image_credit_exact": "Bild: JUGEND GRÜNDET",
+        "named_photographer": null,
+        "note": "Preserve the image credit supplied by the author. JUGEND GRÜNDET is credited as in the post; no individual photographer is invented."
+      },
+      "recommended_placement": {
+        "primary": "National-final and Golden Spotlight milestone disclosure on German and English milestones pages.",
+        "desktop": "Keep the original 1200:676 frame, including everyone in the award group and the second-place marker.",
+        "mobile": "Use full width with automatic height. Avoid a portrait or square crop of this wide award group.",
+        "natural_width_limit_px": 1200
+      },
+      "identity_limit": "This is an event award group, not a current team portrait. The visible silver marker documents second place rather than the separate Golden Spotlight trophy."
+    },
+    {
+      "id": "historical-exhibition-group",
+      "filename": "golden-spotlight-02.jpg",
+      "local_path": "public/img/linkedin/golden-spotlight-02.jpg",
+      "public_path": "/img/linkedin/golden-spotlight-02.jpg",
+      "post_url": "https://de.linkedin.com/posts/felicia-kloss_was-w%C3%A4re-wenn-wir-es-einfach-versuchen-activity-7477038040926879744-FUS1",
+      "author": "Felicia Kloss",
+      "author_type": "known_team_member",
+      "author_profile_url": "https://de.linkedin.com/in/felicia-kloss",
+      "post_published_at": "2026-06-28T16:39:45.589Z",
+      "post_image_index": 2,
+      "original_cdn_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQHMpzJ9hzG5sA/feedshare-shrink_1280/B4DZ8PGb9QIIAQ-/0/1782664773722?e=2147483647&v=beta&t=FXB1PsbZW37OxtdMelqjTDKwXzwnvorDWbqUyOrGQ0w",
+      "mime_type": "image/jpeg",
+      "http_content_type": "image/jpeg",
+      "byte_size": 133875,
+      "width": 1107,
+      "height": 623,
+      "aspect_ratio": "1107:623",
+      "sha256": "3463b30fcfd0d9915c629ba1fc717beb3616be3bc6ac738bb6aa782c9b55474e",
+      "source_supported_event": "Historical Air2Growth exhibition photograph included in Felicia Kloss's JUGEND GRÜNDET national-final and Golden Spotlight post.",
+      "source_evidence": "The image is the post's second photograph and shows four people in Air2Growth shirts at a branded exhibition display with plants and a model. The post does not provide a complete individual identity list for this photograph.",
+      "caption": {
+        "de": "Historische Aufnahme am Air2Growth-Messestand aus dem Beitrag zum JUGEND GRÜNDET Bundesfinale.",
+        "en": "Historical photograph at the Air2Growth exhibition stand, from the post about the JUGEND GRÜNDET national final."
+      },
+      "alt": {
+        "de": "Vier Personen in Air2Growth-Shirts stehen an einem Messestand hinter Pflanzen und einem Modell.",
+        "en": "Four people in Air2Growth shirts stand at an exhibition display behind plants and a model."
+      },
+      "credit": {
+        "de": "Bild: JUGEND GRÜNDET · Quelle: Felicia Kloss / LinkedIn",
+        "en": "Image: JUGEND GRÜNDET · Source: Felicia Kloss / LinkedIn",
+        "href": "https://de.linkedin.com/posts/felicia-kloss_was-w%C3%A4re-wenn-wir-es-einfach-versuchen-activity-7477038040926879744-FUS1",
+        "upstream_image_credit_exact": "Bild: JUGEND GRÜNDET",
+        "named_photographer": null,
+        "note": "The post's supplied image credit applies to the photo selection; no separate per-image photographer is named."
+      },
+      "recommended_placement": {
+        "primary": "Homepage milestone preview on German and English homepages, with a historical exhibition caption.",
+        "desktop": "Keep the complete 1107:623 frame so the exhibition, four people, plants and model provide the context.",
+        "mobile": "Use full width with automatic height and a readable caption. Do not crop to isolate faces.",
+        "natural_width_limit_px": 1107
+      },
+      "identity_limit": "Approved as a historical exhibition group only. Do not claim that these are the website's current four team members or infer any person's identity from appearance. It does not close the current-team-photo gap."
+    },
+    {
+      "id": "microscope-exhibition-demo",
+      "filename": "golden-spotlight-03.jpg",
+      "local_path": "public/img/linkedin/golden-spotlight-03.jpg",
+      "public_path": "/img/linkedin/golden-spotlight-03.jpg",
+      "post_url": "https://de.linkedin.com/posts/felicia-kloss_was-w%C3%A4re-wenn-wir-es-einfach-versuchen-activity-7477038040926879744-FUS1",
+      "author": "Felicia Kloss",
+      "author_type": "known_team_member",
+      "author_profile_url": "https://de.linkedin.com/in/felicia-kloss",
+      "post_published_at": "2026-06-28T16:39:45.589Z",
+      "post_image_index": 3,
+      "original_cdn_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQHmUM-fL44QuA/feedshare-shrink_1280/B4DZ8PGb1GJ4AM-/0/1782664773267?e=2147483647&v=beta&t=FBBISiVo7n0bo79RsXTnfDrNAClKTc9-q5e4ebUnJV0",
+      "mime_type": "image/jpeg",
+      "http_content_type": "image/jpeg",
+      "byte_size": 113456,
+      "width": 1200,
+      "height": 676,
+      "aspect_ratio": "300:169",
+      "sha256": "bffaa31ea5fe352f17b9b4d6b8ed1e1c09152788647c47268286fa6280a4bb06",
+      "source_supported_event": "Microscope demonstration at an exhibition table, shown in Felicia Kloss's post about the JUGEND GRÜNDET national final and Golden Spotlight result.",
+      "source_evidence": "The post's third photograph visibly shows a person handling a sample beside a microscope, containers of green liquid, a laptop and a potted plant in an exhibition setting. The post does not identify the face in a per-image caption or report a scientific measurement.",
+      "caption": {
+        "de": "Mikroskop und Proben am Messestand: Einblick in die Vorführung aus dem Beitrag zum JUGEND GRÜNDET Bundesfinale.",
+        "en": "Microscope and samples at the exhibition stand: a demonstration scene from the post about the JUGEND GRÜNDET national final."
+      },
+      "alt": {
+        "de": "Eine Person hält eine Probe neben einem Mikroskop; auf dem Messetisch stehen grüne Flüssigkeitsproben, ein Laptop und eine Pflanze.",
+        "en": "A person holds a sample beside a microscope, with green liquid samples, a laptop and a plant on the exhibition table."
+      },
+      "credit": {
+        "de": "Bild: JUGEND GRÜNDET · Quelle: Felicia Kloss / LinkedIn",
+        "en": "Image: JUGEND GRÜNDET · Source: Felicia Kloss / LinkedIn",
+        "href": "https://de.linkedin.com/posts/felicia-kloss_was-w%C3%A4re-wenn-wir-es-einfach-versuchen-activity-7477038040926879744-FUS1",
+        "upstream_image_credit_exact": "Bild: JUGEND GRÜNDET",
+        "named_photographer": null,
+        "note": "Preserve the post's image credit. The author is the publishing source and is not asserted to be the photographer or the pictured person."
+      },
+      "recommended_placement": {
+        "primary": "About-page working or research section in German and English, as an exhibition demonstration photograph.",
+        "desktop": "Keep the original 1200:676 frame to show both the person and microscope, plus the surrounding demonstration materials.",
+        "mobile": "Use full width with automatic height. Avoid center crops that lose the microscope or misrepresent this scene as a portrait.",
+        "natural_width_limit_px": 1200
+      },
+      "identity_limit": "Do not name the pictured person or use this as an identified individual headshot. Describe the visible demonstration scene without claiming laboratory results, validated performance or a particular experimental finding."
+    }
+  ],
+  "excluded_candidates": [
+    {
+      "post_author": "Air2Growth",
+      "post_activity_id": "7452047539778023424",
+      "post_image_index": 2,
+      "removed_local_filename": "munich-pitch-02.jpg",
+      "reason": "Different group with a second-place marker; does not illustrate Air2Growth's first-place result."
+    },
+    {
+      "post_author": "Air2Growth",
+      "post_activity_id": "7452047539778023424",
+      "post_image_index": 3,
+      "removed_local_filename": "munich-pitch-03.jpg",
+      "reason": "Different group with a third-place marker; does not illustrate Air2Growth's first-place result."
+    },
+    {
+      "post_author": "Felicia Kloss",
+      "post_activity_id": "7477038040926879744",
+      "post_image_index": 4,
+      "removed_local_filename": "golden-spotlight-04.jpg",
+      "reason": "Large event-wide group; less specific to Air2Growth than the selected five photographs."
+    },
+    {
+      "post_author": "Felicia Kloss",
+      "post_activity_id": "7477038040926879744",
+      "post_image_index": 5,
+      "removed_local_filename": "golden-spotlight-05.jpg",
+      "reason": "Additional exhibition scene, redundant for the requested bounded selection."
+    }
+  ],
+  "remaining_gaps": {
+    "additional_stock_images_needed_for_current_layouts": false,
+    "stock_assessment": "The five genuine event, exhibition and microscopy photographs cover the current proposed placements. Stock people or generic laboratory photographs are unnecessary.",
+    "current_four_member_team_photo": "Still needed if the site is to show the complete current team. The historical four-person exhibition photograph does not verify the current roster.",
+    "current_individual_portraits": "Still needed if individual team cards require portraits. No identified current individual portraits were sourced, and no group photographs were cropped into headshots.",
+    "source_access_limits": "None encountered for the three supplied posts or the retained CDN images: all were publicly accessible without authentication. Research was deliberately bounded to these posts."
+  }
+}

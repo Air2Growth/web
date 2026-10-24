@@ -1,0 +1,276 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-10-22",
+  "brief": "docs/redesign-plan.md",
+  "evidence": "docs/redesign-evidence.json",
+  "skill": "/root/.codex/skills/frontend-design/SKILL.md",
+  "routes": [
+    "/",
+    "/en",
+    "/loesung",
+    "/en/solution",
+    "/function",
+    "/en/how-it-works",
+    "/meilensteine",
+    "/en/milestones",
+    "/vision",
+    "/en/vision",
+    "/ueber-uns",
+    "/en/about"
+  ],
+  "responsiveAudit": {
+    "viewports": [
+      1440,
+      1280,
+      768,
+      390,
+      320
+    ],
+    "cases": 60,
+    "checks": [
+      "One visible H1",
+      "No horizontal page or relevant element overflow",
+      "No broken loaded images"
+    ],
+    "result": "passed before final enlarged-text and touch-control corrections"
+  },
+  "noJavaScriptAudit": {
+    "width": 320,
+    "cases": 12,
+    "method": "Production HTML loaded into same-origin sandboxed iframes without allow-scripts",
+    "checks": [
+      "Readable main headings",
+      "Eight-link fallback navigation visible",
+      "Native disclosures work",
+      "Hero videos unloaded"
+    ],
+    "result": "passed before final enlarged-text and touch-control corrections"
+  },
+  "interactions": {
+    "menuAndFaq": {
+      "mobileMenuOpen": true,
+      "backgroundInert": true,
+      "escapeFocusReturned": true,
+      "faqPointer": true,
+      "faqKeyboard": true,
+      "faqFocusOutline": "solid"
+    },
+    "supporters": {
+      "next": {
+        "left": 188,
+        "previousEnabled": true
+      },
+      "end": {
+        "left": 594,
+        "nextDisabled": true
+      },
+      "home": {
+        "left": 0,
+        "previousDisabled": true,
+        "focusOutline": "solid"
+      }
+    }
+  },
+  "status": "Complete. Implementation, production verification and two independent review rounds passed with no remaining findings.",
+  "production": {
+    "build": {
+      "command": "bun run build",
+      "result": "passed",
+      "transformedModules": 57
+    },
+    "regressions": {
+      "command": "bun test tests/i18n.test.ts tests/seo.test.ts tests/hero-loading.test.ts",
+      "passed": 92,
+      "failed": 0,
+      "assertions": 2133
+    },
+    "server": "Restarted NODE_ENV=production server on port 4174 after rebuilding; server caches generated HTML at startup."
+  },
+  "finalSourceHashes": {
+    "src/function-tour.js": "4c91c637bfaca07b21443ecdcf4f519989ed1e086f4737153b4da76699da126e",
+    "src/editorial.css": "b60877dcc8eac05113191ee0b42b1b0e448ab1dba7caa525945164b332fc345c",
+    "src/solution.css": "57c636c9e630dc74d2cebcc6a2924d3f687d7680ebcb1c99dba08c03ef906494",
+    "src/redesign.css": "91f66e91fbf21f7791d57e7a98d2081eddf58294e216c1a66a458fa3a91142ec"
+  },
+  "finalMobileAudit": {
+    "width": 320,
+    "height": 844,
+    "cases": 12,
+    "javaScript": true,
+    "result": "All 12 rebuilt production routes passed: one visible H1, no page or relevant element overflow, no broken loaded images."
+  },
+  "finalEnlargedTextAndNoJavaScriptAudit": {
+    "width": 320,
+    "rootFont": "200% / 32px",
+    "cases": 12,
+    "method": "Fetch rebuilt production HTML into 320px sandboxed iframes with allow-same-origin and without allow-scripts; await fonts, double root font, inspect element boxes and text-node ranges. Open and inspect each disclosure individually, preserving native named-accordion behavior.",
+    "exclusions": [
+      "Intentionally scrollable supporter contents",
+      "SVG artwork",
+      "Visually clipped screen-reader-only text"
+    ],
+    "result": "All 12 routes passed: document width 320px, no visible box/text overflow, one visible H1, eight visible fallback navigation links, native disclosures functional, hero videos unloaded."
+  },
+  "tour": {
+    "durationSeconds": 38,
+    "browserSuite": "tests/function-tour.browser.js",
+    "initialMeasurements": {
+      "desktopSeconds": 38,
+      "mobileSeconds": 38.02
+    },
+    "afterTouchFix": {
+      "seconds": 38.02,
+      "groupsPassed": 5
+    },
+    "coverage": [
+      "Scene sequence and final greenhouse/plant fertilisation",
+      "Forward and reverse scrubbing",
+      "Pause, resume, replay and exit",
+      "Focus return and keyboard interaction",
+      "Reduced-motion still scenes",
+      "Touchstart plus click pauses exactly once; Resume advances; touch outside controls interrupts playback"
+    ],
+    "regression": "Touch regression failed before the fix and passed afterward.",
+    "limitation": "Touch interaction uses browser-dispatched DOM events; no physical-device test."
+  },
+  "protectedHomepage": {
+    "result": "Unchanged against HEAD: src/site.js, src/hero-loading.js and all four MP4s. Hero template diff is only the approved supporting paragraph.",
+    "sha256": {
+      "src/site.js": "10a469ee8e466ca26479531f973c6395a4cdbadb6258e2bf692794c3ea75e4f2",
+      "src/hero-loading.js": "bc8b4082dd65237f3d0c6ce3ea25d22ab4dcdba387155aff3a6ae9296437448b",
+      "public/video/1.mp4": "f1d7366bf4cb36ee1bfbf3239e513d7b3ee0ad2415316843212d12ca24af1859",
+      "public/video/2.mp4": "734eda2dd6fed8fba2b0bd49e73f2ce23fa537352413fc7aa70ee31c4e24374b",
+      "public/video/3.mp4": "8ed9932d3a3eb8bf225a0b78228d90df5aefdc87622b9336d7c4084734c258fc",
+      "public/video/4.mp4": "651adf777116f6019471c60506e747ffa9ece0713fd70d46426984989e87aac3"
+    }
+  },
+  "review": {
+    "round1": {
+      "taskId": "node:delegated-task:command%3Amcp%3Ad4a93d4a-7d83-49cd-9d8c-2daf57e2b4bf%3Adelegate-task%3Aredesign-integrated-review-20261022-r1",
+      "result": "No newly introduced redesign defects. Found pre-existing Pause touch/click double toggle; fixed in separate delegated implementation."
+    },
+    "round2": {
+      "taskId": "node:delegated-task:command%3Amcp%3Ad4a93d4a-7d83-49cd-9d8c-2daf57e2b4bf%3Adelegate-task%3Aredesign-integrated-review-20261022-r2",
+      "result": "No remaining findings. Independent checks on rebuilt production at 390x844 confirmed sustained touch Pause, advancing Resume, interruption outside controls without cancelling native events, and trusted keyboard Enter/Space activation. Source hash matches the built file; regression coverage accepted. Touch events were dispatched in the browser; physical-device testing was not performed."
+    }
+  },
+  "realAssetGaps": [
+    "Individual headshots",
+    "Genuine current photograph of all four team members",
+    "Verified company Instagram destination"
+  ],
+  "ownerSuppliedProfileUpdate": {
+    "checkedAt": "2026-10-22",
+    "person": "Thinh Nguyen",
+    "url": "https://www.linkedin.com/in/thinisde/",
+    "provenance": "Exact URL explicitly supplied by the user/site owner in this conversation. No independent identity verification is claimed.",
+    "implementation": "Added the personal LinkedIn icon with German and English accessible labels and titles, matching the other people's SVG, class and default target/rel behavior. Earlier validation records remain unchanged.",
+    "validation": {
+      "command": "bun run test:i18n",
+      "result": "Production build and existing i18n, SEO and hero-loading tests passed.",
+      "passed": 92,
+      "failed": 0,
+      "assertions": 2133,
+      "sourceAndBuiltHtml": "Confirmed the exact owner-supplied URL in Thinh's entry in the source partial and both built language pages, translated aria-label/title text, and SVG/class/target/rel parity with the existing personal LinkedIn links.",
+      "documentation": "No stale Thinh profile gap statements remain. All other asset gaps and previous validation provenance are preserved.",
+      "whitespace": "git diff --check passed."
+    }
+  },
+  "screenshots": [
+    {
+      "description": "Rebuilt production solution page, 1440px",
+      "path": "/root/.t3/userdata/browser-artifacts/browser-screenshot-localhost-mvk2jla7-af9187d9.png"
+    }
+  ],
+  "whitespace": "git diff --check passed.",
+  "delivery": "Local implementation only; no commit or publication.",
+  "linkedinPhotoUpdate": {
+    "checkedAt": "2026-10-23",
+    "scope": "Completed integration of authentic photos downloaded from company/team LinkedIn posts, with visible credits.",
+    "historicalValidation": "Earlier redesign and Thinh profile-update entries remain historical and unchanged. Top-level source hashes and build/test counts describe earlier validation, not this photo update.",
+    "assets": {
+      "manifest": "docs/linkedin-image-sources.json",
+      "originalJpegCount": 5,
+      "sourcePostCount": 3,
+      "totalBytes": 628350,
+      "placements": {
+        "golden-spotlight-02.jpg": "Homepage milestone preview",
+        "samsung-solve-for-tomorrow.jpg": "Milestones opening",
+        "munich-pitch-01.jpg": "Munich disclosure",
+        "golden-spotlight-01.jpg": "National-final disclosure",
+        "golden-spotlight-03.jpg": "About-page microscope demonstration"
+      },
+      "presentation": "Full frames at natural aspect ratios with declared dimensions; no gallery JavaScript.",
+      "accessibilityAndCredits": "Every photo has a visible source-post link, descriptive translated alt text and a translated caption.",
+      "attribution": {
+        "goldenSpotlight": "Original JUGEND GRÜNDET credit retained from Felicia Kloss's LinkedIn post.",
+        "otherPosts": "Tim Kothe/Air2Growth credited as sources for the other two posts without inventing photographer names."
+      },
+      "identityClaims": "The historical exhibition group is not presented as the current team, and the microscope subject is not identified."
+    },
+    "validation": {
+      "provenance": "Documents completed checks verified by the parent; this documentation change does not initiate a new implementation or testing round.",
+      "production": {
+        "command": "bun run test:i18n",
+        "timing": "Final run after the final CSS refinement.",
+        "result": "Production build and tests passed.",
+        "passed": 92,
+        "failed": 0,
+        "assertions": 2151
+      },
+      "renderedProduction": {
+        "routes": [
+          "/",
+          "/en",
+          "/meilensteine",
+          "/en/milestones",
+          "/ueber-uns",
+          "/en/about"
+        ],
+        "viewportWidthsPx": [1440, 320],
+        "caseCount": 12,
+        "visibleH1PerCase": 1,
+        "overflow": false,
+        "photoInstanceCount": 20,
+        "result": "All cases passed. All 20 rendered photo instances loaded uncropped with correct natural and declared dimensions, linked credits, and translated English captions and alt text on English routes."
+      },
+      "enlargedTextAndNoJavaScript": {
+        "coverage": "All six routes listed in renderedProduction.",
+        "caseCount": 6,
+        "viewportWidthPx": 320,
+        "textSizePercent": 200,
+        "rootFontSizePx": 32,
+        "javaScript": "blocked",
+        "pageWidthPx": 320,
+        "elementOverflow": false,
+        "textRangeOverflow": false,
+        "visibleFallbackNavigationLinks": 8,
+        "result": "All six additional production cases passed. Photos loaded uncropped, credits and the eight-link fallback navigation remained visible, and native disclosures were functional and opened for the audit."
+      },
+      "authorChecks": [
+        "Keyboard disclosure activation checked.",
+        "Screenshots checked."
+      ],
+      "integrity": {
+        "jpegManifest": "All five JPEG hashes and sizes match the manifest.",
+        "sourceBuildConsistency": "Parent rechecked that all seven changed source files were unchanged since the final production build.",
+        "protectedHomepage": "Protected homepage scripts and all four MP4 SHA256 values match the historical validation.",
+        "illustratedTour": "Illustrated tour source untouched by this photo update."
+      },
+      "whitespace": {
+        "command": "git diff --check",
+        "status": "passed",
+        "owner": "parent",
+        "timing": "Passed after the photo validation record was added and finalized."
+      }
+    },
+    "review": {
+      "taskId": "node:delegated-task:command%3Amcp%3Ad4a93d4a-7d83-49cd-9d8c-2daf57e2b4bf%3Adelegate-task%3Alinkedin-photo-review-20261023-r1",
+      "status": "completed",
+      "result": "No remaining findings. Verified all five JPEGs against the manifest, event/source associations, visible credits, complete German/English captions and alt text, local references, natural ratios and loading behavior. The original about-opening image and exact Thinh profile URL remain intact. All six affected routes passed at 1440px, 320px and 320px with 200% text sizing. Native disclosure toggling, keyboard focus and hidden-link exclusion passed.",
+      "scope": "Independent review used localhost:3000 and changed no files. Production build/tests and the additional no-JavaScript production audit were completed separately by the parent. Tour/video review was not repeated for this photo update."
+    },
+    "additionalStockNeeded": false,
+    "assetGapAssessment": "No more stock imagery is needed for the current placements. Genuine individual portraits and a verified current photograph of all four team members remain useful asset gaps; the existing Instagram gap is unchanged."
+  }
+}

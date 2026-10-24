@@ -1,5 +1,8 @@
 // One Vite styling pipeline: Tailwind utilities, local fonts and brand tokens.
 import "./styles.css";
+import "./redesign.css";
+import "./solution.css";
+import "./editorial.css";
 import { initLanguageLinks } from "./locale-browser.js";
 import "./site.js";
 import "./experience.js";
@@ -15,7 +18,7 @@ if (supporters) {
   import("./supporters.js").then(({ initSupporters }) => {
     const cleanup = initSupporters(supporters);
     if (import.meta.hot) import.meta.hot.dispose(cleanup);
-  }).catch((error) => console.error("The logo animation could not load; the complete supporter list remains visible.", error));
+  }).catch((error) => console.error("The supporter controls could not load; the complete logo list remains browsable.", error));
 }
 
 const tour = document.querySelector<HTMLElement>("[data-function-tour]");

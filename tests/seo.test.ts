@@ -210,7 +210,7 @@ describe("crawlable production pages", () => {
     expect(locations.sort()).toEqual(Object.values(SITE_PAGES).map((page) => SITE_URL + page.path).sort());
   });
 
-  test("all page images and social previews resolve, including generated English diagrams", async () => {
+  test("all page images and social previews resolve", async () => {
     const images = new Set<string>();
     for (const page of Object.values(SITE_PAGES)) {
       const parsed = await inspectHtml(await (await fetch(baseUrl + page.path)).text());
@@ -220,7 +220,8 @@ describe("crawlable production pages", () => {
         images.add(url.pathname);
       }
     }
-    expect(images.has("/img/solution-system-en.svg")).toBe(true);
+    expect(images.has("/img/logo.svg")).toBe(true);
+    expect(images.has("/img/Air2Growth-Team.webp")).toBe(true);
     for (const image of images) {
       const response = await fetch(baseUrl + image);
       expect(response.status, image).toBe(200);
@@ -241,9 +242,12 @@ describe("crawlable production pages", () => {
     expect(homeHtml).not.toContain('name="air2growth-faq"');
     expect(solutionHtml).not.toContain("data-calculator");
     expect(solution.ids).not.toContain("rechenmodell");
-    expect(solutionHtml).toContain("data-process-step");
-    expect(solutionHtml).toContain("Wie wird aus CO₂ Bio-Flüssigdünger?");
-    expect(solutionHtml).toContain("Welche Kosten sind für das System vorgesehen?");
+    expect(solutionHtml).not.toContain("data-process-step");
+    expect(solution.ids).toContain("funktionsweise");
+    expect(solution.ids).toContain("fragen");
+    expect(solution.ids).toContain("solution-principle-title");
+    expect(homeHtml).not.toContain("data-form");
+    expect(home.links).toContain("mailto:info@air2growth.com");
     const pages = new Map([["/", home], ["/loesung", solution]]);
     for (const [path, parsed] of pages) {
       for (const href of parsed.links) {
@@ -259,11 +263,12 @@ describe("crawlable production pages", () => {
     const html = await (await fetch(baseUrl + "/en/how-it-works")).text();
     expect(html).toContain("data-function-tour");
     expect(html).toContain('data-tour-state="poster"');
-    expect(html).toContain("Start the tour");
-    expect(html).toContain("A 60-second tour of the proposed system. Pause or exit at any time.");
-    expect(html).toContain("With water, nutrients and light, the algae grow.");
-    expect(html).toContain("The algae are then harvested and processed into liquid fertiliser.");
-    expect(html).toContain("Operating data only. No other private information.");
+    expect(html).toContain("Start the animation");
+    expect(html).not.toContain("60-second");
+    expect(html).toContain("data-tour-duration");
+    expect(html).toContain("Water and nutrients are already present in the culture.");
+    expect(html).toContain("the harvested biomass is intended to become liquid fertiliser for plants.");
+    expect(html).toContain("without collecting other private information from the site.");
     expect(html).not.toContain('class="pin-spacer');
     const home = await inspectHtml(await (await fetch(baseUrl + "/")).text());
     expect(home.links).toContain("/function");

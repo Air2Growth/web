@@ -191,12 +191,13 @@ describe("complete static translations", () => {
     const german = await renderShell("function.html", "de");
     const english = await renderShell("function.html", "en");
     expect(german).toContain("Animation starten");
-    expect(german).toContain("Maschinenüberwachung");
+    expect(german).toContain("Wasser und Nährstoffe sind bereits in der Kultur vorhanden.");
     expect(german).not.toContain(">Animation Begin<");
-    expect(english).toContain("Start the tour");
-    const svg = await readFile(new URL("../dist/img/solution-system-en.svg", import.meta.url), "utf8");
-    expect(svg).toContain("Microalgae");
-    expect(svg).not.toContain("Umgebungsluft");
+    expect(english).toContain("Start the animation");
+    const solution = await renderShell("loesung.html", "en");
+    expect(solution).toContain("One connected system in the greenhouse");
+    expect(solution).toContain("Microalgae");
+    expect(solution).not.toContain("Umgebungsluft");
     expect(localizedHref("/#kontakt", "en")).toBe("/en#kontakt");
     expect(localizedHref("/loesung?ref=x#fragen", "en")).toBe("/en/solution?ref=x#fragen");
     expect(localizedHref("https://other.test/loesung", "en")).toBe("https://other.test/loesung");
