@@ -267,6 +267,7 @@ describe("crawlable production pages", () => {
     expect(html).not.toContain("60-second");
     expect(html).toContain("data-tour-duration");
     expect(html).toContain("Water and nutrients are already present in the culture.");
+    expect(html).toMatch(/integrated UV lights/i);
     expect(html).toContain("the harvested biomass is intended to become liquid fertiliser for plants.");
     expect(html).toContain("without collecting other private information from the site.");
     expect(html).not.toContain('class="pin-spacer');

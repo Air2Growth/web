@@ -616,8 +616,13 @@ bun.lock             # lockfile
 
 ## Illustrated tour (`/function`)
 
-The German `/function` and English `/en/how-it-works` routes follow the shared storyboard and
-uses the original `public/img/logo.svg`. It is part of both Vite development
+See the [page component contract](./docs/how-it-works-contract.md) for its
+interfaces, invariants, side effects, and verification steps, and the
+[grower-focused design plan](./docs/how-it-works-design.md) for the visual scope.
+
+The German `/function` and English `/en/how-it-works` routes share a grower-focused
+page and illustrated storyboard, using the original `public/img/logo.svg`.
+The page is part of both Vite development
 and the Bun production server; `/function.html` and `/function/` redirect to
 its canonical URL. The shared navigation and home process section link to it.
 
@@ -625,30 +630,40 @@ its canonical URL. The shared navigation and home process section link to it.
   world and shared character symbols: `templates/partials/function-illustration.html`.
 - Scoped layout: `src/function-tour.css` (included in the shared stylesheet
   so the production poster and explanation also work without JavaScript).
+- Static hero artwork: `public/img/function-ecosystem.svg`; the display face
+  is served locally from `public/fonts/bricolage-grotesque-latin-variable.woff`
+  with its SIL Open Font License alongside it.
 - Progressive enhancement: `src/function-tour.js`, exported
   `initFunctionTour(root)` with a cleanup function, and the single
   `TOUR_SCENES` manifest. `src/main.ts` loads the GSAP chunk only for the tour.
 - Exact dependency: GSAP `3.14.2`, with its bundled ScrollTrigger plugin.
 
-The source storyboard is expanded to 60 seconds: order 0–6, delivery 6–14,
-installation 14–22, the biological process 22–39, touchscreen 39–46,
-fault detection 46–51, maintenance 51–57 and the closing view 57–60.
-Capture, regeneration, water/nutrient inputs, culture growth and harvesting
-are separate phases. Finite cloud, bubble, wheel, hand and liquid animations
-belong to the same reversible timeline. The supplied logo remains intact.
+The 38-second storyboard comes from `TOUR_SCENES`: delivery 0–3,
+installation 3–6, capture 6–11, CO₂ supply 11–15, growth 15–23,
+harvest 23–29, operation/service 29–32 and plant application 32–38.
+Water and nutrients are present before growth. Capture, CO₂ supply,
+culture growth and harvesting remain separate phases of one reversible
+timeline. The supplied logo remains intact.
 
-“Animation Begin” deliberately creates a four-viewport scroll runway.
-A linear scroll driver maps real document scrolling to one 60-second GSAP
+The redesigned SVG adds a layered greenhouse with perspective beds and glass,
+cabinet depth, and contact shadows. Capture and supply trace carbon through
+the filter and culture. Integrated UV fixtures provide cultivation lighting;
+a magnified cell-division view accompanies growth. Collection flow and root-zone
+application make the output visible. Parallax
+and biological details are part of the same reversible timeline.
+
+“Start the animation” deliberately creates a scroll runway of 2.5 viewport heights.
+A linear scroll driver maps real document scrolling to one 38-second GSAP
 master timeline. Pause, wheel/touch/scrollbar intervention and navigation keys
 allow manual forward or reverse scrubbing. Resume uses the remaining logical
 duration. Escape/Exit restores the poster; Skip/Continue focuses the following
-explanation. Completion preserves the closing farm view in normal flow.
+explanation. Completion preserves the closing greenhouse view in normal flow.
 Replay rebuilds the tour. A hidden tab or viewport change pauses playback.
 Reduced motion replaces automatic scrolling with Previous/Next still scenes.
 The illustrated workflow makes no order, telemetry or notification requests.
-During playback, the illustration spans the full viewport width. Supporting
-copy and the machine-monitoring notice sit in the explanation below the
-canvas; the player contains the artwork, progress indicator and controls.
+During playback, the illustration spans the full viewport width. The player
+contains the artwork, scene caption, progress indicator and controls. The
+written explanation and machine-monitoring notice sit below the canvas.
 
 Run `bun run build` and `bun test tests/seo.test.ts` to check production routes,
 redirects, language/metadata, the static explanation and existing pages/APIs.
@@ -657,5 +672,5 @@ and run `await (await import('/tests/function-tour.browser.js')).runFunctionTour
 in its browser context. The checks cover real-time duration, all eight scenes,
 manual reverse scrolling, replay cleanup, pause/resume, hidden-tab behaviour,
 Escape/Skip focus and an isolated reduced-motion instance. They take about
-63 seconds; browser automation callers with shorter timeouts can store the
+45 seconds; browser automation callers with shorter timeouts can store the
 promise result and read it after completion.

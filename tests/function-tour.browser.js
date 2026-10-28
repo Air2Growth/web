@@ -104,6 +104,8 @@ export async function runFunctionTourChecks() {
   assert(Math.abs(camera.a - 1) < .001 && Math.abs(camera.d - 1) < .001 && Math.abs(camera.e) < .01 && Math.abs(camera.f) < .01, "Closing camera must return to its original framing");
   assert(getComputedStyle($("[data-art=greenhouse]")).visibility === "visible", "The greenhouse must remain visible at the end");
   assert(getComputedStyle($("[data-art=application]")).visibility === "visible", "Final hold must show fertiliser being applied to plants");
+  assert(getComputedStyle($("[data-art=microscope]")).visibility === "hidden", "The biological close-up must yield to the final greenhouse view");
+  assert(getComputedStyle($("[data-art=root-uptake]")).visibility === "visible", "Final application must reveal the root-zone connection");
   const plantBounds = $("[data-art=application-plant]").getBoundingClientRect();
   const productBounds = $("[data-art=product]").getBoundingClientRect();
   const waterBounds = $("[data-art=irrigation-water]").getBoundingClientRect();
@@ -120,6 +122,13 @@ export async function runFunctionTourChecks() {
   assert(scrollY === pausedY, "Paused driver must stay stopped");
   await seek(TOUR_SCENES.find(scene => scene.id === "service").still);
   assert(root.dataset.scene === "service", "Forward scrolling must scrub");
+  if (innerWidth <= 640) {
+    const canvas = $("[data-tour-art]").getBoundingClientRect();
+    for (const selector of ["[data-art=support]", ".tour-cloud-layout"]) {
+      const bounds = $(selector).getBoundingClientRect();
+      assert(bounds.left >= canvas.left - 1 && bounds.right <= canvas.right + 1 && bounds.top >= canvas.top - 1 && bounds.bottom <= canvas.bottom + 1, "Mobile service artwork must fit within the illustrated canvas: " + selector);
+    }
+  }
   await seek(TOUR_SCENES.find(scene => scene.id === "delivery").still);
   assert(root.dataset.scene === "delivery", "Reverse scrolling must scrub coherently");
   await seek(TOUR_SCENES.find(scene => scene.id === "installation").still);
@@ -135,11 +144,17 @@ export async function runFunctionTourChecks() {
   assert(getComputedStyle($("[data-art=co2-release]")).visibility === "visible", "Released CO₂ must reach cultivation");
   await seek(TOUR_SCENES.find(scene => scene.id === "growth").still);
   assert(getComputedStyle($("[data-art=culture]")).fill !== prepared, "Algae density must develop in the already filled culture");
+  assert(getComputedStyle($("[data-art=microscope]")).visibility === "visible", "The growth still must reveal the biological close-up");
+  assert(getComputedStyle($("[data-art=culture-light]")).visibility === "visible", "The growth still must show the integrated cultivation lighting");
+  const daughterCells = [...root.querySelectorAll("[data-art=cell-daughter]")];
+  assert(daughterCells.length === 2 && daughterCells.every(cell => getComputedStyle(cell).visibility === "visible"), "The growth still must show algae dividing into two cells");
   assert(getComputedStyle($("[data-art=harvest-flow]")).visibility === "hidden", "Growth must precede harvest");
   assert($("[data-art=culture]").getBoundingClientRect().height >= levelBeforeGrowth, "Growth must not empty the prepared culture");
   await seek(TOUR_SCENES.find(scene => scene.id === "harvest").still);
   assert(getComputedStyle($("[data-art=product]")).visibility === "visible", "Preparation must produce the illustrated liquid container");
+  assert(getComputedStyle($("[data-art=collection-stream]")).visibility === "visible", "The harvest still must connect processing to the collection container");
   await seek(TOUR_SCENES.find(scene => scene.id === "capture").still);
+  assert(getComputedStyle($("[data-art=microscope]")).visibility === "hidden", "Reverse scrubbing must close the biological cutaway");
   assert(getComputedStyle($("[data-art=product]")).visibility === "hidden", "Reverse scrubbing must reset the harvest");
   assert(getComputedStyle($("[data-art=application]")).visibility === "hidden", "Reverse scrubbing must reset plant application");
   await seek(TOUR_DURATION - 2);

@@ -11,7 +11,7 @@ export const TOUR_SCENES = Object.freeze([
   { id: "installation", start: 3, end: 6, still: 5, title: "Ready for cultivation", description: "Water and nutrients are already present before growth begins." },
   { id: "capture", start: 6, end: 11, still: 9, title: "Capture CO₂ from the air", description: "Ambient air passes through the filter, which captures CO₂." },
   { id: "supply", start: 11, end: 15, still: 13, title: "Supply CO₂ to the culture", description: "The captured CO₂ is released and supplied to the prepared culture." },
-  { id: "growth", start: 15, end: 23, still: 20, title: "Microalgae grow", description: "With light, microalgae use CO₂, water and nutrients to build biomass." },
+  { id: "growth", start: 15, end: 23, still: 20, title: "Microalgae grow", description: "With integrated UV lighting, microalgae use CO₂, water and nutrients to build biomass." },
   { id: "harvest", start: 23, end: 29, still: 27.5, title: "Harvest and prepare biomass", description: "The harvested microalgae are intended to become liquid fertiliser." },
   { id: "service", start: 29, end: 32, still: 30.8, title: "Keep track of operation", description: "A touchscreen and machine monitoring are planned to support operation and service." },
   { id: "closing", start: 32, end: 38, still: 37.5, title: "Fertilise plants on site", description: "The resulting fertiliser is applied to plants in the greenhouse." },
@@ -43,6 +43,14 @@ function buildTimeline(root, isMobile) {
   tl.set(q("machine"), { autoAlpha: 0, x: 50 }, 0);
   tl.set(q("customer"), { x: -50 }, 0);
   tl.set([q("co2-in"), q("co2-release"), q("culture-bubbles"), q("harvest-flow")], { autoAlpha: 0 }, 0);
+  tl.set([q("capture-particle"), q("released-carbon"), q("captured-carbon")], { autoAlpha: 0, x: 0, y: 0 }, 0);
+  tl.set([q("landscape"), q("greenhouse-rear"), q("crop-rows"), q("greenhouse-front"), q("depth-foreground")], { x: 0, y: 0 }, 0);
+  tl.set(q("microscope"), { svgOrigin: "365 382", smoothOrigin: false, x: isMobile ? 60 : 0, scale: .88 }, 0);
+  tl.set(q("cell-mother"), { transformOrigin: "center", scale: 1 }, 0);
+  tl.set(q("cell-daughter"), { transformOrigin: "center", scale: .68, x: 0, y: 0 }, 0);
+  tl.set(q("cell-colony"), { transformOrigin: "center", scale: .65 }, 0);
+  tl.set(q("product-liquid"), { transformOrigin: "center bottom", scaleY: .05 }, 0);
+  tl.set(q("field-worker"), { svgOrigin: "865 387", smoothOrigin: false }, 0);
   // Liquid volume is present from setup; only algae density changes during growth.
   tl.set(q("culture"), { fill: color("water"), scaleY: 1 }, 0);
   tl.set(q("algae-cells"), { autoAlpha: .25 }, 0);
@@ -63,35 +71,80 @@ function buildTimeline(root, isMobile) {
   tl.fromTo(q("tick"), { autoAlpha: 0, scale: .6 }, { autoAlpha: 1, scale: 1, stagger: .22, duration: .2, transformOrigin: "center", immediateRender: false }, "installation+=.2");
   show("cutaway", "installation+=.5"); hide("front-panel", "installation+=.5");
   show("nutrient-flow", "installation+=.5");
+  tl.to(q("nutrient-flow"), { strokeDashoffset: -22, duration: 1, ease: "none" }, "installation+=.5");
   hide("nutrient-flow", "installation+=1.5");
   hide("checklist", "installation+=1.7"); hide("connections", "installation+=2");
   hide("employee", "installation+=2");
   tl.to(q("customer"), { x: -75, autoAlpha: 0, duration: .6 }, "installation+=2.1");
 
-  // Preserve the detailed cabinet cutaway: capture, supply, growth, preparation.
+  // A finite depth move opens the cabinet. Each layer returns for the final hold.
   hide("status-light", "capture", .25);
   tl.to(q("world"), { scale: isMobile ? 1.4 : 1.65, duration: .8 }, "capture");
+  tl.to(q("landscape"), { x: -10, y: -3, duration: .8 }, "capture");
+  tl.to(q("greenhouse-rear"), { x: -6, duration: .8 }, "capture");
+  tl.to(q("crop-rows"), { x: 5, duration: .8 }, "capture");
+  tl.to(q("greenhouse-front"), { x: 9, duration: .8 }, "capture");
+  tl.to(q("depth-foreground"), { x: 18, y: 4, duration: .8 }, "capture");
   show("air-stream", "capture+=.3");
   tl.to(q("air-stream"), { strokeDashoffset: -90, duration: 4, ease: "none" }, "capture+=.3");
-  tl.fromTo(q("co2-in"), { x: 0, autoAlpha: 0 }, { x: 56, autoAlpha: 1, duration: 1.5, repeat: 1, repeatDelay: .25, ease: "none", immediateRender: false }, "capture+=.5");
+  show("co2-in", "capture+=.4", .15);
+  tl.fromTo(q("capture-particle"), { x: 0, autoAlpha: 0 }, { x: 88, autoAlpha: 1, duration: 1.25, stagger: .2, repeat: 1, repeatDelay: .4, ease: "none", immediateRender: false }, "capture+=.5");
+  show("filter-charge", "capture+=1", .2);
+  tl.to(q("captured-carbon"), { autoAlpha: 1, stagger: .32, duration: .2 }, "capture+=1.2");
+  tl.to(q("cartridge"), { fill: color("leaf"), duration: 2.2 }, "capture+=1.4");
   hide("co2-in", "capture+=4.3", .25); hide("air-stream", "capture+=4.4", .25);
 
-  tl.to(q("cartridge"), { fill: color("water"), duration: .5 }, "supply");
-  tl.fromTo(q("co2-release"), { autoAlpha: 0, x: -10 }, { autoAlpha: 1, x: 19, duration: 1.3, repeat: 1, repeatDelay: .2, ease: "none", immediateRender: false }, "supply+=.2");
+  // Carbon follows the manifold, then drops into each prepared glass vessel.
+  tl.to(q("cartridge"), { fill: color("water"), duration: .6 }, "supply");
+  show("release-route", "supply+=.1", .2);
+  tl.to(q("release-route"), { strokeDashoffset: -44, duration: 3.2, ease: "none" }, "supply+=.1");
+  show("co2-release", "supply+=.2", .15);
+  q("released-carbon").forEach((particle, index) => {
+    for (let pass = 0; pass < 2; pass += 1) {
+      const at = TOUR_SCENES[3].start + .3 + index * .23 + pass * 1.45;
+      tl.fromTo(particle, { x: 0, y: 0, autoAlpha: 0 }, { autoAlpha: 1, duration: .1, immediateRender: false }, at);
+      tl.to(particle, { x: 24 + index * 30, duration: .42, ease: "none" }, at + .1);
+      tl.to(particle, { y: 25, duration: .38, ease: "none" }, at + .52);
+      tl.to(particle, { autoAlpha: 0, duration: .12 }, at + .9);
+    }
+  });
+  tl.to(q("captured-carbon"), { autoAlpha: 0, stagger: .22, duration: .2 }, "supply+=.5");
+  show("nutrient-flow", "supply+=.6", .2);
+  tl.to(q("nutrient-flow"), { strokeDashoffset: -52, duration: 2.6, ease: "none" }, "supply+=.6");
   tl.to(q("cartridge"), { fill: color("tint"), duration: .6 }, "supply+=2.9");
   hide("co2-release", "supply+=3.5", .3);
+  hide("filter-charge", "supply+=3.4", .2); hide("release-route", "supply+=3.5", .3);
+  hide("nutrient-flow", "supply+=3.5", .3);
 
+  // The culture stays full. A connected cutaway reveals membranes and division.
+  tl.to(q("world"), { scale: isMobile ? 1.18 : 1.42, x: isMobile ? 20 : 40, duration: .9 }, "growth");
+  tl.to(q("microscope"), { autoAlpha: 1, scale: 1, duration: .65 }, "growth+=.25");
   tl.to(q("culture"), { fill: color("leaf"), duration: 6 }, "growth+=.2");
   tl.to(q("algae-cells"), { autoAlpha: 1, duration: 5 }, "growth+=.4");
   tl.fromTo(q("culture-bubbles"), { y: 10, autoAlpha: 0 }, { y: -16, autoAlpha: .85, duration: 2, repeat: 2, ease: "none", immediateRender: false }, "growth+=.6");
+  show("culture-light", "growth+=.6", .4);
+  tl.to(q("culture-light"), { strokeDashoffset: -40, duration: 6, ease: "none" }, "growth+=.6");
+  tl.fromTo(q("light-photons"), { x: 0, y: 0, autoAlpha: 0 }, { x: 0, y: 40, autoAlpha: 1, duration: 1.2, repeat: 3, repeatDelay: .3, ease: "none", immediateRender: false }, "growth+=.7");
+  tl.fromTo(q("microscope-bubbles"), { y: 16, autoAlpha: 0 }, { y: -20, autoAlpha: .85, duration: 1.9, repeat: 2, repeatDelay: .3, ease: "none", immediateRender: false }, "growth+=.8");
+  tl.to(q("cell-mother"), { scaleX: 1.22, scaleY: 1.05, duration: 1.2 }, "growth+=1.4");
+  hide("cell-mother", "growth+=2.8", .25); show("cell-daughter", "growth+=2.8", .25);
+  q("cell-daughter").forEach((cell, index) => {
+    tl.to(cell, { x: index ? 24 : -24, y: index ? 9 : -5, scale: 1, rotation: index ? 14 : -15, duration: 1.8 }, "growth+=3");
+  });
+  tl.to(q("cell-colony"), { autoAlpha: 1, scale: 1, duration: 1.6 }, "growth+=4.5");
+  tl.to(q("cell-companions"), { y: -7, x: 3, duration: 5.5, ease: "sine.inOut" }, "growth+=1");
   hide("culture-bubbles", "growth+=7", .5);
+  hide("microscope", "growth+=7.25", .45);
 
+  tl.to(q("world"), { scale: isMobile ? 1.4 : 1.65, x: 0, duration: .65 }, "harvest");
   show("harvest-flow", "harvest");
   tl.to(q("harvest-flow"), { strokeDashoffset: -90, duration: 5.2, ease: "none" }, "harvest");
   tl.to(q("separator"), { rotation: 540, transformOrigin: "center", duration: 4.6, ease: "none" }, "harvest+=.3");
-  show("product", "harvest+=1");
-  tl.fromTo(q("product-liquid"), { scaleY: .05 }, { scaleY: 1, transformOrigin: "center bottom", duration: 3, immediateRender: false }, "harvest+=1.2");
-  hide("harvest-flow", "harvest+=5.3");
+  show("product", "harvest+=.6");
+  show("collection-stream", "harvest+=1", .2);
+  tl.to(q("collection-stream"), { strokeDashoffset: -42, duration: 4.2, ease: "none" }, "harvest+=1");
+  tl.to(q("product-liquid"), { scaleY: 1, duration: 3.4 }, "harvest+=1.2");
+  hide("harvest-flow", "harvest+=5.3"); hide("collection-stream", "harvest+=5.3", .3);
 
   hide("cutaway", "service", .4); show("front-panel", "service", .4);
   show("status-light", "service");
@@ -105,11 +158,14 @@ function buildTimeline(root, isMobile) {
   // The final hold shows actual application, inside the same greenhouse.
   tl.to(q("touchscreen"), { scale: 1, duration: .6 }, "closing");
   tl.to(q("world"), { scale: 1, x: 0, y: 0, duration: .8 }, "closing");
-  tl.to(q("field-worker"), { x: isMobile ? -140 : -100, y: 10, scale: 1.23, svgOrigin: "865 387", duration: .8 }, "closing");
-  tl.set(q("application"), { x: isMobile ? -54 : -14 }, "closing");
+  tl.to([q("landscape"), q("greenhouse-rear"), q("crop-rows"), q("greenhouse-front"), q("depth-foreground")], { x: 0, y: 0, duration: .8 }, "closing");
+  tl.to(q("field-worker"), { x: isMobile ? -140 : -100, y: 10, scale: 1.23, duration: .8 }, "closing");
+  tl.set(q("application"), { x: isMobile ? -40 : 0 }, "closing");
   hide("rake", "closing", .2);
   show("application", "closing+=.8");
   tl.to(q("irrigation-water"), { strokeDashoffset: -70, duration: 4, ease: "none" }, "closing+=1");
+  show("soil-moisture", "closing+=1.7", 1);
+  show("root-uptake", "closing+=2", .8);
   tl.to(q("application-plant"), { scale: 1.08, transformOrigin: "center bottom", duration: 2 }, "closing+=2");
   // The manifest sets the final hold. No independent repeating animations.
   tl.to({ time: 0 }, { time: TOUR_DURATION, duration: TOUR_DURATION, ease: "none" }, 0);
@@ -352,7 +408,7 @@ export function initFunctionTour(root) {
 
   function resize() {
     svg.setAttribute("viewBox", window.innerWidth <= 640 ? "280 130 520 490" : "0 0 1000 620");
-    $("[data-art=data-route]").setAttribute("d", window.innerWidth <= 640 ? "M692 338c48-2 22-142 55-147" : "M692 338c83-1 76-146 171-147");
+    $("[data-art=data-route]").setAttribute("d", window.innerWidth <= 640 ? "M692 338c48-2-26-123 10-132" : "M692 338c83-1 76-146 171-147");
     if (!trigger) return;
     const saved = progress;
     layoutPending = true;
