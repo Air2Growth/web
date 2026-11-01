@@ -123,11 +123,55 @@
 .editorial-commitments p { max-width: 43ch; margin-top: .7rem; font-size: .9375rem; line-height: 1.75; }
 .editorial-development-note { max-width: 39ch; margin-top: 1.5rem; color: #45714C; font-size: .9375rem; line-height: 1.7; }
 
-.editorial-page .editorial-people { margin-top: 2.5rem; }
-.editorial-people .person { padding-block: 1.5rem; }
-.editorial-people .person > div:first-child { min-width: 0; }
+.editorial-page .editorial-people {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 3.25rem 2rem;
+    margin-top: 2.75rem;
+}
+.editorial-people .person {
+    --person-card-width: min(100%, 300px);
+    display: grid;
+    gap: 1rem;
+    min-width: 0;
+    padding: 0;
+    border-top: 0;
+}
+.person-portrait {
+    width: var(--person-card-width);
+    aspect-ratio: 1 / 1;
+    margin: 0 auto;
+    overflow: hidden;
+    background: #DCE8D7;
+    border-radius: 1rem;
+}
+.person-portrait-alt,
+.person-portrait-soft,
+.person-portrait-dark { border-radius: 1rem; }
+.person-portrait img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 38%;
+    filter: saturate(.88);
+}
+.person-content {
+    width: var(--person-card-width);
+    margin-inline: auto;
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 1rem;
+    min-width: 0;
+    padding-top: .85rem;
+    border-top: 1px solid #A7B89C;
+}
+.person-content > div:first-child { min-width: 0; }
 .editorial-people .person h3 { text-wrap: initial; }
-.editorial-company-contact { margin-top: 2rem; max-width: 65ch; }
+.editorial-people .person p { margin-top: .35rem; }
+.editorial-people .person-links { margin-left: auto; }
+.editorial-company-contact { margin: 2rem auto 0; max-width: 65ch; text-align: center; }
 .editorial-company-contact p { font-size: .875rem; line-height: 1.7; }
 .editorial-working { background: #EEF3EC; }
 .editorial-working .site-heading { max-width: 24ch; font-size: clamp(1.85rem, 3vw, 2.75rem); hyphens: auto; }
@@ -172,7 +216,12 @@
     .editorial-cell { width: 2.75rem; height: 2.75rem; }
     .editorial-cell svg { width: 26px; height: 26px; }
     .editorial-commitments article:not(:last-child)::after { top: 2.75rem; left: 1.35rem; }
-    .editorial-people .person { flex-wrap: wrap; gap: 1rem; }
+    .editorial-page .editorial-people { grid-template-columns: 1fr; gap: 2.75rem; }
+    .editorial-people .person { --person-card-width: min(100%, 240px); gap: .85rem; }
+    .person-portrait {
+        aspect-ratio: 1 / 1;
+    }
+    .person-content { align-items: center; }
     .editorial-people .person-links { margin-left: auto; }
     .editorial-principles { flex-direction: column; gap: 1.2rem; }
 }

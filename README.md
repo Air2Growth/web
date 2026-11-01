@@ -674,3 +674,72 @@ manual reverse scrolling, replay cleanup, pause/resume, hidden-tab behaviour,
 Escape/Skip focus and an isolated reduced-motion instance. They take about
 45 seconds; browser automation callers with shorter timeouts can store the
 promise result and read it after completion.
+
+## System Overview
+
+The repository combines a Bun HTTP server with a Vite frontend.
+[`server.ts:server`](./server.ts) serves local API fragments at
+`/api/kontakt` and `/api/newsletter` and, in production, serves built pages
+and static assets. [`vite.config.ts:a2gIncludes`](./vite.config.ts) expands
+the HTML include graph, applies localized metadata, proxies `/api` requests,
+and emits the sitemap and translated diagram assets.
+[`src/README.md`](./src/README.md) documents the browser and rendering
+boundary; [`scripts/README.md`](./scripts/README.md) documents the
+two-process development coordinator.
+
+## Local Interface & Invariants
+
+- [`server.ts:handleKontakt`](./server.ts) accepts `name`, `email`,
+  `message`, `datenschutz_zustimmung`, optional `botcheck`, and optional
+  `lang`; it returns an HTML fragment after local validation.
+- [`server.ts:handleNewsletter`](./server.ts) accepts `email`,
+  `info_einwilligung`, optional `botcheck`, and optional `lang`; it also
+  performs local validation only.
+- [`vite.config.ts:pageMiddleware`](./vite.config.ts) handles only GET/HEAD
+  requests, redirects aliases to canonical paths with `301`, and rewrites
+  mapped page paths to their root entries.
+
+## Subdirectories & System Boundaries
+
+- [`src/`](./src/README.md) — localized rendering, SEO metadata, browser
+  enhancements, and shared styling imports.
+- [`scripts/`](./scripts/README.md) — local Bun/Vite process coordination.
+- `templates/` and `en/` — HTML route shells and translated proxy pages.
+- `public/` — static images, fonts, videos, and generated browser assets.
+- `docs/` — design, validation, provenance, and drift records.
+- `tests/` — test-only source; it is excluded from the runtime package
+  boundary.
+
+## Global Invariants
+
+- [`server.ts:PROD`](./server.ts) is exactly
+  `NODE_ENV === "production"`; development defaults to `127.0.0.1:3001`,
+  production defaults to `0.0.0.0:3000`, and environment variables take
+  precedence.
+- [`server.ts:prodPages`](./server.ts) requires every `SITE_PAGES` build
+  output before production serving begins; missing files terminate startup with
+  status `1`.
+- [`server.ts:serveStatic`](./server.ts) accepts only GET/HEAD, rejects NUL
+  paths with `400`, and rejects normalized paths outside `dist/` with
+  `404`.
+- [`server.ts:isValidEmail`](./server.ts),
+  [`server.ts:handleKontakt`](./server.ts), and
+  [`server.ts:handleNewsletter`](./server.ts) enforce the declared email,
+  consent, length, and honeypot constraints before returning success.
+
+## Global Side Effects
+
+- [`server.ts:server`](./server.ts) starts a Bun listener and reads built
+  HTML at production startup; the contact and newsletter handlers do not send
+  or persist submissions.
+- [`vite.config.ts:a2gIncludes`](./vite.config.ts) watches templates and
+  locale catalogs, sends Vite full-reload messages, mutates request URLs for
+  page entries, and emits build artifacts.
+- [`scripts/dev.ts:api`](./scripts/dev.ts) and
+  [`scripts/dev.ts:vite`](./scripts/dev.ts) spawn the development children and
+  clean them up when either process exits.
+
+## System Verification
+
+- Run: `bun run test:i18n`
+- Run: `bun run test:seo`

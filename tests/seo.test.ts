@@ -221,7 +221,7 @@ describe("crawlable production pages", () => {
       }
     }
     expect(images.has("/img/logo.svg")).toBe(true);
-    expect(images.has("/img/Air2Growth-Team.webp")).toBe(true);
+    expect(images.has("/img/teamphoto.jpg")).toBe(true);
     for (const image of images) {
       const response = await fetch(baseUrl + image);
       expect(response.status, image).toBe(200);
