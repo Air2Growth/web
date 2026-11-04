@@ -16,7 +16,7 @@
 - [`hero-loading.js`](./hero-loading.js): exports `scheduleHeroVideo` ([`hero-loading.js:scheduleHeroVideo`]), a poster-first startup scheduler that accepts a hero element, a start callback, and an optional browser environment.
 - [`site.js`](./site.js): side-effect-only browser module. It owns the `#mobile-menu` overlay, htmx status/error handling, and the decorative `[data-hero-video]` double-buffer playlist; it exports no symbols ([`site.js:#mobile-menu`], [`site.js:data-hero-video`]).
 - [`experience.js`](./experience.js): side-effect-only progressive enhancements for moved homepage anchors, reduced-motion hero entrance animations, and scroll-aware section navigation ([`experience.js:redirectMovedHomeSection`], [`experience.js:updateNavigation`]).
-- [`function-tour.js`](./function-tour.js): exports `TOUR_SCENES`, `TOUR_DURATION`, `formatTourTime`, `sceneAt`, and `initFunctionTour` ([`function-tour.js:TOUR_SCENES`], [`function-tour.js:initFunctionTour`]). The initializer wires the GSAP/ScrollTrigger illustrated tour to the supplied root element.
+- [`function-tour.js`](./function-tour.js): exports `TOUR_SCENES`, `TOUR_DURATION`, `formatTourTime`, `sceneAt`, and `initFunctionTour` ([`function-tour.js:TOUR_SCENES`], [`function-tour.js:initFunctionTour`]). The initializer wires the normal-flow GSAP animation player to the supplied root element.
 - [`supporters.js`](./supporters.js): exports `initSupporters` ([`supporters.js:initSupporters`]), which adds keyboard and button scrolling to the supporter-logo viewport and returns cleanup.
 
 ## Invariants
@@ -30,7 +30,7 @@
 - [`function-tour.js:TOUR_SCENES`] is the single absolute-second timing manifest used for timeline labels, scene selection, progress text, and reduced-motion still frames. [`function-tour.js:sceneAt`] always clamps a time at or beyond the final scene to the final scene index.
 - [`hero-loading.js:scheduleHeroVideo`] does not start the decorative video until the page and poster are ready, two animation frames have allowed the initial content to paint, the hero is visible, and reduced-motion/data-saving/network checks pass. It starts at most once and its returned cleanup cancels pending listeners and frames.
 - [`locale-browser.js:initLanguageLinks`] never performs browser-language detection, local-storage preference reads, or redirects. It only removes a legacy `lang` query parameter with `history.replaceState` and maintains stable German/English paths.
-- [`function-tour.css:data-tour-ready`] and [`function-tour.css:data-tour-state`] keep tour controls hidden until the runtime is ready and reserve the pinned layout for an active tour; [`supporters.css:data-supporter-controls`] keeps unnecessary logo controls hidden.
+- [`function-tour.css:data-tour-ready`] and [`function-tour.css:data-tour-state`] keep tour controls hidden until the runtime is ready and style the normal-flow player while it is active; [`supporters.css:data-supporter-controls`] keeps unnecessary logo controls hidden.
 
 ## Side Effects
 
@@ -41,7 +41,7 @@
 - [`experience.js`] may replace the current URL for legacy homepage section hashes, adds Web Animations API effects, updates `aria-current`, and listens to scroll, resize, and reduced-motion changes.
 - [`hero-loading.js:scheduleHeroVideo`] installs load, scroll, visibility, and cancellation listeners and schedules animation frames; it does not set a video source when reduced motion, Save-Data, a slow connection, a hidden tab, or an off-screen hero blocks startup.
 - [`supporters.js:initSupporters`] installs abortable click, keyboard, scroll, resize, and `ResizeObserver` handlers and calls `scrollBy`/`scrollTo`; its cleanup aborts listeners, disconnects the observer, cancels a pending frame, and hides controls.
-- [`function-tour.js:initFunctionTour`] creates GSAP timelines and a ScrollTrigger pin, mutates the tour DOM and scroll position, updates progress/accessibility text, and responds to pointer, keyboard, visibility, resize, and motion-preference events. Its returned cleanup aborts listeners, releases the pin, reverts media contexts/timelines, and removes the readiness marker.
+- [`function-tour.js:initFunctionTour`] creates a GSAP timeline, mutates the tour DOM without changing document scroll, updates progress/accessibility text, and responds to keyboard, visibility, resize, and motion-preference events. Its returned cleanup aborts listeners, reverts media contexts/timelines, and removes the readiness marker.
 - [`site.js:#mobile-menu`] toggles menu visibility and ARIA state, applies `body.style.overflow`, changes `inert` on background elements, traps focus, and animates open/close. [`site.js:htmx:responseError`] writes server error text into a status region. [`site.js:data-hero-video`] assigns video sources, calls `load`/`play`/`pause`, performs frame-gated fades between playlist clips, and [`site.js:giveUpToFallbackInitial`] restores the poster after all initial candidates fail; it exposes a non-UI `window.__heroVideo` test hook.
 
 ## Verification

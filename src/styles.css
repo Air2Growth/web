@@ -44,6 +44,12 @@
   --color-warning-soft: #f2d9a4;
 }
 
+/* One typographic voice across every route, including the illustrated tour. */
+html,
+body {
+  font-family: var(--font-sans);
+}
+
 ::selection {
   color: var(--color-ink);
   background: var(--color-lime);

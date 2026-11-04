@@ -89,8 +89,11 @@
   "Weiter": "Next",
   "Tour beenden": "Exit tour",
   "Tour überspringen": "Skip tour",
-  "Scrollen übernimmt die Steuerung. Escape beendet die Tour.": "Scroll to take over. Escape to exit.",
+  "Die Animation läuft selbstständig. Escape beendet sie.": "The animation plays by itself. Escape exits it.",
   "Maschinenüberwachung": "Machine monitoring",
   "Nur Maschinenzustände. Keine privaten Informationen.": "Machine states only. No private information.",
-  "Könnte das zu Ihrem Betrieb passen?": "Could this fit your farm?"
+  "Könnte das zu Ihrem Betrieb passen?": "Could this fit your farm?",
+  "Pflanzenreihen wachsen in einem hellen Gewächshaus.": "Rows of plants grow in a bright greenhouse.",
+  "Pflanzenreihen in einem Gewächshaus als möglicher Ort für die Entwicklung des Systems.": "Rows of plants in a greenhouse as a possible setting for developing the system.",
+  "Ein Gewächshaus ist der Ort, an dem unser System mit der Praxis wachsen soll.": "A greenhouse is where we want the system to grow with real practice."
 }

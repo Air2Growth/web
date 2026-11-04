@@ -15,6 +15,9 @@
 .solution-benefit-list dt{font-weight:700;font-size:1.15rem;color:#263E2D}
 .solution-benefit-list dd{margin:.5rem 0 0;color:var(--color-muted);font-size:1rem;line-height:1.7;max-width:46ch}
 .solution-note{margin-top:1.5rem;max-width:57ch;color:var(--color-muted);font-size:.8125rem;line-height:1.7}
+.solution-context-photo{margin:2rem 0 0;max-width:46rem}
+.solution-context-photo img{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;border-radius:1rem}
+.solution-context-photo figcaption{margin-top:.65rem;color:var(--color-muted);font-size:.75rem;line-height:1.65}
 .solution-tour-link{display:flex;align-items:center;gap:1.1rem;margin-top:2rem;font-weight:700;font-size:1rem;text-decoration:none;max-width:100%;width:fit-content}
 .solution-tour-link small{display:block;margin-top:.35rem;font-weight:400;font-size:.8125rem;line-height:1.6;color:var(--color-muted)}
 .solution-play{display:grid;place-items:center;width:64px;height:64px;border-radius:50%;flex-shrink:0;background:#45714C;color:#FCFDFC}
@@ -27,7 +30,11 @@
 .solution-questions summary::after{content:"+";font-size:1.35rem;line-height:1;flex-shrink:0}
 .solution-questions details[open] summary::after{content:"−"}
 .solution-questions details p{margin:0 0 1.5rem;max-width:58ch;font-size:.9375rem;line-height:1.8;color:var(--color-muted)}
-.solution-contact{background:#DCEAEC}
+.solution-contact{background:#2f6b45;color:#fcfdfc}
+.solution-contact .site-copy{color:#e4f0e4}
+.solution-contact .site-text-link{color:#fcfdfc;text-decoration-color:#a7c7a7}
+.solution-contact .site-button{background:#fcfdfc;color:#263e2d}
+.solution-contact .site-button:hover{background:#dce8d7}
 .solution-contact-actions{display:flex;flex-direction:column;align-items:flex-start;gap:1rem}
 :is(.solution-tour-link,.solution-questions summary):focus-visible{outline:3px solid #45714C;outline-offset:5px;border-radius:4px}
 @media(min-width:768px){.solution-opening-layout{grid-template-columns:1fr 1.15fr;gap:2rem}.solution-benefits-layout,.solution-process-layout,.solution-faq-layout{grid-template-columns:.9fr 1.1fr;gap:clamp(2rem,6vw,5.5rem)}.solution-contact .site-split{grid-template-columns:1.2fr .8fr;gap:4rem}.solution-contact-actions{justify-self:end}}

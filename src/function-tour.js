@@ -1,11 +1,8 @@
 import { gsap } from "gsap";
 import { message } from "./messages.ts";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
 
 // Absolute seconds, including holds, are the single timing manifest for the
-// animation, guided driver, progress labels and reduced-motion still scenes.
+// animation player, progress labels and reduced-motion still scenes.
 export const TOUR_SCENES = Object.freeze([
   { id: "delivery", start: 0, end: 3, still: 1.8, title: "Delivery to the greenhouse", description: "The team brings the system into the greenhouse." },
   { id: "installation", start: 3, end: 6, still: 5, title: "Ready for cultivation", description: "Water and nutrients are already present before growth begins." },
@@ -20,6 +17,19 @@ export const TOUR_DURATION = TOUR_SCENES.at(-1).end;
 
 const clamp = (value) => Math.max(0, Math.min(1, value));
 const monitoringStart = TOUR_SCENES.find((scene) => scene.id === "service").start;
+// Portrait screens need a different camera window. The artwork is landscape,
+// so each scene gets a content-sized window instead of one fixed crop that
+// cuts the left or right side as the phone aspect ratio changes.
+const PORTRAIT_FRAMES = Object.freeze({
+  delivery: { center: 410, width: 720 },
+  installation: { center: 500, width: 620 },
+  capture: { center: 500, width: 520 },
+  supply: { center: 500, width: 520 },
+  growth: { center: 430, width: 500 },
+  harvest: { center: 300, width: 650 },
+  service: { center: 820, width: 460 },
+  closing: { center: 820, width: 500 },
+});
 export function formatTourTime(seconds) {
   const whole = Math.floor(seconds + 1e-6);
   return `${Math.floor(whole / 60)}:${String(whole % 60).padStart(2, "0")}`;
@@ -38,7 +48,7 @@ function buildTimeline(root, isMobile) {
   const hide = (name, at, duration = .4) => tl.to(q(name), { autoAlpha: 0, duration }, at);
   TOUR_SCENES.forEach((scene) => tl.addLabel(scene.id, scene.start));
   tl.set(root.querySelectorAll(".tour-initial-hidden"), { autoAlpha: 0 }, 0);
-  // One stable pivot keeps camera movement reversible when scrubbing.
+  // One stable pivot keeps camera movement reversible across the timeline.
   tl.set(q("world"), { svgOrigin: "575 480", smoothOrigin: false, x: 0, y: 0, scale: 1 }, 0);
   tl.set(q("machine"), { autoAlpha: 0, x: 50 }, 0);
   tl.set(q("customer"), { x: -50 }, 0);
@@ -50,11 +60,13 @@ function buildTimeline(root, isMobile) {
   tl.set(q("cell-daughter"), { transformOrigin: "center", scale: .68, x: 0, y: 0 }, 0);
   tl.set(q("cell-colony"), { transformOrigin: "center", scale: .65 }, 0);
   tl.set(q("product-liquid"), { transformOrigin: "center bottom", scaleY: .05 }, 0);
-  tl.set(q("field-worker"), { svgOrigin: "865 387", smoothOrigin: false }, 0);
+  // Keep the worker in the foreground layer so the crop rows do not swallow it.
+  tl.set(q("field-worker"), { svgOrigin: "887 435", smoothOrigin: false, x: 0, y: 0 }, 0);
   // Liquid volume is present from setup; only algae density changes during growth.
   tl.set(q("culture"), { fill: color("water"), scaleY: 1 }, 0);
   tl.set(q("algae-cells"), { autoAlpha: .25 }, 0);
   tl.set(q("application-plant"), { x: isMobile ? -40 : 0 }, 0);
+  tl.set(q("irrigation-water"), { strokeDashoffset: 70, autoAlpha: 0 }, 0);
 
   show("van", "delivery", .15);
   tl.fromTo(q("van"), { x: -330 }, { x: -70, duration: 1.4, immediateRender: false }, "delivery");
@@ -79,7 +91,7 @@ function buildTimeline(root, isMobile) {
 
   // A finite depth move opens the cabinet. Each layer returns for the final hold.
   hide("status-light", "capture", .25);
-  tl.to(q("world"), { scale: isMobile ? 1.4 : 1.65, duration: .8 }, "capture");
+  tl.to(q("world"), { scale: isMobile ? 1.08 : 1.12, duration: .8 }, "capture");
   tl.to(q("landscape"), { x: -10, y: -3, duration: .8 }, "capture");
   tl.to(q("greenhouse-rear"), { x: -6, duration: .8 }, "capture");
   tl.to(q("crop-rows"), { x: 5, duration: .8 }, "capture");
@@ -117,7 +129,7 @@ function buildTimeline(root, isMobile) {
   hide("nutrient-flow", "supply+=3.5", .3);
 
   // The culture stays full. A connected cutaway reveals membranes and division.
-  tl.to(q("world"), { scale: isMobile ? 1.18 : 1.42, x: isMobile ? 20 : 40, duration: .9 }, "growth");
+  tl.to(q("world"), { scale: isMobile ? 1.05 : 1.1, x: isMobile ? 10 : 18, duration: .9 }, "growth");
   tl.to(q("microscope"), { autoAlpha: 1, scale: 1, duration: .65 }, "growth+=.25");
   tl.to(q("culture"), { fill: color("leaf"), duration: 6 }, "growth+=.2");
   tl.to(q("algae-cells"), { autoAlpha: 1, duration: 5 }, "growth+=.4");
@@ -136,7 +148,7 @@ function buildTimeline(root, isMobile) {
   hide("culture-bubbles", "growth+=7", .5);
   hide("microscope", "growth+=7.25", .45);
 
-  tl.to(q("world"), { scale: isMobile ? 1.4 : 1.65, x: 0, duration: .65 }, "harvest");
+  tl.to(q("world"), { scale: isMobile ? 1.08 : 1.12, x: 0, duration: .65 }, "harvest");
   show("harvest-flow", "harvest");
   tl.to(q("harvest-flow"), { strokeDashoffset: -90, duration: 5.2, ease: "none" }, "harvest");
   tl.to(q("separator"), { rotation: 540, transformOrigin: "center", duration: 4.6, ease: "none" }, "harvest+=.3");
@@ -148,7 +160,7 @@ function buildTimeline(root, isMobile) {
 
   hide("cutaway", "service", .4); show("front-panel", "service", .4);
   show("status-light", "service");
-  tl.to(q("world"), { scale: isMobile ? 1.35 : 1.3, x: isMobile ? -40 : 0, duration: .6 }, "service");
+  tl.to(q("world"), { scale: isMobile ? 1.06 : 1.1, x: isMobile ? -18 : 0, duration: .6 }, "service");
   hide("screen-ok", "service", .2); show("screen-cards", "service", .3);
   tl.to(q("touchscreen"), { scale: 1.2, transformOrigin: "left center", duration: .4 }, "service");
   show("data-line", "service+=.3"); show("support", "service+=.6");
@@ -159,11 +171,12 @@ function buildTimeline(root, isMobile) {
   tl.to(q("touchscreen"), { scale: 1, duration: .6 }, "closing");
   tl.to(q("world"), { scale: 1, x: 0, y: 0, duration: .8 }, "closing");
   tl.to([q("landscape"), q("greenhouse-rear"), q("crop-rows"), q("greenhouse-front"), q("depth-foreground")], { x: 0, y: 0, duration: .8 }, "closing");
-  tl.to(q("field-worker"), { x: isMobile ? -140 : -100, y: 10, scale: 1.23, duration: .8 }, "closing");
+  tl.to(q("field-worker"), { x: isMobile ? -170 : -120, y: isMobile ? 12 : 8, scale: isMobile ? 1.12 : 1.18, duration: .8 }, "closing");
   tl.set(q("application"), { x: isMobile ? -40 : 0 }, "closing");
   hide("rake", "closing", .2);
   show("application", "closing+=.8");
-  tl.to(q("irrigation-water"), { strokeDashoffset: -70, duration: 4, ease: "none" }, "closing+=1");
+  show("irrigation-water", "closing+=1", .15);
+  tl.to(q("irrigation-water"), { strokeDashoffset: 0, duration: 3.2, ease: "none" }, "closing+=1");
   show("soil-moisture", "closing+=1.7", 1);
   show("root-uptake", "closing+=2", .8);
   tl.to(q("application-plant"), { scale: 1.08, transformOrigin: "center bottom", duration: 2 }, "closing+=2");
@@ -197,14 +210,30 @@ export function initFunctionTour(root) {
   const lastScene = TOUR_SCENES.length - 1;
   progressBar.setAttribute("aria-valuemax", String(TOUR_DURATION));
   const durationLabel = $("[data-tour-duration]");
-  durationLabel.textContent = message("A {duration}-second guided tour. Pause or exit at any time.", { duration: TOUR_DURATION });
+  durationLabel.textContent = message("A {duration}-second animation. Pause or replay at any time.", { duration: TOUR_DURATION });
   durationLabel.hidden = false;
   const abort = new AbortController();
-  let timeline, trigger, driver, mediaContext;
+  let timeline, mediaContext;
   let state = "poster", progress = 0, currentScene = -1, displayedSecond = -1;
-  let reduceMotion = false, disposed = false, resizing = 0, activation = 0, completionFrame = 0;
-  let expectedScroll = null, savedScrollBehaviour = null;
-  let layoutPending = false;
+  let reduceMotion = false, disposed = false, activation = 0;
+
+  function isPortraitViewport() {
+    return stage.clientHeight > stage.clientWidth;
+  }
+
+  function updateResponsiveViewport(sceneId = root.dataset.scene || "delivery") {
+    const portrait = isPortraitViewport();
+    let view = [0, 0, 1000, 620];
+    if (portrait) {
+      const frame = PORTRAIT_FRAMES[sceneId] ?? PORTRAIT_FRAMES.delivery;
+      const aspectWidth = 620 * stage.clientWidth / Math.max(stage.clientHeight, 1);
+      const width = Math.min(1000, Math.max(aspectWidth, frame.width));
+      const x = Math.max(0, Math.min(1000 - width, frame.center - width / 2));
+      view = [x, 0, width, 620];
+    }
+    svg.setAttribute("viewBox", view.join(" "));
+    svg.setAttribute("preserveAspectRatio", "xMidYMid meet");
+  }
 
   function setState(value) {
     state = value;
@@ -215,8 +244,11 @@ export function initFunctionTour(root) {
     toggle.hidden = value === "complete" || value === "still";
     toggle.textContent = message(value === "playing" ? "Pause" : "Resume");
     replay.hidden = value !== "complete";
+    begin.hidden = !["poster", "paused", "complete"].includes(value);
+    begin.setAttribute("aria-label", message(value === "complete" ? "Animation wiederholen" : value === "paused" ? "Animation fortsetzen" : "Animation starten"));
+    $("[data-tour-play-label]").textContent = message(value === "complete" ? "Wiederholen" : value === "paused" ? "Fortsetzen" : "Animation starten");
     previous.hidden = next.hidden = value !== "still";
-    skip.textContent = message(value === "complete" ? "Continue website" : "Skip tour");
+    skip.textContent = message(value === "complete" ? "Continue website" : "Skip animation");
   }
 
   function renderFrame(time, announce = true) {
@@ -228,6 +260,7 @@ export function initFunctionTour(root) {
     if (sceneChanged) {
       currentScene = index;
       root.dataset.scene = scene.id;
+      updateResponsiveViewport(scene.id);
       sceneTitle.textContent = message(scene.title);
       sceneDescription.textContent = message(scene.description);
       if (announce) announcement.textContent = message(scene.title) + ". " + message(scene.description);
@@ -236,7 +269,6 @@ export function initFunctionTour(root) {
       next.textContent = message(index === lastScene ? "Finish" : "Next");
     }
     progressFill.style.transform = `scaleX(${progress})`;
-    // Text and accessibility updates need second precision, not frame precision.
     const whole = Math.floor(time + 1e-6);
     if (whole !== displayedSecond || sceneChanged) {
       displayedSecond = whole;
@@ -246,116 +278,59 @@ export function initFunctionTour(root) {
     }
   }
 
-  function stopDriver() {
-    if (driver) { driver.kill(); driver = null; }
-    expectedScroll = null;
-    // Restore the site's existing smooth scrolling when the driver yields.
-    if (savedScrollBehaviour !== null) {
-      document.documentElement.style.scrollBehavior = savedScrollBehaviour;
-      savedScrollBehaviour = null;
-    }
+  function wireTimeline() {
+    if (!timeline) return;
+    timeline.eventCallback("onUpdate", () => {
+      if (!disposed) renderFrame(timeline.time());
+    });
+    timeline.eventCallback("onComplete", finish);
   }
 
-  function pause(sourceMessage = "Paused. Scroll to explore, or resume the guided tour.") {
+  function pause(sourceMessage = "Animation paused. Continue scrolling or resume when you are ready.") {
     if (state !== "playing") return;
-    stopDriver();
+    timeline?.pause();
     setState("paused");
     hint.textContent = message(sourceMessage);
   }
 
-  function releasePin(preservePosition = true) {
-    if (!trigger) return;
-    const before = stage.getBoundingClientRect().top;
-    trigger.kill(true, true);
-    trigger = null;
-    if (preservePosition) {
-      const after = stage.getBoundingClientRect().top;
-      window.scrollTo({ top: window.scrollY + after - before, behavior: "instant" });
-    }
-  }
-
   function finish() {
     if (disposed || state === "complete") return;
-    stopDriver();
-    const refocus = document.activeElement === toggle || document.activeElement === next;
+    const refocus = document.activeElement === toggle || document.activeElement === next || document.activeElement === begin;
+    timeline?.pause();
     setState("complete");
-    releasePin();
     timeline?.progress(1, true);
     renderFrame(TOUR_DURATION);
-    hint.textContent = message("The journey is complete. Take your time with the final view.");
+    hint.textContent = message("The animation is complete. Take your time with the final view.");
     if (refocus) replay.focus({ preventScroll: true });
   }
 
-  function queueFinish() {
-    // Never remove a pin during ScrollTrigger's own update traversal.
-    if (completionFrame) return;
-    completionFrame = requestAnimationFrame(() => {
-      completionFrame = 0;
-      if (!layoutPending && progress >= 1 && state !== "poster") finish();
-    });
-  }
-
-  function attachPin(atProgress = 0) {
-    trigger = ScrollTrigger.create({
-      id: "air2growth-function-tour", trigger: stage, pin: stage,
-      start: "top 104px", end: () => `+=${Math.round(window.innerHeight * 2.5)}`,
-      animation: timeline, scrub: true, invalidateOnRefresh: false,
-      onUpdate(self) {
-        if (disposed || !trigger || layoutPending) return;
-        renderFrame(self.progress * TOUR_DURATION);
-        if (self.progress >= 1 && state === "paused") queueFinish();
-      },
-    });
-    trigger.refresh();
-    window.scrollTo({ top: trigger.start + (trigger.end - trigger.start) * atProgress, behavior: "instant" });
-    ScrollTrigger.update();
-    timeline.progress(atProgress, true);
-    renderFrame(atProgress * TOUR_DURATION, false);
-  }
-
   function resume() {
-    if (!trigger || reduceMotion || state === "complete") return;
-    stopDriver();
-    // Read actual scroll progress, including any manual reverse scrubbing.
-    const from = clamp((window.scrollY - trigger.start) / (trigger.end - trigger.start));
-    if (from >= 1) { finish(); return; }
+    if (!timeline || reduceMotion || state === "complete") return;
     setState("playing");
-    hint.textContent = message("Scroll to take over. Escape to exit.");
-    savedScrollBehaviour = document.documentElement.style.scrollBehavior;
-    document.documentElement.style.scrollBehavior = "auto";
-    const clock = { progress: from };
-    driver = gsap.to(clock, {
-      progress: 1, duration: TOUR_DURATION * (1 - from), ease: "none",
-      onUpdate() {
-        if (!trigger) return;
-        expectedScroll = Math.round(trigger.start + (trigger.end - trigger.start) * clock.progress);
-        window.scrollTo({ top: expectedScroll, behavior: "instant" });
-        ScrollTrigger.update();
-      },
-      onComplete: queueFinish,
-    });
+    hint.textContent = message("Animation is playing. Pause any time; page scrolling remains available.");
+    timeline.play();
   }
 
   async function start() {
     const token = ++activation;
-    clearTimeout(resizing); layoutPending = false;
-    cancelAnimationFrame(completionFrame); completionFrame = 0;
-    stopDriver(); releasePin();
-    timeline?.revert(); timeline = null;
-    progress = 0; currentScene = -1;
+    timeline?.revert();
+    timeline = null;
+    progress = 0; currentScene = -1; displayedSecond = -1;
     setState(reduceMotion ? "still" : "paused");
     mediaContext.buildTour();
+    wireTimeline();
+    timeline.progress(0, true);
+    renderFrame(0, false);
     if (reduceMotion) {
       showStill(0);
       hint.textContent = message("Reduced motion: explore the still scenes at your own pace.");
-      next.focus({ preventScroll: true });
+      begin.focus({ preventScroll: true });
       return;
     }
     await document.fonts.ready;
     await new Promise((resolve) => requestAnimationFrame(resolve));
     if (disposed || token !== activation || state === "poster") return;
-    attachPin();
-    toggle.focus({ preventScroll: true });
+    begin.focus({ preventScroll: true });
     resume();
   }
 
@@ -367,95 +342,67 @@ export function initFunctionTour(root) {
 
   function exit() {
     ++activation;
-    clearTimeout(resizing); layoutPending = false;
-    cancelAnimationFrame(completionFrame); completionFrame = 0;
-    stopDriver();
-    releasePin();
+    timeline?.pause();
     timeline?.revert(); timeline = null;
     setState("poster");
-    progress = 0; currentScene = -1;
+    progress = 0; currentScene = -1; displayedSecond = -1;
     delete root.dataset.scene;
     delete root.dataset.tourTime;
     privacy.hidden = true;
-    $("[data-tour-announce]").textContent = message("Tour exited.");
+    $("[data-tour-announce]").textContent = message("Animation exited.");
     begin.focus({ preventScroll: true });
   }
 
   function continueWebsite(event) {
     event?.preventDefault();
     if (state !== "complete") exit();
-    else { stopDriver(); releasePin(); }
     const heading = $("#journey-heading");
     heading.focus({ preventScroll: true });
     $("#journey-explained").scrollIntoView({ behavior: "instant", block: "start" });
   }
 
   const mm = gsap.matchMedia();
-  mm.add({ reduce: "(prefers-reduced-motion: reduce)", mobile: "(max-width: 640px)", all: "all" }, (context) => {
+  mm.add({ reduce: "(prefers-reduced-motion: reduce)", portrait: "(orientation: portrait) and (max-width: 900px)", all: "all" }, (context) => {
     reduceMotion = Boolean(context.conditions.reduce);
     mediaContext = context;
-    context.add("buildTour", () => { timeline = buildTimeline(root, Boolean(context.conditions.mobile)); });
+    context.add("buildTour", () => { timeline = buildTimeline(root, Boolean(context.conditions.portrait)); });
     if (state !== "poster") {
+      const previousState = state;
+      const savedTime = progress * TOUR_DURATION;
       context.buildTour();
-      timeline.progress(progress, true);
-      setState(state === "complete" ? "complete" : reduceMotion ? "still" : "paused");
-      renderFrame(progress * TOUR_DURATION, false);
-      if (!reduceMotion && state !== "complete") attachPin(progress);
+      wireTimeline();
+      timeline.time(savedTime, true);
+      setState(previousState === "complete" ? "complete" : reduceMotion ? "still" : previousState);
+      renderFrame(savedTime, false);
+      if (previousState === "playing" && !reduceMotion) timeline.play();
       hint.textContent = message("Layout or motion preference changed. Continue when you are ready.");
     }
-    return () => { stopDriver(); releasePin(); timeline = null; };
+    return () => { timeline?.pause(); timeline = null; };
   }, root);
 
   function resize() {
-    svg.setAttribute("viewBox", window.innerWidth <= 640 ? "280 130 520 490" : "0 0 1000 620");
-    $("[data-art=data-route]").setAttribute("d", window.innerWidth <= 640 ? "M692 338c48-2-26-123 10-132" : "M692 338c83-1 76-146 171-147");
-    if (!trigger) return;
-    const saved = progress;
-    layoutPending = true;
-    cancelAnimationFrame(completionFrame); completionFrame = 0;
-    pause("Viewport changed. Resume when you are ready.");
-    clearTimeout(resizing);
-    resizing = window.setTimeout(() => {
-      if (!trigger) { layoutPending = false; return; }
-      trigger.refresh();
-      window.scrollTo({ top: trigger.start + (trigger.end - trigger.start) * saved, behavior: "instant" });
-      layoutPending = false;
-      ScrollTrigger.update();
-      timeline?.progress(saved, true);
-      renderFrame(saved * TOUR_DURATION, false);
-    }, 300);
+    updateResponsiveViewport();
+    $("[data-art=data-route]").setAttribute("d", isPortraitViewport() ? "M692 338c48-2-26-123 10-132" : "M692 338c83-1 76-146 171-147");
   }
   resize();
   const on = (target, type, handler, options = {}) => target.addEventListener(type, handler, { ...options, signal: abort.signal });
-  on(begin, "click", start); on(replay, "click", start);
+  on(begin, "click", () => state === "paused" ? resume() : start());
   on(toggle, "click", () => state === "playing" ? pause() : resume());
   on($("[data-tour-exit]"), "click", exit); on(skip, "click", continueWebsite);
   on(previous, "click", () => showStill(currentScene - 1));
   on(next, "click", () => currentScene === lastScene ? finish() : showStill(currentScene + 1));
-  on(window, "wheel", () => pause(), { passive: true });
-  on(window, "touchstart", (event) => {
-    // A control tap's click handles playback; pausing here would toggle it twice.
-    if (!event.target.closest?.("[data-tour-controls]")) pause();
-  }, { passive: true });
-  on(window, "pointerdown", (event) => {
-    if (event.clientX >= document.documentElement.clientWidth || event.target.closest?.("header")) pause();
-  }, { passive: true });
   on(window, "keydown", (event) => {
     if (state === "poster" || state === "complete") return;
-    if (event.key === "Escape") { event.preventDefault(); exit(); return; }
-    if (["ArrowDown", "ArrowUp", "PageDown", "PageUp", "Home", "End", " "].includes(event.key) && !event.target.closest?.("button,a,input,textarea,select")) pause();
+    if (event.key === "Escape") { event.preventDefault(); exit(); }
   });
-  on(window, "scroll", () => {
-    if (state === "playing" && expectedScroll !== null && Math.abs(window.scrollY - expectedScroll) > 3) pause();
-  }, { passive: true });
   on(document, "visibilitychange", () => { if (document.hidden) pause("Paused while this tab was hidden. Resume when you are ready."); });
   on(window, "resize", resize, { passive: true });
   begin.disabled = false;
 
   return () => {
     disposed = true; ++activation;
-    abort.abort(); clearTimeout(resizing); cancelAnimationFrame(completionFrame);
-    stopDriver(); releasePin(false); timeline?.revert(); mm.revert();
+    abort.abort();
+    timeline?.pause(); timeline?.revert(); mm.revert();
     delete root.dataset.tourReady;
   };
 }

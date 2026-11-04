@@ -45,13 +45,13 @@
         <p>Begleiten Sie das System im Gewächshaus: von der vorbereiteten Mikroalgenkultur bis zur Düngung der Pflanzen. Die Animation zeigt unser Entwicklungsprinzip im Zeitraffer.</p>
       </div>
       <div class="tour-launch" data-tour-launch>
-        <button class="tour-button tour-button-primary tour-start" type="button" data-tour-begin disabled><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m7 4 9 6-9 6Z" fill="currentColor"/></svg>Animation starten</button>
         <a class="tour-text-link" href="#journey-explained">Erklärung lesen</a>
         <p data-tour-duration hidden></p>
         <noscript><p>Die Erklärung ist auch ohne JavaScript vollständig lesbar.</p></noscript>
       </div>
     </div>
     <div class="tour-stage" data-tour-stage>
+      <button class="tour-stage-play tour-button tour-button-primary" type="button" data-tour-begin data-tour-replay disabled aria-label="Animation starten"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m7 4 9 6-9 6Z" fill="currentColor"/></svg><span data-tour-play-label>Animation starten</span></button>
       <div class="tour-art" data-tour-art>
         <!-- @include function-illustration -->
       </div>
@@ -73,7 +73,7 @@
     </div>
   </section>
   <p class="tour-sr-only" role="status" aria-live="polite" aria-atomic="true" data-tour-announce></p>
-  <p class="tour-sr-only" data-tour-hint>Scrollen übernimmt die Steuerung. Escape beendet die Tour.</p>
+  <p class="tour-sr-only" data-tour-hint>Die Animation läuft selbstständig. Escape beendet sie.</p>
 
   <section id="function-process" class="tour-process site-shell" aria-labelledby="tour-process-heading">
     <div class="tour-process-intro">
@@ -107,7 +107,7 @@
             <rect x="25" y="24" width="44" height="10" rx="3" fill="#DCE8D7" stroke="#45714C" stroke-width="2"/>
             <path d="M31 31h32" stroke="#8B81D4" stroke-width="3"/>
             <path d="M34 38v6m13-6v6m13-6v6" stroke="#8B81D4" stroke-width="1.5"/>
-            <text x="47" y="19" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" font-weight="700" fill="#45714C">UV</text>
+            <text x="47" y="19" text-anchor="middle" font-family="Open Sans,Arial,sans-serif" font-size="8" font-weight="700" fill="#45714C">UV</text>
           </g>
           <path d="M34 84h26M47 79v5" stroke="#45714C" stroke-width="2"/>
         </svg>

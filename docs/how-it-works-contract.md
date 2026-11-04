@@ -56,13 +56,13 @@ The visual direction is recorded in [the design plan](./how-it-works-design.md).
   root-zone application all belong to the same finite timeline. The
   microscope is visible during growth and hidden by harvest. Closing returns
   the world camera and depth-layer translations to their initial framing.
-- [`src/function-tour.js:start`](../src/function-tour.js): guided animation
-  and scroll pinning begin only after activation. The poster has no scroll
-  runway. Reduced motion calls `showStill(0)` instead of `attachPin()`.
-- [`src/function-tour.js:resume`](../src/function-tour.js): remaining playback
-  duration comes from the current scroll progress and `TOUR_DURATION`.
-- [`src/function-tour.js:finish`](../src/function-tour.js): completion removes
-  the pin and preserves the final greenhouse and plant-application view.
+- [`src/function-tour.js:start`](../src/function-tour.js): the bounded
+  animation begins only after activation. It stays in normal document flow.
+  Reduced motion calls `showStill(0)` instead of starting autoplay.
+- [`src/function-tour.js:resume`](../src/function-tour.js): playback resumes
+  from the current GSAP timeline time and leaves native scrolling untouched.
+- [`src/function-tour.js:finish`](../src/function-tour.js): completion preserves
+  the final greenhouse and plant-application view in normal flow.
 - [`src/function-tour.js:exit`](../src/function-tour.js): exit restores the
   poster and focuses the start button. `continueWebsite()` focuses
   `journey-heading` and scrolls to the written explanation.
@@ -76,16 +76,12 @@ The visual direction is recorded in [the design plan](./how-it-works-design.md).
 - [`src/function-tour.js:setState`](../src/function-tour.js) and
   `renderFrame()` update root data attributes, control visibility, text,
   SVG styles, progress accessibility attributes, and the live status region.
-- [`src/function-tour.js:attachPin`](../src/function-tour.js) creates the
-  `air2growth-function-tour` ScrollTrigger, pins the stage at 104px, reserves
-  2.5 viewport heights of scroll distance, and adjusts document scroll.
-- [`src/function-tour.js:resume`](../src/function-tour.js) temporarily sets
-  document scroll behaviour to `auto`; `stopDriver()` restores its previous
-  inline value. The driver advances real document scroll.
+- [`src/function-tour.js:resume`](../src/function-tour.js) plays the GSAP
+  timeline from its current time and leaves document scrolling untouched.
 - [`src/function-tour.js:on`](../src/function-tour.js) registers input,
   visibility, and resize listeners using one `AbortController`. The returned
-  cleanup aborts listeners, clears pending timers/frames, stops the driver,
-  releases pinning, and reverts the timeline and media context.
+  cleanup aborts listeners, stops playback, and reverts the timeline and media
+  context.
 - [`src/function-tour.js:initFunctionTour`](../src/function-tour.js) performs
   browser presentation work; it contains no order, telemetry, or notification
   request. [`src/main.ts:tour`](../src/main.ts) dynamically loads its module.

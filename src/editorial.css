@@ -41,6 +41,14 @@
     line-height: 1.65;
 }
 .editorial-opening-photo { max-width: 1080px; }
+.editorial-event-gallery { background: #FCFDFC; }
+.editorial-event-gallery-intro { display: grid; gap: 1.25rem; align-items: end; }
+.editorial-event-gallery-intro .site-heading { max-width: 16ch; }
+.editorial-event-gallery-intro .site-copy { max-width: 52ch; }
+.editorial-event-grid { display: grid; gap: 1.5rem; margin-top: 2.5rem; }
+.editorial-event-grid figure { margin: 0; min-width: 0; }
+.editorial-event-grid img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; border-radius: .85rem; }
+.editorial-event-grid figcaption { margin-top: .65rem; color: #45714C; font-size: .75rem; line-height: 1.6; }
 .editorial-award-photo { max-width: 800px; margin-block: 1.5rem .75rem; }
 .editorial-section-intro .site-copy { margin-top: 1.5rem; }
 .editorial-section-intro .site-heading {
@@ -99,10 +107,10 @@
 .editorial-vision-statement .site-copy { max-width: 62ch; }
 .editorial-vision-composition { display: grid; gap: 2.5rem; align-items: center; margin-top: 3rem; }
 .editorial-page .editorial-photo-crops img {
-    aspect-ratio: 1 / 1;
+    aspect-ratio: 3 / 2;
     object-fit: cover;
-    object-position: 70% center;
-    border-radius: 46% 46% 1rem 1rem;
+    object-position: center;
+    border-radius: 1rem 1rem .35rem .35rem;
 }
 .editorial-commitments { min-width: 0; }
 .editorial-commitments article { position: relative; display: grid; grid-template-columns: 3.5rem minmax(0, 1fr); gap: 1.1rem; padding-block: 0 2.3rem; }
@@ -187,6 +195,8 @@
 @media (min-width: 768px) {
     .editorial-opening .editorial-opening-split { grid-template-columns: 1.2fr 1fr; gap: 3rem; }
     .editorial-opening .editorial-photo-team { margin-top: 3.5rem; }
+    .editorial-event-gallery-intro { grid-template-columns: .8fr 1.2fr; gap: 3rem; }
+    .editorial-event-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; }
     .editorial-support-network { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .editorial-current-programme { grid-template-columns: .85fr 1.15fr; }
     .editorial-vision-composition { grid-template-columns: .9fr 1.1fr; gap: 3rem; }

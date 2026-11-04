@@ -1,4 +1,4 @@
-<svg class="tour-world" data-tour-svg="" viewBox="0 0 1000 620" fill="none" aria-hidden="true" focusable="false" stroke-linecap="round" stroke-linejoin="round">
+<svg class="tour-world" data-tour-svg="" viewBox="0 0 1000 620" preserveAspectRatio="xMidYMid meet" fill="none" aria-hidden="true" focusable="false" stroke-linecap="round" stroke-linejoin="round">
   <defs>
     <linearGradient id="a2gf-sky-depth" x1="0" y1="0" x2="0" y2="1">
       <stop stop-color="#DCEAEC"/><stop offset="1" stop-color="#FCFDFC"/>
@@ -229,15 +229,6 @@
       <path d="M285 275h680M616 91v156m-112-94v96m228-96v96" stroke="#91A98D" stroke-width="2.5"/>
       <path d="M284 568h682" stroke="#627D61" stroke-width="6"/>
     </g>
-    <g data-art="background-workers">
-      <g data-art="field-worker">
-        <use href="#a2gf-worker" x="865" y="387" width="44" height="94" />
-        <g data-art="rake">
-          <path d="m892 438 48 38" stroke="#846b43" stroke-width="3" />
-          <path d="m927 472 20-4" stroke="var(--color-pine, #2d6b24)" stroke-width="5" />
-        </g>
-      </g>
-    </g>
     <g data-art="crops">
       <g data-art="crop-rows">
         <path d="m766 453 33-3 80 85-53 7Zm60-6 26-3 90 73-42 8Z" fill="#7A7157"/>
@@ -263,6 +254,16 @@
         <g data-art="root-uptake" class="tour-initial-hidden">
           <path d="M737 556v14m0-8-10 6m10-2 10 7m-10-5-5 6" stroke="#EEF3CE" stroke-width="1.4"/>
           <circle cx="720" cy="561" r="1.8" fill="#DCEAEC"/><circle cx="746" cy="566" r="1.6" fill="#DCEAEC"/>
+        </g>
+      </g>
+    </g>
+    <!-- Foreground worker: painted after the crop rows so the person remains readable. -->
+    <g data-art="background-workers">
+      <g data-art="field-worker">
+        <use href="#a2gf-worker" x="865" y="387" width="44" height="94" />
+        <g data-art="rake">
+          <path d="m892 438 48 38" stroke="#846b43" stroke-width="3" />
+          <path d="m927 472 20-4" stroke="var(--color-pine, #2d6b24)" stroke-width="5" />
         </g>
       </g>
     </g>

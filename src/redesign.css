@@ -153,8 +153,8 @@ main h2{letter-spacing:-.04em}
 .home-benefits .benefits-list dd { max-width: 52ch; line-height: 1.7; }
 .home-benefits .development-note { font-size: .875rem; max-width: 60ch; }
 .home-vision-layout { align-items: center; }
-.home-vision-photo { overflow: hidden; border-radius: 50% 50% 8px 8px; background: #eef3ec; }
-.home-vision-photo img { display: block; width: 100%; height: auto; aspect-ratio: 1 / 1.06; object-fit: cover; object-position: 56% center; }
+.home-vision-photo { overflow: hidden; border-radius: 28px 28px 8px 8px; background: #eef3ec; }
+.home-vision-photo img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; object-position: center; }
 .home-vision .site-text-link, .home-milestones .site-text-link, .home-team .site-text-link { margin-top: 1.2rem; }
 .home-vision .site-heading { max-width: 16ch; }
 .home-milestones { padding-top: 1rem; }
@@ -206,7 +206,7 @@ main h2{letter-spacing:-.04em}
 }
 @media (max-width: 767px) {
   .home-vision-photo { max-width: 420px; }
-  .home-vision-photo img { aspect-ratio: 4 / 3; }
+  .home-vision-photo img { aspect-ratio: 3 / 2; }
   .home-solution-aside { max-width: 480px; }
   .home-vision .site-heading, .home-team .site-heading { max-width: 20ch; }
   .home-milestones { padding-top: 1rem; }

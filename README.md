@@ -630,13 +630,12 @@ its canonical URL. The shared navigation and home process section link to it.
   world and shared character symbols: `templates/partials/function-illustration.html`.
 - Scoped layout: `src/function-tour.css` (included in the shared stylesheet
   so the production poster and explanation also work without JavaScript).
-- Static hero artwork: `public/img/function-ecosystem.svg`; the display face
-  is served locally from `public/fonts/bricolage-grotesque-latin-variable.woff`
-  with its SIL Open Font License alongside it.
+- Static hero artwork: `public/img/function-ecosystem.svg`; all routes use the
+  locally hosted Open Sans family for a consistent typographic voice.
 - Progressive enhancement: `src/function-tour.js`, exported
   `initFunctionTour(root)` with a cleanup function, and the single
   `TOUR_SCENES` manifest. `src/main.ts` loads the GSAP chunk only for the tour.
-- Exact dependency: GSAP `3.14.2`, with its bundled ScrollTrigger plugin.
+- Exact dependency: GSAP `3.14.2` for the bounded animation timeline.
 
 The 38-second storyboard comes from `TOUR_SCENES`: delivery 0–3,
 installation 3–6, capture 6–11, CO₂ supply 11–15, growth 15–23,
@@ -652,18 +651,15 @@ a magnified cell-division view accompanies growth. Collection flow and root-zone
 application make the output visible. Parallax
 and biological details are part of the same reversible timeline.
 
-“Start the animation” deliberately creates a scroll runway of 2.5 viewport heights.
-A linear scroll driver maps real document scrolling to one 38-second GSAP
-master timeline. Pause, wheel/touch/scrollbar intervention and navigation keys
-allow manual forward or reverse scrubbing. Resume uses the remaining logical
-duration. Escape/Exit restores the poster; Skip/Continue focuses the following
-explanation. Completion preserves the closing greenhouse view in normal flow.
-Replay rebuilds the tour. A hidden tab or viewport change pauses playback.
-Reduced motion replaces automatic scrolling with Previous/Next still scenes.
-The illustrated workflow makes no order, telemetry or notification requests.
-During playback, the illustration spans the full viewport width. The player
-contains the artwork, scene caption, progress indicator and controls. The
-written explanation and machine-monitoring notice sit below the canvas.
+“Start the animation” plays one 38-second GSAP timeline inside the bounded
+illustration stage. Native document scrolling remains available throughout;
+pause, resume, replay, Escape/Exit and Skip/Continue are explicit controls.
+Completion preserves the closing greenhouse view in normal flow. Replay
+rebuilds the tour, a hidden tab pauses playback, and reduced motion replaces
+autoplay with Previous/Next still scenes. The illustrated workflow makes no
+order, telemetry or notification requests. The player contains the artwork,
+scene caption, progress indicator and controls; the written explanation and
+machine-monitoring notice sit below the canvas.
 
 Run `bun run build` and `bun test tests/seo.test.ts` to check production routes,
 redirects, language/metadata, the static explanation and existing pages/APIs.
