@@ -81,6 +81,14 @@ export const SEO_PAGES: Record<string, PageSeo> = {
     description:
       "Informationen zum Datenschutz bei Air2Growth: Nutzung der Website, Verarbeitung personenbezogener Daten bei Kontaktanfragen und Ihre Rechte als betroffene Person.",
   },
+  "ar.html": {
+    breadcrumbLabel: "AR-Modell",
+    path: "/ar",
+    aliases: ["/ar.html", "/ar/"],
+    title: "Die Anlage in 3D und AR erleben | Air2Growth",
+    description:
+      "Betrachten Sie das geplante Air2Growth-System als interaktives 3D-Modell direkt im Browser oder platzieren Sie es per Augmented Reality in Ihrer Umgebung.",
+  },
 };
 
 const ENGLISH_SEO: Record<
@@ -134,6 +142,12 @@ const ENGLISH_SEO: Record<
     title: "Privacy policy | Air2Growth",
     description:
       "Learn how Air2Growth handles personal data, contact enquiries and website analytics, and how to exercise your data protection rights.",
+  },
+  "ar.html": {
+    breadcrumbLabel: "AR model",
+    title: "Experience the system in 3D and AR | Air2Growth",
+    description:
+      "Explore the planned Air2Growth system as an interactive 3D model in your browser or place it in your own space with augmented reality.",
   },
 };
 

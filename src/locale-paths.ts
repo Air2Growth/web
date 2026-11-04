@@ -12,6 +12,7 @@ export const PAGE_PATHS: Record<string, Record<Locale, string>> = {
   "ueber-uns.html": { de: "/ueber-uns", en: "/en/about" },
   "impressum.html": { de: "/impressum", en: "/en/legal-notice" },
   "datenschutz.html": { de: "/datenschutz", en: "/en/privacy" },
+  "ar.html": { de: "/ar", en: "/en/ar" },
 };
 
 export function isLocale(value: unknown): value is Locale {

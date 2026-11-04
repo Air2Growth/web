@@ -1,0 +1,60 @@
+<section id="ar-modell" aria-labelledby="ar-title" class="bg-mist pt-[120px] md:pt-[144px] pb-16 md:pb-24 scroll-mt-[120px]">
+    <div class="mx-auto w-full max-w-[1169px] px-5 md:px-10">
+        <div class="mb-6 md:mb-8">
+            <!-- @breadcrumbs -->
+        </div>
+        <div class="rounded-3xl border border-pine/15 bg-gradient-to-b from-soft/70 via-mist to-white px-6 py-8 md:px-10 md:py-12 mb-8 md:mb-10">
+            <span class="inline-flex items-center rounded-full bg-brand/10 text-pine font-sans font-bold text-[0.8rem] uppercase tracking-[0.08em] px-3 py-1 mb-5">3D-Modell</span>
+            <h1 id="ar-title" class="font-serif font-normal leading-[1.08] text-balance text-[clamp(2rem,4.4vw,3.25rem)] mb-[1.2rem]">Die Anlage in 3D und AR.</h1>
+            <p class="font-sans text-[1.125rem] leading-[1.6] text-ink max-w-[70ch]">Drehen Sie unser geplantes System direkt im Browser – oder stellen Sie es per Augmented Reality in Ihren eigenen Raum.</p>
+        </div>
+        <div class="ar-stage rounded-3xl border border-pine/15 bg-white p-4 md:p-6 shadow-[0_8px_30px_#2f2f2f0f]">
+            <model-viewer
+                src="/models/air2growth-machine.glb"
+                alt="Air2Growth-Anlage als 3D-Modell"
+                camera-controls
+                auto-rotate
+                ar
+                ar-modes="webxr scene-viewer quick-look"
+                ar-scale="fixed"
+                shadow-intensity="1"
+                environment-image="neutral"
+                exposure="1"
+                loading="eager"
+                reveal="auto"
+                touch-action="pan-y">
+                <button slot="ar-button" class="inline-flex min-h-11 items-center justify-center rounded-lg bg-pine px-5 py-3 text-sm font-bold text-white">AR ansehen</button>
+                <p data-ar-status role="status" class="p-4 text-center text-sm text-ink/70">Modell wird geladen …</p>
+            </model-viewer>
+            <noscript><p class="p-4 text-center text-sm">Für die 3D-Ansicht ist JavaScript erforderlich. Sie können die <a class="font-bold text-pine underline underline-offset-4" href="/models/air2growth-machine.glb">Modelldatei direkt öffnen</a>.</p></noscript>
+            <script type="module">
+                const viewer = document.querySelector(".ar-stage model-viewer");
+                const status = document.querySelector("[data-ar-status]");
+                const en = document.documentElement.lang === "en";
+                if (viewer && status) {
+                    viewer.addEventListener("load", () => status.remove(), { once: true });
+                    viewer.addEventListener("error", () => {
+                        status.textContent = en
+                            ? "The 3D model could not be loaded."
+                            : "Das 3D-Modell konnte nicht geladen werden.";
+                    }, { once: true });
+                }
+            </script>
+        </div>
+        <div class="grid gap-6 md:grid-cols-3 mt-8 md:mt-10 [&_h2]:font-sans [&_h2]:font-bold [&_h2]:text-[1.25rem] [&_h2]:leading-[1.35] [&_h2]:mb-2 [&_p]:text-[1.0625rem] [&_p]:leading-[1.7] [&_p]:text-ink">
+            <div class="rounded-3xl bg-white border border-pine/15 p-6 md:p-8 shadow-[0_8px_30px_#2f2f2f0f]">
+                <h2>Drehen und Zoomen</h2>
+                <p>Ziehen Sie das Modell mit dem Finger oder der Maus, um es von allen Seiten zu betrachten.</p>
+            </div>
+            <div class="rounded-3xl bg-white border border-pine/15 p-6 md:p-8 shadow-[0_8px_30px_#2f2f2f0f]">
+                <h2>AR starten</h2>
+                <p>Tippen Sie auf „AR ansehen“, um die Anlage in Ihrer Umgebung zu platzieren und sich darin umzusehen.</p>
+            </div>
+            <div class="rounded-3xl bg-white border border-pine/15 p-6 md:p-8 shadow-[0_8px_30px_#2f2f2f0f]">
+                <h2>Größe einordnen</h2>
+                <p>Der Maßstab bleibt fixiert, damit die Proportionen der Anlage vergleichbar bleiben.</p>
+            </div>
+        </div>
+        <p class="mt-8 md:mt-10 text-[1.0625rem] leading-[1.7] text-ink max-w-[70ch]">Hinweis: AR funktioniert auf vielen aktuellen Smartphones. Ohne AR-fähiges Gerät sehen Sie das Modell weiterhin als interaktives 3D-Objekt. Mehr zum Konzept: <a class="font-bold text-pine underline underline-offset-[3px] decoration-brand/40 hover:decoration-brand" href="/function">So funktioniert’s</a> <a class="font-bold text-pine underline underline-offset-[3px] decoration-brand/40 hover:decoration-brand" href="/loesung">Unsere Lösung</a>.</p>
+    </div>
+</section>

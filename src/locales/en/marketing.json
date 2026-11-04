@@ -202,5 +202,20 @@
   "CO₂-Filter": "CO₂ filter",
   "Vom CO₂ zum Flüssigdünger": "From CO₂ to liquid fertiliser",
   "Prinzipdarstellung: Umgebungsluft gelangt in einen Filter. Das gewonnene CO₂ wird für Mikroalgen nutzbar gemacht. Daraus entsteht Flüssigdünger für Pflanzen.": "System diagram: a filter captures CO₂ from the surrounding air. The CO₂ is supplied to microalgae, which provide the basis for liquid fertiliser for plants.",
-  "Flüssigdünger": "Liquid fertiliser"
+  "Flüssigdünger": "Liquid fertiliser",
+  "3D-Modell": "3D model",
+  "Die Anlage in 3D und AR.": "The system in 3D and AR.",
+  "Drehen Sie unser geplantes System direkt im Browser – oder stellen Sie es per Augmented Reality in Ihren eigenen Raum.": "Rotate our planned system right in your browser – or place it in your own space with augmented reality.",
+  "AR ansehen": "View in AR",
+  "Modell wird geladen …": "Loading model …",
+  "Für die 3D-Ansicht ist JavaScript erforderlich. Sie können die": "JavaScript is required for the 3D view. You can",
+  "Modelldatei direkt öffnen": "open the model file directly",
+  "Drehen und Zoomen": "Rotate and zoom",
+  "Ziehen Sie das Modell mit dem Finger oder der Maus, um es von allen Seiten zu betrachten.": "Drag the model with your finger or mouse to view it from all sides.",
+  "AR starten": "Start AR",
+  "Tippen Sie auf „AR ansehen“, um die Anlage in Ihrer Umgebung zu platzieren und sich darin umzusehen.": "Tap “View in AR” to place the system in your surroundings and look around it.",
+  "Größe einordnen": "Getting a sense of size",
+  "Der Maßstab bleibt fixiert, damit die Proportionen der Anlage vergleichbar bleiben.": "The scale stays fixed so the proportions of the system remain comparable.",
+  "Hinweis: AR funktioniert auf vielen aktuellen Smartphones. Ohne AR-fähiges Gerät sehen Sie das Modell weiterhin als interaktives 3D-Objekt. Mehr zum Konzept:": "Note: AR works on many recent smartphones. Without an AR-capable device you can still explore the model as an interactive 3D object. More about the concept:",
+  "Air2Growth-Anlage als 3D-Modell": "Air2Growth system as a 3D model"
 }

@@ -27,6 +27,7 @@ export const MANIFEST: Record<string, string> = {
   "head-function": "partials/head-function.html",
   "head-solution": "partials/head-solution.html",
   "head-milestones": "partials/head-milestones.html",
+  "head-ar": "partials/head-ar.html",
   "milestones-page": "partials/milestones-page.html",
   "head-vision": "partials/head-vision.html",
   "vision-page": "partials/vision-page.html",
@@ -51,6 +52,7 @@ export const MANIFEST: Record<string, string> = {
   contact: "partials/contact.html",
   footer: "partials/footer.html",
   "legal-header": "partials/legal-header.html",
+  "ar-viewer": "partials/ar-viewer.html",
   "impressum-content": "partials/impressum-content.html",
   "privacy-content": "partials/privacy-content.html",
 };

@@ -48,6 +48,8 @@ const MIME: Record<string, string> = {
   ".webm": "video/webm",
   ".m4v": "video/x-m4v",
   ".ico": "image/x-icon",
+  ".glb": "model/gltf-binary",
+  ".usdz": "model/vnd.usdz+zip",
   ".svg": "image/svg+xml",
   ".woff2": "font/woff2",
   ".txt": "text/plain; charset=utf-8",
