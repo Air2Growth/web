@@ -31,10 +31,10 @@
 .tour-intro { padding-block: 8.25rem 2.5rem; }
 .tour-intro-layout { display: grid; grid-template-columns: minmax(0, 45fr) minmax(0, 55fr); align-items: center; margin-top: 1rem; }
 .tour-hero-copy { position: relative; z-index: 1; padding-bottom: 1.75rem; }
-.tour-intro h1 { margin: 0; max-width: none; font-size: clamp(4.75rem, 7.64vw, 6.875rem); font-weight: 650; font-stretch: 75%; line-height: 1; letter-spacing: -.055em; hyphens: none; overflow-wrap: normal; text-wrap: nowrap; }
-.tour-intro h1 > span { display: block; }
-.function-tour:lang(en) .tour-intro h1 { font-stretch: 100%; }
-.function-tour:lang(de) .tour-intro h1 { letter-spacing: -.025em; }
+.tour-intro :is(h1, h2) { margin: 0; max-width: none; font-size: clamp(3rem, 5vw, 4.5rem); font-weight: 650; font-stretch: 75%; line-height: 1; letter-spacing: -.055em; hyphens: none; overflow-wrap: normal; text-wrap: nowrap; }
+.tour-intro :is(h1, h2) > span { display: block; }
+.function-tour:lang(en) .tour-intro :is(h1, h2) { font-stretch: 100%; }
+.function-tour:lang(de) .tour-intro :is(h1, h2) { letter-spacing: -.025em; }
 .tour-hero-description { margin: 1.75rem 0 0; max-width: 43ch; font-size: 1rem; line-height: 1.8; color: var(--color-muted); text-wrap: pretty; }
 .tour-hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .75rem 1.5rem; margin-top: 1.75rem; }
 .tour-hero-figure { margin: 0; min-width: 0; }
@@ -80,9 +80,9 @@
 .tour-support-layout { transform: translateX(-70px); }
 .tour-cloud-layout { transform: translateX(-70px); }
 .tour-initial-hidden { visibility: hidden; opacity: 0; }
-.tour-scene-copy { position: absolute; z-index: 2; right: 0; bottom: 0; left: 0; width: min(1200px, calc(100% - 48px)); margin: 0 auto; padding: 42px 0 20px; color: var(--tour-chalk); pointer-events: none; background: linear-gradient(180deg, transparent 0%, rgb(38 62 45 / 78%) 74%); }
-.tour-scene-copy > p:first-child { margin: 0 0 5px; font-weight: 700; font-size: clamp(1rem, 2vw, 1.25rem); line-height: 1.35; }
-.tour-scene-copy > p:last-child { margin: 0; max-width: 78ch; color: #E6EFE1; font-size: .875rem; line-height: 1.65; }
+.tour-scene-copy { position: absolute; z-index: 2; right: 0; bottom: 0; left: 0; width: min(1200px, calc(100% - 48px)); margin: 0 auto; padding: 42px 0 20px; color: var(--tour-chalk); pointer-events: none }
+.tour-scene-copy > p:first-child { margin: 0 0 5px; font-weight: 700; font-size: clamp(1rem, 2vw, 1.25rem); line-height: 1.35; color: #263E2D }
+.tour-scene-copy > p:last-child { margin: 0; max-width: 78ch; color: #263E2D; font-size: .875rem; line-height: 1.65; }
 .tour-controls { position: absolute; z-index: 3; right: 0; bottom: 0; left: 0; width: min(1200px, calc(100% - 48px)); margin: 0 auto; display: none !important; }
 .function-tour[data-tour-state="still"] .tour-controls { display: grid !important; }
 .tour-progress { display: flex; align-items: center; gap: 16px; min-width: 0; }
@@ -137,7 +137,7 @@
 @media (max-width: 900px) {
   .tour-intro { padding-top: 7.75rem; }
   .tour-intro-layout { grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); }
-  .tour-intro h1 { font-size: clamp(3.75rem, 8.3vw, 4.75rem); }
+  .tour-intro :is(h1, h2) { font-size: clamp(3.25rem, 8.3vw, 4.25rem); }
   .tour-hero-copy { padding-bottom: 0; }
   .tour-hero-description { font-size: .9375rem; margin-top: 1.25rem; }
   .tour-hero-actions { margin-top: 1.25rem; }
@@ -162,8 +162,8 @@
   .function-tour .site-shell { width: calc(100% - 40px); }
   .tour-intro { padding-top: 7.25rem; padding-bottom: 2rem; }
   .tour-intro-layout { grid-template-columns: minmax(0, 1fr); gap: .75rem; margin-top: 1.75rem; }
-  .tour-intro h1 { font-size: clamp(3.5rem, 11.8vw, 4.5rem); }
-  .function-tour:lang(de) .tour-intro h1 { font-stretch: 80%; letter-spacing: -.03em; }
+  .tour-intro :is(h1, h2) { font-size: clamp(3rem, 11.8vw, 4rem); }
+  .function-tour:lang(de) .tour-intro :is(h1, h2) { font-stretch: 80%; letter-spacing: -.03em; }
   .tour-hero-description { max-width: 46ch; font-size: 1rem; }
   .tour-hero-actions { gap: .5rem 1.25rem; margin-top: 1.5rem; }
   .tour-hero-action { padding-inline: 18px; font-size: .8125rem; }
@@ -206,7 +206,7 @@
   .tour-skip { margin-left: 0; font-size: .75rem; }
 }
 @media (max-width: 359px) {
-  .tour-intro h1 { font-size: clamp(2.75rem, 15.5vw, 3.5rem); }
+  .tour-intro :is(h1, h2) { font-size: clamp(2.25rem, 15.5vw, 3rem); }
 }
 @media (max-height: 600px) and (min-aspect-ratio: 4/3) {
   .tour-controls { display: flex; flex-wrap: wrap; gap: 10px; padding-block: 8px; }

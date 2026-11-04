@@ -119,7 +119,7 @@ main h2{letter-spacing:-.04em}
 
 /* Event photographs keep their full frames and original colours. */
 .documentary-photo { margin: 0; min-width: 0; }
-.documentary-photo img { display: block; width: 100%; height: auto; }
+.documentary-photo img { display: block; width: 100%; height: auto; border-radius: 28px }
 .documentary-photo figcaption { margin-top: .85rem; color: var(--color-muted); font-size: .8125rem; line-height: 1.65; overflow-wrap: anywhere; }
 .documentary-photo figcaption > span, .documentary-photo .photo-credit > span { display: block; }
 .documentary-photo .photo-credit { margin-top: .35rem; }
@@ -153,7 +153,7 @@ main h2{letter-spacing:-.04em}
 .home-benefits .benefits-list dd { max-width: 52ch; line-height: 1.7; }
 .home-benefits .development-note { font-size: .875rem; max-width: 60ch; }
 .home-vision-layout { align-items: center; }
-.home-vision-photo { overflow: hidden; border-radius: 28px 28px 8px 8px; background: #eef3ec; }
+.home-vision-photo { overflow: hidden; border-radius: 28px; background: #eef3ec; }
 .home-vision-photo img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; object-position: center; }
 .home-vision .site-text-link, .home-milestones .site-text-link, .home-team .site-text-link { margin-top: 1.2rem; }
 .home-vision .site-heading { max-width: 16ch; }

@@ -31,7 +31,7 @@
 .editorial-photo-team img {
     aspect-ratio: 4 / 3;
     object-fit: cover;
-    border-radius: 42% 42% 1rem 1rem;
+    border-radius: 28px;
 }
 .editorial-photo figcaption {
     max-width: 43ch;
@@ -110,7 +110,7 @@
     aspect-ratio: 3 / 2;
     object-fit: cover;
     object-position: center;
-    border-radius: 1rem 1rem .35rem .35rem;
+    border-radius: 28px;
 }
 .editorial-commitments { min-width: 0; }
 .editorial-commitments article { position: relative; display: grid; grid-template-columns: 3.5rem minmax(0, 1fr); gap: 1.1rem; padding-block: 0 2.3rem; }

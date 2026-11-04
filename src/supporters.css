@@ -9,7 +9,9 @@
 [data-supporter-controls] button:hover:enabled { background: #eef3ec; }
 [data-supporter-controls] button:disabled { opacity: .4; cursor: default; }
 [data-supporter-controls] svg { width: 20px; height: 20px; }
-[data-supporters] [data-logo-viewport] { overflow-x: auto; overflow-y: hidden; overscroll-behavior-x: contain; scroll-snap-type: x proximity; scroll-padding-inline: 10px; scrollbar-width: thin; scrollbar-color: #a7b89c #eef3ec; border-block: 1px solid #a7b89c; padding-block: 1rem; }
+[data-supporters] [data-logo-viewport] { overflow-x: ; overflow-y: hidden; overscroll-behavior-x: contain; scroll-snap-type: x proximity; scroll-padding-inline: 10px; scrollbar-width: thin; scrollbar-color: #a7b89c #eef3ec; border-block: 1px solid #a7b89c; padding-block: 1rem; scrollbar-width: none; &::-webkit-scrollbar {
+    display: none;
+} }
 [data-supporters] [data-logo-group] { display: flex; align-items: center; gap: 2.5rem; width: max-content; min-width: 100%; margin: 0; padding: .5rem 10px; list-style: none; }
 [data-supporters] [data-logo-group] > li { flex: 0 0 200px; width: 200px; scroll-snap-align: start; }
 [data-supporters] [data-logo-group] a { display: flex; align-items: center; justify-content: center; width: 100%; min-height: 104px; padding: 12px; border-radius: 8px; }
